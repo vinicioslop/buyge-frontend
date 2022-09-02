@@ -15,22 +15,29 @@
             <div class="fundo-login">
                 <form>
                     <h1>BuyGe</h1>
-                    <label class="etiqueta" for="email">Login</label>
-                    <input
-                        class="entrada-texto"
-                        type="text"
-                        name="email"
-                        id="email"
-                        placeholder="Email ou usuario"
-                    />
-                    <label class="etiqueta" for="senha">Senha</label>
-                    <input
-                        class="entrada-texto"
-                        type="password"
-                        name="senha"
-                        id="senha"
-                        placeholder="Senha"
-                    />
+                    <div class="grupo-input">
+                        <div
+                            id="email"
+                            class="entrada-texto did-floating-label-content"
+                        >
+                            <input
+                                class="did-floating-input entrada-texto"
+                                type="text"
+                                placeholder=" "
+                            />
+                            <label class="did-floating-label"
+                                >Email ou usuário</label
+                            >
+                        </div>
+                        <div id="senha" class="entrada-texto did-floating-label-content">
+                            <input
+                                class="did-floating-input entrada-texto"
+                                type="password"
+                                placeholder=" "
+                            />
+                            <label class="did-floating-label">Senha</label>
+                        </div>
+                    </div>
                     <p class="esqueceu">Esqueceu sua senha?</p>
                     <a
                         type="button"
@@ -52,6 +59,11 @@
                 <p>Criado por <b>LikeCaramelo ©</b></p>
             </div>
         </div>
+
+        <!--
+            <input class="entrada-texto" type="text" name="email" id="email" placeholder="Email ou usuario"/>
+            <input class="entrada-texto" type="password" name="senha" id="senha" placeholder="Senha"/>
+        -->
 
         <script src="../js/login.js"></script>
     </body>
