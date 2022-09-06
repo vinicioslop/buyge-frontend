@@ -80,6 +80,8 @@
 .did-floating-input:focus ~ .did-floating-label {
     top: -8px;
     font-size: 14px;
+    background-color: transparent;
+    font-weight: bold;
 }
 
 .did-floating-input:not(:placeholder-shown) ~ .did-floating-label {
