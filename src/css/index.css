@@ -20,6 +20,8 @@
     display: flex;
     flex-direction: row;
 
+    height: 60px;
+
     margin-top: 16px;
 }
 
@@ -31,6 +33,10 @@
     margin-left: 30px;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.grupo-cima .logo:hover {
+    cursor: pointer;
 }
 
 .grupo-cima .barra-pesquisa {
@@ -73,52 +79,44 @@
     cursor: pointer;
 }
 
-.grupo-cima .icones {
+.grupo-cima .grupo-icones {
     background-color: transparent;
 
     display: flex;
+    width: 110px;
+    justify-content: space-between;
 
     margin-top: 10px;
+    margin-left: 50px;
+}
+
+.grupo-cima .icone-link {
+    background-color: transparent;
 }
 
 .grupo-cima .icone {
+    background-color: transparent;
+
     height: 28px;
 }
 
-.grupo-cima #favoritos {
-    margin-left: 40px;
-    margin-right: 15px;
-}
-
-.grupo-cima #favoritos:hover {
+.grupo-cima #favoritos-icon:hover {
     cursor: pointer;
 }
 
-.grupo-cima #carrinho {
-    margin-right: 15px;
-}
-
-.grupo-cima #carrinho:hover {
+.grupo-cima #carrinho-icon:hover {
     cursor: pointer;
 }
 
-.grupo-cima #user {
-    margin-right: 15px;
-}
-
-.grupo-cima #user:hover {
+.grupo-cima #user-icon:hover {
     cursor: pointer;
 }
 
-.grupo-baixo {
+.barra-navegacao .grupo-baixo {
     background-color: transparent;
 
     display: flex;
     flex-direction: row;
-}
-
-.grupo-baixo {
-    margin-top: 18px;
 }
 
 .grupo-baixo .categorias {
