@@ -15,7 +15,7 @@
 }
 
 .barra-navegacao .grupo-cima {
-    background-color: #d9965b;
+    background-color: transparent;
 
     display: flex;
     flex-direction: row;
@@ -24,7 +24,7 @@
 }
 
 .grupo-cima .logo {
-    background-color: #d9965b;
+    background-color: transparent;
 
     height: 42px;
 
@@ -33,12 +33,16 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.grupo-cima #barra-pesquisa {
+.grupo-cima .barra-pesquisa {
+    background-color: transparent;
+
     display: flex;
     margin-left: 40px;
 
     margin-top: 5px;
+}
 
+.grupo-cima .barra-pesquisa #barra-pesquisa-input {
     width: 960px;
     height: 36px;
 
@@ -46,17 +50,39 @@
     box-sizing: border-box;
     border-radius: 5px;
     border: none;
+
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+}
+
+.grupo-cima .barra-pesquisa #barra-pesquisa-input:focus {
+    outline: 0;
+}
+
+.grupo-cima .barra-pesquisa #barra-pesquisa-icone {
+    background-color: transparent;
+
+    height: 24px;
+
+    display: flex;
+    margin-top: 5px;
+    margin-left: -30px;
+}
+
+.grupo-cima .barra-pesquisa #barra-pesquisa-icone:hover {
+    cursor: pointer;
 }
 
 .grupo-cima .icones {
-    background-color: #d9965b;
+    background-color: transparent;
 
     display: flex;
+
+    margin-top: 10px;
 }
 
 .grupo-cima .icone {
-    height: 32px;
-    width: 32px;
+    height: 28px;
 }
 
 .grupo-cima #favoritos {
@@ -85,7 +111,7 @@
 }
 
 .grupo-baixo {
-    background-color: #d9965b;
+    background-color: transparent;
 
     display: flex;
     flex-direction: row;
@@ -96,7 +122,7 @@
 }
 
 .grupo-baixo .categorias {
-    background-color: #d9965b;
+    background-color: transparent;
 
     display: flex;
     flex-direction: row;
@@ -109,13 +135,13 @@
 }
 
 .grupo-baixo .categorias #categorias-icone {
-    background-color: #d9965b;
+    background-color: transparent;
 
     margin-left: 26px;
 }
 
 .grupo-baixo .categorias #categorias-titulo {
-    background-color: #d9965b;
+    background-color: transparent;
 
     font-size: 18px;
     font-weight: normal;
@@ -125,7 +151,7 @@
 }
 
 .grupo-baixo .temas {
-    background-color: #d9965b;
+    background-color: transparent;
 
     display: flex;
     flex-direction: row;
@@ -137,9 +163,13 @@
 }
 
 .grupo-baixo .temas .tema {
-    background-color: #d9965b;
+    background-color: transparent;
 
     font-size: 18px;
     font-weight: normal;
     color: #f9f9f9;
+}
+
+.grupo-baixo .temas .tema:hover {
+    cursor: pointer;
 }

@@ -39,7 +39,7 @@
 }
 
 .did-floating-label {
-    color: #1e4c82;
+    color: #000000;
     font-size: 16px;
     font-weight: normal;
     position: absolute;
@@ -60,8 +60,8 @@
     height: 36px;
     padding: 0 20px;
     background: #fff;
-    color: #323840;
-    border: 1px solid #3d85d8;
+    color: #000;
+    border: 1px solid #f9f9f9;
     border-radius: 4px;
     box-sizing: border-box;
 }
