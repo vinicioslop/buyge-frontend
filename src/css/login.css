@@ -1,5 +1,6 @@
 /* FORMULÁRIO DE ENTRADA DE LOGIN */
 .fundo-login form {
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -9,134 +10,174 @@
     margin-right: auto;
     margin-top: 50px;
 
+    /* APARÊNCIA */
     background-color: #d9965b;
     height: 420px;
     width: 450px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* LOGO DO PROJETO */
 .fundo-login .logo {
+    /* APARÊNCIA */
     height: 65px;
-
-    background-color: #d9965b;
-
     margin-top: 24px;
     margin-bottom: 20px;
+
+    background-color: transparent;
 }
 
+/* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */
 .fundo-login .grupo-input {
-    background-color: transparent;
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
+
+    /* APARÊNCIA */
+    background-color: transparent;
 }
 
+/* ENTRADA DE TEXTO DO FORMULÁRIO */
 .fundo-login .entrada-texto {
+    /* POSICIONAMENTO */
     padding-left: 10px;
 
+    /* APARÊNCIA DO TEXTO */
     font-size: 18px;
 
+    /* CAIXA DA ENTRADA DO TEXTO */
     width: 300px;
     height: 45px;
-
     box-sizing: border-box;
     border-radius: 5px;
     border: none;
 
+    /* SOMBRA DA ENTRADA DE TEXTO */
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+/* PERSONALIZAÇÃO DA ENTRADA DE TEXTO */
 .fundo-login .entrada-texto:focus {
+    /* RETIRA BORDA PRETA AO SELECIONAR O INPUT */
     outline: none;
 }
 
+/* ENTRADA DE TEXTO PARA SENHA */
 #senha {
+    /* ESPAÇAMENTO PARA COMPONENTES */
     margin-top: 20px;
 }
 
+/* ESQUECEU SUA SENHA */
 .fundo-login .esqueceu {
+    /* POSICIONAMENTO */
     display: flex;
     align-self: flex-end;
     margin-right: 50px;
 
-    background-color: #d9965b;
+    /* APARÊNCIA */
+    background-color: transparent;
 
+    /* ANIMAÇÃO DE TRANSIÇÃO SUAVE */
     -webkit-transition: 0.2s ease-in;
     -moz-transition: 0.2s ease-in;
     -o-transition: 0.2s ease-in;
     transition: 0.2s ease-in;
 
+    /* SOMBREAMENTO */
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA O ESQUECEU SUA SENHA */
 .fundo-login .esqueceu:hover {
     cursor: pointer;
+
+    /* APARÊNCIA */
     color: #f9f9fa;
 }
 
+/* FORMATO DE BOTÃO */
 .fundo-login .botao {
-    font-family: "Roboto", sans-serif;
-    font-size: 20px;
-
-    text-decoration: none;
+    /* POSICIONAMENTO */
     text-align: center;
     justify-content: center;
-
     padding-top: 10px;
     padding-bottom: 10px;
 
+    /* APARÊNCIA */
+    font-size: 20px;
+    text-decoration: none;
+    width: 220px;
+    height: 45px;
+
+    /* PERSONALIZAÇÃO DE BORDA */
     box-sizing: border-box;
     border-radius: 5px;
     border: none;
 
-    width: 220px;
-    height: 45px;
-
+    /* SOMBREAMENTO */
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+/* SIMULAÇÃO DE BOTÃO GENÉRICO */
 .fundo-login .botao:hover {
     cursor: pointer;
 }
 
+/* BOTÃO DE ENTRAR/LOGAR */
 .fundo-login #entrar {
+    /* POSICIONAMENTO */
     margin-top: 12px;
     margin-bottom: 10px;
 
+    /* APARÊNCIA */
     background-color: #734226;
     color: #f9f9fa;
 
+    /* ANIMAÇÃO DE TRANSIÇÃO SUAVE*/
     -webkit-transition: 0.2s ease-in;
     -moz-transition: 0.2s ease-in;
     -o-transition: 0.2s ease-in;
     transition: 0.2s ease-in;
 }
 
+/* SIMULAÇÃO DE BOTÃO DE ENTRAR/LOGAR */
 .fundo-login #entrar:hover {
+    /* APARÊNCIA */
     background-color: #d9a273;
     color: #f9f9fa;
 }
 
+/* BOTÃO DE CRIAR UMA CONTA */
 .fundo-login #criar {
+    /* APARÊNCIA */
     color: black;
 
+    /* ANIMAÇÃO DE TRANSIÇÃO SUAVE */
     -webkit-transition: 0.2s ease-in;
     -moz-transition: 0.2s ease-in;
     -o-transition: 0.2s ease-in;
     transition: 0.2s ease-in;
 }
 
+/* SIMULAÇÃO DE BOTÃO */
 .fundo-login #criar:hover {
-    background-color: #d9a273;
+    /* APARÊNCIA */
+    background-color: transparent;
     color: #f9f9fa;
 }
 
+/* CRÉDITOS DA EQUIPE */
 .container .equipe {
-    font-size: 20px;
-
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
     text-align: center;
     margin-top: 20px;
 
+    /* APARÊNCIA DO TEXTO DO BOTÃO */
+    font-size: 20px;
+
+    /* SOMBREAMENTO */
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
