@@ -1,13 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="../css/style.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    <link rel="stylesheet" href="../css/sign.css">
+</head>
 
-        <title>Cadastro</title>
-    </head>
-    <body></body>
+<body>
+    <div class="fundo">
+        <form action="x">
+            <h1 class="titulo">BuyGe</h1>
+            <div class="input">
+                <div>
+                    <label for="name">
+                        Nome
+                    </label>
+                </div>
+                <input type="text" id="name" name="name" required placeholder="Insira o seu nome">
+            </div>
+            <div class="input">
+                <div>
+                    <label for="cpf">
+                        CPF
+                    </label>
+                </div>
+
+                <input type="text" id="cpf" name="cpf" required placeholder="Insira o seu CPF">
+            </div>
+            <div class="input">
+                <div>
+                    <label for="tell">
+                        Celular
+                    </label>
+                </div>
+                <input type="text" id="tell" name="tell" required placeholder="Insira o seu celular">
+            </div>
+            <div class="input">
+                <div>
+                    <label for="email">
+                        E-mail
+                    </label>
+                </div>
+                <input type="text" id="email" name="email" required placeholder="Insira o seu e-mail">
+            </div>
+            <div class="input">
+                <div>
+                    <label for="confirma_email">
+                        Confirme o E-mail
+                    </label>
+                </div>
+                <input type="text" id="confirma_email" name="confirma_email" required placeholder="Confirme o seu e-mail">
+            </div>
+            <div class="input">
+                <div>
+                    <label for="senha">
+                        Senha
+                    </label>
+                </div>
+                <input type="password" id="senha" name="senha" required placeholder="Insira a sua senha">
+            </div>
+            <div class="input">
+                <div>
+                    <label for="confirma_senha">
+                        Confirme a senha
+                    </label>
+                </div>
+                <input type="password" id="confirma_senha" name="confirma_senha" required placeholder="Confirme a sua senha">
+            </div>
+
+            <div class="li_concordo_checkbox">
+                <input type="checkbox" name="li_concordo" id="li_concordo" required class="checkbox">
+                <label for="li_concordo" class="li_concordo">Eu li e concordo com os <a href="li_concordo.html" class="li_concordo">termos e condições</a></label>
+                </a>
+            </div>
+
+            <button type="submit" id="submit" class="button">Enviar</button>
+        </form>
+
+    </div>
+
+
+
+</body>
+
 </html>

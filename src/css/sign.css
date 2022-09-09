@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
+body{
+    background-color: #d9965b;
+}
+.fundo form{
+    background-color: #f9f9f9;
+    width: 700px;
+    height: 900px;
+
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+
+    margin-bottom: 10px;
+    margin-top: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+.titulo{
+    margin-top: 10px;
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 30px;
+    display: flex;
+    color: #734226;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+
+}
+input{
+    margin-bottom: 18px;
+    margin-top: 8px;
+    width: 400px;
+    height: 45px;
+    border-radius: 5px;
+    border-color: rgb(0, 0, 0);
+    border-style: none;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0,0.2);
+    font-size: 16px;
+}
+label{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+}
+.li_concordo{
+    font-size: 15px;
+}
+.checkbox{
+    height: auto;
+    width: auto;
+}
+.li_concordo_checkbox{
+    margin-top: 10px;
+}
+#submit{
+    color: whitesmoke;
+    background-color: rgb(7, 7, 69);
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    background-color: #734226;
+
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+
+    width: 220px;
+    height: 45px;
+
+    margin-top: 20px;
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+#submit:hover{
+    background-color: #d9a273;
+    color: #f9f9fa;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0,0.2);
+    cursor: pointer;
+    transition: 0.1s ease-in;
+
+}
+input:focus{
+    background-color: #f7ebe0;
+    outline: none;
+}
