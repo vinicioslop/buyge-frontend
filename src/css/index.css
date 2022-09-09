@@ -4,170 +4,206 @@
     font-family: "Roboto", sans-serif;
 }
 
+/* BARRA DE NAVEGAÇÃO */
 .barra-navegacao {
-    background-color: #d9965b;
-
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
 
+    /* APARÊNCIA */
+    background-color: #d9965b;
     width: 100vw;
     height: 120px;
 }
 
+/* GRUPO SUPERIOR DA BARRA DE NAVEGAÇÃO */
 .barra-navegacao .grupo-cima {
-    background-color: transparent;
-
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
-
-    height: 60px;
-
     margin-top: 16px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+    height: 60px;
 }
 
+/* LOGO DO PROJETO */
 .grupo-cima .logo {
-    background-color: transparent;
-
-    height: 42px;
-
+    /* POSICIONAMENTO */
     margin-left: 30px;
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* APARÊNCIA */
+    background-color: transparent;
+    height: 42px;
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA O LOGO */
 .grupo-cima .logo:hover {
     cursor: pointer;
 }
 
+/* GRUPO DA BARRA DE PESQUISA */
 .grupo-cima .barra-pesquisa {
-    background-color: transparent;
-
+    /* POSICIONAMENTO */
     display: flex;
     margin-left: 40px;
-
     margin-top: 5px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
 }
 
+/* CAIXA DE ENTRADA DE TEXTO PARA PESQUISA */
 .grupo-cima .barra-pesquisa #barra-pesquisa-input {
+    /* TAMANHO E ALTURA */
     width: 960px;
     height: 36px;
 
+    /* BORDA E ESPAÇAMENTO INTERNO */
     padding: 12px 20px;
     box-sizing: border-box;
     border-radius: 5px;
     border: none;
 
+    /* APARÊNCIA DE LETRAS */
     font-size: 16px;
     color: rgb(0, 0, 0);
 }
 
+/* PERSONALIZAÇÃO DA SELEÇÃO DE ENTRADA DE TEXTO DA BARRA DE PESQUISA */
 .grupo-cima .barra-pesquisa #barra-pesquisa-input:focus {
+    /* ESTILO DE BORDA SELECIONADA */
     outline: 0;
 }
 
+/* ÍCONE DE PROCURAR DA BARRA DE PESQUISA */
 .grupo-cima .barra-pesquisa #barra-pesquisa-icone {
-    background-color: transparent;
-
-    height: 24px;
-
+    /* POSICIONAMENTO */
     display: flex;
     margin-top: 5px;
     margin-left: -30px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+    height: 24px;
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA O ÍCONE DE PESQUISA */
 .grupo-cima .barra-pesquisa #barra-pesquisa-icone:hover {
     cursor: pointer;
 }
 
+/* GRUPO DE ÍCONES SUPERIORES (CARRINHO, FAVORITOS E USUÁRIO) */
 .grupo-cima .grupo-icones {
-    background-color: transparent;
-
+    /* POSICIONAMENTO */
     display: flex;
     width: 110px;
     justify-content: space-between;
-
     margin-top: 10px;
     margin-left: 50px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
 }
 
+/* TAG DE LINK PARA OS ÍCONES SUPERIORES */
 .grupo-cima .icone-link {
+    /* APARÊNCIA */
     background-color: transparent;
 }
 
+/* ÍCONE SUPERIOR */
 .grupo-cima .icone {
+    /* APARÊNCIA */
     background-color: transparent;
-
     height: 28px;
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA FAVORITOS */
 .grupo-cima #favoritos-icon:hover {
     cursor: pointer;
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA CARRINHO */
 .grupo-cima #carrinho-icon:hover {
     cursor: pointer;
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA USUÁRIO */
 .grupo-cima #user-icon:hover {
     cursor: pointer;
 }
 
+/* GRUPO INFERIOR DA BARRA DE NAVEGAÇÃO */
 .barra-navegacao .grupo-baixo {
-    background-color: transparent;
-
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
+
+    /* PARÊNCIA */
+    background-color: transparent;
 }
 
+/* GRUPO DE MENU DE CATEGORIAS */
 .grupo-baixo .categorias {
-    background-color: transparent;
-
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
-
     align-items: center;
+    margin-left: 26px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA GRUPO DE CATEGORIAS */
 .grupo-baixo .categorias:hover {
     cursor: pointer;
 }
 
+/* ÍCONE DE CATEGORIAS */
 .grupo-baixo .categorias #categorias-icone {
     background-color: transparent;
-
-    margin-left: 26px;
 }
 
+/* TEXTO PARA CATEGORIAS */
 .grupo-baixo .categorias #categorias-titulo {
-    background-color: transparent;
+    /* POSICIONAMENTO */
+    margin-left: 10px;
 
+    /* APARÊNCIA */
+    background-color: transparent;
     font-size: 18px;
     font-weight: normal;
     color: #f9f9f9;
-
-    margin-left: 10px;
 }
 
+/* GRUPO DE TEMAS MAIS PESQUISADOS */
 .grupo-baixo .temas {
-    background-color: transparent;
-
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
     align-self: center;
-
-    width: 800px;
-    margin-left: 100px;
     justify-content: space-between;
+    margin-left: 100px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+    width: 800px;
 }
 
+/* TEMAS UNITÁRIOS */
 .grupo-baixo .temas .tema {
+    /* APARÊNCIA */
     background-color: transparent;
-
     font-size: 18px;
     font-weight: normal;
     color: #f9f9f9;
 }
 
+/* SIMULAÇÃO DE BOTÃO PARA TEMA */
 .grupo-baixo .temas .tema:hover {
     cursor: pointer;
 }
