@@ -9,22 +9,8 @@
 
 /* CARROSEL */
 .carrosel {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-
-    background-color: var(--cor-caramelo-rgb40);
-}
-
-/* external css: flickity.css */
-
-* {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-body {
-    font-family: sans-serif;
 }
 
 .gallery {
@@ -47,4 +33,65 @@ body {
     line-height: 200px;
     font-size: 80px;
     color: white;
+}
+
+.container {
+    display: flex;
+    width: 100vw;
+    padding-top: 35px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.produtos .produtos-cartoes {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+
+    padding-top: 10px;
+}
+
+.card {
+    max-width: 300px;
+    margin: auto;
+    margin-right: 2vw;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+
+    background-color: var(--cor-caramelo-rgb10);
+}
+
+.card img {
+    width: 100%;
+}
+
+.card .textos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80px;
+    text-align: left;
+    width: auto;
+    padding-left: 10px;
+    padding-bottom: 10px;
+
+    background-color: transparent;
+}
+
+.card .titulo {
+    font-size: 16px;
+
+    background-color: transparent;
+}
+
+.preco {
+    color: var(--cor-caramelo-escuro);
+    font-size: 22px;
+
+    background-color: transparent;
+}
+
+.descricao {
+    background-color: transparent;
 }
