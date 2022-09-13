@@ -1,3 +1,9 @@
+:root {
+    --cor-clara: #f9f9f9;
+    --cor-caramelo: #d9965b;
+    --cor-caramelo-escuro: #734226;
+}
+
 /* FORMULÁRIO DE ENTRADA DE LOGIN */
 .fundo-login form {
     /* POSICIONAMENTO */
@@ -11,7 +17,7 @@
     margin-top: 50px;
 
     /* APARÊNCIA */
-    background-color: #d9965b;
+    background-color: var(--cor-caramelo);
     height: 420px;
     width: 450px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -93,7 +99,7 @@
     cursor: pointer;
 
     /* APARÊNCIA */
-    color: #f9f9fa;
+    color: var(--cor-clara);
 }
 
 /* FORMATO DE BOTÃO */
@@ -131,8 +137,8 @@
     margin-bottom: 10px;
 
     /* APARÊNCIA */
-    background-color: #734226;
-    color: #f9f9fa;
+    background-color: var(--cor-caramelo-escuro);
+    color: var(--cor-clara);
 
     /* ANIMAÇÃO DE TRANSIÇÃO SUAVE*/
     -webkit-transition: 0.2s ease-in;
@@ -144,8 +150,8 @@
 /* SIMULAÇÃO DE BOTÃO DE ENTRAR/LOGAR */
 .fundo-login #entrar:hover {
     /* APARÊNCIA */
-    background-color: #d9a273;
-    color: #f9f9fa;
+    background-color: var(--cor-caramelo);
+    color: var(--cor-clara);
 }
 
 /* BOTÃO DE CRIAR UMA CONTA */
@@ -164,7 +170,7 @@
 .fundo-login #criar:hover {
     /* APARÊNCIA */
     background-color: transparent;
-    color: #f9f9fa;
+    color: var(--cor-clara);
 }
 
 /* CRÉDITOS DA EQUIPE */

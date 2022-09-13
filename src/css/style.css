@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
 
+:root {
+    --cor-clara: #f9f9fa;
+    --cor-caramelo: #d9965b;
+}
+
 * {
-    background-color: #f9f9fa;
+    background-color: var(--cor-clara);
     font-family: "Roboto", sans-serif;
 }
 
@@ -12,7 +17,7 @@
     flex-direction: column;
 
     /* APARÊNCIA */
-    background-color: #d9965b;
+    background-color: var(--cor-caramelo);
     width: 100vw;
     height: 120px;
 }
@@ -219,7 +224,7 @@
     background-color: transparent;
     font-size: 18px;
     font-weight: normal;
-    color: #f9f9f9;
+    color: var(--cor-clara);
 }
 
 /* GRUPO INFERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
@@ -250,7 +255,7 @@
     background-color: transparent;
     font-size: 18px;
     font-weight: normal;
-    color: #f9f9f9;
+    color: var(--cor-clara);
 }
 
 /* SIMULAÇÃO DE BOTÃO PARA TEMA */
