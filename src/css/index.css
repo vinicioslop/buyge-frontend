@@ -8,24 +8,20 @@
 .carrosel {
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 
     background-color: var(--cor-caramelo-escuro);
 }
 
-* {
-    box-sizing: border-box;
-}
-body {
-    font-family: Verdana, sans-serif;
-    margin: 0;
-}
 .mySlides {
     display: none;
 }
-img {
+.mySlides img {
     display: flex;
     margin-left: auto;
     margin-right: auto;
+
+    width: 80%;
 }
 
 /* Slideshow container */
@@ -66,30 +62,6 @@ img {
 .prev:hover,
 .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Caption text */
-.text {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-
-    background-color: transparent;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-
-    background-color: transparent;
 }
 
 /* The dots/bullets/indicators */
