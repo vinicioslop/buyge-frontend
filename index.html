@@ -99,12 +99,12 @@
             }
 
             /* Fading animation */
-            .fade {
-                animation-name: fade;
+            .slide {
+                animation-name: slide;
                 animation-duration: 1.5s;
             }
 
-            @keyframes fade {
+            @keyframes slide {
                 from {
                     opacity: 0.4;
                 }
@@ -210,37 +210,25 @@
         </header>
         <div class="carrosel">
             <div class="slideshow-container">
-                <div class="mySlides fade">
+                <div class="mySlides slide">
                     <img src="src/imgs/carrosel/fundo01.png" />
                 </div>
 
-                <div class="mySlides fade">
+                <div class="mySlides slide">
                     <img src="src/imgs/carrosel/fundo02.png" />
                 </div>
 
-                <div class="mySlides fade">
+                <div class="mySlides slide">
                     <img src="src/imgs/carrosel/fundo03.png" />
                 </div>
 
-                <div class="mySlides fade">
+                <div class="mySlides slide">
                     <img src="src/imgs/carrosel/fundo04.png" />
                 </div>
 
-                <div class="mySlides fade">
+                <div class="mySlides slide">
                     <img src="src/imgs/carrosel/fundo05.png" />
                 </div>
-
-                <a class="prev" onclick="plusSlides(-1)">❮</a>
-                <a class="next" onclick="plusSlides(1)">❯</a>
-            </div>
-            <br />
-
-            <div style="text-align: center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-                <span class="dot" onclick="currentSlide(5)"></span>
             </div>
         </div>
         <script src="src/js/carrosel.js"></script>
