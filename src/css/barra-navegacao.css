@@ -1,0 +1,272 @@
+:root {
+    --cor-clara: #f9f9fa;
+    --cor-caramelo: #d9965b;
+}
+
+* {
+    background-color: var(--cor-clara);
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+}
+
+/* BARRA DE NAVEGAÇÃO */
+.barra-navegacao {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: column;
+
+    /* APARÊNCIA */
+    background-color: var(--cor-caramelo);
+    width: 100vw;
+    height: 120px;
+}
+
+/* GRUPO SUPERIOR DA BARRA DE NAVEGAÇÃO */
+.barra-navegacao .grupo-superior {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+
+    /* APARÊNCIA */
+    width: 100vw;
+    height: 50%;
+    background-color: transparent;
+}
+
+.barra-navegacao .grupo-superior .grupo-superior-esquerdo {
+    /* POSICIONAMENTO */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 2%;
+
+    /* APARÊNCIA */
+    width: 20vw;
+    background-color: transparent;
+}
+
+/* LOGO DO PROJETO */
+.barra-navegacao .grupo-superior .grupo-superior-esquerdo .logo {
+    /* APARÊNCIA */
+    background-color: transparent;
+    height: 42px;
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+}
+
+/* SIMULAÇÃO DE BOTÃO PARA O LOGO */
+.barra-navegacao .grupo-superior .grupo-superior-esquerdo .logo:hover {
+    cursor: pointer;
+}
+
+/* GRUPO SUPERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
+.barra-navegacao .grupo-superior .grupo-superior-meio {
+    /* POSICIONAMENTO */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* BARRA DE PESQUISA */
+.barra-navegacao .grupo-superior .grupo-superior-meio .barra-pesquisa {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* CAIXA DE ENTRADA DE TEXTO PARA PESQUISA */
+.grupo-superior .grupo-superior-meio .barra-pesquisa #barra-pesquisa-input {
+    /* TAMANHO E ALTURA */
+    width: 100%;
+    height: 36px;
+
+    /* BORDA E ESPAÇAMENTO INTERNO */
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+
+    /* APARÊNCIA DE LETRAS */
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+}
+
+/* PERSONALIZAÇÃO DA SELEÇÃO DE ENTRADA DE TEXTO DA BARRA DE PESQUISA */
+.barra-navegacao
+    .grupo-superior
+    .grupo-superior-meio
+    .barra-pesquisa
+    #barra-pesquisa-input:focus {
+    /* ESTILO DE BORDA SELECIONADA */
+    outline: 0;
+}
+
+/* ÍCONE DE PROCURAR DA BARRA DE PESQUISA */
+.barra-navegacao
+    .grupo-superior
+    .grupo-superior-meio
+    .barra-pesquisa
+    #barra-pesquisa-icone {
+    /* POSICIONAMENTO */
+    display: flex;
+    margin-left: -30px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* SIMULAÇÃO DE BOTÃO PARA O ÍCONE DE PESQUISA */
+.barra-navegacao
+    .grupo-superior
+    .grupo-superior-meio
+    .barra-pesquisa
+    #barra-pesquisa-icone:hover {
+    cursor: pointer;
+}
+
+/* GRUPO SUPERIOR DIREITO DA BARRA DE NAVEGAÇÃO */
+.barra-navegacao .grupo-superior .grupo-superior-direito {
+    /* POSICIONAMENTO */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* GRUPO DE ÍCONES SUPERIORES (CARRINHO, FAVORITOS E USUÁRIO) */
+.barra-navegacao .grupo-superior .grupo-superior-direito .grupo-icones {
+    /* POSICIONAMENTO */
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* ÍCONE SUPERIOR */
+.barra-navegacao .grupo-superior .grupo-superior-direito .icone {
+    /* APARÊNCIA */
+    background-color: transparent;
+    height: 28px;
+    cursor: pointer;
+}
+
+/* TAG DE LINK PARA OS ÍCONES SUPERIORES */
+.barra-navegacao .grupo-superior .grupo-superior-direito .icone-link {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* GRUPO INFERIOR DA BARRA DE NAVEGAÇÃO */
+.barra-navegacao .grupo-inferior {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+    width: 100vw;
+    height: 50%;
+}
+
+.barra-navegacao .grupo-inferior .grupo-inferior-esquerdo {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 1.5%;
+    width: 20%;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* GRUPO DE MENU DE CATEGORIAS */
+.barra-navegacao .grupo-inferior .grupo-inferior-esquerdo .categorias {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* SIMULAÇÃO DE BOTÃO PARA GRUPO DE CATEGORIAS */
+.barra-navegacao .grupo-inferior .grupo-inferior-esquerdo .categorias:hover {
+    cursor: pointer;
+}
+
+/* ÍCONE DE CATEGORIAS */
+.barra-navegacao
+    .grupo-inferior
+    .grupo-inferior-esquerdo
+    .categorias
+    #categorias-icone {
+    /* POSICIONAMENTO */
+    display: flex;
+    align-self: flex-start;
+    padding-right: 1vw;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* TEXTO PARA CATEGORIAS */
+.barra-navegacao
+    .grupo-inferior
+    .grupo-inferior-esquerdo
+    .categorias
+    #categorias-titulo {
+    /* APARÊNCIA */
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: normal;
+    color: var(--cor-clara);
+}
+
+/* GRUPO INFERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
+.barra-navegacao .grupo-inferior .grupo-inferior-meio {
+    /* POSICIONAMENTO */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* GRUPO DE TEMAS MAIS PESQUISADOS */
+.barra-navegacao .grupo-inferior .grupo-inferior-meio .temas {
+    /* POSICIONAMENTO */
+    display: flex;
+    justify-content: space-between;
+    width: 60vw;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+/* TEMAS UNITÁRIOS */
+.barra-navegacao .grupo-inferior .grupo-inferior-meio .temas .tema {
+    /* APARÊNCIA */
+    background-color: transparent;
+    font-size: 18px;
+    color: var(--cor-clara);
+}
+
+/* SIMULAÇÃO DE BOTÃO PARA TEMA */
+.barra-navegacao .grupo-inferior .grupo-inferior-meio .temas .tema:hover {
+    cursor: pointer;
+}

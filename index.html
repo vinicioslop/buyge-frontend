@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" href="src/css/style.css" />
+        <link rel="stylesheet" href="src/css/barra-navegacao.css" />
         <link rel="stylesheet" href="src/css/index.css" />
 
         <!-- FRAMEWORK EXTERNO PARA CARROSEL -->
@@ -18,96 +19,89 @@
         <title>Tela de Início</title>
     </head>
     <body>
-        <header>
-            <div class="barra-navegacao">
-                <div class="grupo-superior">
-                    <div class="grupo-superior-esquerdo">
+        <header class="barra-navegacao">
+            <div class="grupo-superior">
+                <div class="grupo-superior-esquerdo">
+                    <img
+                        src="src/imgs/buyge_branco.png"
+                        alt="Logo do projeto branco"
+                        class="logo"
+                    />
+                </div>
+                <div class="grupo-superior-meio">
+                    <div class="barra-pesquisa">
+                        <input
+                            type="text"
+                            id="barra-pesquisa-input"
+                            placeholder="Digite aqui o que procura..."
+                        />
                         <img
-                            src="src/imgs/buyge_branco.png"
-                            alt="Logo do projeto branco"
-                            class="logo"
+                            src="src/icons/search-caramelo.svg"
+                            alt="Ícone de pesquisa"
+                            id="barra-pesquisa-icone"
                         />
                     </div>
-                    <div class="grupo-superior-meio">
-                        <div class="barra-pesquisa">
-                            <input
-                                type="text"
-                                id="barra-pesquisa-input"
-                                placeholder="Digite aqui o que procura..."
-                            />
-                            <img
-                                src="src/icons/search-caramelo.svg"
-                                alt="Ícone de pesquisa"
-                                id="barra-pesquisa-icone"
-                            />
-                        </div>
-                    </div>
-                    <div class="grupo-superior-direito">
-                        <div class="grupo-icones">
-                            <a
-                                href="src/pages/favoritos.html"
-                                class="icone-link"
-                            >
-                                <img
-                                    class="icone"
-                                    id="favoritos-icon"
-                                    src="./src/icons/heart-branco.svg"
-                                    alt="Ícone de favoritos branco"
-                                />
-                            </a>
-                            <a
-                                href="src/pages/carrinho.html"
-                                class="icone-link"
-                            >
-                                <img
-                                    class="icone"
-                                    id="carrinho-icon"
-                                    src="./src/icons/shopping-cart-branco.svg"
-                                    alt="Ícone de carrinho branco"
-                                />
-                            </a>
-                            <a href="src/pages/login.html" class="icone-link"
-                                ><img
-                                    class="icone"
-                                    id="user-icon"
-                                    src="./src/icons/user-branco.svg"
-                                    alt="Ícone de usuario branco"
-                            /></a>
-                        </div>
-                    </div>
                 </div>
-                <div class="grupo-inferior">
-                    <div class="grupo-inferior-esquerdo">
-                        <div class="categorias">
+                <div class="grupo-superior-direito">
+                    <div class="grupo-icones">
+                        <a href="src/pages/favoritos.html" class="icone-link">
                             <img
                                 class="icone"
-                                id="categorias-icone"
-                                src="./src/icons/menu-branco.svg"
-                                alt="Ícone de menu branco"
+                                id="favoritos-icon"
+                                src="./src/icons/heart-branco.svg"
+                                alt="Ícone de favoritos branco"
                             />
-                            <p id="categorias-titulo">Todas as categorias</p>
-                        </div>
+                        </a>
+                        <a href="src/pages/carrinho.html" class="icone-link">
+                            <img
+                                class="icone"
+                                id="carrinho-icon"
+                                src="./src/icons/shopping-cart-branco.svg"
+                                alt="Ícone de carrinho branco"
+                            />
+                        </a>
+                        <a href="src/pages/login.html" class="icone-link"
+                            ><img
+                                class="icone"
+                                id="user-icon"
+                                src="./src/icons/user-branco.svg"
+                                alt="Ícone de usuario branco"
+                        /></a>
                     </div>
-                    <div class="grupo-inferior-meio">
-                        <div class="temas">
-                            <p class="tema">demon slayer</p>
-                            <p class="tema">death note</p>
-                            <p class="tema">boku no hero</p>
-                            <p class="tema">one piece</p>
-                            <p class="tema">naruto</p>
-                            <p class="tema">made in abyss</p>
-                            <p class="tema">pokemon</p>
-                        </div>
+                </div>
+            </div>
+            <div class="grupo-inferior">
+                <div class="grupo-inferior-esquerdo">
+                    <div class="categorias">
+                        <img
+                            class="icone"
+                            id="categorias-icone"
+                            src="./src/icons/menu-branco.svg"
+                            alt="Ícone de menu branco"
+                        />
+                        <p id="categorias-titulo">Todas as categorias</p>
+                    </div>
+                </div>
+                <div class="grupo-inferior-meio">
+                    <div class="temas">
+                        <p class="tema">demon slayer</p>
+                        <p class="tema">death note</p>
+                        <p class="tema">boku no hero</p>
+                        <p class="tema">one piece</p>
+                        <p class="tema">naruto</p>
+                        <p class="tema">made in abyss</p>
+                        <p class="tema">pokemon</p>
                     </div>
                 </div>
             </div>
         </header>
+
         <div class="carrosel">
             <!-- Flickity HTML init -->
             <div
                 class="gallery js-flickity"
-                data-flickity='{ "autoPlay": 3000, "pauseAutoPlayOnHover": false }'
-                data-flickity-options='{ "freeScroll": true, "wrapAround": true}'
+                data-flickity='{ "autoPlay": 3000, "pauseAutoPlayOnHover": true,
+                "freeScroll": true, "wrapAround": true, "prevNextButtons": false }'
             >
                 <div class="gallery-cell"></div>
                 <div class="gallery-cell"></div>
@@ -116,9 +110,10 @@
                 <div class="gallery-cell"></div>
             </div>
         </div>
+
         <div class="container">
             <div class="produtos">
-                <h1>Produtos</h1>
+                <h1 class="titulo">Produtos</h1>
                 <div class="produtos-cartoes">
                     <div class="card">
                         <img
@@ -129,7 +124,23 @@
                             <h1 class="titulo">
                                 Pokemon Pelucia 8 " Pikachu , Sunny
                             </h1>
-                            <p class="preco">R$135,03</p>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -141,7 +152,23 @@
                             <h1 class="titulo">
                                 Pokemon Pelucia 8 " Pikachu , Sunny
                             </h1>
-                            <p class="preco">R$135,03</p>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -153,7 +180,23 @@
                             <h1 class="titulo">
                                 Pokemon Pelucia 8 " Pikachu , Sunny
                             </h1>
-                            <p class="preco">R$135,03</p>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -165,7 +208,23 @@
                             <h1 class="titulo">
                                 Pokemon Pelucia 8 " Pikachu , Sunny
                             </h1>
-                            <p class="preco">R$135,03</p>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -177,9 +236,239 @@
                             <h1 class="titulo">
                                 Pokemon Pelucia 8 " Pikachu , Sunny
                             </h1>
-                            <p class="preco">R$135,03</p>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <img
+                            src="src/imgs/produtos/pikachu produto.jpg"
+                            alt="Pikachu de pelucia"
+                        />
+                        <div class="textos">
+                            <h1 class="titulo">
+                                Pokemon Pelucia 8 " Pikachu , Sunny
+                            </h1>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img
+                        id="mais-produtos"
+                        src="src/icons/arrow-right-circle-caramelo.svg"
+                        alt="Ícone de mais produtos"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="produtos">
+                <h1 class="titulo">Produtos</h1>
+                <div class="produtos-cartoes">
+                    <div class="card">
+                        <img
+                            src="src/imgs/produtos/pikachu produto.jpg"
+                            alt="Pikachu de pelucia"
+                        />
+                        <div class="textos">
+                            <h1 class="titulo">
+                                Pokemon Pelucia 8 " Pikachu , Sunny
+                            </h1>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img
+                            src="src/imgs/produtos/pikachu produto.jpg"
+                            alt="Pikachu de pelucia"
+                        />
+                        <div class="textos">
+                            <h1 class="titulo">
+                                Pokemon Pelucia 8 " Pikachu , Sunny
+                            </h1>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img
+                            src="src/imgs/produtos/pikachu produto.jpg"
+                            alt="Pikachu de pelucia"
+                        />
+                        <div class="textos">
+                            <h1 class="titulo">
+                                Pokemon Pelucia 8 " Pikachu , Sunny
+                            </h1>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img
+                            src="src/imgs/produtos/pikachu produto.jpg"
+                            alt="Pikachu de pelucia"
+                        />
+                        <div class="textos">
+                            <h1 class="titulo">
+                                Pokemon Pelucia 8 " Pikachu , Sunny
+                            </h1>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img
+                            src="src/imgs/produtos/pikachu produto.jpg"
+                            alt="Pikachu de pelucia"
+                        />
+                        <div class="textos">
+                            <h1 class="titulo">
+                                Pokemon Pelucia 8 " Pikachu , Sunny
+                            </h1>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img
+                            src="src/imgs/produtos/pikachu produto.jpg"
+                            alt="Pikachu de pelucia"
+                        />
+                        <div class="textos">
+                            <h1 class="titulo">
+                                Pokemon Pelucia 8 " Pikachu , Sunny
+                            </h1>
+                            <div class="preco-icones">
+                                <p class="preco">R$135,03</p>
+                                <div class="icones">
+                                    <img
+                                        class="icone"
+                                        id="icone-esquerda"
+                                        src="src/icons/heart-preto.svg"
+                                        alt="Ícone de favoritos"
+                                    />
+                                    <img
+                                        class="icone"
+                                        id="icone-direita"
+                                        src="src/icons/shopping-cart-preto.svg"
+                                        alt="Ícone de carrinho"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img
+                        id="mais-produtos"
+                        src="src/icons/arrow-right-circle-caramelo.svg"
+                        alt="Ícone de mais produtos"
+                    />
                 </div>
             </div>
         </div>
