@@ -1,6 +1,6 @@
 /* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
-    --cor-clara: #f9f9fa;
+    --cor-fundo-claro: #f9f9fa;
     --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
     --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
     --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
@@ -13,6 +13,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100vw;
+    margin-bottom: 25px;
 }
 
 .gallery {
@@ -42,7 +43,7 @@
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
-    margin-top: 25px;
+    margin-bottom: 20px;
 
     /* APARÊNCIA */
     width: 100vw;
@@ -55,7 +56,7 @@
     margin-left: 20px;
 
     /* APARÊNCIA */
-    width: 90vw;
+    width: 100vw;
 }
 
 .produtos .titulo {
@@ -67,12 +68,11 @@
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 
 .card {
     /* POSICIONAMENTO */
-    width: 15%;
+    width: 200px;
 
     /* BORDA */
     border-radius: 7px;
@@ -83,16 +83,19 @@
 }
 
 .card img {
+    /* APARÊNCIA */
     width: 100%;
+    cursor: pointer;
 }
 
-.card .texts {
+.card .textos {
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     /* APARÊNCIA */
+    width: 100%;
     height: 80px;
     padding-left: 10px;
     padding-bottom: 10px;
@@ -110,16 +113,16 @@
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
     /* APARÊNCIA */
-    width: 100%;
+    width: 90%;
     background-color: transparent;
 }
 
 .preco-icones .preco {
     /* POSICIONAMENTO */
     display: flex;
-    justify-self: flex-start;
 
     /* APARÊNCIA */
     color: var(--cor-caramelo-escuro);
@@ -130,18 +133,22 @@
 .preco-icones .icones {
     /* POSICIONAMENTO */
     display: flex;
-    flex-direction: row;
-    justify-self: flex-end;
-    justify-content: space-between;
-    margin-left: 25px;
 
     /* APARÊNCIA */
     background-color: transparent;
 }
 
 .preco-icones .icones #icone-esquerda {
+    /* APARÊNCIA */
+    cursor: pointer;
+}
+
+.preco-icones .icones #icone-direita {
     /* POSICIONAMENTO */
-    margin-right: 10px;
+    margin-left: 10px;
+
+    /* APARÊNCIA */
+    cursor: pointer;
 }
 
 .preco-icones .icones .icone {
@@ -155,12 +162,19 @@
     background-color: transparent;
 }
 
-.produtos #mais-produtos {
+.produtos .mais-produtos-link {
     /* POSICIONAMENTO */
     display: flex;
     align-self: center;
     justify-self: center;
+    margin-left: 5px;
 
     /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.produtos #mais-produtos {
+    /* APARÊNCIA */
     height: 50px;
+    background-color: transparent;
 }

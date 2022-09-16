@@ -18,7 +18,7 @@
     /* APARÊNCIA */
     background-color: var(--cor-caramelo);
     width: 100vw;
-    height: 120px;
+    height: 25vh;
 }
 
 /* GRUPO SUPERIOR DA BARRA DE NAVEGAÇÃO */
@@ -43,6 +43,11 @@
 
     /* APARÊNCIA */
     width: 20vw;
+    background-color: transparent;
+}
+
+.barra-navegacao .grupo-superior .grupo-superior-esquerdo .logo-link {
+    /* APARÊNCIA */
     background-color: transparent;
 }
 

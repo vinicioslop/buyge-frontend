@@ -1,0 +1,18 @@
+/* VARIÁVEIS PARA CORES DO PROJETO */
+:root {
+    --cor-clara: #f9f9fa;
+    --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
+    --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
+    --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
+    --cor-caramelo-full: rgba(217, 150, 91, 1);
+    --cor-caramelo-escuro: rgba(115, 66, 38, 1);
+}
+
+.container {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+
+    /* APARÊNCIA */
+    width: 100vw;
+}

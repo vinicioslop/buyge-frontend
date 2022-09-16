@@ -1,0 +1,114 @@
+:root {
+    --cor-caramelo-rgb20: rgba(217, 150, 91, 0.2);
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    height: 75vh;
+    width: 100vw;
+}
+
+.container .produto-fotos {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 50%;
+    height: 80%;
+}
+
+.container .produto-fotos .produto-caminho {
+    display: flex;
+    padding-bottom: 10px;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.container .produto-fotos .produto-foto-full {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 100%;
+    width: 95%;
+
+    border-radius: 5px;
+
+    background-color: var(--cor-caramelo-rgb20);
+}
+
+.container .produto-fotos .produto-foto-full img {
+    height: 120px;
+
+    background-color: transparent;
+}
+
+.container .produto-fotos .produto-foto-pequenas {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 80%;
+}
+
+.container .produto-fotos .produto-foto-pequenas img {
+    margin-right: 5px;
+    height: 36px;
+}
+
+.container .produto-informacoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-self: center;
+    width: 45%;
+    height: 80%;
+    margin: 10px;
+
+    border-radius: 5px;
+
+    background-color: var(--cor-caramelo-rgb20);
+}
+
+.container .produto-informacoes .produto-nome {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 18px;
+    width: 100%;
+}
+
+.container .produto-informacoes .produto-nome .titulo-avaliacao {
+    display: flex;
+    flex-direction: column;
+
+    background-color: transparent;
+}
+
+.container .produto-informacoes .produto-nome .titulo-avaliacao .titulo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+
+    background-color: transparent;
+}
+
+.container .produto-informacoes .produto-nome .titulo-avaliacao .avaliacao {
+    background-color: transparent;
+}
+
+.container .produto-informacoes .produto-nome .favoritar {
+    height: 36px;
+
+    background-color: transparent;
+}

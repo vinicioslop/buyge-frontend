@@ -4,17 +4,23 @@
     --cor-caramelo-escuro: #734226;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
 /* FORMULÁRIO DE ENTRADA DE LOGIN */
 .fundo-login form {
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
-    align-self: center;
     align-items: center;
-
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
+    justify-content: center;
 
     /* APARÊNCIA */
     background-color: var(--cor-caramelo);
@@ -27,7 +33,6 @@
 .fundo-login .logo {
     /* APARÊNCIA */
     height: 65px;
-    margin-top: 24px;
     margin-bottom: 20px;
 
     background-color: transparent;
@@ -80,6 +85,7 @@
     display: flex;
     align-self: flex-end;
     margin-right: 50px;
+    margin-top: 12px;
 
     /* APARÊNCIA */
     background-color: transparent;
@@ -169,8 +175,8 @@
 /* SIMULAÇÃO DE BOTÃO */
 .fundo-login #criar:hover {
     /* APARÊNCIA */
-    background-color: transparent;
-    color: var(--cor-clara);
+    background-color: var(--cor-caramelo);
+    color: white;
 }
 
 /* CRÉDITOS DA EQUIPE */
@@ -182,7 +188,7 @@
     margin-top: 20px;
 
     /* APARÊNCIA DO TEXTO DO BOTÃO */
-    font-size: 20px;
+    font-size: 18px;
 
     /* SOMBREAMENTO */
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
