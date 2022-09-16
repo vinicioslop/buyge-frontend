@@ -1,0 +1,23 @@
+.container-usuario {
+    width: 415px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.navegacao-usuario{
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    width: 350px;
+    height: 50%;
+    background-color: transparent;
+}
+
+.navegacao-usuario-sub{
+    display: flex;
+    align-self: flex-start;
+    padding-right: 1vw;
+    background-color: transparent;
+}
