@@ -1,12 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
 
 :root {
-    --cor-clara: #f9f9fa;
-    --cor-caramelo: #d9965b;
+    --cor-fundo-claro: #f9f9fa;
+    --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
+    --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
+    --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
+    --cor-caramelo-full: rgba(217, 150, 91, 1);
+    --cor-caramelo-escuro: rgba(115, 66, 38, 1);
 }
 
 * {
-    background-color: var(--cor-clara);
+    background-color: var(--cor-fundo-claro);
     font-family: "Roboto", sans-serif;
     margin: 0;
 }
