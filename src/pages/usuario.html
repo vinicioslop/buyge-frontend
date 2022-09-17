@@ -4,22 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Página de Usuário</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/index.css" />
-
-    <title>Página de Usuário</title>
-
+    <link rel="stylesheet" href="/src/css/barra-navegacao.css" />
+    <link rel="stylesheet" href="/src/css/usuario.css" />
 </head>
 <body>
+<<<<<<< HEAD
+    <header class="barra-navegacao">
+        <div class="grupo-superior">
+            <div class="grupo-superior-esquerdo">
+                <a href="/index.html" class="logo-link">
+                    <img
+                        src="/src/imgs/logo/buyge_branco.png"
+                        alt="Logo do projeto branco"
+                        class="logo"
+                    />
+                </a>
+            </div>
+            <div class="grupo-superior-meio">
+=======
     <header>
         <div class="barra-navegacao">
             <div class="grupo-cima">
                 <img
-                    src="../imgs/buyge_branco.png"
+                    src="/src/imgs/logo/buyge_logo_v3.png"
                     alt="Logo do projeto branco"
                     class="logo"
                 />
+>>>>>>> 6b94be9c08d2d23e4ea7334944f341ac1f4e3ed5
                 <div class="barra-pesquisa">
                     <input
                         type="text"
@@ -27,47 +41,57 @@
                         placeholder="Digite aqui o que procura..."
                     />
                     <img
-                        src="../icons/search-caramelo.svg"
+                        src="/src/icons/search-caramelo.svg"
                         alt="Ícone de pesquisa"
                         id="barra-pesquisa-icone"
                     />
                 </div>
+            </div>
+            <div class="grupo-superior-direito">
                 <div class="grupo-icones">
-                    <a href="../pages/favoritos.html" class="icone-link">
+                    <a href="/src/pages/favoritos.html" class="icone-link">
                         <img
                             class="icone"
                             id="favoritos-icon"
-                            src="../icons/heart-branco.svg"
+                            src="/src/icons/heart-branco.svg"
                             alt="Ícone de favoritos branco"
                         />
                     </a>
-                    <a href="../pages/carrinho.html" class="icone-link">
+<<<<<<< HEAD
+                    <a href="src/pages/carrinho.html" class="icone-link">
+=======
+                    <a href="/src/pages/carrinho.html" class="icone-link">
+>>>>>>> 6b94be9c08d2d23e4ea7334944f341ac1f4e3ed5
                         <img
                             class="icone"
                             id="carrinho-icon"
-                            src="../icons/shopping-cart-branco.svg"
+                            src="/src/icons/shopping-cart-branco.svg"
                             alt="Ícone de carrinho branco"
                         />
                     </a>
-                    <a href="../pages/login.html" class="icone-link"
+                    <a href="/src/pages/login.html" class="icone-link"
                         ><img
                             class="icone"
                             id="user-icon"
-                            src="../icons/user-branco.svg"
+                            src="/src/icons/user-branco.svg"
                             alt="Ícone de usuario branco"
                     /></a>
                 </div>
             </div>
-            <div class="grupo-baixo">
+        </div>
+        <div class="grupo-inferior">
+            <div class="grupo-inferior-esquerdo">
                 <div class="categorias">
                     <img
                         class="icone"
                         id="categorias-icone"
-                        src="../icons/menu-branco.svg"
+                        src="/src/icons/menu-branco.svg"
                         alt="Ícone de menu branco"
                     />
                     <p id="categorias-titulo">Todas as categorias</p>
                 </div>
+            </div>
+            <div class="grupo-inferior-meio">
                 <div class="temas">
                     <p class="tema">demon slayer</p>
                     <p class="tema">death note</p>
@@ -81,6 +105,18 @@
         </div>
     </header>
     
-    <div class="container"></div>
+    <div class="container-usuario">
+        <div class="navegacao-usuario">
+            <div class="navegacao-usuario-sub">
+                <img
+                    class="icone-usuario"
+                    id="categorias-icone"
+                    src="../icons/menu-branco.svg"
+                    alt="Ícone de menu branco"
+                />
+                <p>Minha conta</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

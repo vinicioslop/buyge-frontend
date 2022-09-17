@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
-
+/* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
-    --cor-fundo-claro: #f9f9fa;
+    --cor-clara: #f9f9fa;
     --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
     --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
     --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
@@ -9,8 +8,11 @@
     --cor-caramelo-escuro: rgba(115, 66, 38, 1);
 }
 
-* {
-    background-color: var(--cor-fundo-claro);
-    font-family: "Roboto", sans-serif;
-    margin: 0;
+.container {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+
+    /* APARÊNCIA */
+    width: 100vw;
 }

@@ -5,16 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/src/css/style.css" />
-        <link rel="stylesheet" href="/src/css/barra-navegacao.css" />
-        <link rel="stylesheet" href="/src/css/index.css" />
-
-        <!-- FRAMEWORK EXTERNO PARA CARROSEL -->
-        <link
-            rel="stylesheet"
-            href="/src/flickity/flickity.css"
-            media="screen"
-        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/barra-navegacao.css" />
+        <link rel="stylesheet" href="../css/produtos.css" />
 
         <title>BuyGe</title>
     </head>
@@ -98,69 +91,8 @@
             </div>
         </header>
 
-        <div class="carrosel">
-            <!-- Flickity HTML init -->
-            <div
-                class="gallery js-flickity"
-                data-flickity='{ "autoPlay": 2500, "pauseAutoPlayOnHover": true,
-                "freeScroll": true, "wrapAround": true, "prevNextButtons": false }'
-            >
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-                <div class="gallery-cell"></div>
-            </div>
-        </div>
-
         <div class="container">
-            <div class="produtos">
-                <h1 class="titulo">Produtos</h1>
-                <div class="produtos-cartoes">
-                    <div class="card">
-                        <a href="/src/pages/produto.html" class="produto-link">
-                            <img
-                                src="/src/imgs/produtos/pikachu produto.jpg"
-                                alt="Pikachu de pelucia"
-                            />
-                        </a>
-                        <div class="textos">
-                            <h1 class="titulo">
-                                Pokemon Pelucia 8 " Pikachu , Sunny
-                            </h1>
-                            <div class="preco-icones">
-                                <p class="preco">R$135,03</p>
-                                <div class="icones">
-                                    <img
-                                        class="icone"
-                                        id="icone-esquerda"
-                                        src="/src/icons/heart-preto.svg"
-                                        alt="Ícone de favoritos"
-                                    />
-                                    <img
-                                        class="icone"
-                                        id="icone-direita"
-                                        src="/src/icons/shopping-cart-preto.svg"
-                                        alt="Ícone de carrinho"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a
-                        href="/src/pages/produtos.html"
-                        class="mais-produtos-link"
-                    >
-                        <img
-                            id="mais-produtos"
-                            src="/src/icons/arrow-right-circle-caramelo.svg"
-                            alt="Ícone de mais produtos"
-                    /></a>
-                </div>
-            </div>
+            
         </div>
-
-        <!-- FRAMEWORK EXTERNO DO CARROSEL -->
-        <script src="src/flickity/flickity.pkgd.min.js"></script>
     </body>
 </html>
