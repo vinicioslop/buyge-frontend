@@ -13,4 +13,7 @@
     background-color: var(--cor-fundo-claro);
     font-family: "Roboto", sans-serif;
     margin: 0;
+    box-sizing: border-box;
 }
+
+

@@ -1,0 +1,30 @@
+/* FRAMEWORK DE CARROSEL FLICKITY */
+.carrosel {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.gallery {
+    background: #eee;
+}
+
+.gallery-cell {
+    width: 70%;
+    height: 300px;
+    margin-right: 10px;
+    background: #8c8;
+    counter-increment: gallery-cell;
+}
+
+/* cell number */
+.gallery-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(gallery-cell);
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
+}
+/* FINAL DO CÓDIGO DO FRAMEWORK */

@@ -1,17 +1,143 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/src/css/style.css">
-    <link rel="stylesheet" href="/src/css/barra-navegacao.css">
-    <link rel="stylesheet" href="/src/css/favoritos.css">
+        <link rel="stylesheet" href="/src/css/style.css" />
+        <link rel="stylesheet" href="/src/css/barra-navegacao.css" />
+        <link rel="stylesheet" href="/src/css/favoritos.css" />
 
-    <title>Página de Favoritos</title>
-</head>
-<body>
-    
-</body>
+        <!-- FRAMEWORK EXTERNO PARA CARROSEL -->
+        <link
+            rel="stylesheet"
+            href="/src/flickity/flickity.css"
+            media="screen"
+        />
+
+        <title>Página de Favoritos</title>
+    </head>
+    <body>
+        <header class="barra-navegacao">
+            <div class="grupo-superior">
+                <div class="grupo-superior-esquerdo">
+                    <a href="/index.html" class="logo-link">
+                        <img
+                            src="/src/imgs/logo/buyge_logo_v3.png"
+                            alt="Logo do projeto branco"
+                            class="logo"
+                        />
+                    </a>
+                </div>
+                <div class="grupo-superior-meio">
+                    <div class="barra-pesquisa">
+                        <input
+                            type="text"
+                            id="barra-pesquisa-input"
+                            placeholder="Digite aqui o que procura..."
+                        />
+                        <img
+                            src="/src/icons/search-caramelo.svg"
+                            alt="Ícone de pesquisa"
+                            id="barra-pesquisa-icone"
+                        />
+                    </div>
+                </div>
+                <div class="grupo-superior-direito">
+                    <div class="grupo-icones">
+                        <a href="/src/pages/favoritos.html" class="icone-link">
+                            <img
+                                class="icone"
+                                id="favoritos-icon"
+                                src="/src/icons/heart-branco.svg"
+                                alt="Ícone de favoritos branco"
+                            />
+                        </a>
+                        <a href="/src/pages/carrinho.html" class="icone-link">
+                            <img
+                                class="icone"
+                                id="carrinho-icon"
+                                src="/src/icons/shopping-cart-branco.svg"
+                                alt="Ícone de carrinho branco"
+                            />
+                        </a>
+                        <a href="/src/pages/login.html" class="icone-link"
+                            ><img
+                                class="icone"
+                                id="user-icon"
+                                src="/src/icons/user-branco.svg"
+                                alt="Ícone de usuario branco"
+                        /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="grupo-inferior">
+                <div class="grupo-inferior-esquerdo">
+                    <div class="categorias">
+                        <img
+                            class="icone"
+                            id="categorias-icone"
+                            src="/src/icons/menu-branco.svg"
+                            alt="Ícone de menu branco"
+                        />
+                        <p id="categorias-titulo">Todas as categorias</p>
+                    </div>
+                </div>
+                <div class="grupo-inferior-meio">
+                    <div class="temas">
+                        <p class="tema">demon slayer</p>
+                        <p class="tema">death note</p>
+                        <p class="tema">boku no hero</p>
+                        <p class="tema">one piece</p>
+                        <p class="tema">naruto</p>
+                        <p class="tema">made in abyss</p>
+                        <p class="tema">pokemon</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <h2 class="titulo">Favoritos</h2>
+            <div class="produtos-favoritados">
+                <div class="produto">
+                    <img src="/src/imgs/produtos/afnaruto/foto01.webp" alt="" />
+                    <div class="descricao">
+                        <p class="titulo">
+                            Kit 12 Bonecos Naruto Action Figure Sasuke Itachi
+                            Jiraya
+                        </p>
+                        <p class="preco">R$ 164,65</p>
+                        <p class="parcelas">em 12x R$ 15,96</p>
+                        <a href="" class="remover">Excluir</a>
+                    </div>
+                </div>
+                <div class="produto">
+                    <img src="/src/imgs/produtos/afnaruto/foto01.webp" alt="" />
+                    <div class="descricao">
+                        <p class="titulo">
+                            Kit 12 Bonecos Naruto Action Figure Sasuke Itachi
+                            Jiraya
+                        </p>
+                        <p class="preco">R$ 164,65</p>
+                        <p class="parcelas">em 12x R$ 15,96</p>
+                        <p class="remover">Excluir</p>
+                    </div>
+                </div>
+                <div class="produto">
+                    <img src="/src/imgs/produtos/afnaruto/foto01.webp" alt="" />
+                    <div class="descricao">
+                        <p class="titulo">
+                            Kit 12 Bonecos Naruto Action Figure Sasuke Itachi
+                            Jiraya
+                        </p>
+                        <p class="preco">R$ 164,65</p>
+                        <p class="parcelas">em 12x R$ 15,96</p>
+                        <p class="remover">Excluir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

@@ -7,6 +7,7 @@
 
         <link rel="stylesheet" href="/src/css/style.css" />
         <link rel="stylesheet" href="/src/css/barra-navegacao.css" />
+        <link rel="stylesheet" href="/src/css/carrosel.css" />
         <link rel="stylesheet" href="/src/css/produto.css" />
 
         <title>BuyGe</title>
@@ -47,7 +48,7 @@
                                 alt="Ícone de favoritos branco"
                             />
                         </a>
-                        <a href="src/pages/carrinho.html" class="icone-link">
+                        <a href="/src/pages/carrinho.html" class="icone-link">
                             <img
                                 class="icone"
                                 id="carrinho-icon"
@@ -95,14 +96,14 @@
             <div class="produto-fotos">
                 <p class="produto-caminho">inicio > categoria > produto</p>
                 <div class="produto-foto-full">
-                    <img src="/src/icons/image-preto.svg">
+                    <img src="/src/icons/image-preto.svg" />
                 </div>
                 <div class="produto-foto-pequenas">
-                    <img src="/src/icons/image-preto.svg">
-                    <img src="/src/icons/image-preto.svg">
-                    <img src="/src/icons/image-preto.svg">
-                    <img src="/src/icons/image-preto.svg">
-                    <img src="/src/icons/image-preto.svg">
+                    <img src="/src/icons/image-preto.svg" />
+                    <img src="/src/icons/image-preto.svg" />
+                    <img src="/src/icons/image-preto.svg" />
+                    <img src="/src/icons/image-preto.svg" />
+                    <img src="/src/icons/image-preto.svg" />
                 </div>
             </div>
             <div class="produto-informacoes">
@@ -111,12 +112,19 @@
                         <h2 class="titulo">TITULO DO PRODUTO</h2>
                         <div class="avaliacao">ESTRELINHAS</div>
                     </div>
-                    <img class="favoritar" src="/src/icons/heart-preto.svg" alt="">
+                    <img
+                        class="favoritar"
+                        src="/src/icons/heart-preto.svg"
+                        alt=""
+                    />
                 </div>
                 <div class="preco">
                     <p class="valor">R$ 999,90</p>
                 </div>
             </div>
         </div>
+
+        <!-- FRAMEWORK EXTERNO DO CARROSEL -->
+        <script src="/src/flickity/flickity.pkgd.min.js"></script>
     </body>
 </html>

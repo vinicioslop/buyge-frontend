@@ -8,42 +8,10 @@
     --cor-caramelo-escuro: rgba(115, 66, 38, 1);
 }
 
-/* FRAMEWORK DE CARROSEL FLICKITY */
-.carrosel {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
-    margin-bottom: 25px;
-}
-
-.gallery {
-    background: #eee;
-}
-
-.gallery-cell {
-    width: 70%;
-    height: 300px;
-    margin-right: 10px;
-    background: #8c8;
-    counter-increment: gallery-cell;
-}
-
-/* cell number */
-.gallery-cell:before {
-    display: block;
-    text-align: center;
-    content: counter(gallery-cell);
-    line-height: 200px;
-    font-size: 80px;
-    color: white;
-}
-/* FINAL DO CÓDIGO DO FRAMEWORK */
-
 .container {
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
 
     /* APARÊNCIA */
     width: 100%;
@@ -53,9 +21,11 @@
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
+    margin-left: 2%;
+    margin-bottom: 2%;
 
     /* APARÊNCIA */
-    width: 100%;
+    width: 90%;
 }
 
 .produtos .titulo {
@@ -67,6 +37,10 @@
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
+
+    /* APARÊNCIA */
+    width: 100%;
+    justify-content: space-between;
 }
 
 .card {
@@ -94,16 +68,14 @@
 
     /* APARÊNCIA */
     width: 100%;
-    height: 80px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-bottom: 5px;
-    text-align: left;
+    height: auto;
+    padding: 5%;
     background-color: transparent;
 }
 
 .card .textos .titulo {
     /* APARÊNCIA */
+    width: 80%;
     font-size: 16px;
     background-color: transparent;
 }
@@ -166,7 +138,6 @@
     display: flex;
     align-self: center;
     justify-self: center;
-    margin-left: 5px;
 
     /* APARÊNCIA */
     background-color: transparent;
