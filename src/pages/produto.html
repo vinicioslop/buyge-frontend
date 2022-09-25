@@ -11,6 +11,12 @@
 
         <link rel="stylesheet" href="/src/css/produto.css" />
 
+        <link
+            rel="shortcut icon"
+            href="/src/imgs/logo/buyge_logo_v3_b.png"
+            type="image/x-icon"
+        />
+
         <title>BuyGe</title>
     </head>
     <body>
@@ -94,33 +100,79 @@
         </header>
 
         <div class="container">
-            <div class="produto-fotos">
-                <p class="produto-caminho">inicio > categoria > produto</p>
-                <div class="produto-foto-full">
-                    <img src="/src/icons/image-preto.svg" />
-                </div>
-                <div class="produto-foto-pequenas">
-                    <img src="/src/icons/image-preto.svg" />
-                    <img src="/src/icons/image-preto.svg" />
-                    <img src="/src/icons/image-preto.svg" />
-                    <img src="/src/icons/image-preto.svg" />
-                    <img src="/src/icons/image-preto.svg" />
-                </div>
-            </div>
-            <div class="produto-informacoes">
-                <div class="produto-nome">
-                    <div class="titulo-avaliacao">
-                        <h2 class="titulo">TITULO DO PRODUTO</h2>
-                        <div class="avaliacao">ESTRELINHAS</div>
-                    </div>
+            <p class="caminho">inicio > categoria > produto</p>
+            <div class="produto">
+                <div class="imagens">
                     <img
-                        class="favoritar"
-                        src="/src/icons/heart-preto.svg"
-                        alt=""
+                        class="imagem-full"
+                        src="/src/imgs/produtos/afnaruto/foto01.webp"
                     />
+                    <div class="miniaturas">
+                        <img src="/src/imgs/produtos/afnaruto/foto01.webp" />
+                        <img src="/src/imgs/produtos/afnaruto/foto02.webp" />
+                        <img src="/src/imgs/produtos/afnaruto/foto03.webp" />
+                        <img src="/src/imgs/produtos/afnaruto/foto04.webp" />
+                        <img src="/src/imgs/produtos/afnaruto/foto05.webp" />
+                    </div>
                 </div>
-                <div class="preco">
-                    <p class="valor">R$ 999,90</p>
+                <div class="informacoes">
+                    <div class="titulo-avaliacoes">
+                        <div class="titulo-favoritos">
+                            <p class="titulo">
+                                Kit 12 Bonecos Naruto Action Figure Sasuke
+                                Itachi Jiraya
+                            </p>
+                            <img src="/src/icons/heart-preto.svg" />
+                        </div>
+                        <div class="avaliacoes">
+                            <img src="/src/icons/star-preto.svg" />
+                            <img src="/src/icons/star-preto.svg" />
+                            <img src="/src/icons/star-preto.svg" />
+                            <img src="/src/icons/star-preto.svg" />
+                            <img src="/src/icons/star-preto.svg" />
+                        </div>
+                    </div>
+                    <div class="preco">
+                        <p class="antes">R$ 185</p>
+                        <p class="atual">R$ 164,65</p>
+                        <p class="parcelas">em 12x R$ 15,96</p>
+                    </div>
+                    <div class="localizacao">
+                        <div class="fonte">
+                            <img src="/src/icons/map-pin-preto.svg" />
+                            <p>Luganenhum, Space</p>
+                        </div>
+                        <div class="destinatario">
+                            <label for="cep"
+                                >Calcular o frete e o prazo de entrega</label
+                            >
+                            <div class="entrada">
+                                <input
+                                    type="text"
+                                    name="cep"
+                                    id="cep"
+                                    placeholder="Inserir CEP"
+                                />
+                                <button>OK</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="descricao">
+                        <p class="descricao-titulo">Descrição</p>
+                        <p class="texto">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Quia vero totam adipisci optio praesentium
+                            quidem provident saepe, illum impedit tenetur
+                            quaerat unde ipsa assumenda. Perspiciatis
+                            repudiandae autem laborum impedit. Blanditiis.
+                        </p>
+                    </div>
+                    <div class="botoes">
+                        <button class="comprar">Comprar</button>
+                        <button class="carrinho">
+                            <img src="/src/icons/shopping-cart-preto.svg" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -200,8 +252,5 @@
                 </p>
             </div>
         </footer>
-
-        <!-- FRAMEWORK EXTERNO DO CARROSEL -->
-        <script src="/src/flickity/flickity.pkgd.min.js"></script>
     </body>
 </html>

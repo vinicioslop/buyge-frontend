@@ -27,18 +27,71 @@
     margin-bottom: 2%;
 }
 
-.produtos-favoritados {
+.container .selecao {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: space-between;
 
     width: 100%;
+    height: 40px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    background-color: var(--cor-fundo-claro);
+}
+
+.container .selecao .selecionar {
+    display: flex;
+    align-items: center;
+
+    background-color: transparent;
+}
+
+.container .selecao #excluir {
+    margin-right: 10px;
+
+    height: 16px;
+    width: 16px;
+}
+
+.container .selecao .selecionar .texto {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.400);
+
+    background-color: transparent;
+}
+
+.container .selecao .quantidade {
+    display: flex;
+    align-items: center;
+
+    background-color: transparent;
+}
+
+.container .selecao .quantidade .texto {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.600);
+
+    background-color: transparent;
+}
+
+.produtos-favoritados {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1%;
+
+    width: 100%;
+    height: 100%;
 }
 
 .produtos-favoritados .produto {
     display: flex;
     flex-direction: row;
+
     width: 100%;
+    height: 180px;
 
     margin-top: 1%;
 
@@ -54,8 +107,11 @@
 .produtos-favoritados .produto .descricao {
     display: flex;
     flex-direction: column;
+
     height: 100%;
+
     justify-content: space-between;
+
     padding-left: 1%;
 
     background-color: transparent;
@@ -75,6 +131,7 @@
 
 .produtos-favoritados .produto .descricao .parcelas {
     font-size: 14px;
+
     background-color: transparent;
 }
 

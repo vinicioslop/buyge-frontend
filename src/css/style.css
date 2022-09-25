@@ -2,6 +2,7 @@
 
 :root {
     --cor-fundo-claro: #eaeaea;
+    --cor-clara: #f9f9f9;
     --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
     --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
     --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);

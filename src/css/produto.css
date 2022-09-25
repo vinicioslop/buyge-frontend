@@ -1,114 +1,316 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
+
 :root {
-    --cor-caramelo-rgb20: rgba(217, 150, 91, 0.2);
+    --cor-fundo-claro: #eaeaea;
+    --cor-clara: #fff;
+    --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
+    --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
+    --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
+    --cor-caramelo-full: rgba(217, 150, 91, 1);
+    --cor-caramelo-escuro: rgba(115, 66, 38, 1);
 }
 
 * {
     margin: 0;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
 .container {
     display: flex;
-    height: 75vh;
-    width: 100vw;
-}
-
-.container .produto-fotos {
-    display: flex;
     flex-direction: column;
-    padding-left: 20px;
-    padding-top: 20px;
-    width: 50%;
-    height: 80%;
+
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    width: 96%;
+
+    background-color: var(--cor-fundo-claro);
 }
 
-.container .produto-fotos .produto-caminho {
-    display: flex;
-    padding-bottom: 10px;
-
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    font-weight: 600;
-}
-
-.container .produto-fotos .produto-foto-full {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.caminho {
     margin-bottom: 10px;
-    height: 100%;
-    width: 95%;
 
-    border-radius: 5px;
-
-    background-color: var(--cor-caramelo-rgb20);
+    font-family: "Press Start 2P", cursive;
+    font-size: 12px;
 }
 
-.container .produto-fotos .produto-foto-full img {
-    height: 120px;
-
-    background-color: transparent;
-}
-
-.container .produto-fotos .produto-foto-pequenas {
+.produto {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    width: 80%;
+
+    width: 100%;
+
+    justify-content: center;
 }
 
-.container .produto-fotos .produto-foto-pequenas img {
-    margin-right: 5px;
-    height: 36px;
-}
-
-.container .produto-informacoes {
+.produto .imagens {
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    align-self: center;
-    width: 45%;
-    height: 80%;
-    margin: 10px;
+    justify-content: center;
 
-    border-radius: 5px;
+    width: 70%;
 
-    background-color: var(--cor-caramelo-rgb20);
+    background-color: transparent;
 }
 
-.container .produto-informacoes .produto-nome {
-    background-color: transparent;
+.produto .imagens .imagem-full {
+    margin-bottom: 5%;
+
+    height: 100%;
+}
+
+.produto .imagens .miniaturas {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 18px;
+
     width: 100%;
+
+    background-color: transparent;
 }
 
-.container .produto-informacoes .produto-nome .titulo-avaliacao {
+.produto .imagens .miniaturas img {
+    width: 60px;
+}
+
+.produto .informacoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-left: 10%;
+
+    padding: 2%;
+
+    width: 70%;
+    height: 550px;
+
+    border-radius: 5px;
+
+    background-color: var(--cor-caramelo-rgb40);
+}
+
+.produto .informacoes .titulo-avaliacoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .titulo-avaliacoes .titulo-favoritos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .titulo-avaliacoes .titulo-favoritos img {
+    height: 36px;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo {
+    font-family: "Press Start 2P", cursive;
+    font-size: 14px;
+
+    width: 90%;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .titulo-avaliacoes .avaliacoes {
+    margin-top: 1%;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .avaliacoes img {
+    height: 20px;
+    background-color: transparent;
+}
+
+.produto .informacoes .preco {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.produto .informacoes .preco .antes {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: line-through;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .preco .atual {
+    margin-top: 1%;
+
+    font-family: "Press Start 2P", cursive;
+    font-size: 20px;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .preco .parcelas {
+    margin-top: 1%;
+
+    font-size: 20px;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .localizacao {
     display: flex;
     flex-direction: column;
 
     background-color: transparent;
 }
 
-.container .produto-informacoes .produto-nome .titulo-avaliacao .titulo {
-    font-family: 'Press Start 2P', cursive;
+.produto .informacoes .fonte {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .fonte img {
+    height: 24px;
+
+    margin-bottom: 2%;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .fonte p {
+    margin-left: 5px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .destinatario {
+    display: flex;
+    flex-direction: column;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .destinatario label {
+    margin-bottom: 1%;
+
+    font-weight: bold;
     font-size: 14px;
 
     background-color: transparent;
 }
 
-.container .produto-informacoes .produto-nome .titulo-avaliacao .avaliacao {
+.produto .informacoes .destinatario .entrada {
+    display: flex;
+    flex-direction: row;
+
     background-color: transparent;
 }
 
-.container .produto-informacoes .produto-nome .favoritar {
-    height: 36px;
+.produto .informacoes .destinatario .entrada input {
+    margin-right: 10px;
+
+    padding-left: 10px;
+
+    width: 200px;
+    height: 40px;
+
+    font-size: 16px;
+
+    border: none;
+    border-radius: 2px;
+    outline: none;
+}
+
+.produto .informacoes .destinatario .entrada button {
+    font-weight: bold;
+
+    width: 50px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: var(--cor-caramelo-full);
+}
+
+.produto .informacoes .descricao {
+    display: flex;
+    flex-direction: column;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .descricao .descricao-titulo {
+    font-size: 20px;
+    font-weight: bold;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .descricao .texto {
+    width: 80%;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .botoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 50px;
+
+    background-color: transparent;
+}
+
+.produto .informacoes .botoes button {
+    border: none;
+    border-radius: 5px;
+}
+
+.produto .informacoes .botoes .comprar {
+    width: 70%;
+
+    font-size: 20px;
+    color: var(--cor-clara);
+
+    background-color: var(--cor-caramelo-escuro);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.produto .informacoes .botoes .carrinho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 18%;
+
+    background-color: var(--cor-caramelo-full);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.produto .informacoes .botoes .carrinho img {
+    height: 30px;
 
     background-color: transparent;
 }
