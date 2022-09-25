@@ -110,10 +110,14 @@
     background-color: transparent;
 }
 
-.produto .informacoes .titulo-avaliacoes .titulo-favoritos img {
+.produto .informacoes .titulo-avaliacoes .titulo-favoritos .favoritar {
     height: 36px;
 
     background-color: transparent;
+}
+
+.produto .informacoes .titulo-avaliacoes .titulo-favoritos .favoritar:hover {
+    cursor: pointer;
 }
 
 .produto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo {
@@ -174,7 +178,7 @@
     background-color: transparent;
 }
 
-.produto .informacoes .fonte {
+.produto .informacoes .localizacao .fonte {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -182,7 +186,7 @@
     background-color: transparent;
 }
 
-.produto .informacoes .fonte img {
+.produto .informacoes .localizacao .fonte img {
     height: 24px;
 
     margin-bottom: 2%;
@@ -190,7 +194,7 @@
     background-color: transparent;
 }
 
-.produto .informacoes .fonte p {
+.produto .informacoes .localizacao .fonte p {
     margin-left: 5px;
 
     font-size: 16px;
@@ -246,6 +250,19 @@
     border-radius: 5px;
 
     background-color: var(--cor-caramelo-full);
+
+    /* ANIMAÇÃO DE TRANSIÇÃO SUAVE*/
+    -webkit-transition: 0.2s ease-in;
+    -moz-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+}
+
+.produto .informacoes .destinatario .entrada button:hover {
+    cursor: pointer;
+
+    background-color: var(--cor-caramelo-escuro);
+    color: var(--cor-clara);
 }
 
 .produto .informacoes .descricao {
@@ -282,6 +299,16 @@
 .produto .informacoes .botoes button {
     border: none;
     border-radius: 5px;
+
+    /* ANIMAÇÃO DE TRANSIÇÃO SUAVE*/
+    -webkit-transition: 0.2s ease-in;
+    -moz-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+}
+
+.produto .informacoes .botoes button:hover {
+    cursor: pointer;
 }
 
 .produto .informacoes .botoes .comprar {
@@ -296,17 +323,26 @@
     border-radius: 10px;
 }
 
+.produto .informacoes .botoes .comprar:hover {
+    background-color: var(--cor-caramelo-full);
+    color: rgba(0, 0, 0, 1);
+}
+
 .produto .informacoes .botoes .carrinho {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 18%;
+    width: 25%;
 
     background-color: var(--cor-caramelo-full);
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+}
+
+.produto .informacoes .botoes .carrinho:hover {
+    background-color: var(--cor-caramelo-escuro);
 }
 
 .produto .informacoes .botoes .carrinho img {
