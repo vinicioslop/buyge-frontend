@@ -1,30 +1,47 @@
 /* FRAMEWORK DE CARROSEL FLICKITY */
 .carrosel {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
+    /* DIMENSIONAMENTO */
     margin-bottom: 25px;
+    width: 100%;
+
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 .gallery {
+    /* APARÊNCIA */
     background: #eee;
 }
 
 .gallery-cell {
+    /* POSICIONAMENTO */
+    margin-right: 10px;
+    
+    /* DIMENSIONAMENTO */
     width: 70%;
     height: 300px;
-    margin-right: 10px;
+    
+    /* APARÊNCIA */
     background: #8c8;
+
+    /* OUTRAS FUNÇÕES */
     counter-increment: gallery-cell;
 }
 
 /* cell number */
 .gallery-cell:before {
+    /* POSICIONAMENTO */
     display: block;
     text-align: center;
-    content: counter(gallery-cell);
-    line-height: 200px;
+    
+    /* DIMENSIONAMENTO */
     font-size: 80px;
+    
+    /* APARÊNCIA */
     color: white;
+    line-height: 200px;
+
+    /* OUTRAS FUNÇÕES */
+    content: counter(gallery-cell);
 }
 /* FINAL DO CÓDIGO DO FRAMEWORK */

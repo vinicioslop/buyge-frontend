@@ -12,57 +12,71 @@ body {
 }
 
 .rodape {
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin-top: 100px;
-
     position: relative;
     bottom: 0;
-
+    
+    /* DIMENSIONAMENTO */
     width: 100%;
 }
 
 .rodape-linha {
+    /* POSICIONAMENTO */
     margin-left: 1%;
     margin-right: 1%;
-
+    
+    /* DIMENSIONAMENTO */
     width: 98%;
-
     height: 2px;
+    
+    /* APARÊNCIA */
     border-width: 0;
     background-color: var(--cor-caramelo-rgb60);
 }
 
 .rodape-superior {
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
+    
+    /* DIMENSIONAMENTO */
     margin-top: 1%;
-
+    
+    /* APARÊNCIA */
     width: 90%;
 }
 
 .rodape-superior .rodape-titulo {
+    /* POSICIONAMENTO */
     margin-bottom: 10px;
-
+    
+    /* DIMENSIONAMENTO */
     font-size: 16px;
+    
+    /* APARÊNCIA */
     font-weight: bold;
 }
 
 .items {
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
 }
 
 .items .item {
+    /* POSICIONAMENTO */
     margin-bottom: 5px;
-
+    
+    /* DIMENSIONAMENTO */
     width: fit-content;
-
     font-size: 14px;
+    
+    /* APARÊNCIA */
     color: gray;
 }
 
@@ -71,6 +85,7 @@ body {
 }
 
 .rodape-superior .rodape-pagamento .icone-mercado-pago {
+    /* DIMENSIONAMENTO */
     width: 300px;
 }
 
@@ -79,10 +94,10 @@ body {
 }
 
 .rodape-superior .social-icones .social-icon {
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
     align-items: center;
-
     margin-bottom: 10px;
 }
 
@@ -91,24 +106,30 @@ body {
 }
 
 .rodape-superior .social-icones .social-icon .icon {
+    /* POSICIONAMENTO */
     margin-right: 5px;
 }
 
 .rodape-inferior {
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    
+    /* DIMENSIONAMENTO */
     width: 100%;
     height: 40px;
-
+    
+    /* APARÊNCIA */
     background-color: var(--cor-caramelo-escuro);
 }
 
 .rodape-inferior .direitos {
+    /* DIMENSIONAMENTO */
     font-size: 16px;
+    
+    /* APARÊNCIA */
     color: #f9f9f9;
-
     background-color: transparent;
 }

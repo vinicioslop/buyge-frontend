@@ -11,9 +11,13 @@
 }
 
 * {
+    /* POSICIONAMENTO */
     margin: 0;
+    
+    /* DIMENSIONAMENTO */
     box-sizing: border-box;
     
+    /* APARÊNCIA */
     background-color: var(--cor-fundo-claro);
     font-family: "Roboto", sans-serif;
 }
