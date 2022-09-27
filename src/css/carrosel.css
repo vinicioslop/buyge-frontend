@@ -1,47 +1,17 @@
-/* FRAMEWORK DE CARROSEL FLICKITY */
-.carrosel {
-    /* DIMENSIONAMENTO */
-    margin-bottom: 25px;
-    width: 100%;
-
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+/* external css: flickity.css */
+.carousel {
+  background: #EEE;
 }
 
-.gallery {
-    /* APARÊNCIA */
-    background: #eee;
+.carousel img {
+  display: block;
+  height: 150px;
+
+  object-fit: scale-down;
 }
 
-.gallery-cell {
-    /* POSICIONAMENTO */
-    margin-right: 10px;
-    
-    /* DIMENSIONAMENTO */
-    width: 70%;
-    height: 300px;
-    
-    /* APARÊNCIA */
-    background: #8c8;
-
-    /* OUTRAS FUNÇÕES */
-    counter-increment: gallery-cell;
+@media screen and ( min-width: 768px ) {
+  .carousel img {
+    height: 400px;
+  }
 }
-
-/* cell number */
-.gallery-cell:before {
-    /* POSICIONAMENTO */
-    display: block;
-    text-align: center;
-    
-    /* DIMENSIONAMENTO */
-    font-size: 80px;
-    
-    /* APARÊNCIA */
-    color: white;
-    line-height: 200px;
-
-    /* OUTRAS FUNÇÕES */
-    content: counter(gallery-cell);
-}
-/* FINAL DO CÓDIGO DO FRAMEWORK */
