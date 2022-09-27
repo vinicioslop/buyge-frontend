@@ -1,57 +1,78 @@
-#container-usuario {
+div {
+    
+}
+
+.container-usuario {
     /* POSICIONAMENTO */
     display: flex;
+    flex-direction: row;
+
+    /* DIMENSIONAMENTO */
+    width: 100%;
+
+    /* APARÊNCIA */
+    color: black;
+}
+
+.container-usuario-nav {
+    /* POSICIONAMENTO */
+    flex: 1;
     flex-direction: column;
-    margin-bottom: 20px;
 
     /* DIMENSIONAMENTO */
-    width: 300px;
-    height: 1068px;
-
-    /* APARÊNCIA */
-    color: white;
-}
-
-.navegacao-usuario {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-
-    /* DIMENSIONAMENTO */
-    width: 300px;
-    padding: 30px;
-    font-size: 19px;
-
-    /* APARÊNCIA */
-    background-color: rgba(255, 119, 0, 0.486);
-}
-
-.navegacao-usuario-itens {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-
-    /* DIMENSIONAMENTO */
-    height: 1068px;
-    width: 300px;
-    padding: 30px;
-
-    /* APARÊNCIA */
-    background-color: rgba(255, 119, 0, 0.486);
-}
-
-.navegacao-item {
-    /* DIMENSIONAMENTO */
-    padding: 17px;
-    font-size: 16px;
+    min-width: 230px;
+    height: 100%;
     
     /* APARÊNCIA */
-    background-color: transparent;
+    /* border-right: 1px solid;
+    border-color: rgba(217, 150, 91, 1); */
 }
 
-/* .navegacao-usuario-sub{
-    display: flex;
-    align-self: flex-start;
-    padding-right: 1vw;
-    background-color: transparent;
-} */
+.container-usuario-nav-tl {
+    /* POSICIONAMENTO */
+    flex-direction: row;
+
+    /* DIMENSIONAMENTO */
+    padding: 25px;
+    
+    /* APARÊNCIA */
+    font-size: 18px;
+}
+
+.container-usuario-nav-itens {
+    /* POSICIONAMENTO */
+    
+
+    /* DIMENSIONAMENTO */
+    padding: 0 20px 20px 25px;
+    
+    
+    /* APARÊNCIA */
+}
+
+.item {
+    /* POSICIONAMENTO */
+    
+
+    /* DIMENSIONAMENTO */
+    padding: 25px 10px 20px 10px;
+    
+    
+    /* APARÊNCIA */
+    font-size: 16px;
+}
+
+
+
+
+
+
+.container-usuario-data {
+    /* POSICIONAMENTO */
+    flex: 5;
+
+    /* DIMENSIONAMENTO */
+    
+    
+    /* APARÊNCIA */
+}
