@@ -2,13 +2,13 @@
 
 /* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
-    --cor-fundo-claro: #eaeaea;
+    --cor-fundo: #eaeaea;
     --cor-clara: #f9f9f9;
-    --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
-    --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
-    --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
-    --cor-caramelo-full: rgba(217, 150, 91, 1);
-    --cor-caramelo-escuro: rgba(115, 66, 38, 1);
+    --cor-principal-rgb10: rgba(217, 150, 91, 0.1);
+    --cor-principal-rgb40: rgba(217, 150, 91, 0.4);
+    --cor-principal-rgb60: rgba(217, 150, 91, 0.6);
+    --cor-principal: rgba(255, 181, 0, 1);
+    --cor-principal-escura: rgba(115, 66, 38, 1);
 }
 
 @media screen and (max-width: 1200px) {
@@ -92,8 +92,8 @@
     .cartao .imagem-favorito .favorito {
         /* POSICIONAMENTO */
         position: absolute;
-        margin-top: 8px;
-        margin-left: 90px;
+        margin-top: 2%;
+        margin-left: 80%;
 
         /* DIMENSIONAMENTO */
         height: 24px;
@@ -209,14 +209,6 @@
         height: 500px;
     }
 
-    .carrosel-produtos {
-        /* POSICIONAMENTO */
-        
-
-        /* APARÊNCIA */
-        background: #eee;
-    }
-
     .carrosel-cell {
         /* POSICIONAMENTO */
         margin-right: 10px;
@@ -253,15 +245,15 @@
 
     .cartao .imagem-favorito .imagem {
         /* DIMENSIONAMENTO */
-        width: 80%;
+        width: 90%;
         object-fit: scale-down;
     }
 
     .cartao .imagem-favorito .favorito {
         /* POSICIONAMENTO */
         position: absolute;
-        margin-top: 8px;
-        margin-left: 90px;
+        margin-top: 2%;
+        margin-left: 80%;
 
         /* DIMENSIONAMENTO */
         height: 24px;
@@ -343,11 +335,12 @@
 }
 
 .produtos .titulo {
-    /* APARÊNCIA */
-    font-family: "Press Start 2P", cursive;
-
     /* DIMENSIONAMENTO */
     font-size: 16px;
+
+    /* APARÊNCIA */
+    font-family: "Press Start 2P", cursive;
+    background-color: transparent;
 }
 
 .carrosel-produtos {
@@ -501,7 +494,7 @@
     /* APARÊNCIA */
     color: #333333;
     background: #ffffff;
-    border: 1px solid #d9965b;
+    border: 1px solid var(--cor-principal);
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 }

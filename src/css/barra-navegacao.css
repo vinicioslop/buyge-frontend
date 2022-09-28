@@ -1,18 +1,40 @@
 /* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
-    --cor-fundo-claro: #eaeaea;
+    --cor-fundo: #eaeaea;
     --cor-clara: #f9f9f9;
-    --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
-    --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
-    --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
-    --cor-caramelo-full: rgba(217, 150, 91, 1);
-    --cor-caramelo-escuro: rgba(115, 66, 38, 1);
+    --cor-principal-rgb10: rgba(217, 150, 91, 0.1);
+    --cor-principal-rgb40: rgba(217, 150, 91, 0.4);
+    --cor-principal-rgb60: rgba(217, 150, 91, 0.6);
+    --cor-principal: rgba(255, 181, 0, 1);
+    --cor-principal-escura: rgba(115, 66, 38, 1);
 }
 
 * {
-    background-color: var(--cor-fundo-claro);
+    background-color: var(--cor-fundo);
     font-family: "Roboto", sans-serif;
     margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .barra-navegacao .grupo-superior .grupo-superior-esquerdo {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 40%;
+    }
+
+    .barra-navegacao .grupo-superior .grupo-superior-meio {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 60%;
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -63,7 +85,7 @@
         justify-content: center;
 
         /* DIMENSIONAMENTO */
-        width: 60%;
+        width: 70%;
     }
 
     /* BARRA DE PESQUISA */
@@ -367,7 +389,7 @@
 /* BARRA DE NAVEGAÇÃO */
 .barra-navegacao {
     /* APARÊNCIA */
-    background-color: var(--cor-caramelo-full);
+    background-color: var(--cor-principal);
 }
 
 /* GRUPO SUPERIOR DA BARRA DE NAVEGAÇÃO */
@@ -537,7 +559,7 @@
     /* APARÊNCIA */
     background-color: transparent;
     font-size: 18px;
-    color: var(--cor-fundo-claro);
+    color: var(--cor-fundo);
 
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
