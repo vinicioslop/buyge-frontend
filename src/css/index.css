@@ -24,16 +24,16 @@
         width: 100%;
     }
 
+    /* CARROSEL DE PRODUTOS */
     .produtos {
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         margin-bottom: 5%;
 
         /* DIMENSIONAMENTO */
-        width: 100%;
+        width: 90%;
     }
 
     .produtos .titulo {
@@ -42,16 +42,22 @@
     }
 
     .produtos .produtos-cartoes {
-        /* POSICIONAMENTO */
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: left;
-
         /* DIMENSIONAMENTO */
         width: 100%;
-        height: 100%;
+        height: 500px;
     }
+
+    .carrosel-produtos {
+        /* APARÊNCIA */
+        background: #eee;
+    }
+
+    .carrosel-cell {
+        width: 100%;
+        height: 500px;
+        margin-right: 10px;
+    }
+    /* CARROSEL DE PRODUTOS */
 
     .cartao {
         /* POSICIONAMENTO */
@@ -91,10 +97,6 @@
 
         /* DIMENSIONAMENTO */
         height: 24px;
-    }
-
-    .cartao .imagem-favorito .favorito:hover {
-        cursor: pointer;
     }
 
     .cartao .informacoes {
@@ -166,12 +168,6 @@
         justify-content: left;
     }
 
-    .cartao .informacoes .preco-parcela-botao .preco-parcela .parcela {
-        /* DIMENSIONAMENTO */
-        font-size: 12px;
-        font-weight: 700;
-    }
-
     .cartao .informacoes .preco-parcela-botao .comprar {
         /* POSICIONAMENTO */
         margin-top: 10px;
@@ -183,7 +179,6 @@
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         margin-top: 5%;
 
@@ -191,6 +186,7 @@
         width: 100%;
     }
 
+    /* CARROSEL DE PRODUTOS */
     .produtos {
         /* POSICIONAMENTO */
         display: flex;
@@ -199,27 +195,37 @@
         margin-bottom: 5%;
 
         /* DIMENSIONAMENTO */
-        width: 90%;
+        width: 95%;
     }
 
     .produtos .titulo {
         /* POSICIONAMENTO */
-        display: flex;
-        flex-direction: row;
         margin-bottom: 2.5%;
     }
 
     .produtos .produtos-cartoes {
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 500px;
+    }
+
+    .carrosel-produtos {
         /* POSICIONAMENTO */
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        
+
+        /* APARÊNCIA */
+        background: #eee;
+    }
+
+    .carrosel-cell {
+        /* POSICIONAMENTO */
+        margin-right: 10px;
 
         /* DIMENSIONAMENTO */
         width: 100%;
-        height: 100%;
+        height: 500px;
     }
+    /* CARROSEL DE PRODUTOS */
 
     .cartao {
         /* POSICIONAMENTO */
@@ -342,6 +348,15 @@
 
     /* DIMENSIONAMENTO */
     font-size: 16px;
+}
+
+.carrosel-produtos {
+    /* APARÊNCIA */
+    background: transparent;
+}
+
+.carrosel-cell {
+    background-color: transparent;
 }
 
 .cartao {
