@@ -1,5 +1,7 @@
+/* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
-    --cor-fundo-claro: #f9f9fa;
+    --cor-fundo-claro: #eaeaea;
+    --cor-clara: #f9f9f9;
     --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
     --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
     --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
@@ -13,39 +15,369 @@
     margin: 0;
 }
 
+@media screen and (max-width: 1200px) {
+    /* BARRA DE NAVEGAÇÃO */
+    .barra-navegacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 18vh;
+    }
+
+    /* GRUPO SUPERIOR DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-superior {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        padding-top: 10px;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 50%;
+    }
+
+    .barra-navegacao .grupo-superior .grupo-superior-esquerdo {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 20%;
+    }
+
+    /* LOGO DO PROJETO */
+    .barra-navegacao .grupo-superior .grupo-superior-esquerdo .logo {
+        /* DIMENSIONAMENTO */
+        height: 32px;
+    }
+
+    /* GRUPO SUPERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-superior .grupo-superior-meio {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 60%;
+    }
+
+    /* BARRA DE PESQUISA */
+    .barra-navegacao .grupo-superior .grupo-superior-meio .barra-pesquisa {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+
+        /* DIMENSIONAMENTO */
+        width: 95%;
+    }
+
+    /* CAIXA DE ENTRADA DE TEXTO PARA PESQUISA */
+    .grupo-superior .grupo-superior-meio .barra-pesquisa #barra-pesquisa-input {
+        /* TAMANHO E ALTURA */
+        width: 100%;
+        height: 36px;
+    }
+
+    /* ÍCONE DE PROCURAR DA BARRA DE PESQUISA */
+    .barra-navegacao
+        .grupo-superior
+        .grupo-superior-meio
+        .barra-pesquisa
+        #barra-pesquisa-icone {
+        /* POSICIONAMENTO */
+        display: flex;
+
+        margin-left: -32px;
+    }
+
+    /* GRUPO SUPERIOR DIREITO DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-superior .grupo-superior-direito {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 20%;
+    }
+
+    /* GRUPO DE ÍCONES SUPERIORES (CARRINHO, FAVORITOS E USUÁRIO) */
+    .barra-navegacao .grupo-superior .grupo-superior-direito .grupo-icones {
+        /* POSICIONAMENTO */
+        display: flex;
+        justify-content: space-between;
+
+        /* DIMENSIONAMENTO */
+        width: 60%;
+    }
+
+    /* ÍCONE SUPERIOR */
+    .barra-navegacao .grupo-superior .grupo-superior-direito .icone {
+        /* DIMENSIONAMENTO */
+        height: 24px;
+    }
+
+    /* GRUPO INFERIOR DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-inferior {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 50%;
+    }
+
+    .barra-navegacao .grupo-inferior .grupo-inferior-esquerdo {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 20%;
+    }
+
+    /* GRUPO DE MENU DE CATEGORIAS */
+    .barra-navegacao .grupo-inferior .grupo-inferior-esquerdo .categorias {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        /* DIMENSINAMENTO */
+        width: 70%;
+    }
+
+    /* ÍCONE DE CATEGORIAS */
+    .barra-navegacao
+        .grupo-inferior
+        .grupo-inferior-esquerdo
+        .categorias
+        #categorias-icone {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-self: flex-start;
+
+        /* DIMENSIONAMENTO */
+        height: 90%;
+    }
+
+    /* GRUPO INFERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-inferior .grupo-inferior-meio {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 60%;
+    }
+
+    /* GRUPO DE TEMAS MAIS PESQUISADOS */
+    .barra-navegacao .grupo-inferior .grupo-inferior-meio .temas {
+        /* POSICIONAMENTO */
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    /* BARRA DE NAVEGAÇÃO */
+    .barra-navegacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 15vh;
+    }
+
+    /* GRUPO SUPERIOR DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-superior {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        padding-top: 10px;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 50%;
+    }
+
+    .barra-navegacao .grupo-superior .grupo-superior-esquerdo {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 20%;
+    }
+
+    /* LOGO DO PROJETO */
+    .barra-navegacao .grupo-superior .grupo-superior-esquerdo .logo {
+        /* DIMENSIONAMENTO */
+        height: 32px;
+    }
+
+    /* GRUPO SUPERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-superior .grupo-superior-meio {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 70%;
+    }
+
+    /* BARRA DE PESQUISA */
+    .barra-navegacao .grupo-superior .grupo-superior-meio .barra-pesquisa {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+    }
+
+    /* CAIXA DE ENTRADA DE TEXTO PARA PESQUISA */
+    .grupo-superior .grupo-superior-meio .barra-pesquisa #barra-pesquisa-input {
+        /* TAMANHO E ALTURA */
+        width: 100%;
+        height: 36px;
+    }
+
+    /* ÍCONE DE PROCURAR DA BARRA DE PESQUISA */
+    .barra-navegacao
+        .grupo-superior
+        .grupo-superior-meio
+        .barra-pesquisa
+        #barra-pesquisa-icone {
+        /* POSICIONAMENTO */
+        display: flex;
+
+        margin-left: -32px;
+    }
+
+    /* GRUPO SUPERIOR DIREITO DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-superior .grupo-superior-direito {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 20%;
+    }
+
+    /* GRUPO DE ÍCONES SUPERIORES (CARRINHO, FAVORITOS E USUÁRIO) */
+    .barra-navegacao .grupo-superior .grupo-superior-direito .grupo-icones {
+        /* POSICIONAMENTO */
+        display: flex;
+        justify-content: space-between;
+
+        /* DIMENSIONAMENTO */
+        width: 50%;
+    }
+
+    /* ÍCONE SUPERIOR */
+    .barra-navegacao .grupo-superior .grupo-superior-direito .icone {
+        /* DIMENSIONAMENTO */
+        height: 24px;
+    }
+
+    /* GRUPO INFERIOR DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-inferior {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 50%;
+    }
+
+    .barra-navegacao .grupo-inferior .grupo-inferior-esquerdo {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 15%;
+    }
+
+    /* GRUPO DE MENU DE CATEGORIAS */
+    .barra-navegacao .grupo-inferior .grupo-inferior-esquerdo .categorias {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        /* DIMENSINAMENTO */
+        width: 100%;
+    }
+
+    /* ÍCONE DE CATEGORIAS */
+    .barra-navegacao
+        .grupo-inferior
+        .grupo-inferior-esquerdo
+        .categorias
+        #categorias-icone {
+        /* POSICIONAMENTO */
+        display: flex;
+        margin-right: 2%;
+    }
+
+    /* GRUPO INFERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
+    .barra-navegacao .grupo-inferior .grupo-inferior-meio {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        margin-left: 10%;
+
+        /* DIMENSIONAMENTO */
+        width: 60%;
+    }
+
+    /* GRUPO DE TEMAS MAIS PESQUISADOS */
+    .barra-navegacao .grupo-inferior .grupo-inferior-meio .temas {
+        /* POSICIONAMENTO */
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
 /* BARRA DE NAVEGAÇÃO */
 .barra-navegacao {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: column;
-
     /* APARÊNCIA */
     background-color: var(--cor-caramelo-full);
-    width: 100%;
-    height: 18vh;
 }
 
 /* GRUPO SUPERIOR DA BARRA DE NAVEGAÇÃO */
 .barra-navegacao .grupo-superior {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-    padding-top: 10px;
-
     /* APARÊNCIA */
-    width: 100%;
-    height: 50%;
     background-color: transparent;
 }
 
 .barra-navegacao .grupo-superior .grupo-superior-esquerdo {
-    /* POSICIONAMENTO */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     /* APARÊNCIA */
-    width: 20%;
     background-color: transparent;
 }
 
@@ -58,8 +390,6 @@
 .barra-navegacao .grupo-superior .grupo-superior-esquerdo .logo {
     /* APARÊNCIA */
     background-color: transparent;
-    height: 36px;
-    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
 }
 
 /* SIMULAÇÃO DE BOTÃO PARA O LOGO */
@@ -69,33 +399,18 @@
 
 /* GRUPO SUPERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
 .barra-navegacao .grupo-superior .grupo-superior-meio {
-    /* POSICIONAMENTO */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
 
 /* BARRA DE PESQUISA */
 .barra-navegacao .grupo-superior .grupo-superior-meio .barra-pesquisa {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
 
 /* CAIXA DE ENTRADA DE TEXTO PARA PESQUISA */
 .grupo-superior .grupo-superior-meio .barra-pesquisa #barra-pesquisa-input {
-    /* TAMANHO E ALTURA */
-    width: 100%;
-    height: 36px;
-
     /* BORDA E ESPAÇAMENTO INTERNO */
     padding: 12px 20px;
     box-sizing: border-box;
@@ -123,10 +438,6 @@
     .grupo-superior-meio
     .barra-pesquisa
     #barra-pesquisa-icone {
-    /* POSICIONAMENTO */
-    display: flex;
-    margin-left: -32px;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
@@ -142,23 +453,12 @@
 
 /* GRUPO SUPERIOR DIREITO DA BARRA DE NAVEGAÇÃO */
 .barra-navegacao .grupo-superior .grupo-superior-direito {
-    /* POSICIONAMENTO */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
 
 /* GRUPO DE ÍCONES SUPERIORES (CARRINHO, FAVORITOS E USUÁRIO) */
 .barra-navegacao .grupo-superior .grupo-superior-direito .grupo-icones {
-    /* POSICIONAMENTO */
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
@@ -167,7 +467,6 @@
 .barra-navegacao .grupo-superior .grupo-superior-direito .icone {
     /* APARÊNCIA */
     background-color: transparent;
-    height: 28px;
     cursor: pointer;
 }
 
@@ -179,36 +478,17 @@
 
 /* GRUPO INFERIOR DA BARRA DE NAVEGAÇÃO */
 .barra-navegacao .grupo-inferior {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-
     /* APARÊNCIA */
     background-color: transparent;
-    width: 100%;
-    height: 50%;
 }
 
 .barra-navegacao .grupo-inferior .grupo-inferior-esquerdo {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 20%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
 
 /* GRUPO DE MENU DE CATEGORIAS */
 .barra-navegacao .grupo-inferior .grupo-inferior-esquerdo .categorias {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 70%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
@@ -224,11 +504,6 @@
     .grupo-inferior-esquerdo
     .categorias
     #categorias-icone {
-    /* POSICIONAMENTO */
-    display: flex;
-    align-self: flex-start;
-    height: 90%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
@@ -241,30 +516,18 @@
     #categorias-titulo {
     /* APARÊNCIA */
     background-color: transparent;
-    font-size: 18px;
-    font-weight: normal;
-    color: var(--cor-fundo-claro);
+    font-size: 16px;
+    color: var(--cor-clara);
 }
 
 /* GRUPO INFERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
 .barra-navegacao .grupo-inferior .grupo-inferior-meio {
-    /* POSICIONAMENTO */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     /* APARÊNCIA */
-    width: 60%;
     background-color: transparent;
 }
 
 /* GRUPO DE TEMAS MAIS PESQUISADOS */
 .barra-navegacao .grupo-inferior .grupo-inferior-meio .temas {
-    /* POSICIONAMENTO */
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
     /* APARÊNCIA */
     background-color: transparent;
 }
