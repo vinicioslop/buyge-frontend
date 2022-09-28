@@ -1,11 +1,12 @@
+/* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
     --cor-fundo: #eaeaea;
     --cor-clara: #f9f9f9;
-    --cor-principal-rgb10: rgba(217, 150, 91, 0.1);
-    --cor-principal-rgb40: rgba(217, 150, 91, 0.4);
-    --cor-principal-rgb60: rgba(217, 150, 91, 0.6);
-    --cor-principal: rgba(255, 181, 0, 1);
-    --cor-principal-escura: rgba(115, 66, 38, 1);
+    --cor-principal-rgb10: rgba(109, 32, 11, 0.1);
+    --cor-principal-rgb40: rgba(109, 32, 11, 0.4);
+    --cor-principal-rgb60: rgba(109, 32, 11, 0.6);
+    --cor-principal: #6D2077;
+    --cor-principal-escura: #A779AB;
 }
 
 * {
@@ -117,7 +118,8 @@
 
 .produtos-favoritados .produto img {
     /* DIMENSIONAMENTO */
-    width: 180px;
+    width: 200px;
+    object-fit: scale-down;
 }
 
 .produtos-favoritados .produto .descricao {

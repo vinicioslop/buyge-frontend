@@ -28,6 +28,7 @@
         <title>BuyGe</title>
     </head>
     <body>
+        <!--
         <header class="barra-navegacao">
             <div class="grupo-superior">
                 <div class="grupo-superior-esquerdo">
@@ -106,6 +107,11 @@
                 </div>
             </div>
         </header>
+        -->
+
+        <header id="barra-navegacao">
+            
+        </header>
 
         <div
             class="carrosel"
@@ -122,7 +128,7 @@
                 <h1 class="titulo">Venha conferir os mais vendidos!</h1>
                 <div
                     class="produtos-cartoes carrosel-produtos"
-                    data-flickity='{ "pageDots": false, "alignCells": left }'
+                    data-flickity='{ "pageDots": false, "freeScroll": true, "wrapAround": true }'
                 >
                     <div class="cartao carrosel-cell">
                         <div class="imagem-favorito">
@@ -736,7 +742,7 @@
                 <h1 class="titulo">Olha o que chegou de novo!</h1>
                 <div
                     class="produtos-cartoes carrosel-produtos"
-                    data-flickity='{ "pageDots": false, "alignCells": left }'
+                    data-flickity='{ "pageDots": false, "freeScroll": true, "wrapAround": true }'
                 >
                     <div class="cartao carrosel-cell">
                         <div class="imagem-favorito">
@@ -1350,7 +1356,7 @@
                 <h1 class="titulo">Rápido antes que acabe!</h1>
                 <div
                     class="produtos-cartoes carrosel-produtos"
-                    data-flickity='{ "pageDots": false, "alignCells": left }'
+                    data-flickity='{ "pageDots": false, "freeScroll": true, "wrapAround": true }'
                 >
                     <div class="cartao carrosel-cell">
                         <div class="imagem-favorito">
@@ -2037,6 +2043,8 @@
                 </p>
             </div>
         </footer>
+
+        <script src="/src/js/barra-navegacao.js"></script>
 
         <!-- FRAMEWORK EXTERNO DO CARROSEL -->
         <script src="/src/flickity/flickity.pkgd.min.js"></script>
