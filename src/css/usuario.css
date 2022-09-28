@@ -217,3 +217,117 @@ input:hover {
 #rodape-user {
     margin-top: 10px;
 }
+
+
+
+/* RESPONSIVIDADE */
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+    .container-usuario {
+        font-size: 1.1em;
+    }
+
+    .container-usuario-nav {
+        min-width: 250px;
+    }
+
+    .container-usuario-nav-tl {
+        font-size: 1.1em;
+    }
+
+    .item-nav {
+        font-size: 1.1em;
+    }
+
+    .edit-form-button {
+        width: 120px;
+        height: 30px;
+        font-size: 1.02em;
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+    .container-usuario {
+        font-size: 1.2em;
+    }
+
+    .container-usuario-nav {
+        min-width: 300px;
+    }
+
+    .container-usuario-nav-tl {
+        font-size: 1.2em;
+    }
+
+    .item-nav {
+        font-size: 1.2em;
+    }
+
+    input {
+        width: 320px;
+    }
+
+    .edit-form-button {
+        width: 150px;
+        height: 50px;
+        font-size: 1.1em;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1000px) {
+    .container-usuario {
+        font-size: 1.2em;
+    }
+
+    .container-usuario-nav {
+        min-width: 300px;
+    }
+
+    .container-usuario-nav-tl {
+        font-size: 1.2em;
+    }
+
+    .item-nav {
+        font-size: 1.2em;
+    }
+
+    input {
+        width: 350px;
+    }
+
+    .edit-form-button {
+        width: 150px;
+        height: 50px;
+        font-size: 1.1em;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 800px) {
+    .container-usuario {
+        flex-direction: column;
+        font-size: 1.1em;
+    }
+
+    .container-usuario-data-user {
+        width: 100%;
+    }
+
+    .container-usuario-nav-tl {
+        font-size: 1.5em;
+    }
+
+    .container-usuario-nav-tl:hover {
+        background-color: #eaeaea;
+        color: rgba(217, 150, 91, 1);
+        font-size: 1.6em;
+        transition: 1s;
+    }
+
+    .item-nav {
+        font-size: 1.3em;
+    }
+
+    .container-usuario-data-user-info {
+        padding: 0px 0px 25px 25px;
+    }
+}
