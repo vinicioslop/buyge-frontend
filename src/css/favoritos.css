@@ -1,15 +1,15 @@
 :root {
-    --cor-fundo-claro: #f9f9fa;
-    --cor-fundo-meio-claro: #ededed;
-    --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
-    --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
-    --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
-    --cor-caramelo-full: rgba(217, 150, 91, 1);
-    --cor-caramelo-escuro: rgba(115, 66, 38, 1);
+    --cor-fundo: #eaeaea;
+    --cor-clara: #f9f9f9;
+    --cor-principal-rgb10: rgba(217, 150, 91, 0.1);
+    --cor-principal-rgb40: rgba(217, 150, 91, 0.4);
+    --cor-principal-rgb60: rgba(217, 150, 91, 0.6);
+    --cor-principal: rgba(255, 181, 0, 1);
+    --cor-principal-escura: rgba(115, 66, 38, 1);
 }
 
 * {
-    background-color: var(--cor-fundo-meio-claro);
+    background-color: var(--cor-clara);
 }
 
 .container {
@@ -41,7 +41,7 @@
     padding-right: 10px;
     
     /* APARÊNCIA */
-    background-color: var(--cor-fundo-claro);
+    background-color: var(--cor-fundo);
 }
 
 .container .selecao .selecionar {
@@ -112,7 +112,7 @@
     height: 180px;
     
     /* APARÊNCIA */
-    background-color: var(--cor-fundo-claro);
+    background-color: var(--cor-fundo);
 }
 
 .produtos-favoritados .produto img {
