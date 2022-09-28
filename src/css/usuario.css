@@ -45,6 +45,11 @@
     background-color: transparent;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .container-usuario-nav-tl:hover {
     background-color: #eaeaea;
     color: rgba(217, 150, 91, 1);
@@ -120,6 +125,7 @@ i {
 .icon-user {
     /* POSICIONAMENTO */
     align-content: center;
+    padding-left: 20px;
 
     /* DIMENSIONAMENTO */
     width: 250px;
@@ -174,7 +180,7 @@ input {
     /* APARÊNCIA */
     font-size: 1.2em;
     border: none;
-    background-color: rgb(223, 223, 223);
+    background-color: rgba(223, 223, 223, 0.685);
     color: black;
 }
 
@@ -198,11 +204,14 @@ input:hover {
 
     /* DIMENSIONAMENTO */
     width: 100px;
+    height: 35px;
 
     /* APARÊNCIA */
     border: transparent;
+    border-radius: 4%;
     background-color: rgba(115, 66, 38, 1);
     color: #f9f9f9;
+    box-shadow: 10px 10px 8px -8px #b1b1b1;
 }
 
 .edit-form-button:hover {
@@ -214,9 +223,9 @@ input:hover {
 
 /* FOOTER */
 
-#rodape-user {
+/* #rodape-user {
     margin-top: 10px;
-}
+} */
 
 
 
@@ -241,7 +250,7 @@ input:hover {
 
     .edit-form-button {
         width: 120px;
-        height: 30px;
+        height: 35px;
         font-size: 1.02em;
     }
 }
@@ -269,7 +278,7 @@ input:hover {
 
     .edit-form-button {
         width: 150px;
-        height: 50px;
+        height: 40px;
         font-size: 1.1em;
     }
 }
@@ -297,7 +306,7 @@ input:hover {
 
     .edit-form-button {
         width: 150px;
-        height: 50px;
+        height: 40px;
         font-size: 1.1em;
     }
 }
@@ -329,5 +338,11 @@ input:hover {
 
     .container-usuario-data-user-info {
         padding: 0px 0px 25px 25px;
+    }
+
+    .edit-form-button {
+        font-size: 1.1em;
+        width: 150px;
+        height: 50px;
     }
 }
