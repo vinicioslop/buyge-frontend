@@ -30,7 +30,7 @@
     height: 100%;
     
     /* APARÊNCIA */
-    background-color: rgb(236, 234, 234);
+    background-color: rgb(221, 221, 221);
 }
 
 .container-usuario-nav-tl {
@@ -347,7 +347,7 @@ input:hover {
     }
 
     .container-usuario-nav-tl {
-        font-size: 1.5em;
+        font-size: 1.3em;
         min-width: 300px;
         max-width: 800px;
     }
@@ -360,7 +360,7 @@ input:hover {
     }
 
     .item-nav {
-        font-size: 1.3em;
+        font-size: 1em;
     }
 
     .container-usuario-data-user-info {
@@ -394,7 +394,7 @@ input:hover {
     }
 
     .container-usuario-nav-tl {
-        font-size: 1.5em;
+        font-size: 1.3em;
         min-width: 300px;
         max-width: 800px;
     }
@@ -407,7 +407,7 @@ input:hover {
     }
 
     .item-nav {
-        font-size: 1.3em;
+        font-size: 0.95em;
     }
 
     .container-usuario-data-user-info {
@@ -461,7 +461,7 @@ input:hover {
     }
 
     .item-nav {
-        font-size: 1.3em;
+        font-size: 1em;
     }
 
     .container-usuario-data-user-info {
