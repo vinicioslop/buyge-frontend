@@ -350,7 +350,7 @@ input:hover {
 
     .container-usuario-nav-tl:hover {
         background-color: #eaeaea;
-        color: rgba(217, 150, 91, 1);
+        color: #A779AB;
         font-size: 1.6em;
         transition: 1s;
     }
