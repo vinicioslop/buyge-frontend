@@ -253,7 +253,7 @@ input:hover {
     }
 
     .container-usuario-nav {
-        min-width: 250px;
+        max-width: 230px;
     }
 
     .container-usuario-nav-tl {
@@ -277,7 +277,7 @@ input:hover {
     }
 
     .container-usuario-nav {
-        min-width: 300px;
+        max-width: 230px;
     }
 
     .container-usuario-nav-tl {
@@ -305,7 +305,7 @@ input:hover {
     }
 
     .container-usuario-nav {
-        min-width: 300px;
+        max-width: 230px;
     }
 
     .container-usuario-nav-tl {
@@ -333,8 +333,13 @@ input:hover {
         font-size: 1.1em;
     }
 
+    .dropdown {
+        position: absolute;
+    }
+
     .container-usuario-data-user {
         width: 100%;
+        padding-top: 80px;
     }
 
     .container-usuario-nav {
@@ -374,9 +379,14 @@ input:hover {
         flex-direction: column;
         font-size: 1.1em;
     }
+    
+    .dropdown {
+        position: absolute;
+    }
 
     .container-usuario-data-user {
         width: 100%;
+        padding-top: 80px;
     }
 
     .container-usuario-nav {
