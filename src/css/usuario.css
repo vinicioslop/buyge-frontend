@@ -39,10 +39,13 @@
 
     /* DIMENSIONAMENTO */
     padding: 25px;
+    min-width: 230px;       /*REMOVA */
     
     /* APARÊNCIA */
     font-size: 18px;
     background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 a {
@@ -52,14 +55,14 @@ a {
 
 .container-usuario-nav-tl:hover {
     background-color: #eaeaea;
-    color: rgba(217, 150, 91, 1);
+    color: #A779AB;
     font-size: 1.2em;
     transition: 1s;
 }
 
 .container-usuario-nav-itens {
     /* POSICIONAMENTO */
-    
+    display: none;
 
     /* DIMENSIONAMENTO */
     padding: 0 20px 20px 25px;
@@ -69,12 +72,26 @@ a {
     background-color: transparent;
 }
 
+.container-usuario-nav-itens .item-nav-div {
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown:hover .container-usuario-nav-itens {
+    display: block;
+}
+
 .item-nav {
     /* POSICIONAMENTO */
     
 
     /* DIMENSIONAMENTO */
-    padding: 25px 10px 20px 10px;
+    padding: 20px 10px 20px 10px;
     
     
     /* APARÊNCIA */
@@ -85,7 +102,7 @@ a {
 .item-nav:hover {
     padding: 25px 0px 20px 20px;
     background-color: #eaeaea;
-    color: rgba(217, 150, 91, 1);
+    color: #A779AB;
     transition: 0.3s;
 }
 
@@ -132,11 +149,11 @@ i {
     
     /* APARÊNCIA */
     font-size: 210px;
-    color: rgba(115, 66, 38, 1);
+    color: #6D2077;
 }
 
 .icon-user:hover {
-    color: rgba(217, 150, 91, 1);
+    color: #A779AB;
     transition: 0.3s;
 }
 
@@ -185,7 +202,7 @@ input {
 }
 
 input:hover {
-    background-color: rgba(217, 150, 91, 0.4);
+    background-color: #a779ab6c;
     transition: 0.6s;
 }
 
@@ -209,13 +226,13 @@ input:hover {
     /* APARÊNCIA */
     border: transparent;
     border-radius: 4%;
-    background-color: rgba(115, 66, 38, 1);
+    background-color: #6D2077;
     color: #f9f9f9;
     box-shadow: 10px 10px 8px -8px #b1b1b1;
 }
 
 .edit-form-button:hover {
-    background-color: rgba(217, 150, 91, 1);
+    background-color: #A779AB;
     transition: 0.3s;
 }
 
@@ -321,8 +338,14 @@ input:hover {
         width: 100%;
     }
 
+    .container-usuario-nav {
+        width: 100%;
+    }
+
     .container-usuario-nav-tl {
         font-size: 1.5em;
+        min-width: 100%;
+        max-width: 800px;
     }
 
     .container-usuario-nav-tl:hover {
