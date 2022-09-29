@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
 
+/* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
-    --cor-fundo-claro: #eaeaea;
+    --cor-fundo: #eaeaea;
     --cor-clara: #f9f9f9;
-    --cor-caramelo-rgb10: rgba(217, 150, 91, 0.1);
-    --cor-caramelo-rgb40: rgba(217, 150, 91, 0.4);
-    --cor-caramelo-rgb60: rgba(217, 150, 91, 0.6);
-    --cor-caramelo-full: rgba(217, 150, 91, 1);
-    --cor-caramelo-escuro: rgba(115, 66, 38, 1);
+    --cor-principal-rgb10: rgba(109, 32, 11, 0.1);
+    --cor-principal-rgb40: rgba(109, 32, 11, 0.4);
+    --cor-principal-rgb60: rgba(109, 32, 11, 0.6);
+    --cor-principal: #6d2077;
+    --cor-principal-escura: #a779ab;
 }
 
 * {
@@ -18,6 +19,6 @@
     box-sizing: border-box;
     
     /* APARÊNCIA */
-    background-color: var(--cor-fundo-claro);
+    background-color: var(--cor-fundo);
     font-family: "Roboto", sans-serif;
 }
