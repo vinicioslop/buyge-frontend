@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
 
+/* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
     --cor-fundo: #eaeaea;
     --cor-clara: #f9f9f9;
-    --cor-principal-rgb10: rgba(217, 150, 91, 0.1);
-    --cor-principal-rgb40: rgba(217, 150, 91, 0.4);
-    --cor-principal-rgb60: rgba(217, 150, 91, 0.6);
-    --cor-principal: rgba(255, 181, 0, 1);
-    --cor-principal-escura: rgba(115, 66, 38, 1);
+    --cor-principal-rgb10: rgba(109, 32, 11, 0.1);
+    --cor-principal-rgb40: rgba(109, 32, 11, 0.4);
+    --cor-principal-rgb60: rgba(109, 32, 11, 0.6);
+    --cor-principal: #6d2077;
+    --cor-principal-escura: #a779ab;
 }
 
 @media screen and (max-width: 1200px) {
@@ -486,7 +487,7 @@
 .produto .informacoes {
     /* APARÊNCIA */
     border-radius: 5px;
-    background-color: var(--cor-principal-rgb40);
+    background-color: var(--cor-principal-escura);
 }
 
 .produto .informacoes .titulo-avaliacoes {
@@ -614,7 +615,7 @@
 .produto .informacoes .destinatario .entrada button:hover {
     /* APARÊNCIA */
     cursor: pointer;
-    background-color: var(--cor-principal-escura);
+    background-color: var(--cor-principal);
     color: var(--cor-clara);
 }
 
@@ -660,8 +661,9 @@
 
 .produto .informacoes .botoes .comprar {
     /* APARÊNCIA */
-    color: var(--cor-clara);
-    background-color: var(--cor-principal-escura);
+    font-size: 20px;
+    color: var(--cor-principal);
+    background-color: var(--cor-clara);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
 }
@@ -669,7 +671,7 @@
 .produto .informacoes .botoes .comprar:hover {
     /* APARÊNCIA */
     background-color: var(--cor-principal);
-    color: rgba(0, 0, 0, 1);
+    color: var(--cor-clara);
 }
 
 .produto .informacoes .botoes .carrinho {
@@ -681,7 +683,7 @@
 
 .produto .informacoes .botoes .carrinho:hover {
     /* APARÊNCIA */
-    background-color: var(--cor-principal-escura);
+    background-color: var(--cor-clara);
 }
 
 .produto .informacoes .botoes .carrinho img {
