@@ -46,6 +46,10 @@
         background-color: transparent;
     }
 
+    .barra-navegacao .grupo-esquerdo .menu:hover {
+        cursor: pointer;
+    }
+
     .barra-navegacao .grupo-meio {
         display: flex;
         flex-direction: column;
@@ -55,6 +59,12 @@
         width: 70%;
         height: 100%;
 
+        background-color: transparent;
+    }
+
+    /* LOGO DO PROJETO */
+    .barra-navegacao .grupo-meio .logo-link {
+        /* APARÊNCIA */
         background-color: transparent;
     }
 
@@ -80,6 +90,10 @@
         height: 34px;
 
         background-color: transparent;
+    }
+
+    .barra-navegacao .grupo-direito .pesquisa-icone:hover {
+        cursor: pointer;
     }
     /* BARRA NAVEGAÇÃO MENOR */
 }

@@ -232,11 +232,18 @@ function montaBarraNavegacao() {
         grupoMeio.classList.add("grupo-meio");
 
         // LOGO DO PROJETO
-        const logo = document.createElement("img");
-        logo.setAttribute("src", "/src/imgs/logo/buyge_logo_v3_branco.png");
-        logo.classList.add("logo");
+        const logoLink = document.createElement("a");
+        logoLink.classList.add("logo-link");
+        logoLink.setAttribute("href", "/index.html");
 
-        grupoMeio.appendChild(logo);
+        const logo = document.createElement("img");
+        logo.classList.add("logo");
+        logo.setAttribute("src", "/src/imgs/logo/buyge_logo_v3_branco.png");
+        logo.setAttribute("alt", "Logo do projeto branco e preto");
+
+        logoLink.appendChild(logo);
+
+        grupoMeio.appendChild(logoLink);
         // LOGO DO PROJETO
 
         barraNavegacao.appendChild(grupoMeio);
