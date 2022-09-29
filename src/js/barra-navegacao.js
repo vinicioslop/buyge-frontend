@@ -2,6 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
     montaBarraNavegacao();
 });
 
+/*
+window.addEventListener("resize", () => {
+    limpaBarraNavegacao();
+    montaBarraNavegacao();
+});
+
+function limpaBarraNavegacao(){
+    const barra = document.document.querySelector("#barra-navegacao");
+    
+    barra.innerHTML = "";
+}
+*/
+
 function montaBarraNavegacao() {
     if (screen.width >= 820) {
         // BARRA DE NAVEGAÇÃO
