@@ -1,26 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-    montaBarraNavegacao();
-});
-
-/*
-window.addEventListener("resize", () => {
-    limpaBarraNavegacao();
-    montaBarraNavegacao();
-});
-
-function limpaBarraNavegacao(){
-    const barra = document.document.querySelector("#barra-navegacao");
-    
-    barra.innerHTML = "";
-}
-*/
+document.addEventListener("DOMContentLoaded", montaBarraNavegacao());
 
 function montaBarraNavegacao() {
-    if (screen.width >= 820) {
-        // BARRA DE NAVEGAÇÃO
-        const barraNavegacao = document.querySelector("#barra-navegacao");
-        barraNavegacao.classList.add("barra-navegacao");
+    // BARRA DE NAVEGAÇÃO
+    const barraNavegacao = document.querySelector("#barra-navegacao");
+    barraNavegacao.innerHTML = "";
+    barraNavegacao.classList.add("barra-navegacao");
 
+    if (screen.width >= 820) {
         // BARRA DE NAVEGAÇÃO - GRUPO SUPERIOR
         const grupoSuperior = document.createElement("div");
         grupoSuperior.classList.add("grupo-superior");
@@ -221,10 +207,6 @@ function montaBarraNavegacao() {
         // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR
     }
     if (screen.width < 820) {
-        // BARRA DE NAVEGAÇÃO
-        const barraNavegacao = document.querySelector("#barra-navegacao");
-        barraNavegacao.classList.add("barra-navegacao");
-
         // GRUPO ESQUERDO
         const grupoEsquerdo = document.createElement("div");
         grupoEsquerdo.classList.add("grupo-esquerdo");
