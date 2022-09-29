@@ -242,7 +242,14 @@
 }
 
 .rodape-inferior {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     /* APARÊNCIA */
+    text-align: center;
     background-color: var(--cor-principal-escura);
 }
 
