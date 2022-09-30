@@ -252,8 +252,8 @@ function montaBarraNavegacaoGrande() {
     // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR ESQUERDO
 
     // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR MEIO
-    const grupo_inferior_direito = document.createElement("div");
-    grupo_inferior_direito.classList.add("grupo-inferior-direito");
+    const grupoInferiorDireito = document.createElement("div");
+    grupoInferiorDireito.classList.add("grupo-inferior-direito");
 
     // TEMAS MAIS PESQUISADOS
     const temas = document.createElement("div");
@@ -295,10 +295,10 @@ function montaBarraNavegacaoGrande() {
     temas.appendChild(tema06);
     temas.appendChild(tema07);
 
-    grupo_inferior_direito.appendChild(temas);
+    grupoInferiorDireito.appendChild(temas);
     // TEMAS MAIS PESQUISADOS
 
-    grupoInferior.appendChild(grupo_inferior_direito);
+    grupoInferior.appendChild(grupoInferiorDireito);
     // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR MEIO
 
     barraNavegacao.appendChild(grupoInferior);

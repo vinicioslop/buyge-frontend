@@ -1,17 +1,20 @@
-/* external css: flickity.css */
 .carrosel {
-  background: #EEE;
+    /* APARÊNCIA */
+    background: #eee;
 }
 
 .carrosel img {
-  display: block;
-  height: 150px;
+    /* POSICIONAMENTO */
+    display: block;
 
-  object-fit: scale-down;
+    /* DIMENSIONAMENTO */
+    height: 150px;
+    object-fit: scale-down;
 }
 
-@media screen and ( min-width: 768px ) {
-  .carrosel img {
-    height: 400px;
-  }
+@media screen and (min-width: 768px) {
+    .carrosel img {
+        /* DIMENSIONAMENTO */
+        height: 400px;
+    }
 }

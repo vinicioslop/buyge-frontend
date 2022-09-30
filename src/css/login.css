@@ -5,16 +5,18 @@
     --cor-principal-rgb10: rgba(109, 32, 11, 0.1);
     --cor-principal-rgb40: rgba(109, 32, 11, 0.4);
     --cor-principal-rgb60: rgba(109, 32, 11, 0.6);
-    --cor-principal: #6D2077;
-    --cor-principal-escura: #A779AB;
+    --cor-principal: #6d2077;
+    --cor-principal-escura: #a779ab;
 }
 
 .container {
+    /* POSICIONAMENTO */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
+    /* DIMENSIONAMENTO */
     width: 100vw;
     height: 100vh;
 }
@@ -36,10 +38,13 @@
 
 /* LOGO DO PROJETO */
 .fundo-login .logo {
-    /* APARÊNCIA */
-    height: 50px;
+    /* POSICIONAMENTO */
     margin-bottom: 20px;
+    
+    /* DIMENSIONAMENTO */
+    height: 50px;
 
+    /* APARÊNCIA */
     background-color: transparent;
 }
 
