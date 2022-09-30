@@ -1,10 +1,22 @@
 document.addEventListener("DOMContentLoaded", montaBarraNavegacao());
 
+window.onresize = function() {
+    montaBarraNavegacao();
+}
+
+window.onload = function() {
+    montaBarraNavegacao();
+}
+
+window.onchange = function() {
+    montaBarraNavegacao();
+}
+
 function montaBarraNavegacao() {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
-    barraNavegacao.innerHTML = "";
     barraNavegacao.classList.add("barra-navegacao");
+    barraNavegacao.innerHTML = "";
 
     if (screen.width >= 820) {
         // BARRA DE NAVEGAÇÃO - GRUPO SUPERIOR
