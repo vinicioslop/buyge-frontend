@@ -1,24 +1,84 @@
 document.addEventListener("DOMContentLoaded", montaBarraNavegacao());
 
-window.onresize = function() {
+window.onresize = function () {
+    limpaBarraNavegacao();
     montaBarraNavegacao();
-}
+};
 
-window.onload = function() {
+window.onload = function () {
+    limpaBarraNavegacao();
     montaBarraNavegacao();
-}
+};
 
-window.onchange = function() {
+window.onchange = function () {
+    limpaBarraNavegacao();
     montaBarraNavegacao();
+};
+
+function limpaBarraNavegacao() {
+    // BARRA DE NAVEGAÇÃO
+    const barraNavegacao = document.querySelector("#barra-navegacao");
+    barraNavegacao.innerHTML = "";
 }
 
 function montaBarraNavegacao() {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
     barraNavegacao.classList.add("barra-navegacao");
-    barraNavegacao.innerHTML = "";
 
-    if (screen.width >= 820) {
+    if (screen.width < 820) {
+        // GRUPO ESQUERDO
+        const grupoEsquerdo = document.createElement("div");
+        grupoEsquerdo.classList.add("grupo-esquerdo");
+
+        // ICONE DE MENU/CATEGORIAS
+        const menuIcone = document.createElement("img");
+        menuIcone.setAttribute("src", "/src/icons/menu-branco.svg");
+        menuIcone.classList.add("menu");
+
+        grupoEsquerdo.appendChild(menuIcone);
+        // ICONE DE MENU/CATEGORIAS
+
+        barraNavegacao.appendChild(grupoEsquerdo);
+        // GRUPO ESQUERDO
+
+        // GRUPO MEIO
+        const grupoMeio = document.createElement("div");
+        grupoMeio.classList.add("grupo-meio");
+
+        // LOGO DO PROJETO
+        const logoLink = document.createElement("a");
+        logoLink.classList.add("logo-link");
+        logoLink.setAttribute("href", "/index.html");
+
+        const logo = document.createElement("img");
+        logo.classList.add("logo");
+        logo.setAttribute("src", "/src/imgs/logo/buyge_logo_v3_branco.png");
+        logo.setAttribute("alt", "Logo do projeto branco e preto");
+
+        logoLink.appendChild(logo);
+
+        grupoMeio.appendChild(logoLink);
+        // LOGO DO PROJETO
+
+        barraNavegacao.appendChild(grupoMeio);
+        // GRUPO MEIO
+
+        // GRUPO DIREITO
+        const grupoDireito = document.createElement("div");
+        grupoDireito.classList.add("grupo-direito");
+
+        // ICONE DE PESQUISA
+        const pesquisaIcone = document.createElement("img");
+        pesquisaIcone.setAttribute("src", "/src/icons/search-branco.svg");
+        pesquisaIcone.classList.add("pesquisa-icone");
+
+        grupoDireito.appendChild(pesquisaIcone);
+        // ICONE DE PESQUISA
+
+        barraNavegacao.appendChild(grupoDireito);
+        // GRUPO DIREITO
+    } else {
         // BARRA DE NAVEGAÇÃO - GRUPO SUPERIOR
         const grupoSuperior = document.createElement("div");
         grupoSuperior.classList.add("grupo-superior");
@@ -217,58 +277,5 @@ function montaBarraNavegacao() {
 
         barraNavegacao.appendChild(grupoInferior);
         // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR
-    }
-    if (screen.width < 820) {
-        // GRUPO ESQUERDO
-        const grupoEsquerdo = document.createElement("div");
-        grupoEsquerdo.classList.add("grupo-esquerdo");
-
-        // ICONE DE MENU/CATEGORIAS
-        const menuIcone = document.createElement("img");
-        menuIcone.setAttribute("src", "/src/icons/menu-branco.svg");
-        menuIcone.classList.add("menu");
-
-        grupoEsquerdo.appendChild(menuIcone);
-        // ICONE DE MENU/CATEGORIAS
-
-        barraNavegacao.appendChild(grupoEsquerdo);
-        // GRUPO ESQUERDO
-
-        // GRUPO MEIO
-        const grupoMeio = document.createElement("div");
-        grupoMeio.classList.add("grupo-meio");
-
-        // LOGO DO PROJETO
-        const logoLink = document.createElement("a");
-        logoLink.classList.add("logo-link");
-        logoLink.setAttribute("href", "/index.html");
-
-        const logo = document.createElement("img");
-        logo.classList.add("logo");
-        logo.setAttribute("src", "/src/imgs/logo/buyge_logo_v3_branco.png");
-        logo.setAttribute("alt", "Logo do projeto branco e preto");
-
-        logoLink.appendChild(logo);
-
-        grupoMeio.appendChild(logoLink);
-        // LOGO DO PROJETO
-
-        barraNavegacao.appendChild(grupoMeio);
-        // GRUPO MEIO
-
-        // GRUPO DIREITO
-        const grupoDireito = document.createElement("div");
-        grupoDireito.classList.add("grupo-direito");
-
-        // ICONE DE PESQUISA
-        const pesquisaIcone = document.createElement("img");
-        pesquisaIcone.setAttribute("src", "/src/icons/search-branco.svg");
-        pesquisaIcone.classList.add("pesquisa-icone");
-
-        grupoDireito.appendChild(pesquisaIcone);
-        // ICONE DE PESQUISA
-
-        barraNavegacao.appendChild(grupoDireito);
-        // GRUPO DIREITO
     }
 }
