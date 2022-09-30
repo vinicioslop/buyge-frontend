@@ -15,6 +15,12 @@ window.onchange = function () {
 window.addEventListener("change", montaBarra());
 
 function montaBarra() {
+    const barraNavegacao = document.querySelector("#barra-navegacao");
+
+    if (!barraNavegacao.classList.contains("barra-navegacao")) {
+        barraNavegacao.classList.add("barra-navegacao");
+    }
+
     if (window.screen.width <= 820) {
         limpaBarraNavegacao();
         montaBarraNavegacaoPequena();
