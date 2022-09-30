@@ -261,31 +261,31 @@ function montaBarraNavegacaoGrande() {
 
     const tema01 = document.createElement("p");
     tema01.classList.add("tema");
-    tema01.innerText = "demon slayer";
+    tema01.innerText = "DEMON SLAYER";
 
     const tema02 = document.createElement("p");
     tema02.classList.add("tema");
-    tema02.innerText = "death note";
+    tema02.innerText = "DEATH NOTE";
 
     const tema03 = document.createElement("p");
     tema03.classList.add("tema");
-    tema03.innerText = "boku no hero";
+    tema03.innerText = "BOKU NO HERO";
 
     const tema04 = document.createElement("p");
     tema04.classList.add("tema");
-    tema04.innerText = "one piece";
+    tema04.innerText = "ONE PIECE";
 
     const tema05 = document.createElement("p");
     tema05.classList.add("tema");
-    tema05.innerText = "naruto";
+    tema05.innerText = "NARUTO";
 
     const tema06 = document.createElement("p");
     tema06.classList.add("tema");
-    tema06.innerText = "made in abyss";
+    tema06.innerText = "MADE IN ABYSS";
 
     const tema07 = document.createElement("p");
     tema07.classList.add("tema");
-    tema07.innerText = "pokemon";
+    tema07.innerText = "POKEMON";
 
     temas.appendChild(tema01);
     temas.appendChild(tema02);
