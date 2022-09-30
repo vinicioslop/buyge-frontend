@@ -1,22 +1,18 @@
 document.addEventListener("DOMContentLoaded", montaBarra());
-
 window.onload = function () {
     montaBarra();
 };
+window.addEventListener("load", montaBarra());
 
 window.onresize = function () {
     montaBarra();
 };
+window.addEventListener("resize", montaBarra());
 
 window.onchange = function () {
     montaBarra();
 };
-
-function limpaBarraNavegacao() {
-    // BARRA DE NAVEGAÇÃO
-    const barraNavegacao = document.querySelector("#barra-navegacao");
-    barraNavegacao.innerHTML = "";
-}
+window.addEventListener("change", montaBarra());
 
 function montaBarra() {
     if (window.screen.width <= 820) {
@@ -26,6 +22,12 @@ function montaBarra() {
         limpaBarraNavegacao();
         montaBarraNavegacaoGrande();
     }
+}
+
+function limpaBarraNavegacao() {
+    // BARRA DE NAVEGAÇÃO
+    const barraNavegacao = document.querySelector("#barra-navegacao");
+    barraNavegacao.innerHTML = "";
 }
 
 function montaBarraNavegacaoPequena() {
