@@ -1,43 +1,25 @@
 document.addEventListener("DOMContentLoaded", montaBarra());
-window.onload = function () {
-    montaBarra();
-};
-window.addEventListener("load", montaBarra());
 
 window.onresize = function () {
     montaBarra();
 };
-window.addEventListener("resize", montaBarra());
 
 window.onchange = function () {
     montaBarra();
 };
-window.addEventListener("change", montaBarra());
 
 function montaBarra() {
-    const barraNavegacao = document.querySelector("#barra-navegacao");
-
-    if (!barraNavegacao.classList.contains("barra-navegacao")) {
-        barraNavegacao.classList.add("barra-navegacao");
-    }
-
     if (window.screen.width < 820) {
-        limpaBarraNavegacao();
         montaBarraNavegacaoPequena();
     } else {
-        limpaBarraNavegacao();
         montaBarraNavegacaoGrande();
     }
-}
-
-function limpaBarraNavegacao() {
-    // BARRA DE NAVEGAÇÃO
-    document.querySelector("#barra-navegacao").innerHTML = "";
 }
 
 function montaBarraNavegacaoPequena() {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
+    barraNavegacao.innerHTML = "";
 
     // GRUPO ESQUERDO
     const grupoEsquerdo = document.createElement("div");
@@ -124,6 +106,7 @@ function montaBarraNavegacaoPequena() {
 function montaBarraNavegacaoGrande() {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
+    barraNavegacao.innerHTML = "";
 
     // BARRA DE NAVEGAÇÃO - GRUPO SUPERIOR
     const grupoSuperior = document.createElement("div");
@@ -323,7 +306,7 @@ function montaBarraNavegacaoGrande() {
 }
 
 /* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
+toggle between hiding and showing the dropdown content 
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -341,3 +324,4 @@ window.onclick = function (event) {
         }
     }
 };
+*/
