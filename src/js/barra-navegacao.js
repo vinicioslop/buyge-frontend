@@ -261,31 +261,31 @@ function montaBarraNavegacaoGrande() {
 
     const tema01 = document.createElement("p");
     tema01.classList.add("tema");
-    tema01.innerText = "demon slayer".toUpperCase();
+    tema01.innerText = "DEMON SLAYER".toUpperCase();
 
     const tema02 = document.createElement("p");
     tema02.classList.add("tema");
-    tema02.innerText = "death note".toUpperCase();
+    tema02.innerText = "DEATH NOTE".toUpperCase();
 
     const tema03 = document.createElement("p");
     tema03.classList.add("tema");
-    tema03.innerText = "boku no hero".toUpperCase();
+    tema03.innerText = "BOKU NO HERO".toUpperCase();
 
     const tema04 = document.createElement("p");
     tema04.classList.add("tema");
-    tema04.innerText = "one piece".toUpperCase();
+    tema04.innerText = "ONE PIECE".toUpperCase();
 
     const tema05 = document.createElement("p");
     tema05.classList.add("tema");
-    tema05.innerText = "naruto".toUpperCase();
+    tema05.innerText = "NARUTO".toUpperCase();
 
     const tema06 = document.createElement("p");
     tema06.classList.add("tema");
-    tema06.innerText = "made in abyss".toUpperCase();
+    tema06.innerText = "MADE IN ABYSS".toUpperCase();
 
     const tema07 = document.createElement("p");
     tema07.classList.add("tema");
-    tema07.innerText = "pokemon".toUpperCase();
+    tema07.innerText = "POKEMON".toUpperCase();
 
     temas.appendChild(tema01);
     temas.appendChild(tema02);

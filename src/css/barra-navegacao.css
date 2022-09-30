@@ -445,6 +445,7 @@
         /* APARÊNCIA */
         background-color: transparent;
         font-size: 14px;
+        font-weight: normal;
         color: var(--cor-fundo);
 
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
