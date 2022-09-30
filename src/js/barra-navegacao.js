@@ -33,7 +33,6 @@ function limpaBarraNavegacao() {
 function montaBarraNavegacaoPequena() {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
-    barraNavegacao.classList.add("barra-navegacao");
 
     // GRUPO ESQUERDO
     const grupoEsquerdo = document.createElement("div");
