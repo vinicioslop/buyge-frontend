@@ -1,11 +1,8 @@
-document.addEventListener("DOMContentLoaded", montaBarraNavegacao());
-
-window.onresize = function () {
-    limpaBarraNavegacao();
+window.onload = function () {
     montaBarraNavegacao();
 };
 
-window.onload = function () {
+window.onresize = function () {
     limpaBarraNavegacao();
     montaBarraNavegacao();
 };
