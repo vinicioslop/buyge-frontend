@@ -47,8 +47,37 @@ function montaBarraNavegacaoPequena() {
     const menuIcone = document.createElement("img");
     menuIcone.setAttribute("src", "/src/icons/menu-branco.svg");
     menuIcone.classList.add("menu");
-
     grupoEsquerdo.appendChild(menuIcone);
+
+    /* MENU FLUTUANTE
+    const menu_flutuante = document.createElement("div");
+    menu_flutuante.classList.add("dropdown");
+    const menu_botao = document.createElement("button");
+    menu_botao.setAttribute("onclick", "myFunction()");
+    menu_botao.classList.add("dropbtn");
+    menu_botao.setAttribute("innerText", "Dropdown");
+    const menu_itens = document.createElement("div");
+    menu_itens.setAttribute("id", "myDropdown");
+    menu_itens.classList.add("dropdown-content");
+    const link01 = document.createElement("a");
+    link01.setAttribute("href", "#home");
+    link01.setAttribute("innerText", "Home");
+    const link02 = document.createElement("a");
+    link02.setAttribute("href", "#about");
+    link02.setAttribute("innerText", "About");
+    const link03 = document.createElement("a");
+    link03.setAttribute("href", "#Contact");
+    link03.setAttribute("innerText", "Contact");
+
+    menu_itens.appendChild(link01);
+    menu_itens.appendChild(link02);
+    menu_itens.appendChild(link03);
+
+    menu_flutuante.appendChild(menu_botao);
+    menu_flutuante.appendChild(menu_itens);
+
+    grupoEsquerdo.appendChild(menu_flutuante);
+    */
     // ICONE DE MENU/CATEGORIAS
 
     barraNavegacao.appendChild(grupoEsquerdo);
@@ -226,13 +255,13 @@ function montaBarraNavegacaoGrande() {
     categoriasIcone.setAttribute("id", "categorias-icone");
     categoriasIcone.setAttribute("src", "/src/icons/menu-branco.svg");
     categoriasIcone.setAttribute("alt", "Ícone de menu branco");
-    categorias.appendChild(categoriasIcone);
 
     const categoriasTitulo = document.createElement("p");
     categoriasTitulo.setAttribute("id", "categorias-titulo");
     categoriasTitulo.innerText = "Todas as categorias";
-    categorias.appendChild(categoriasTitulo);
 
+    categorias.appendChild(categoriasIcone);
+    categorias.appendChild(categoriasTitulo);
     grupoInferiorEsquerdo.appendChild(categorias);
     // CATEGORIAS
 
@@ -292,3 +321,23 @@ function montaBarraNavegacaoGrande() {
     barraNavegacao.appendChild(grupoInferior);
     // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR
 }
+
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches(".dropbtn")) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+                openDropdown.classList.remove("show");
+            }
+        }
+    }
+};
