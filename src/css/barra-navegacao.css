@@ -97,7 +97,7 @@
     }
     /* BARRA NAVEGAÇÃO MENOR */
 
-    /* MENU FLUTUANTE */
+    /* MENU FLUTUANTE
     .dropdown {
         position: relative;
         display: inline-block;
@@ -141,7 +141,7 @@
     .show {
         display: block;
     }
-    /* MENU FLUTUANTE */
+     MENU FLUTUANTE */
 }
 
 @media screen and (min-width: 820px) {
@@ -322,6 +322,7 @@
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
 
         /* DIMENSIONAMENTO */
         width: 100%;
@@ -339,7 +340,7 @@
         justify-content: center;
 
         /* DIMENSIONAMENTO */
-        width: 15%;
+        width: 25%;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -376,7 +377,10 @@
         #categorias-icone {
         /* POSICIONAMENTO */
         display: flex;
-        margin-right: 2%;
+        margin-right: 5px;
+
+        /* DIMENSIONAMENTO */
+        height: 24px;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -395,44 +399,43 @@
     }
 
     /* GRUPO INFERIOR DO MEIO DA BARRA DE NAVEGAÇÃO */
-    .barra-navegacao .grupo-inferior .grupo-inferior-meio {
+    .barra-navegacao .grupo-inferior .grupo-inferior-direito {
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
 
-        margin-left: 10%;
-
         /* DIMENSIONAMENTO */
-        width: 60%;
+        width: 100%;
 
         /* APARÊNCIA */
         background-color: transparent;
     }
 
     /* GRUPO DE TEMAS MAIS PESQUISADOS */
-    .barra-navegacao .grupo-inferior .grupo-inferior-meio .temas {
+    .barra-navegacao .grupo-inferior .grupo-inferior-direito .temas {
         /* POSICIONAMENTO */
         display: flex;
         justify-content: space-between;
-        width: 100%;
+
+        width: 85%;
 
         /* APARÊNCIA */
         background-color: transparent;
-        font-size: 18px;
+        font-size: 16px;
         color: var(--cor-fundo);
 
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
-    .barra-navegacao .grupo-inferior .grupo-inferior-meio .temas .tema {
+    .barra-navegacao .grupo-inferior .grupo-inferior-direito .temas .tema {
         /* APARÊNCIA */
         background-color: transparent;
     }
 
     /* SIMULAÇÃO DE BOTÃO PARA TEMA */
-    .barra-navegacao .grupo-inferior .grupo-inferior-meio .temas .tema:hover {
+    .barra-navegacao .grupo-inferior .grupo-inferior-direito .temas .tema:hover {
         cursor: pointer;
     }
 }

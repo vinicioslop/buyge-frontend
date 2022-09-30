@@ -203,7 +203,7 @@
         margin-bottom: 50px;
 
         /* DIMENSIONAMENTO */
-        width: 95%;
+        width: 98%;
     }
 
     .produtos .titulo {
@@ -472,7 +472,7 @@
 
 .cartao .informacoes .preco-parcela-botao .preco-parcela .preco {
     /* DIMENSIONAMENTO */
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: #333333;
 
@@ -500,9 +500,9 @@
     letter-spacing: 0.65px;
 
     /* APARÊNCIA */
-    color: #333333;
+    color: var(--cor-principal);
     background: #ffffff;
-    border: 1px solid var(--cor-principal);
+    border: 1.5px solid var(--cor-principal);
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 }
