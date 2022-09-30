@@ -21,7 +21,7 @@ function montaBarra() {
         barraNavegacao.classList.add("barra-navegacao");
     }
 
-    if (window.screen.width <= 820) {
+    if (window.screen.width < 820) {
         limpaBarraNavegacao();
         montaBarraNavegacaoPequena();
     } else {
@@ -32,8 +32,7 @@ function montaBarra() {
 
 function limpaBarraNavegacao() {
     // BARRA DE NAVEGAÇÃO
-    const barraNavegacao = document.querySelector("#barra-navegacao");
-    barraNavegacao.innerHTML = "";
+    document.querySelector("#barra-navegacao").innerHTML = "";
 }
 
 function montaBarraNavegacaoPequena() {
@@ -96,7 +95,6 @@ function montaBarraNavegacaoPequena() {
 function montaBarraNavegacaoGrande() {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
-    barraNavegacao.classList.add("barra-navegacao");
 
     // BARRA DE NAVEGAÇÃO - GRUPO SUPERIOR
     const grupoSuperior = document.createElement("div");
