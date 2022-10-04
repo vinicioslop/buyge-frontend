@@ -1,12 +1,12 @@
 /* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
-    --cor-fundo: #eaeaea;
+    --cor-fundo: #f1e9f3;
     --cor-clara: #f9f9f9;
-    --cor-principal-rgb10: rgba(109, 32, 11, 0.1);
-    --cor-principal-rgb40: rgba(109, 32, 11, 0.4);
-    --cor-principal-rgb60: rgba(109, 32, 11, 0.6);
-    --cor-principal: #6d2077;
-    --cor-principal-escura: #a779ab;
+    --cor-principal-rgb10: rgba(119, 37, 131, 0.1);
+    --cor-principal-rgb40: rgba(119, 37, 131, 0.4);
+    --cor-principal-rgb60: rgba(119, 37, 131, 0.6);
+    --cor-principal: #772583;
+    --cor-principal-clara: #ad7cb5;
 }
 
 * {
@@ -470,7 +470,7 @@
         .tema:hover {
         cursor: pointer;
 
-        color: var(--cor-principal-escura);
+        color: var(--cor-principal-clara);
     }
 }
 
