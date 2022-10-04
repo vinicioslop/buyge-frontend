@@ -15,6 +15,15 @@
 @media screen and (min-width: 768px) {
     .carrosel img {
         /* DIMENSIONAMENTO */
-        height: 400px;
+        height: 320px;
+        object-fit: scale-down;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carrosel img {
+        /* DIMENSIONAMENTO */
+        height: 240px;
+        object-fit: scale-down;
     }
 }
