@@ -516,6 +516,7 @@
 .produto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo {
     /* APARÊNCIA */
     font-size: 14px;
+    color: var(--cor-clara);
     font-family: "Press Start 2P", cursive;
     background-color: transparent;
 }
