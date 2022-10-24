@@ -1,22 +1,12 @@
-document.addEventListener("DOMContentLoaded", montaBarra());
+const url = "https://localhost:7240/api";
 
-window.onresize = function () {
-    montaBarra();
+const carregarDados = async () => {
+    const response = await fetch(`${url}/categorias`, {mode: 'cors'});
+    const result = await response.json();
+    montaBarra(result);
 };
 
-window.onchange = function () {
-    montaBarra();
-};
-
-function montaBarra() {
-    if (window.screen.width < 820) {
-        montaBarraNavegacaoPequena();
-    } else {
-        montaBarraNavegacaoGrande();
-    }
-}
-
-function montaBarraNavegacaoPequena() {
+function montaBarraNavegacaoPequena(categorias) {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
     barraNavegacao.innerHTML = "";
@@ -40,19 +30,13 @@ function montaBarraNavegacaoPequena() {
     const menuConteudo = document.createElement("div");
     menuConteudo.classList.add("dropdown-content");
 
-    const conteudo01 = document.createElement("a");
-    conteudo01.setAttribute("href", "#");
-    conteudo01.innerText = "Link 1";
-    const conteudo02 = document.createElement("a");
-    conteudo02.setAttribute("href", "#");
-    conteudo02.innerText = "Link 2";
-    const conteudo03 = document.createElement("a");
-    conteudo03.setAttribute("href", "#");
-    conteudo03.innerText = "Link 3";
+    categorias.forEach(categoria => {
+        let item = document.createElement("a");
+        item.setAttribute("href", "#");
+        item.innerText = categoria.nmCategoria;
 
-    menuConteudo.appendChild(conteudo01);
-    menuConteudo.appendChild(conteudo02);
-    menuConteudo.appendChild(conteudo03);
+        menuConteudo.appendChild(item);
+    });
 
     dropdown.appendChild(menuIcone);
     dropdown.appendChild(menuConteudo);
@@ -100,7 +84,7 @@ function montaBarraNavegacaoPequena() {
     // GRUPO DIREITO
 }
 
-function montaBarraNavegacaoGrande() {
+function montaBarraNavegacaoGrande(categorias) {
     // BARRA DE NAVEGAÇÃO
     const barraNavegacao = document.querySelector("#barra-navegacao");
     barraNavegacao.innerHTML = "";
@@ -225,10 +209,15 @@ function montaBarraNavegacaoGrande() {
     // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR ESQUERDO
     const grupoInferiorEsquerdo = document.createElement("div");
     grupoInferiorEsquerdo.classList.add("grupo-inferior-esquerdo");
+    grupoInferiorEsquerdo.classList.add("navbar");
+
+    // MENU FLUTUANTE
+    const dropdown = document.createElement("div");
+    dropdown.classList.add("dropdown");
 
     // CATEGORIAS
-    const categorias = document.createElement("div");
-    categorias.classList.add("categorias");
+    const menuCategorias = document.createElement("div");
+    menuCategorias.classList.add("categorias");
 
     const categoriasIcone = document.createElement("img");
     categoriasIcone.classList.add("icone");
@@ -240,9 +229,26 @@ function montaBarraNavegacaoGrande() {
     categoriasTitulo.setAttribute("id", "categorias-titulo");
     categoriasTitulo.innerText = "CATEGORIAS";
 
-    categorias.appendChild(categoriasIcone);
-    categorias.appendChild(categoriasTitulo);
-    grupoInferiorEsquerdo.appendChild(categorias);
+    menuCategorias.appendChild(categoriasIcone);
+    menuCategorias.appendChild(categoriasTitulo);
+    menuCategorias.classList.add("dropbtn");
+
+    // CONTEÚDO DO MENU
+    const menuConteudo = document.createElement("div");
+    menuConteudo.classList.add("dropdown-content");
+
+    categorias.forEach(categoria => {
+        let item = document.createElement("a");
+        item.setAttribute("href", "#");
+        item.innerText = categoria.nmCategoria;
+
+        menuConteudo.appendChild(item);
+    });
+
+    dropdown.appendChild(menuCategorias);
+    dropdown.appendChild(menuConteudo);
+
+    grupoInferiorEsquerdo.appendChild(dropdown);
     // CATEGORIAS
 
     grupoInferior.appendChild(grupoInferiorEsquerdo);
@@ -301,3 +307,21 @@ function montaBarraNavegacaoGrande() {
     barraNavegacao.appendChild(grupoInferior);
     // BARRA DE NAVEGAÇÃO - GRUPO INFERIOR
 }
+
+function montaBarra(categorias) {
+    if (window.screen.width < 820) {
+        montaBarraNavegacaoPequena(categorias);
+    } else {
+        montaBarraNavegacaoGrande(categorias);
+    }
+}
+
+window.onresize = function () {
+    carregarDados();
+};
+
+window.onchange = function () {
+    carregarDados();
+};
+
+document.addEventListener("DOMContentLoaded", carregarDados());

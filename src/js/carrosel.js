@@ -1,4 +1,10 @@
-document.addEventListener("DOMContentLoaded", resetaCarrosel());
+function resetaCarrosel() {
+    var carroselPrincipal = new Flickity("#carrosel-principal");
+    var carroselProdutos = new Flickity(".carrosel-produtos");
+
+    carroselPrincipal.reloadCells();
+    carroselProdutos.reloadCells();
+}
 
 window.onresize = function () {
     resetaCarrosel();
@@ -10,12 +16,6 @@ window.onchange = function () {
 
 window.onload = function () {
     resetaCarrosel();
-}
+};
 
-function resetaCarrosel() {
-    var carroselPrincipal = new Flickity('.carrosel');
-    var carroselProdutos = new Flickity('.carrosel-produtos');
-
-    carroselPrincipal.reloadCells();
-    carroselProdutos.reloadCells();
-}
+document.addEventListener("DOMContentLoaded", resetaCarrosel());
