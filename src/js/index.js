@@ -1,11 +1,5 @@
 const fetchUrl = "https://localhost:7240/api";
 
-function dolarToReal(dolar) {
-    dolar = dolar.replace('.', '');
-    dolar = dolar.replace(',', '.');
-    return dolar;
-}
-
 const carregarProdutos = async () => {
     const response = await fetch(`${fetchUrl}/produtos`, { mode: "cors" });
     const produtos = await response.json();
@@ -17,23 +11,21 @@ const carregarImagems = async (produtos) => {
         mode: "cors",
     });
     const produtoImagens = await response.json();
-    montaCartao(produtos, produtoImagens);
+    carregarCategorias(produtos, produtoImagens);
 };
 
-function montaCartao(produtos, produtoImagens) {
+const carregarCategorias = async (produtos, produtoImagens) => {
+    const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
+    const categorias = await response.json();
+    montaCartao(produtos, produtoImagens, categorias);
+};
+
+function montaCartao(produtos, produtoImagens, categorias) {
     const maisVendidos = new Flickity("#mais-vendidos");
     const novidades = new Flickity("#novidades");
     const queimaEstoque = new Flickity("#queima-estoque");
 
     produtos.forEach((produto) => {
-        let imagens = [];
-
-        produtoImagens.forEach((produtoImagem) => {
-            if (produtoImagem.fkCdProduto === produto.cdProduto) {
-                imagens.push(produtoImagem);
-            }
-        });
-
         const cartao = document.createElement("div");
         cartao.classList.add("cartao");
         cartao.classList.add("carrosel-cell");
@@ -42,7 +34,17 @@ function montaCartao(produtos, produtoImagens) {
         imagemFavorito.classList.add("imagem-favorito");
         const imagem = document.createElement("img");
         imagem.classList.add("imagem");
-        imagem.src = imagens[0].imgProduto;
+
+        produtoImagens.forEach((produtoImagem) => {
+            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+                imagem.src = produtoImagem.imgProduto;
+            }
+        });
+
+        if (imagem.src == "") {
+            imagem.src = "/src/icons/image-preto.svg";
+        }
+
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
         iconeFavorito.src = "/src/icons/heart-roxo.svg";
@@ -58,8 +60,15 @@ function montaCartao(produtos, produtoImagens) {
 
         const categoriaAvaliacao = document.createElement("div");
         categoriaAvaliacao.classList.add("categoria-avaliacao");
+
         const categoria = document.createElement("p");
-        categoria.innerText = "ARCADE";
+
+        categorias.forEach((item) => {
+            if (item.cdCategoria === produto.fkCdCategoria) {
+                categoria.innerText = item.nmCategoria;
+            }
+        });
+
         const avaliacao = document.createElement("div");
         avaliacao.classList.add("avaliacao");
         const iconeAvaliacao = document.createElement("img");
@@ -97,7 +106,10 @@ function montaCartao(produtos, produtoImagens) {
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
-        botao.setAttribute("onclick", "window.location.href = '/src/pages/produto.html'")
+        botao.setAttribute(
+            "onclick",
+            "window.location.href = '/src/pages/produto.html'"
+        );
         botao.innerText = "COMPRA";
 
         precoParcelaBotao.appendChild(precoParcela);
@@ -113,14 +125,6 @@ function montaCartao(produtos, produtoImagens) {
     });
 
     produtos.forEach((produto) => {
-        let imagens = [];
-
-        produtoImagens.forEach((produtoImagem) => {
-            if (produtoImagem.fkCdProduto === produto.cdProduto) {
-                imagens.push(produtoImagem);
-            }
-        });
-
         const cartao = document.createElement("div");
         cartao.classList.add("cartao");
         cartao.classList.add("carrosel-cell");
@@ -129,7 +133,17 @@ function montaCartao(produtos, produtoImagens) {
         imagemFavorito.classList.add("imagem-favorito");
         const imagem = document.createElement("img");
         imagem.classList.add("imagem");
-        imagem.src = imagens[0].imgProduto;
+
+        produtoImagens.forEach((produtoImagem) => {
+            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+                imagem.src = produtoImagem.imgProduto;
+            }
+        });
+
+        if (imagem.src == "") {
+            imagem.src = "/src/icons/image-preto.svg";
+        }
+
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
         iconeFavorito.src = "/src/icons/heart-roxo.svg";
@@ -145,8 +159,15 @@ function montaCartao(produtos, produtoImagens) {
 
         const categoriaAvaliacao = document.createElement("div");
         categoriaAvaliacao.classList.add("categoria-avaliacao");
+
         const categoria = document.createElement("p");
-        categoria.innerText = "ARCADE";
+
+        categorias.forEach((item) => {
+            if (item.cdCategoria === produto.fkCdCategoria) {
+                categoria.innerText = item.nmCategoria;
+            }
+        });
+
         const avaliacao = document.createElement("div");
         avaliacao.classList.add("avaliacao");
         const iconeAvaliacao = document.createElement("img");
@@ -184,7 +205,10 @@ function montaCartao(produtos, produtoImagens) {
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
-        botao.setAttribute("onclick", "window.location.href = '/src/pages/produto.html'")
+        botao.setAttribute(
+            "onclick",
+            "window.location.href = '/src/pages/produto.html'"
+        );
         botao.innerText = "COMPRA";
 
         precoParcelaBotao.appendChild(precoParcela);
@@ -200,14 +224,6 @@ function montaCartao(produtos, produtoImagens) {
     });
 
     produtos.forEach((produto) => {
-        let imagens = [];
-
-        produtoImagens.forEach((produtoImagem) => {
-            if (produtoImagem.fkCdProduto === produto.cdProduto) {
-                imagens.push(produtoImagem);
-            }
-        });
-
         const cartao = document.createElement("div");
         cartao.classList.add("cartao");
         cartao.classList.add("carrosel-cell");
@@ -216,7 +232,17 @@ function montaCartao(produtos, produtoImagens) {
         imagemFavorito.classList.add("imagem-favorito");
         const imagem = document.createElement("img");
         imagem.classList.add("imagem");
-        imagem.src = imagens[0].imgProduto;
+
+        produtoImagens.forEach((produtoImagem) => {
+            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+                imagem.src = produtoImagem.imgProduto;
+            }
+        });
+
+        if (imagem.src == "") {
+            imagem.src = "/src/icons/image-preto.svg";
+        }
+
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
         iconeFavorito.src = "/src/icons/heart-roxo.svg";
@@ -232,8 +258,15 @@ function montaCartao(produtos, produtoImagens) {
 
         const categoriaAvaliacao = document.createElement("div");
         categoriaAvaliacao.classList.add("categoria-avaliacao");
+
         const categoria = document.createElement("p");
-        categoria.innerText = "ARCADE";
+
+        categorias.forEach((item) => {
+            if (item.cdCategoria === produto.fkCdCategoria) {
+                categoria.innerText = item.nmCategoria;
+            }
+        });
+
         const avaliacao = document.createElement("div");
         avaliacao.classList.add("avaliacao");
         const iconeAvaliacao = document.createElement("img");
@@ -271,7 +304,10 @@ function montaCartao(produtos, produtoImagens) {
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
-        botao.setAttribute("onclick", "window.location.href = '/src/pages/produto.html'")
+        botao.setAttribute(
+            "onclick",
+            "window.location.href = '/src/pages/produto.html'"
+        );
         botao.innerText = "COMPRA";
 
         precoParcelaBotao.appendChild(precoParcela);

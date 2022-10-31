@@ -190,9 +190,22 @@ function montaBarraNavegacaoGrande(categorias) {
     userLink.appendChild(userIcone);
     // ICONE DE USUARIO
 
+    // ICONE DE PRODUTOS
+    const produtosLink = document.createElement("a");
+    produtosLink.setAttribute("href", "/src/pages/produtos.html");
+    produtosLink.classList.add("icone-link");
+    const produtosIcone = document.createElement("img");
+    produtosIcone.classList.add("icone");
+    produtosIcone.setAttribute("id", "produto-icon");
+    produtosIcone.setAttribute("src", "/src/icons/shopping-bag-branco.svg");
+    produtosIcone.setAttribute("alt", "Ícone de produtos branco");
+    produtosLink.appendChild(produtosIcone);
+    // ICONE DE PRODUTOS
+
     grupoIcones.appendChild(favoritosLink);
     grupoIcones.appendChild(carrinhoLink);
     grupoIcones.appendChild(userLink);
+    grupoIcones.appendChild(produtosLink);
     grupoSuperiorDireito.appendChild(grupoIcones);
     // GRUPO DE ICONES
 

@@ -7,15 +7,23 @@
 
         <link rel="stylesheet" href="/src/css/style.css" />
         <link rel="stylesheet" href="/src/css/barra-navegacao.css" />
-        <link rel="stylesheet" href="/src/css/componentes.css">
         <link rel="stylesheet" href="/src/css/rodape.css" />
+        <link rel="stylesheet" href="/src/css/componentes.css" />
+        <link rel="stylesheet" href="/src/css/novoProduto.css" />
 
-        <link rel="stylesheet" href="/src/css/produtos.css" />
+        <link rel="stylesheet" href="/src/css/carrosel.css" />
 
         <link
             rel="shortcut icon"
             href="/src/imgs/logo/buyge_logo_v3_b.svg"
             type="image/x-icon"
+        />
+
+        <!-- FRAMEWORK EXTERNO PARA CARROSEL -->
+        <link
+            rel="stylesheet"
+            href="/src/flickity/flickity.css"
+            media="screen"
         />
 
         <title>BuyGe</title>
@@ -24,16 +32,85 @@
         <header id="barra-navegacao" class="barra-navegacao"></header>
 
         <div class="container">
-            <h1 class="titulo">TODOS OS PRODUTOS</h1>
+            <form id="formulario">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="nome">Nome</label>
+                    </div>
+                    <div class="col-75">
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite o nome do produto..."
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="descricao">Descrição</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea
+                            id="descricao"
+                            name="descricao"
+                            placeholder="Digite aqui a descrição do produto.."
+                            style="height: 100px"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="preco">Preço</label>
+                    </div>
+                    <div class="col-75">
+                        <input
+                            type="number"
+                            id="preco"
+                            name="preco"
+                            placeholder="00.00"
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="quantidade">Quantidade</label>
+                    </div>
+                    <div class="col-75">
+                        <input
+                            type="number"
+                            id="quantidade"
+                            name="quantidade"
+                            placeholder="1"
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="mercante">Mercante</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="mercador" id="mercador">
+                            <option value="">-- selecione --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="categoria">Categoria</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="categoria" id="categoria">
+                            <option value="">-- selecione --</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <input type="submit" id="enviar" value="Enviar" />
+                </div>
+            </form>
         </div>
-
-        <a href="/src/pages/novoProduto.html" class="botao-flutuante">
-            <img
-                class="icone-flutuante"
-                src="/src/icons/plus-roxo.svg"
-                alt=""
-            />
-        </a>
 
         <footer class="rodape">
             <hr class="rodape-linha" />
@@ -112,6 +189,6 @@
         </footer>
 
         <script src="/src/js/barra-navegacao.js"></script>
-        <script src="/src/js/produtos.js"></script>
+        <script src="/src/js/novoProduto.js"></script>
     </body>
 </html>

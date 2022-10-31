@@ -1,5 +1,5 @@
 function resetaCarrosel() {
-    var carroselPrincipal = new Flickity("#carrosel-principal");
+    var carroselPrincipal = new Flickity(".carrosel");
     var carroselProdutos = new Flickity(".carrosel-produtos");
 
     carroselPrincipal.reloadCells();
@@ -13,9 +13,3 @@ window.onresize = function () {
 window.onchange = function () {
     resetaCarrosel();
 };
-
-window.onload = function () {
-    resetaCarrosel();
-};
-
-document.addEventListener("DOMContentLoaded", resetaCarrosel());

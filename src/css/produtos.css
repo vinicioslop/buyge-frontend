@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
+
 /* VARIÁVEIS PARA CORES DO PROJETO */
 :root {
     --cor-clara: #f9f9fa;
@@ -9,10 +11,89 @@
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 40px;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    height: 120%;
+    width: 90vw;
+}
+
+.titulo {
+    /* POSICIONAMENTO */
+    margin-bottom: 20px;
+
+    /* DIMENSIONAMENTO */
+    font-size: 18px;
+
+    /* APARÊNCIA */
+    font-family: "Press Start 2P", cursive;
+    background-color: transparent;
+}
+
+.produtos {
     /* POSICIONAMENTO */
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 
     /* DIMENSIONAMENTO */
-    width: 100vw;
+    width: 100%;
+}
+
+.produtos .cartao {
+    /* POSICIONAMENTO */
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+.cartao .imagem-favorito .favorito {
+    /* POSICIONAMENTO */
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 90px;
+}
+
+.cartao .imagem-favorito .editar {
+    /* POSICIONAMENTO */
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 90px;
+
+    /* DIMENSIONAMENTO */
+    height: 24px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao .imagem-favorito .editar:hover {
+    cursor: pointer;
+}
+
+.cartao .imagem-favorito .remover-link {
+    /* POSICIONAMENTO */
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 180px;
+
+    /* APARÊNCIA */
+    border: none;
+    background-color: transparent;
+}
+
+.cartao .imagem-favorito .remover-link .remover {
+    /* DIMENSIONAMENTO */
+    height: 30px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao .imagem-favorito .remover:hover {
+    cursor: pointer;
 }
