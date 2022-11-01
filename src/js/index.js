@@ -7,7 +7,7 @@ const carregarProdutos = async () => {
 };
 
 const carregarImagems = async (produtos) => {
-    const response = await fetch(`${fetchUrl}/produtos/produto-imagens`, {
+    const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
         mode: "cors",
     });
     const produtoImagens = await response.json();

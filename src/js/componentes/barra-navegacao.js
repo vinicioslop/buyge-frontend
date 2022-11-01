@@ -57,7 +57,7 @@ function montaBarraNavegacaoPequena(categorias) {
 
     const logo = document.createElement("img");
     logo.classList.add("logo");
-    logo.setAttribute("src", "/src/imgs/logo/buyge_logo_v3_branco.png");
+    logo.setAttribute("src", "/src/imgs/logo/buyge_logo_novo_branco_full.png");
     logo.setAttribute("alt", "Logo do projeto branco e preto");
 
     logoLink.appendChild(logo);
@@ -107,7 +107,7 @@ function montaBarraNavegacaoGrande(categorias) {
     logoLink.setAttribute("href", "/index.html");
     logoLink.classList.add("logo-link");
     const logo = document.createElement("img");
-    logo.setAttribute("src", "/src/imgs/logo/buyge_logo_v3_branco.png");
+    logo.setAttribute("src", "/src/imgs/logo/buyge_logo_novo_branco_full.png");
     logo.setAttribute("alt", "Logo do projeto branco");
     logo.classList.add("logo");
 

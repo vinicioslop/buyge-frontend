@@ -10,7 +10,7 @@ const carregarProdutos = async () => {
 };
 
 const carregarImagems = async (produtos) => {
-    const response = await fetch(`${fetchUrl}/produtos/produto-imagen`, {
+    const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
         method: "GET",
         mode: "cors",
     });
@@ -25,6 +25,19 @@ const carregarCategorias = async (produtos, produtoImagens) => {
     });
     const categorias = await response.json();
     montaCartao(produtos, produtoImagens, categorias);
+};
+
+const removerProduto = async (idProduto) => {
+    await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+        method: "DELETE",
+        mode: "cors",
+    });
+};
+
+const enviarRemoverProduto = (idProduto) => {
+    removerProduto(idProduto);
+
+    window.location.reload(true);
 };
 
 const passaValor = function (idProduto) {
@@ -67,9 +80,18 @@ function montaCartao(produtos, produtoImagens, categorias) {
             `passaValor(${produto.cdProduto})`
         );
 
+        const iconeRemover = document.createElement("img");
+        iconeRemover.classList.add("remover");
+        iconeRemover.src = "/src/icons/trash-2-roxo.svg";
+        iconeRemover.setAttribute(
+            "onclick",
+            `enviarRemoverProduto(${produto.cdProduto})`
+        );
+
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
         imagemFavorito.appendChild(iconeEditar);
+        imagemFavorito.appendChild(iconeRemover);
 
         const informacoes = document.createElement("div");
         informacoes.classList.add("informacoes");

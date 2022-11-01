@@ -154,7 +154,7 @@
 
     .barra-navegacao .grupo-meio .logo {
         /* DIMENSIONAMENTO */
-        height: 36px;
+        height: 100px;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -241,7 +241,7 @@
 
     .barra-navegacao .grupo-superior .grupo-superior-esquerdo .logo {
         /* DIMENSIONAMENTO */
-        height: 32px;
+        height: 100px;
 
         /* APARÊNCIA */
         background-color: transparent;

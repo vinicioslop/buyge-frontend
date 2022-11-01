@@ -80,7 +80,7 @@ const carregarInformacoesProduto = (produto, categorias, mercante) => {
     mercanteSelect.appendChild(mercanteItem);
 };
 
-const passaValor = function (idProduto) {
+const passaValor = function (idProduto) {    
     window.location = "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
 };
 
