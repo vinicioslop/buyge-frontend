@@ -1,0 +1,148 @@
+const fetchUrl = "https://localhost:7240/api";
+
+const carregarProdutos = async () => {
+    const response = await fetch(`${fetchUrl}/produtos`, {
+        method: "GET",
+        mode: "cors",
+    });
+    const produtos = await response.json();
+    carregarImagems(produtos);
+};
+
+const carregarImagems = async (produtos) => {
+    const response = await fetch(`${fetchUrl}/produtos/produto-imagen`, {
+        method: "GET",
+        mode: "cors",
+    });
+    const produtoImagens = await response.json();
+    carregarCategorias(produtos, produtoImagens);
+};
+
+const carregarCategorias = async (produtos, produtoImagens) => {
+    const response = await fetch(`${fetchUrl}/categorias`, {
+        method: "GET",
+        mode: "cors",
+    });
+    const categorias = await response.json();
+    montaCartao(produtos, produtoImagens, categorias);
+};
+
+const passaValor = function (idProduto) {
+    window.location = "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
+};
+
+function montaCartao(produtos, produtoImagens, categorias) {
+    const container = document.querySelector(".container");
+    const containerProdutos = document.createElement("div");
+    containerProdutos.classList.add("produtos");
+
+    produtos.forEach((produto) => {
+        const cartao = document.createElement("div");
+        cartao.classList.add("cartao");
+
+        const imagemFavorito = document.createElement("div");
+        imagemFavorito.classList.add("imagem-favorito");
+        const imagem = document.createElement("img");
+        imagem.classList.add("imagem");
+
+        produtoImagens.forEach((produtoImagem) => {
+            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+                imagem.src = produtoImagem.imgProduto;
+            }
+        });
+
+        if (imagem.src == "") {
+            imagem.src = "/src/icons/image-preto.svg";
+        }
+
+        const iconeFavorito = document.createElement("img");
+        iconeFavorito.classList.add("favorito");
+        iconeFavorito.src = "/src/icons/heart-roxo.svg";
+
+        const iconeEditar = document.createElement("img");
+        iconeEditar.classList.add("editar");
+        iconeEditar.src = "/src/icons/edit2-roxo.svg";
+        iconeEditar.setAttribute(
+            "onclick",
+            `passaValor(${produto.cdProduto})`
+        );
+
+        imagemFavorito.appendChild(imagem);
+        imagemFavorito.appendChild(iconeFavorito);
+        imagemFavorito.appendChild(iconeEditar);
+
+        const informacoes = document.createElement("div");
+        informacoes.classList.add("informacoes");
+
+        const tituloCategoriaAvaliacao = document.createElement("div");
+        tituloCategoriaAvaliacao.classList.add("titulo-categoria-avaliacao");
+
+        const categoriaAvaliacao = document.createElement("div");
+        categoriaAvaliacao.classList.add("categoria-avaliacao");
+
+        const categoria = document.createElement("p");
+
+        categorias.forEach((item) => {
+            if (item.cdCategoria === produto.fkCdCategoria) {
+                categoria.innerText = item.nmCategoria;
+            }
+        });
+
+        const avaliacao = document.createElement("div");
+        avaliacao.classList.add("avaliacao");
+        const iconeAvaliacao = document.createElement("img");
+        iconeAvaliacao.src = "/src/icons/star-amarela.svg";
+        const notaAvaliacao = document.createElement("p");
+        notaAvaliacao.innerText = "4.5";
+
+        avaliacao.appendChild(iconeAvaliacao);
+        avaliacao.appendChild(notaAvaliacao);
+
+        categoriaAvaliacao.appendChild(categoria);
+        categoriaAvaliacao.appendChild(avaliacao);
+
+        const tituloProduto = document.createElement("p");
+        tituloProduto.classList.add("titulo-produto");
+        tituloProduto.innerText = produto.nmProduto;
+
+        tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
+        tituloCategoriaAvaliacao.appendChild(tituloProduto);
+
+        const precoParcelaBotao = document.createElement("div");
+        precoParcelaBotao.classList.add("preco-parcela-botao");
+
+        const precoParcela = document.createElement("div");
+        precoParcela.classList.add("preco-parcela");
+        const preco = document.createElement("p");
+        preco.classList.add("preco");
+        preco.innerText = "R$ " + produto.vlProduto;
+        const parcela = document.createElement("p");
+        parcela.classList.add("parcela");
+        parcela.innerText = "ou 2x R$ " + produto.vlProduto / 2;
+
+        precoParcela.appendChild(preco);
+        precoParcela.appendChild(parcela);
+
+        const botao = document.createElement("button");
+        botao.classList.add("comprar");
+        botao.setAttribute(
+            "onclick",
+            "window.location.href = '/src/pages/produtos/produto.html'"
+        );
+        botao.innerText = "COMPRA";
+
+        precoParcelaBotao.appendChild(precoParcela);
+        precoParcelaBotao.appendChild(botao);
+
+        informacoes.appendChild(tituloCategoriaAvaliacao);
+        informacoes.appendChild(precoParcelaBotao);
+
+        cartao.appendChild(imagemFavorito);
+        cartao.appendChild(informacoes);
+
+        containerProdutos.append(cartao);
+        container.append(containerProdutos);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", carregarProdutos());

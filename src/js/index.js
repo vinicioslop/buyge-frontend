@@ -108,7 +108,7 @@ function montaCartao(produtos, produtoImagens, categorias) {
         botao.classList.add("comprar");
         botao.setAttribute(
             "onclick",
-            "window.location.href = '/src/pages/produto.html'"
+            "window.location.href = '/src/pages/produtos/produto.html'"
         );
         botao.innerText = "COMPRA";
 
@@ -207,7 +207,7 @@ function montaCartao(produtos, produtoImagens, categorias) {
         botao.classList.add("comprar");
         botao.setAttribute(
             "onclick",
-            "window.location.href = '/src/pages/produto.html'"
+            "window.location.href = '/src/pages/produtos/produto.html'"
         );
         botao.innerText = "COMPRA";
 
@@ -306,7 +306,7 @@ function montaCartao(produtos, produtoImagens, categorias) {
         botao.classList.add("comprar");
         botao.setAttribute(
             "onclick",
-            "window.location.href = '/src/pages/produto.html'"
+            "window.location.href = '/src/pages/produtos/produto.html'"
         );
         botao.innerText = "COMPRA";
 

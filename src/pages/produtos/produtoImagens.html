@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/src/css/componentes/style.css" />
+        <link
+            rel="stylesheet"
+            href="/src/css/componentes/barra-navegacao.css"
+        />
+        <link rel="stylesheet" href="/src/css/componentes/rodape.css" />
+        <link rel="stylesheet" href="/src/css/componentes/componentes.css" />
+
+        <link rel="stylesheet" href="/src/css/produtos/produtoImagens.css" />
+
+        <link
+            rel="shortcut icon"
+            href="/src/imgs/logo/buyge_logo_v3_b.svg"
+            type="image/x-icon"
+        />
+
+        <!-- FRAMEWORK EXTERNO PARA CARROSEL -->
+        <link
+            rel="stylesheet"
+            href="/src/flickity/flickity.css"
+            media="screen"
+        />
+
+        <title>BuyGe</title>
+    </head>
+    <body>
+        <header id="barra-navegacao" class="barra-navegacao"></header>
+
+        <div class="container">
+            <div class="formularios" id="novaImagem">
+                <h1 class="titulo">INSERIR IMAGEM</h1>
+                <form>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="imagemUrl">Imagem URL</label>
+                        </div>
+                        <div class="col-75">
+                            <input
+                                type="text"
+                                id="imagemUrl"
+                                name="imagemUrl"
+                                placeholder="Digite a URL da imagem..."
+                            />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="descricaoImagem"
+                                >Descrição da Imagem</label
+                            >
+                        </div>
+                        <div class="col-75">
+                            <textarea
+                                id="descricaoImagem"
+                                name="descricaoImagem"
+                                placeholder="Digite aqui a descrição da imagem do produto.."
+                                style="height: 100px"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <input
+                            type="submit"
+                            class="botao"
+                            id="inserirImagem"
+                            value="Inserir"
+                        />
+                    </div>
+                </form>
+            </div>
+
+            <div class="container-imagens"></div>
+
+            <div class="formularios" id="editarImagem">
+                <h1 class="titulo">EDITAR IMAGENS</h1>
+                <form>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="codigoImagem">Código da Imagem</label>
+                        </div>
+                        <div class="col-75">
+                            <select
+                                disabled
+                                name="codigoImagem"
+                                id="codigoImagem"
+                            ></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="novaImagemUrl">Imagem URL</label>
+                        </div>
+                        <div class="col-75">
+                            <input
+                                type="text"
+                                id="novaImagemUrl"
+                                name="novaImagemUrl"
+                                placeholder="Digite a URL da imagem..."
+                            />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="novaDescricaoImagem"
+                                >Descrição da Imagem</label
+                            >
+                        </div>
+                        <div class="col-75">
+                            <textarea
+                                id="novaDescricaoImagem"
+                                name="novaDescricaoImagem"
+                                placeholder="Digite aqui a descrição da imagem do produto.."
+                                style="height: 100px"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <input
+                            type="submit"
+                            class="botao"
+                            id="atualizarImagem"
+                            value="Atualizar"
+                        />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="rodape">
+            <hr class="rodape-linha" />
+            <div class="rodape-superior">
+                <div class="rodape-atendimento rodape-grupo">
+                    <p class="rodape-titulo">ATENDIMENTO AO CLIENTE</p>
+                    <div class="items">
+                        <p class="item">Central De Ajuda</p>
+                        <p class="item">Como Comprar</p>
+                        <p class="item">Garantia</p>
+                        <p class="item">Devolução e Reembolso</p>
+                        <p class="item">Falar Com A Gente</p>
+                        <p class="item">Ouvidoria</p>
+                    </div>
+                </div>
+                <div class="rodape-sobre rodape-grupo">
+                    <p class="rodape-titulo">SOBRE O BUYGE</p>
+                    <div class="items">
+                        <p class="item">Sobre Nós</p>
+                        <p class="item">Política De Privacidade</p>
+                        <p class="item">Ofertas Relâmpago</p>
+                        <p class="item">Imprensa</p>
+                    </div>
+                </div>
+                <div class="rodape-pagamento rodape-grupo">
+                    <p class="rodape-titulo">PAGAMENTO</p>
+                    <img
+                        src="/src/imgs/mercado-pago/mercado-pago-logo.png"
+                        alt="Logo do Mercado Pago Pagamentos"
+                        class="icone-mercado-pago"
+                    />
+                </div>
+                <div class="rodape-social rodape-grupo">
+                    <p class="rodape-titulo">NOSSAS REDES SOCIAIS</p>
+                    <div class="social-icones">
+                        <div class="social-icon">
+                            <img
+                                src="/src/icons/redes-sociais/facebook-icon.svg"
+                                alt="Ícone do Facebook"
+                                class="icon"
+                            />
+                            <p class="texto">Facebook</p>
+                        </div>
+                        <div class="social-icon">
+                            <img
+                                src="/src/icons/redes-sociais/instagram-icon.svg"
+                                alt="Ícone do Instagram"
+                                class="icon"
+                            />
+                            <p class="texto">Instagram</p>
+                        </div>
+                        <div class="social-icon">
+                            <img
+                                src="/src/icons/redes-sociais/linkedin-icon.svg"
+                                alt="Ícone do LinkedIn"
+                                class="icon"
+                            />
+                            <p class="texto">LinkedIn</p>
+                        </div>
+                        <div class="social-icon">
+                            <img
+                                src="/src/icons/redes-sociais/github-icon.svg"
+                                alt="Ícone do GitHub"
+                                class="icon"
+                            />
+                            <p class="texto">GitHub</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rodape-inferior">
+                <p class="direitos">
+                    © 2022 LikeCaramelo. Todos os direitos reservados
+                </p>
+            </div>
+        </footer>
+
+        <script src="/src/js/produtos/produtoImagens.js"></script>
+
+        <script src="/src/js/componentes/barra-navegacao.js"></script>
+    </body>
+</html>
