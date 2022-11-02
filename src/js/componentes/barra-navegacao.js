@@ -201,7 +201,7 @@ function montaBarraNavegacaoGrande(categorias) {
 
     // ICONE DE PRODUTOS
     const mercantesLink = document.createElement("a");
-    mercantesLink.setAttribute("href", "#");
+    mercantesLink.setAttribute("href", "/src/pages/mercantes/mercantes.html");
     mercantesLink.classList.add("icone-link");
     const mercantesIcone = document.createElement("img");
     mercantesIcone.classList.add("icone");

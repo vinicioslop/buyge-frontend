@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap");
+
+/* VARIÁVEIS PARA CORES DO PROJETO */
+:root {
+    --cor-fundo: #f1e9f3;
+    --cor-clara: #f9f9f9;
+    --cor-principal-rgb10: rgba(119, 37, 131, 0.1);
+    --cor-principal-rgb40: rgba(119, 37, 131, 0.4);
+    --cor-principal-rgb60: rgba(119, 37, 131, 0.6);
+    --cor-principal: #772583;
+    --cor-principal-clara: #ad7cb5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    margin: 2%;
+}
+
+.mercantes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin-top: 2%;
+}
+
+.mercantes .mercante {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-right: 2%;
+    margin-bottom: 2%;
+
+    height: 140px;
+    width: 320px;
+
+    background-color: var(--cor-principal-clara);
+}
+
+.mercantes .mercante .logo-loja {
+    height: 100%;
+
+    background-color: transparent;
+}
+
+.mercantes .mercante .informacoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 90%;
+    width: 100%;
+
+    background-color: transparent;
+}
+
+.mercantes .mercante .informacoes .nome-loja {
+    width: 95%;
+
+    /* DIMENSIONAMENTO */
+    font-size: 12px;
+
+    /* APARÊNCIA */
+    font-family: "Press Start 2P", cursive;
+    color: #000;
+
+    background-color: transparent;
+}
+
+.mercantes .mercante .informacoes .icones-edicao {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 40%;
+
+    background-color: transparent;
+}
+
+.mercantes .mercante .informacoes .icones-edicao img {
+    background-color: transparent;
+}

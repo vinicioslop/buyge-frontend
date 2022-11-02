@@ -10,15 +10,22 @@
             rel="stylesheet"
             href="/src/css/componentes/barra-navegacao.css"
         />
-        <link rel="stylesheet" href="/src/css/componentes/componentes.css" />
         <link rel="stylesheet" href="/src/css/componentes/rodape.css" />
+        <link rel="stylesheet" href="/src/css/componentes/componentes.css" />
 
-        <link rel="stylesheet" href="/src/css/produtos/produtos.css" />
+        <link rel="stylesheet" href="/src/css/mercantes/editarMercante.css" />
 
         <link
             rel="shortcut icon"
             href="/src/imgs/logo/logo_buyge_novo_branco.png"
             type="image/x-icon"
+        />
+
+        <!-- FRAMEWORK EXTERNO PARA CARROSEL -->
+        <link
+            rel="stylesheet"
+            href="/src/flickity/flickity.css"
+            media="screen"
         />
 
         <title>BuyGe</title>
@@ -27,18 +34,90 @@
         <header id="barra-navegacao" class="barra-navegacao"></header>
 
         <div class="container">
-            <h1 class="titulo">TODOS OS PRODUTOS</h1>
+            <div class="conteudo">
+                <h1 class="titulo">EDITAR MERCANTES</h1>
+                <form id="editarMercante">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="nome">Nome da Loja</label>
+                        </div>
+                        <div class="col-75">
+                            <input
+                                type="text"
+                                id="nome"
+                                name="nome"
+                                placeholder="Digite o nome da loja..."
+                            />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="descricao">Descrição da Loja</label>
+                        </div>
+                        <div class="col-75">
+                            <textarea
+                                id="descricao"
+                                name="descricao"
+                                placeholder="Digite aqui a descrição da loja..."
+                                style="height: 100px"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="logoUrl">Logo Mercante URL</label>
+                        </div>
+                        <div class="col-75">
+                            <input
+                                type="text"
+                                id="logoUrl"
+                                name="logoUrl"
+                                placeholder="Informe aqui a url do logo da loja..."
+                            />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cnpj">CNPJ</label>
+                        </div>
+                        <div class="col-75">
+                            <input
+                                type="text"
+                                id="cnpj"
+                                name="cnpj"
+                                placeholder="Informe o CNPJ da loja, se possuir..."
+                            />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="administrador">Administrador</label>
+                        </div>
+                        <div class="col-75">
+                            <select
+                                disabled
+                                name="administrador"
+                                id="administrador"
+                            ></select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <input
+                            class="botao"
+                            type="submit"
+                            id="atualizarMercante"
+                            value="Atualizar"
+                        />
+                    </div>
+                </form>
 
-            <a
-                href="/src/pages/produtos/novoProduto.html"
-                class="botao-flutuante"
-            >
-                <img
-                    class="icone-flutuante"
-                    src="/src/icons/plus-roxo.svg"
-                    alt=""
-                />
-            </a>
+                <div class="botoes">
+                    <button class="botao excluir" id="excluirMercante">
+                        Excluir
+                    </button>
+                </div>
+            </div>
         </div>
 
         <footer class="rodape">
@@ -117,7 +196,8 @@
             </div>
         </footer>
 
+        <script src="/src/js/mercantes/editarMercante.js"></script>
+
         <script src="/src/js/componentes/barra-navegacao.js"></script>
-        <script src="/src/js/produtos/produtos.js"></script>
     </body>
 </html>
