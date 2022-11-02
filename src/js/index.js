@@ -20,6 +20,10 @@ const carregarCategorias = async (produtos, produtoImagens) => {
     montaCartao(produtos, produtoImagens, categorias);
 };
 
+const exibirProduto = function (idProduto) {
+    window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
+};
+
 function montaCartao(produtos, produtoImagens, categorias) {
     const maisVendidos = new Flickity("#mais-vendidos");
     const novidades = new Flickity("#novidades");
@@ -96,6 +100,7 @@ function montaCartao(produtos, produtoImagens, categorias) {
         precoParcela.classList.add("preco-parcela");
         const preco = document.createElement("p");
         preco.classList.add("preco");
+
         preco.innerText = "R$ " + produto.vlProduto;
         const parcela = document.createElement("p");
         parcela.classList.add("parcela");
@@ -106,10 +111,7 @@ function montaCartao(produtos, produtoImagens, categorias) {
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
-        botao.setAttribute(
-            "onclick",
-            "window.location.href = '/src/pages/produtos/produto.html'"
-        );
+        botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
         botao.innerText = "COMPRA";
 
         precoParcelaBotao.appendChild(precoParcela);

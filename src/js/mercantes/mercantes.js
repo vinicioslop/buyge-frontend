@@ -9,8 +9,14 @@ const carregarMercantes = async () => {
     montarCartoes(mercantes);
 };
 
-const passaValor = function (idMercante) {
-    window.location = "/src/pages/mercantes/editarMercante.html?idMercante=" + idMercante;
+const produtosMercante = function (idMercante) {
+    window.location =
+        "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
+};
+
+const editarMercante = function (idMercante) {
+    window.location =
+        "/src/pages/mercantes/editarMercante.html?idMercante=" + idMercante;
 };
 
 function montarCartoes(mercantes) {
@@ -33,14 +39,24 @@ function montarCartoes(mercantes) {
 
         let iconesEdicao = document.createElement("div");
         iconesEdicao.classList.add("icones-edicao");
-        let iconeEditar = document.createElement("img");
-        iconeEditar.classList.add("editar");
-        iconeEditar.src = "/src/icons/edit-roxo.svg";
+        let todosProdutos = document.createElement("div");
+        todosProdutos.classList.add("edicao");
+        todosProdutos.id = "todos-produtos";
+        todosProdutos.innerText = "PRODUTOS";
+        todosProdutos.setAttribute(
+            "onclick",
+            `produtosMercante(${mercante.cdMercante})`
+        );
+        let iconeEditar = document.createElement("div");
+        iconeEditar.classList.add("edicao");
+        iconeEditar.id = "editar";
+        iconeEditar.innerText = "EDITAR";
         iconeEditar.setAttribute(
             "onclick",
-            `passaValor(${mercante.cdMercante})`
+            `editarMercante(${mercante.cdMercante})`
         );
 
+        iconesEdicao.append(todosProdutos);
         iconesEdicao.append(iconeEditar);
 
         informacoes.append(nomeloja);

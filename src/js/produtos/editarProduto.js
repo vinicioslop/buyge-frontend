@@ -48,6 +48,11 @@ const atualizarProduto = async (produto, id) => {
     });
 };
 
+const editarImagens = function (idProduto) {
+    window.location =
+        "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
+};
+
 const carregarInformacoesProduto = (produto, categorias, mercante) => {
     const nome = document.querySelector("#nome");
     const descricao = document.querySelector("#descricao");
@@ -80,16 +85,12 @@ const carregarInformacoesProduto = (produto, categorias, mercante) => {
     mercanteSelect.appendChild(mercanteItem);
 };
 
-const passaValor = function (idProduto) {    
-    window.location = "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
-};
-
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    const id = urlParams.get("id");
+    const idProduto = urlParams.get("idProduto");
 
-    carregarProduto(id);
+    carregarProduto(idProduto);
 });
 
 document.querySelector("#atualizarProduto").addEventListener("click", (e) => {
@@ -114,18 +115,18 @@ document.querySelector("#atualizarProduto").addEventListener("click", (e) => {
     document.location.reload(true);
 });
 
-document.getElementsByClassName("excluir")[0].addEventListener("click", () => {
+document.querySelector("#excluirProduto").addEventListener("click", () => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    const id = urlParams.get("id");
+    const idProduto = urlParams.get("idProduto");
 
-    removerProduto(id);
+    removerProduto(idProduto);
 });
 
-document.getElementsByClassName("imagens")[0].addEventListener("click", () => {
+document.querySelector("#editarImagens").addEventListener("click", () => {
     const urlParams = new URLSearchParams(window.location.search);
 
-    const id = urlParams.get("id");
+    const idProduto = urlParams.get("idProduto");
 
-    passaValor(id);
+    editarImagens(idProduto);
 });

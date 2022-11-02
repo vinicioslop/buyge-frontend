@@ -143,10 +143,3 @@
     /* APARÊNCIA */
     background-color: transparent;
 }
-
-.cartao .imagem-favorito .favorito {
-    /* POSICIONAMENTO */
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 180px;
-}

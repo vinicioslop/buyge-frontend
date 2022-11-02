@@ -59,10 +59,12 @@
                     </div>
                     <div class="col-75">
                         <input
-                            type="number"
+                            size="12"
+                            onKeyUp="mascaraMoeda(this, event)"
+                            value=""
+                            type="text"
                             id="preco"
                             name="preco"
-                            placeholder="00.00"
                         />
                     </div>
                 </div>
@@ -84,9 +86,7 @@
                         <label for="mercante">Mercante</label>
                     </div>
                     <div class="col-75">
-                        <select name="mercador" id="mercador">
-                            <option value="">-- selecione --</option>
-                        </select>
+                        <select disabled name="mercador" id="mercador"></select>
                     </div>
                 </div>
                 <div class="row">

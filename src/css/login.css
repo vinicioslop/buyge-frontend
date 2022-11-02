@@ -30,6 +30,8 @@
         align-items: center;
         justify-content: center;
 
+        padding-bottom: 30px;
+
         /* DIMENSIONAMENTO */
         height: 450px;
         width: 400px;
@@ -38,7 +40,7 @@
     /* LOGO DO PROJETO */
     .form-login .logo {
         /* APARÊNCIA */
-        height: 12%;
+        height: 160px;
     }
 
     /* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */
@@ -46,8 +48,6 @@
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: column;
-
-        margin-top: 30px;
 
         width: 80%;
     }
@@ -128,6 +128,8 @@
         align-items: center;
         justify-content: center;
 
+        padding-bottom: 20px;
+
         /* DIMENSIONAMENTO */
         height: 85%;
         width: 80%;
@@ -136,7 +138,7 @@
     /* LOGO DO PROJETO */
     .form-login .logo {
         /* APARÊNCIA */
-        height: 12%;
+        height: 140px;
     }
 
     /* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */
@@ -146,8 +148,6 @@
         flex-direction: column;
 
         width: 80%;
-
-        margin-top: 30px;
     }
 
     /* ENTRADA DE TEXTO DO FORMULÁRIO */

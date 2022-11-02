@@ -19,7 +19,10 @@ input[type="text"],
 input[type="number"],
 select,
 textarea {
+    /* DIMENSIONAMENTO */
     width: 80%;
+
+    /* APARÊNCIA */
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -27,11 +30,15 @@ textarea {
 }
 
 label {
-    padding: 12px 12px 12px 0;
+    /* POSICIONAMENTO */
     display: inline-block;
+
+    /* APARÊNCIA */
+    padding: 12px 12px 12px 0;
 }
 
 input[type="submit"] {
+    /* APARÊNCIA */
     background-color: var(--cor-principal);
     color: var(--cor-clara);
     padding: 12px 20px;
@@ -41,25 +48,33 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
+    /* APARÊNCIA */
     background-color: var(--cor-principal-clara);
 }
 
 .container {
+    /* APARÊNCIA */
     border-radius: 5px;
     background-color: transparent;
     padding: 20px;
 }
 
 .col-25 {
+    /* POSICIONAMENTO */
     float: left;
-    width: 10%;
     margin-top: 6px;
+
+    /* DIMENSIONAMENTO */
+    width: 10%;
 }
 
 .col-75 {
+    /* POSICIONAMENTO */
     float: left;
-    width: 50%;
     margin-top: 6px;
+
+    /* DIMENSIONAMENTO */
+    width: 50%;
 }
 
 /* Clear floats after the columns */
@@ -74,7 +89,10 @@ input[type="submit"]:hover {
     .col-25,
     .col-75,
     input[type="submit"] {
-        width: 100%;
+        /* POSICIONAMENTO */
         margin-top: 0;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
     }
 }

@@ -11,77 +11,283 @@
     --cor-principal-clara: #ad7cb5;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
+@media screen and (max-width: 870px) {
+    .container {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    margin: 2%;
+        margin: 2%;
+    }
+
+    .titulo {
+        /* POSICIONAMENTO */
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        /* DIMENSIONAMENTO */
+        font-size: 18px;
+
+        /* APARÊNCIA */
+        font-family: "Press Start 2P", cursive;
+        color: #000;
+    }
+
+    .mercantes {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-top: 2%;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+    }
+
+    .mercantes .mercante {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        margin-right: 2%;
+        margin-bottom: 2%;
+
+        /* DIMENSIONAMENTO */
+        height: 200px;
+        width: 400px;
+
+        /* APARÊNCIA */
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.55);
+        border-radius: 5px;
+
+        background-color: var(--cor-principal);
+    }
+
+    .mercantes .mercante .logo-loja {
+        /* POSICIONAMENTO */
+        margin-left: 2%;
+        margin-right: 2%;
+
+        /* DIMENSIONAMENTO */
+        height: fit-content;
+        max-height: 140px;
+        max-width: 140px;
+        object-fit: scale-down;
+
+        /* APARÊNCIA */
+        border-radius: 50%;
+
+        background-color: var(--cor-clara);
+    }
+
+    .mercantes .mercante .logo-loja:hover {
+        cursor: pointer;
+    }
+
+    .mercantes .mercante .informacoes {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+
+        /* DIMENSIONAMENTO */
+        height: 90%;
+        width: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .mercantes .mercante .informacoes .nome-loja {
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+        font-size: 12px;
+
+        /* APARÊNCIA */
+        font-family: "Press Start 2P", cursive;
+        color: var(--cor-clara);
+
+        background-color: transparent;
+    }
+
+    .mercantes .mercante .informacoes .icones-edicao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        margin-left: 10px;
+        margin-top: 30px;
+
+        /* DIMENSIONAMENTO */
+        height: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .mercantes .mercante .informacoes .icones-edicao .edicao {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 200px;
+        height: 40px;
+
+        /* APARÊNCIA */
+        border-radius: 10px;
+
+        color: var(--cor-clara);
+
+        /* ANIMAÇÃO DE TRANSIÇÃO SUAVE */
+        -webkit-transition: 0.2s ease-in;
+        -moz-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in;
+        transition: 0.2s ease-in;
+
+        /* SOMBREAMENTO */
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.6);
+
+        background-color: var(--cor-principal-clara);
+    }
+
+    .mercantes .mercante .informacoes .icones-edicao .edicao:hover {
+        /* APARÊNCIA */
+        cursor: pointer;
+        color: #000;
+        background-color: var(--cor-clara);
+    }
 }
 
-.mercantes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+@media screen and (min-width: 870px) {
+    .container {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
 
-    margin-top: 2%;
-}
+        margin: 2%;
+    }
 
-.mercantes .mercante {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    .titulo {
+        /* POSICIONAMENTO */
+        margin-top: 10px;
+        margin-bottom: 20px;
 
-    margin-right: 2%;
-    margin-bottom: 2%;
+        /* APARÊNCIA */
+        font-size: 18px;
+        font-family: "Press Start 2P", cursive;
+        color: #000;
+    }
 
-    height: 140px;
-    width: 320px;
+    .mercantes {
+        /* POSICIONAMENTO */
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
 
-    background-color: var(--cor-principal-clara);
-}
+        margin-top: 2%;
+    }
 
-.mercantes .mercante .logo-loja {
-    height: 100%;
+    .mercantes .mercante {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
-    background-color: transparent;
-}
+        margin-right: 2%;
+        margin-bottom: 2%;
 
-.mercantes .mercante .informacoes {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+        /* DIMENSIONAMENTO */
+        height: 200px;
+        width: 400px;
 
-    height: 90%;
-    width: 100%;
+        /* APARÊNCIA */
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.55);
+        border-radius: 5px;
+        background-color: var(--cor-principal);
+    }
 
-    background-color: transparent;
-}
+    .mercantes .mercante .logo-loja {
+        /* POSICIONAMENTO */
+        margin-left: 2%;
+        margin-right: 2%;
 
-.mercantes .mercante .informacoes .nome-loja {
-    width: 95%;
+        /* DIMENSIONAMENTO */
+        height: fit-content;
+        max-height: 140px;
+        max-width: 140px;
+        object-fit: scale-down;
 
-    /* DIMENSIONAMENTO */
-    font-size: 12px;
+        /* APARÊNCIA */
+        border-radius: 50%;
+        background-color: var(--cor-clara);
+    }
 
-    /* APARÊNCIA */
-    font-family: "Press Start 2P", cursive;
-    color: #000;
+    .mercantes .mercante .informacoes {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
 
-    background-color: transparent;
-}
+        /* DIMENSIONAMENTO */
+        height: 90%;
+        width: 100%;
 
-.mercantes .mercante .informacoes .icones-edicao {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
 
-    width: 40%;
+    .mercantes .mercante .informacoes .nome-loja {
+        /* DIMENSIONAMENTO */
+        width: fit-content;
 
-    background-color: transparent;
-}
+        /* APARÊNCIA */
+        font-size: 12px;
+        font-family: "Press Start 2P", cursive;
+        color: var(--cor-clara);
 
-.mercantes .mercante .informacoes .icones-edicao img {
-    background-color: transparent;
+        background-color: transparent;
+    }
+
+    .mercantes .mercante .informacoes .icones-edicao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        margin-left: 10px;
+        margin-top: 20px;
+
+        /* DIMENSIONAMENTO */
+        height: 50%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .mercantes .mercante .informacoes .icones-edicao .botao {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        /* DIMENSIONAMENTO */
+        width: 200px;
+        height: 40px;
+
+        /* APARÊNCIA */
+        border-radius: 10px;
+        color: var(--cor-clara);
+        background-color: var(--cor-principal-clara);
+    }
+
+    .mercantes .mercante .informacoes .icones-edicao .botao:hover {
+        /* APARÊNCIA */
+        cursor: pointer;
+        color: #000;
+        background-color: var(--cor-clara);
+    }
 }

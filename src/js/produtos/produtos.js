@@ -27,25 +27,9 @@ const carregarCategorias = async (produtos, produtoImagens) => {
     montaCartao(produtos, produtoImagens, categorias);
 };
 
-const removerProduto = async (idProduto) => {
-    await fetch(`${fetchUrl}/produtos/${idProduto}`, {
-        method: "DELETE",
-        mode: "cors",
-    });
-};
-
-const enviarRemoverProduto = (idProduto) => {
-    removerProduto(idProduto);
-
-    window.location.reload(true);
-};
-
-const passaValor = function (idProduto) {
-    window.location = "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
-};
-
 function montaCartao(produtos, produtoImagens, categorias) {
     const container = document.querySelector(".container");
+
     const containerProdutos = document.createElement("div");
     containerProdutos.classList.add("produtos");
 
@@ -72,26 +56,8 @@ function montaCartao(produtos, produtoImagens, categorias) {
         iconeFavorito.classList.add("favorito");
         iconeFavorito.src = "/src/icons/heart-roxo.svg";
 
-        const iconeEditar = document.createElement("img");
-        iconeEditar.classList.add("editar");
-        iconeEditar.src = "/src/icons/edit2-roxo.svg";
-        iconeEditar.setAttribute(
-            "onclick",
-            `passaValor(${produto.cdProduto})`
-        );
-
-        const iconeRemover = document.createElement("img");
-        iconeRemover.classList.add("remover");
-        iconeRemover.src = "/src/icons/trash-2-roxo.svg";
-        iconeRemover.setAttribute(
-            "onclick",
-            `enviarRemoverProduto(${produto.cdProduto})`
-        );
-
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
-        imagemFavorito.appendChild(iconeEditar);
-        imagemFavorito.appendChild(iconeRemover);
 
         const informacoes = document.createElement("div");
         informacoes.classList.add("informacoes");
@@ -163,8 +129,9 @@ function montaCartao(produtos, produtoImagens, categorias) {
         cartao.appendChild(informacoes);
 
         containerProdutos.append(cartao);
-        container.append(containerProdutos);
     });
+
+    container.append(containerProdutos);
 }
 
 document.addEventListener("DOMContentLoaded", carregarProdutos());

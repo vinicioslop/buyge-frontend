@@ -40,7 +40,7 @@ const enviarRemoverMercante = (idMercante) => {
     removerMercante(idMercante);
 
     // Recarrega a página atual sem usar o cache
-    document.location.reload(true);
+    window.location.replace("/src/pages/mercantes/mercantes.html");
 };
 
 const carregarInformacoesMercante = (mercante, cliente) => {
