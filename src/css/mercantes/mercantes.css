@@ -268,12 +268,12 @@
         background-color: transparent;
     }
 
-    .mercantes .mercante .informacoes .icones-edicao .botao {
+    .mercantes .mercante .informacoes .icones-edicao .edicao {
         /* POSICIONAMENTO */
         display: flex;
         align-items: center;
         justify-content: center;
-        
+
         /* DIMENSIONAMENTO */
         width: 200px;
         height: 40px;
@@ -282,9 +282,18 @@
         border-radius: 10px;
         color: var(--cor-clara);
         background-color: var(--cor-principal-clara);
+
+        /* ANIMAÇÃO DE TRANSIÇÃO SUAVE */
+        -webkit-transition: 0.2s ease-in;
+        -moz-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in;
+        transition: 0.2s ease-in;
+
+        /* SOMBREAMENTO */
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.6);
     }
 
-    .mercantes .mercante .informacoes .icones-edicao .botao:hover {
+    .mercantes .mercante .informacoes .icones-edicao .edicao:hover {
         /* APARÊNCIA */
         cursor: pointer;
         color: #000;

@@ -53,6 +53,10 @@ const editarProduto = function (idProduto) {
     window.location = "/src/pages/produtos/editarProduto.html?idProduto=" + idProduto;
 };
 
+const exibirProduto = function (idProduto) {
+    window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
+};
+
 function montarCartoes(produtos, produtoImagens, categorias, mercante) {
     const container = document.querySelector(".container");
 
@@ -73,6 +77,7 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
         imagemFavorito.classList.add("imagem-favorito");
         const imagem = document.createElement("img");
         imagem.classList.add("imagem");
+        imagem.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
 
         produtoImagens.forEach((produtoImagem) => {
             if (produtoImagem.fkCdProduto === produto.cdProduto) {

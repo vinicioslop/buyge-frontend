@@ -22,3 +22,7 @@
     background-color: var(--cor-fundo);
     font-family: "Roboto", sans-serif;
 }
+
+.imagem:hover {
+    cursor: pointer;
+}

@@ -76,14 +76,14 @@ document.querySelector("#enviar").addEventListener("click", (e) => {
         nmProduto: document.querySelector("#nome").value,
         dsProduto: document.querySelector("#descricao").value,
         vlProduto: parseFloat(document.querySelector("#preco").value),
-        qtProduto: parseFloat(document.querySelector("#quantidade").value),
+        qtProduto: parseInt(document.querySelector("#quantidade").value),
         fkCdMercante: parseInt(document.querySelector("#mercador").value),
         fkCdCategoria: parseInt(document.querySelector("#categoria").value),
     };
 
     enviarProduto(produto);
 
-    window.location = "/src/pages/produtos/produtos.html";
+    window.location = "/src/pages/mercantes/mercantes.html";
     // Recarrega a página atual sem usar o cache
     //document.location.reload(true);
 });
