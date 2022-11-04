@@ -94,6 +94,9 @@ const inserirImagensContainer = (imagens) => {
         img.src = imagem.imgProduto;
         img.classList.add("imagem");
 
+        let containerIcones = document.createElement("div");
+        containerIcones.classList.add("container-icones");
+
         let editarLink = document.createElement("a");
         editarLink.classList.add("editar-link");
 
@@ -102,7 +105,7 @@ const inserirImagensContainer = (imagens) => {
         editarIcone.classList.add("icone");
         editarIcone.setAttribute(
             "onclick",
-            `enviarEditarImagem(${(imagem.cdProdutoImagem)})`
+            `enviarEditarImagem(${imagem.cdProdutoImagem})`
         );
 
         editarLink.appendChild(editarIcone);
@@ -115,14 +118,16 @@ const inserirImagensContainer = (imagens) => {
         removerIcone.classList.add("icone");
         removerIcone.setAttribute(
             "onclick",
-            `enviarRemoverImagem(${(imagem.cdProdutoImagem)})`
+            `enviarRemoverImagem(${imagem.cdProdutoImagem})`
         );
 
         removerLink.appendChild(removerIcone);
 
+        containerIcones.appendChild(editarLink);
+        containerIcones.appendChild(removerLink);
+
+        imagemGrupo.appendChild(containerIcones);
         imagemGrupo.appendChild(img);
-        imagemGrupo.appendChild(editarLink);
-        imagemGrupo.appendChild(removerLink);
 
         containerImagens.appendChild(imagemGrupo);
     });
@@ -131,7 +136,12 @@ const inserirImagensContainer = (imagens) => {
 const enviarRemoverImagem = (idImagem) => {
     removerImagem(idImagem);
 
-    window.location.reload(true);
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const idProduto = urlParams.get("idProduto");
+
+    window.location =
+        "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
 };
 
 const enviarEditarImagem = function (idImagem) {

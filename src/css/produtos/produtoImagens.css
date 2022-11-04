@@ -150,26 +150,36 @@ input[type="submit"]:hover {
     margin-right: 3%;
 }
 
-.container-imagens .imagem-grupo .icone {
+.container-imagens .container-icones {
     /* POSICIONAMENTO */
-    position: absolute;
-    margin-top: 10px;
-    margin-left: -30px;
+    display: flex;
+    flex-direction: column;
+    float: right;
 
+    background-color: transparent;
+}
+
+.container-imagens .icone {
     /* DIMENSIONAMENTO */
-    height: 20px;
+    height: 26px;
 
     /* APARÊNCIA */
     background-color: transparent;
 }
 
-.container-imagens .imagem-grupo .remover-link {
+.container-imagens .editar-link {
     /* POSICIONAMENTO */
-    position: absolute;
-    margin-top: 30px;
+    background-color: transparent;
+}
+
+.container-imagens .remover-link {
+    /* POSICIONAMENTO */
+    background-color: transparent;
 }
 
 .container-imagens .imagem {
+    position: relative;
+
     /* DIMENSIONAMENTO */
     height: 240px;
 }

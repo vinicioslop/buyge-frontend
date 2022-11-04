@@ -85,6 +85,13 @@ const carregarInformacoesProduto = (produto, categorias, mercante) => {
     mercanteSelect.appendChild(mercanteItem);
 };
 
+const enviarRemoverProduto = (idProduto) => {
+    removerProduto(idProduto);
+
+    window.location =
+        "/src/pages/mercantes/mercantes.html";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -120,7 +127,7 @@ document.querySelector("#excluirProduto").addEventListener("click", () => {
 
     const idProduto = urlParams.get("idProduto");
 
-    removerProduto(idProduto);
+    enviarRemoverProduto(idProduto);
 });
 
 document.querySelector("#editarImagens").addEventListener("click", () => {
