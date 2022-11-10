@@ -200,10 +200,28 @@
     /* DIMENSIONAMENTO */
     font-size: 16px;
     font-weight: 700;
+    height: 30px;
 
     /* APARÊNCIA */
     color: #333333;
     background-color: transparent;
+}
+
+.cartao .informacoes .nome-loja {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: 14px;
+    text-align: right;
+
+    background-color: transparent;
+}
+
+.cartao .informacoes .nome-loja:hover {
+    cursor: pointer;
+
+    color: var(--cor-principal);
 }
 
 .cartao .informacoes .preco-parcela-botao {

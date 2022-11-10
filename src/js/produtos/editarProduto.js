@@ -49,8 +49,15 @@ const atualizarProduto = async (produto, id) => {
 };
 
 const editarImagens = function (idProduto) {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const idMercante = urlParams.get("idMercante");
+
     window.location =
-        "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
+        "/src/pages/produtos/produtoImagens.html?idMercante=" +
+        idMercante +
+        "&idProduto=" +
+        idProduto;
 };
 
 const carregarInformacoesProduto = (produto, categorias, mercante) => {
@@ -88,9 +95,8 @@ const carregarInformacoesProduto = (produto, categorias, mercante) => {
 const enviarRemoverProduto = (idProduto) => {
     removerProduto(idProduto);
 
-    window.location =
-        "/src/pages/mercantes/mercantes.html";
-}
+    window.location = "/src/pages/mercantes/mercantes.html";
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);

@@ -1,37 +1,50 @@
 const fetchUrl = "https://localhost:7240/api";
 
-const carregarProdutos = async () => {
-    const response = await fetch(`${fetchUrl}/produtos`, {
-        method: "GET",
-        mode: "cors",
-    });
+async function carregarProdutos() {
+    const response = await fetch(`${fetchUrl}/produtos`, { mode: "cors" });
     const produtos = await response.json();
-    carregarImagems(produtos);
-};
 
-const carregarImagems = async (produtos) => {
+    return produtos;
+}
+
+async function carregarImagems() {
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
-        method: "GET",
         mode: "cors",
     });
     const produtoImagens = await response.json();
-    carregarCategorias(produtos, produtoImagens);
-};
 
-const carregarCategorias = async (produtos, produtoImagens) => {
-    const response = await fetch(`${fetchUrl}/categorias`, {
-        method: "GET",
-        mode: "cors",
-    });
+    return produtoImagens;
+}
+
+async function carregarCategorias() {
+    const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
     const categorias = await response.json();
-    montaCartao(produtos, produtoImagens, categorias);
-};
+
+    return categorias;
+}
+
+async function carregarMercantes() {
+    const response = await fetch(`${fetchUrl}/mercantes`, { mode: "cors" });
+    const mercantes = await response.json();
+
+    return mercantes;
+}
 
 const exibirProduto = function (idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
 };
 
-function montaCartao(produtos, produtoImagens, categorias) {
+function produtosMercante(idMercante) {
+    window.location =
+        "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
+}
+
+async function montaCartao() {
+    const produtos = await carregarProdutos();
+    const produtoImagens = await carregarImagems();
+    const categorias = await carregarCategorias();
+    const mercantes = await carregarMercantes();
+
     const container = document.querySelector(".container");
 
     const containerProdutos = document.createElement("div");
@@ -40,12 +53,12 @@ function montaCartao(produtos, produtoImagens, categorias) {
     produtos.forEach((produto) => {
         const cartao = document.createElement("div");
         cartao.classList.add("cartao");
+        cartao.classList.add("carrosel-cell");
 
         const imagemFavorito = document.createElement("div");
         imagemFavorito.classList.add("imagem-favorito");
         const imagem = document.createElement("img");
         imagem.classList.add("imagem");
-        imagem.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
 
         produtoImagens.forEach((produtoImagem) => {
             if (produtoImagem.fkCdProduto === produto.cdProduto) {
@@ -94,12 +107,22 @@ function montaCartao(produtos, produtoImagens, categorias) {
         categoriaAvaliacao.appendChild(categoria);
         categoriaAvaliacao.appendChild(avaliacao);
 
-        const tituloProduto = document.createElement("p");
+        const tituloProduto = document.createElement("h1");
         tituloProduto.classList.add("titulo-produto");
         tituloProduto.innerText = produto.nmProduto;
 
         tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
         tituloCategoriaAvaliacao.appendChild(tituloProduto);
+
+        const nomeLoja = document.createElement("h2");
+        nomeLoja.classList.add("nome-loja");
+
+        mercantes.forEach((item) => {
+            if (item.cdMercante === produto.fkCdMercante) {
+                nomeLoja.innerText = item.nmLoja;
+                nomeLoja.setAttribute("onclick", `produtosMercante(${item.cdMercante})`)
+            }
+        });
 
         const precoParcelaBotao = document.createElement("div");
         precoParcelaBotao.classList.add("preco-parcela-botao");
@@ -108,6 +131,7 @@ function montaCartao(produtos, produtoImagens, categorias) {
         precoParcela.classList.add("preco-parcela");
         const preco = document.createElement("p");
         preco.classList.add("preco");
+
         preco.innerText = "R$ " + produto.vlProduto;
         const parcela = document.createElement("p");
         parcela.classList.add("parcela");
@@ -118,16 +142,14 @@ function montaCartao(produtos, produtoImagens, categorias) {
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
-        botao.setAttribute(
-            "onclick",
-            "window.location.href = '/src/pages/produtos/produto.html'"
-        );
+        botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
         botao.innerText = "COMPRA";
 
         precoParcelaBotao.appendChild(precoParcela);
         precoParcelaBotao.appendChild(botao);
 
         informacoes.appendChild(tituloCategoriaAvaliacao);
+        informacoes.appendChild(nomeLoja);
         informacoes.appendChild(precoParcelaBotao);
 
         cartao.appendChild(imagemFavorito);
@@ -139,4 +161,4 @@ function montaCartao(produtos, produtoImagens, categorias) {
     container.append(containerProdutos);
 }
 
-document.addEventListener("DOMContentLoaded", carregarProdutos());
+document.addEventListener("DOMContentLoaded", montaCartao());

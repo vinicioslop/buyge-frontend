@@ -87,20 +87,20 @@ const inserirImagensContainer = (imagens) => {
     containerImagens.innerHTML = "";
 
     imagens.forEach((imagem) => {
-        let imagemGrupo = document.createElement("div");
+        const imagemGrupo = document.createElement("div");
         imagemGrupo.classList.add("imagem-grupo");
 
-        let img = document.createElement("img");
+        const img = document.createElement("img");
         img.src = imagem.imgProduto;
         img.classList.add("imagem");
 
-        let containerIcones = document.createElement("div");
+        const containerIcones = document.createElement("div");
         containerIcones.classList.add("container-icones");
 
-        let editarLink = document.createElement("a");
+        const editarLink = document.createElement("a");
         editarLink.classList.add("editar-link");
 
-        let editarIcone = document.createElement("img");
+        const editarIcone = document.createElement("img");
         editarIcone.src = "/src/icons/edit-roxo.svg";
         editarIcone.classList.add("icone");
         editarIcone.setAttribute(
@@ -110,15 +110,15 @@ const inserirImagensContainer = (imagens) => {
 
         editarLink.appendChild(editarIcone);
 
-        let removerLink = document.createElement("a");
+        const removerLink = document.createElement("a");
         removerLink.classList.add("remover-link");
 
-        let removerIcone = document.createElement("img");
+        const removerIcone = document.createElement("img");
         removerIcone.src = "/src/icons/trash-2-roxo.svg";
         removerIcone.classList.add("icone");
         removerIcone.setAttribute(
             "onclick",
-            `enviarRemoverImagem(${imagem.cdProdutoImagem})`
+            `montarConfirmacao(${imagem.cdProdutoImagem})`
         );
 
         removerLink.appendChild(removerIcone);
@@ -133,15 +133,50 @@ const inserirImagensContainer = (imagens) => {
     });
 };
 
-const enviarRemoverImagem = (idImagem) => {
+const montarConfirmacao = (idImagem) => {
+    const container = document.querySelector(".container");
+
+    const confirmar = document.createElement("div");
+    confirmar.classList.add("confirmar");
+
+    const mensagem = document.createElement("p");
+    mensagem.innerText =
+        "Deseja excluir essa imagem? Essa ação é irreversível!";
+
+    const botoes = document.createElement("div");
+    botoes.classList.add("confirmacao");
+
+    const aceitar = document.createElement("button");
+    aceitar.innerText = "Aceitar";
+    aceitar.id = "aceitar";
+    aceitar.setAttribute("onclick", `enviarRemoverImagem(${idImagem})`);
+
+    const recusar = document.createElement("button");
+    recusar.innerText = "Recusar";
+    recusar.id = "recusar";
+    recusar.setAttribute("onclick", "defazerConfirmacao()");
+
+    botoes.appendChild(aceitar);
+    botoes.appendChild(recusar);
+
+    confirmar.appendChild(mensagem);
+    confirmar.appendChild(botoes);
+
+    container.append(confirmar);
+};
+
+const defazerConfirmacao = () => {
+    const container = document.querySelector(".container");
+    const confirmar = document.querySelector(".confirmar");
+
+    container.removeChild(confirmar);
+};
+
+const enviarRemoverImagem = function (idImagem) {
     removerImagem(idImagem);
 
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const idProduto = urlParams.get("idProduto");
-
-    window.location =
-        "/src/pages/produtos/produtoImagens.html?idProduto=" + idProduto;
+    defazerConfirmacao();
+    window.location.reload();
 };
 
 const enviarEditarImagem = function (idImagem) {

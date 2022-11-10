@@ -1,10 +1,13 @@
 const fetchUrl = "https://localhost:7240/api";
 
 const carregarProdutos = async (idMercante) => {
-    const response = await fetch(`${fetchUrl}/produtos/mercante/${idMercante}`, {
-        method: "GET",
-        mode: "cors",
-    });
+    const response = await fetch(
+        `${fetchUrl}/produtos/mercante/${idMercante}`,
+        {
+            method: "GET",
+            mode: "cors",
+        }
+    );
     const produtos = await response.json();
     carregarImagems(idMercante, produtos);
 };
@@ -27,7 +30,12 @@ const carregarCategorias = async (idMercante, produtos, produtoImagens) => {
     carregarMercante(idMercante, produtos, produtoImagens, categorias);
 };
 
-const carregarMercante = async (idMercante, produtos, produtoImagens, categorias) => {
+const carregarMercante = async (
+    idMercante,
+    produtos,
+    produtoImagens,
+    categorias
+) => {
     const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
         method: "GET",
         mode: "cors",
@@ -50,7 +58,15 @@ const enviarRemoverProduto = (idProduto) => {
 };
 
 const editarProduto = function (idProduto) {
-    window.location = "/src/pages/produtos/editarProduto.html?idProduto=" + idProduto;
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const idMercante = urlParams.get("idMercante");
+
+    window.location =
+        "/src/pages/produtos/editarProduto.html?idMercante=" +
+        idMercante +
+        "&idProduto=" +
+        idProduto;
 };
 
 const exibirProduto = function (idProduto) {
@@ -205,5 +221,6 @@ document.getElementById("adicionarProduto").addEventListener("click", (e) => {
 
     const idMercante = urlParams.get("idMercante");
 
-    window.location = "/src/pages/produtos/novoProduto.html?idMercante=" + idMercante;
+    window.location =
+        "/src/pages/produtos/novoProduto.html?idMercante=" + idMercante;
 });
