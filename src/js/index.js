@@ -35,9 +35,9 @@ function produtosMercante(idMercante) {
         "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
 }
 
-const exibirProduto = (idProduto) => {
+function exibirProduto(idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
-};
+}
 
 async function montaCartao() {
     const produtos = await carregarProdutos();

@@ -1,44 +1,51 @@
 const fetchUrl = "https://localhost:7240/api";
 
-const carregarProduto = async (id) => {
+async function carregarProduto(id) {
     const response = await fetch(`${fetchUrl}/produtos/${id}`, {
         method: "GET",
         mode: "cors",
     });
     const produto = await response.json();
-    carregarCategorias(produto);
-};
 
-const carregarCategorias = async (produto) => {
+    return produto;
+}
+
+async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",
         mode: "cors",
     });
     const categorias = await response.json();
-    carregarMercante(produto, categorias);
-};
 
-const carregarMercante = async (produto, categorias) => {
+    return categorias;
+}
+
+async function carregarMercante(idMercante) {
     const response = await fetch(
-        `${fetchUrl}/mercantes/${produto.fkCdMercante}`,
+        `${fetchUrl}/mercantes/${idMercante}`,
         {
             method: "GET",
             mode: "cors",
         }
     );
     const mercante = await response.json();
-    carregarInformacoesProduto(produto, categorias, mercante);
-};
 
-const removerProduto = async (id) => {
-    await fetch(`${fetchUrl}/produtos/${id}`, {
+    return mercante;
+}
+
+async function removerProduto(id) {
+    const result = await fetch(`${fetchUrl}/produtos/${id}`, {
         method: "DELETE",
         mode: "cors",
     });
-};
 
-const atualizarProduto = async (produto, id) => {
-    await fetch(`${fetchUrl}/produtos/${id}`, {
+    const response = result.status;
+
+    return response;
+}
+
+async function atualizarProduto(produto, id) {
+    const result = await fetch(`${fetchUrl}/produtos/${id}`, {
         method: "PATCH",
         mode: "cors",
         headers: {
@@ -46,9 +53,13 @@ const atualizarProduto = async (produto, id) => {
         },
         body: JSON.stringify(produto),
     });
-};
 
-const editarImagens = function (idProduto) {
+    const response = result.status;
+
+    return response;
+}
+
+function editarImagens(idProduto) {
     const urlParams = new URLSearchParams(window.location.search);
 
     const idMercante = urlParams.get("idMercante");
@@ -58,9 +69,13 @@ const editarImagens = function (idProduto) {
         idMercante +
         "&idProduto=" +
         idProduto;
-};
+}
 
-const carregarInformacoesProduto = (produto, categorias, mercante) => {
+async function carregarInformacoesProduto(idProduto) {
+    const produto = await carregarProduto(idProduto);
+    const categorias = await carregarCategorias();
+    const mercante = await carregarMercante(produto.fkCdMercante);
+
     const nome = document.querySelector("#nome");
     const descricao = document.querySelector("#descricao");
     const preco = document.querySelector("#preco");
@@ -90,7 +105,7 @@ const carregarInformacoesProduto = (produto, categorias, mercante) => {
     mercanteItem.innerHTML = mercante.nmLoja;
 
     mercanteSelect.appendChild(mercanteItem);
-};
+}
 
 const enviarRemoverProduto = (idProduto) => {
     removerProduto(idProduto);
@@ -103,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const idProduto = urlParams.get("idProduto");
 
-    carregarProduto(idProduto);
+    carregarInformacoesProduto(idProduto);
 });
 
 document.querySelector("#atualizarProduto").addEventListener("click", (e) => {

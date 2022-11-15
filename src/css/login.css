@@ -39,8 +39,11 @@
 
     /* LOGO DO PROJETO */
     .form-login .logo {
+        /* POSICIONAMENTO */
+        margin-bottom: 30px;
+
         /* APARÊNCIA */
-        height: 160px;
+        height: 80px;
     }
 
     /* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */
@@ -137,8 +140,11 @@
 
     /* LOGO DO PROJETO */
     .form-login .logo {
+        /* POSICIONAMENTO */
+        margin-bottom: 30px;
+
         /* APARÊNCIA */
-        height: 140px;
+        height: 80px;
     }
 
     /* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */

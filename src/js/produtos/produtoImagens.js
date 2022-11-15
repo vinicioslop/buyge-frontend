@@ -1,8 +1,8 @@
 const fetchUrl = "https://localhost:7240/api";
 
-const carregarImagens = async (idProduto, idImagem) => {
+async function carregarImagens(idProduto) {
     const response = await fetch(
-        `${fetchUrl}/produtos/produto-imagem/${idProduto}`,
+        `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
         {
             method: "GET",
             mode: "cors",
@@ -10,18 +10,10 @@ const carregarImagens = async (idProduto, idImagem) => {
     );
     const imagens = await response.json();
 
-    inserirImagensContainer(imagens);
+    return imagens;
+}
 
-    if (idImagem != 0) {
-        imagens.forEach((imagem) => {
-            if (imagem.cdProdutoImagem == idImagem) {
-                inserirInformacoesEditar(imagem);
-            }
-        });
-    }
-};
-
-const inserirImagem = async (imagem) => {
+async function inserirImagem(imagem) {
     const requisicao = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
         method: "POST",
         mode: "cors",
@@ -30,11 +22,12 @@ const inserirImagem = async (imagem) => {
         },
         body: JSON.stringify(imagem),
     });
-    const resposta = await requisicao.json();
-};
 
-const atualizarImagem = async (imagem) => {
-    await fetch(
+    return requisicao.status;
+}
+
+async function atualizarImagem(imagem) {
+    const requisicao = await fetch(
         `${fetchUrl}/produtos/produto-imagem/${imagem.cdProdutoImagem}`,
         {
             method: "PATCH",
@@ -45,17 +38,52 @@ const atualizarImagem = async (imagem) => {
             body: JSON.stringify(imagem),
         }
     );
-};
 
-const removerImagem = async (idImagem) => {
-    await fetch(`${fetchUrl}/produtos/produto-imagem/${idImagem}`, {
-        method: "DELETE",
-        mode: "cors",
-    });
-};
+    return requisicao.status;
+}
 
-const inserirInformacoesEditar = (imagem) => {
+async function enviarEditarImagem(imagem) {
+    const resposta = await atualizarImagem(imagem);
+
+    console.log(resposta);
+
+    window.location.reload(true);
+}
+
+async function removerImagem(idImagem) {
+    const result = await fetch(
+        `${fetchUrl}/produtos/produto-imagem/${idImagem}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+        }
+    );
+
+    return result.status;
+}
+
+async function enviarRemoverImagem(idImagem) {
+    let resposta = await removerImagem(idImagem);
+    console.log(resposta);
+
+    defazerConfirmacao();
+    window.location.reload();
+}
+
+async function inserirInformacoesEditar(idImagem) {
     limparFormularioEditar();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idProduto = urlParams.get("idProduto");
+
+    const imagens = await carregarImagens(idProduto);
+    let imagem = {};
+
+    imagens.forEach((item) => {
+        if (item.cdProdutoImagem === idImagem) {
+            imagem = item;
+        }
+    });
 
     const codigoImagem = document.querySelector("#codigoImagem");
     const imagemUrl = document.querySelector("#novaImagemUrl");
@@ -69,9 +97,9 @@ const inserirInformacoesEditar = (imagem) => {
 
     imagemUrl.value = imagem.imgProduto;
     descricaoImagem.value = imagem.dsImagemProduto;
-};
+}
 
-const limparFormularioEditar = () => {
+function limparFormularioEditar() {
     const codigoImagem = document.querySelector("#codigoImagem");
     const imagemUrl = document.querySelector("#novaImagemUrl");
     const descricaoImagem = document.querySelector("#novaDescricaoImagem");
@@ -80,9 +108,11 @@ const limparFormularioEditar = () => {
 
     imagemUrl.value = "";
     descricaoImagem.value = "";
-};
+}
 
-const inserirImagensContainer = (imagens) => {
+async function inserirImagensContainer(idProduto) {
+    const imagens = await carregarImagens(idProduto);
+
     const containerImagens = document.querySelector(".container-imagens");
     containerImagens.innerHTML = "";
 
@@ -105,7 +135,7 @@ const inserirImagensContainer = (imagens) => {
         editarIcone.classList.add("icone");
         editarIcone.setAttribute(
             "onclick",
-            `enviarEditarImagem(${imagem.cdProdutoImagem})`
+            `inserirInformacoesEditar(${imagem.cdProdutoImagem})`
         );
 
         editarLink.appendChild(editarIcone);
@@ -118,7 +148,7 @@ const inserirImagensContainer = (imagens) => {
         removerIcone.classList.add("icone");
         removerIcone.setAttribute(
             "onclick",
-            `montarConfirmacao(${imagem.cdProdutoImagem})`
+            `montarConfirmacaoRemoção(${imagem.cdProdutoImagem})`
         );
 
         removerLink.appendChild(removerIcone);
@@ -131,9 +161,41 @@ const inserirImagensContainer = (imagens) => {
 
         containerImagens.appendChild(imagemGrupo);
     });
-};
+}
 
-const montarConfirmacao = (idImagem) => {
+function montarConfirmacaoEdição(imagem) {
+    const container = document.querySelector(".container");
+
+    const confirmar = document.createElement("div");
+    confirmar.classList.add("confirmar");
+
+    const mensagem = document.createElement("p");
+    mensagem.innerText =
+        "Deseja confirmar a atualização dessa imagem?";
+
+    const botoes = document.createElement("div");
+    botoes.classList.add("confirmacao");
+
+    const aceitar = document.createElement("button");
+    aceitar.innerText = "Aceitar";
+    aceitar.id = "aceitar";
+    aceitar.setAttribute("onclick", `enviarEditarImagem(${imagem})`);
+
+    const recusar = document.createElement("button");
+    recusar.innerText = "Recusar";
+    recusar.id = "recusar";
+    recusar.setAttribute("onclick", "defazerConfirmacao()");
+
+    botoes.appendChild(aceitar);
+    botoes.appendChild(recusar);
+
+    confirmar.appendChild(mensagem);
+    confirmar.appendChild(botoes);
+
+    container.append(confirmar);
+}
+
+function montarConfirmacaoRemoção(idImagem) {
     const container = document.querySelector(".container");
 
     const confirmar = document.createElement("div");
@@ -163,29 +225,14 @@ const montarConfirmacao = (idImagem) => {
     confirmar.appendChild(botoes);
 
     container.append(confirmar);
-};
+}
 
-const defazerConfirmacao = () => {
+function defazerConfirmacao() {
     const container = document.querySelector(".container");
     const confirmar = document.querySelector(".confirmar");
 
     container.removeChild(confirmar);
-};
-
-const enviarRemoverImagem = function (idImagem) {
-    removerImagem(idImagem);
-
-    defazerConfirmacao();
-    window.location.reload();
-};
-
-const enviarEditarImagem = function (idImagem) {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const idProduto = urlParams.get("idProduto");
-
-    carregarImagens(idProduto, idImagem);
-};
+}
 
 document.querySelector("#inserirImagem").addEventListener("click", (e) => {
     e.preventDefault();
@@ -220,9 +267,8 @@ document.querySelector("#atualizarImagem").addEventListener("click", (e) => {
         fkCdProduto: idProduto,
     };
 
-    atualizarImagem(imagem);
+    montarConfirmacaoEdição(imagem);
     // Recarrega a página atual sem usar o cache
-    document.location.reload(true);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -230,5 +276,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const idProduto = urlParams.get("idProduto");
 
-    carregarImagens(idProduto, 0);
+    inserirImagensContainer(idProduto);
 });

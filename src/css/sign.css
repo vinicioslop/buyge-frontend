@@ -1,0 +1,427 @@
+/* VARIÁVEIS PARA CORES DO PROJETO */
+:root {
+    --cor-fundo: #f1e9f3;
+    --cor-clara: #f9f9f9;
+    --cor-principal-rgb10: rgba(119, 37, 131, 0.1);
+    --cor-principal-rgb40: rgba(119, 37, 131, 0.4);
+    --cor-principal-rgb60: rgba(119, 37, 131, 0.6);
+    --cor-principal: #772583;
+    --cor-principal-clara: #ad7cb5;
+}
+
+@media screen and (min-width: 500px) {
+    .container {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        height: 100vh;
+    }
+
+    .cadastro {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+        /* DIMENSIONAMENTO */
+        width: 70%;
+        height: fit-content;
+    }
+
+    .cadastro .logo {
+        /* POSICIONAMENTO */
+        margin-bottom: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 60px;
+    }
+
+    .cadastro .nome-sobrenome,
+    .cpf-datanasc {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .cadastro .entrada-dados {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        margin-bottom: 10px;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+    }
+
+    .cadastro .entrada-dados label {
+        /* POSICIONAMENTO */
+        margin-bottom: 5px;
+
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+    }
+
+    .cadastro .entrada-dados input {
+        /* POSICIONAMENTO */
+        padding-left: 10px;
+        padding-right: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 40px;
+        width: 90%;
+    }
+
+    .cadastro .celular {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .cadastro .celular input {
+        /* DIMENSIONAMENTO */
+        width: 45%;
+    }
+
+    .cadastro .grupo-login,
+    .grupo-senha {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .grupo-login .entrada-dados label {
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+    }
+
+    .grupo-senha .entrada-dados label {
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+    }
+
+    .termos {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .termos input {
+        /* POSICIONAMENTO */
+        margin-right: 10px;
+    }
+
+    .cadastrar {
+        /* POSICIONAMENTO */
+        text-align: center;
+        justify-content: center;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        font-size: 18px;
+
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cadastro {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+        height: fit-content;
+    }
+
+    .cadastro .logo {
+        /* POSICIONAMENTO */
+        margin-bottom: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 60px;
+    }
+
+    .cadastro .nome-sobrenome,
+    .cpf-datanasc {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .cadastro .entrada-dados {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        margin-bottom: 10px;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+    }
+
+    .cadastro .entrada-dados label {
+        /* POSICIONAMENTO */
+        margin-bottom: 5px;
+
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+    }
+
+    .cadastro .entrada-dados input {
+        /* POSICIONAMENTO */
+        padding-left: 10px;
+        padding-right: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 40px;
+        width: 90%;
+    }
+
+    .cadastro .celular {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .cadastro .celular input {
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .cadastro .grupo-login,
+    .grupo-senha {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .grupo-login .entrada-dados label {
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+    }
+
+    .grupo-senha .entrada-dados label {
+        /* DIMENSIONAMENTO */
+        width: fit-content;
+    }
+
+    .termos {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+    }
+
+    .termos input {
+        /* POSICIONAMENTO */
+        margin-right: 10px;
+    }
+
+    .cadastrar {
+        /* POSICIONAMENTO */
+        text-align: center;
+        justify-content: center;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        font-size: 18px;
+
+        /* DIMENSIONAMENTO */
+        width: 50%;
+        height: auto;
+    }
+}
+
+.cadastro {
+    /* APARÊNCIA */
+    background-color: var(--cor-principal);
+}
+
+.cadastro .logo {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .nome-sobrenome,
+.cpf-datanasc {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .entrada-dados {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .entrada-dados label {
+    /* APARÊNCIA */
+    font-size: 16px;
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+.cadastro .entrada-dados {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .entrada-dados label {
+    /* APARÊNCIA */
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+.cadastro .entrada-dados {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .entrada-dados label {
+    /* APARÊNCIA */
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+.cadastro .entrada-dados input {
+    /* APARÊNCIA */
+    font-size: 14px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: none;
+
+    /* SOMBRA DA ENTRADA DE TEXTO */
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.cadastro .celular {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .celular label {
+    /* APARÊNCIA */
+    font-size: 16px;
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+.cadastro .grupo-login {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .grupo-senha {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .grupo-senha .entrada-dados {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .grupo-senha .entrada-dados label {
+    /* APARÊNCIA */
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+.cadastro .termos {
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cadastro .termos label {
+    /* APARÊNCIA */
+    font-size: 16px;
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+.cadastro .termos label a {
+    /* APARÊNCIA */
+    color: var(--cor-clara);
+    font-weight: bold;
+    text-decoration: none;
+
+    background-color: transparent;
+}
+
+.cadastro .termos label a:hover {
+    /* APARÊNCIA */
+    color: var(--cor-principal-clara);
+}
