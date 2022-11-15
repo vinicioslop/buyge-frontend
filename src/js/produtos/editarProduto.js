@@ -44,8 +44,8 @@ async function removerProduto(id) {
     return response;
 }
 
-async function atualizarProduto(produto, id) {
-    const result = await fetch(`${fetchUrl}/produtos/${id}`, {
+async function atualizarProduto(produto) {
+    const result = await fetch(`${fetchUrl}/produtos/${produto.cdProduto}`, {
         method: "PATCH",
         mode: "cors",
         headers: {
@@ -126,7 +126,7 @@ document.querySelector("#atualizarProduto").addEventListener("click", (e) => {
 
     const urlParams = new URLSearchParams(window.location.search);
 
-    const id = urlParams.get("id");
+    const id = urlParams.get("idProduto");
 
     const produto = {
         cdProduto: id,
@@ -138,7 +138,7 @@ document.querySelector("#atualizarProduto").addEventListener("click", (e) => {
         fkCdCategoria: document.querySelector("#categoria").value,
     };
 
-    atualizarProduto(produto, id);
+    atualizarProduto(produto);
     // Recarrega a página atual sem usar o cache
     document.location.reload(true);
 });

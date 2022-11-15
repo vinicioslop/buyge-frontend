@@ -44,19 +44,6 @@ const carregarMercante = async (
     montarCartoes(produtos, produtoImagens, categorias, mercante);
 };
 
-const removerProduto = async (idProduto) => {
-    await fetch(`${fetchUrl}/produtos/${idProduto}`, {
-        method: "DELETE",
-        mode: "cors",
-    });
-};
-
-const enviarRemoverProduto = (idProduto) => {
-    removerProduto(idProduto);
-
-    window.location.reload(true);
-};
-
 const editarProduto = function (idProduto) {
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -117,18 +104,9 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
             `editarProduto(${produto.cdProduto})`
         );
 
-        const iconeRemover = document.createElement("img");
-        iconeRemover.classList.add("remover");
-        iconeRemover.src = "/src/icons/trash-2-roxo.svg";
-        iconeRemover.setAttribute(
-            "onclick",
-            `enviarRemoverProduto(${produto.cdProduto})`
-        );
-
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
         imagemFavorito.appendChild(iconeEditar);
-        imagemFavorito.appendChild(iconeRemover);
 
         const informacoes = document.createElement("div");
         informacoes.classList.add("informacoes");

@@ -27,7 +27,7 @@ async function inserirImagem(imagem) {
 }
 
 async function atualizarImagem(imagem) {
-    const requisicao = await fetch(
+    const result = await fetch(
         `${fetchUrl}/produtos/produto-imagem/${imagem.cdProdutoImagem}`,
         {
             method: "PATCH",
@@ -39,7 +39,9 @@ async function atualizarImagem(imagem) {
         }
     );
 
-    return requisicao.status;
+    const response = result.status;
+
+    return response;
 }
 
 async function enviarEditarImagem(imagem) {
@@ -170,8 +172,7 @@ function montarConfirmacaoEdição(imagem) {
     confirmar.classList.add("confirmar");
 
     const mensagem = document.createElement("p");
-    mensagem.innerText =
-        "Deseja confirmar a atualização dessa imagem?";
+    mensagem.innerText = "Deseja confirmar a atualização dessa imagem?";
 
     const botoes = document.createElement("div");
     botoes.classList.add("confirmacao");
@@ -261,14 +262,17 @@ document.querySelector("#atualizarImagem").addEventListener("click", (e) => {
     const idProduto = urlParams.get("idProduto");
 
     let imagem = {
-        cdProdutoImagem: document.querySelector("#codigoImagem").value,
+        cdProdutoImagem: parseInt(
+            document.querySelector("#codigoImagem").value
+        ),
         imgProduto: document.querySelector("#novaImagemUrl").value,
         dsImagemProduto: document.querySelector("#novaDescricaoImagem").value,
-        fkCdProduto: idProduto,
+        fkCdProduto: parseInt(idProduto),
     };
 
+    console.log(imagem);
+
     montarConfirmacaoEdição(imagem);
-    // Recarrega a página atual sem usar o cache
 });
 
 document.addEventListener("DOMContentLoaded", () => {

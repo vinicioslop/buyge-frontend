@@ -20,6 +20,7 @@ document.querySelector("#cadastrar").addEventListener("click", async (e) => {
     let cliente = {
         nmCliente: document.querySelector("#nome").value,
         nmSobrenome: document.querySelector("#sobrenome").value,
+        nrCpf: document.querySelector("#cpf").value,
         dtNascimento: document.querySelector("#dataNasc").value,
         nrTelefone: document.querySelector("#telefone").value,
         nmLogin: document.querySelector("#login").value,
