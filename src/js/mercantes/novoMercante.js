@@ -1,55 +1,73 @@
 const fetchUrl = "https://localhost:7240/api";
 
-const enviarMercante = async (mercante) => {
+async function enviarMercante(mercante, token) {
     const requisicao = await fetch(`${fetchUrl}/mercantes`, {
         method: "POST",
         mode: "cors",
         headers: {
+            Accept: "application/json",
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
         },
         body: JSON.stringify(mercante),
     });
-    const resposta = await requisicao.json();
-};
+    const resposta = await requisicao.status;
 
-const carregarCLientes = async () => {
-    const response = await fetch(`${fetchUrl}/clientes`, {
-        mode: "cors",
-    });
-    const clientes = await response.json();
-
-    montar(clientes);
-};
-
-function montar(clientes) {
-    const clienteSelect = document.querySelector("#administrador");
-
-    clientes.forEach((cliente) => {
-        let clienteItem = document.createElement("option");
-        clienteItem.value = cliente.cdCliente;
-        clienteItem.innerHTML = cliente.nmCliente;
-
-        clienteSelect.appendChild(clienteItem);
-    });
+    return resposta;
 }
 
-document.querySelector("#enviarMercante").addEventListener("click", (e) => {
-    e.preventDefault();
+async function carregarCliente(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/clientes/${idCliente}`, {
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const cliente = await response.json();
 
-    const mercador = {
-        nmLoja: document.querySelector("#nome").value,
-        dsLoja: document.querySelector("#descricao").value,
-        imgLogo: document.querySelector("#logoUrl").value,
-        nrCnpj: document.querySelector("#cnpj").value,
-        fkCdCliente: document.querySelector("#administrador").value,
-    };
+    return cliente;
+}
 
-    enviarMercante(mercador);
+async function montar() {
+    const idCliente = sessionStorage.getItem("idCliente");
+    const token = sessionStorage.getItem("token");
 
-    // Recarrega a página atual sem usar o cache
-    document.location.reload(true);
+    const cliente = await carregarCliente(idCliente, token);
 
-    window.location = "/src/pages/mercantes/mercantes.html";
-});
+    const clienteSelect = document.querySelector("#administrador");
 
-document.addEventListener("DOMContentLoaded", carregarCLientes());
+    let clienteItem = document.createElement("option");
+    clienteItem.value = cliente.cdCliente;
+    clienteItem.innerHTML = cliente.nmCliente;
+    clienteItem.selected = true;
+
+    clienteSelect.appendChild(clienteItem);
+}
+
+document
+    .querySelector("#enviarMercante")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const mercador = {
+            nmLoja: document.querySelector("#nome").value,
+            dsLoja: document.querySelector("#descricao").value,
+            imgLogo: document.querySelector("#logoUrl").value,
+            nrCnpj: document.querySelector("#cnpj").value,
+            fkCdCliente: document.querySelector("#administrador").value,
+        };
+
+        const token = sessionStorage.getItem("token");
+
+        const resposta = await enviarMercante(mercador, token);
+
+        if (resposta === 200) {
+            window.location = "/src/pages/mercantes/mercantes.html";
+        } else {
+            console.log("Ocorreu um erro");
+        }
+    });
+
+document.addEventListener("DOMContentLoaded", montar());

@@ -83,7 +83,11 @@ document.querySelector("#enviar").addEventListener("click", (e) => {
 
     enviarProduto(produto);
 
-    window.location = "/src/pages/mercantes/mercantes.html";
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const idMercante = urlParams.get("idMercante");
+
+    window.location = "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
     // Recarrega a página atual sem usar o cache
     //document.location.reload(true);
 });
