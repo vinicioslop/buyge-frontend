@@ -61,7 +61,7 @@ async function montaCartao() {
 
         produtoImagens.forEach((produtoImagem) => {
             if (produtoImagem.fkCdProduto === produto.cdProduto) {
-                imagem.src = produtoImagem.imgProduto;
+                imagem.src = produtoImagem.imgProdutoLink;
             }
         });
 
@@ -172,7 +172,7 @@ async function montaCartao() {
 
         produtoImagens.forEach((produtoImagem) => {
             if (produtoImagem.fkCdProduto === produto.cdProduto) {
-                imagem.src = produtoImagem.imgProduto;
+                imagem.src = produtoImagem.imgProdutoLink;
             }
         });
 
@@ -283,7 +283,7 @@ async function montaCartao() {
 
         produtoImagens.forEach((produtoImagem) => {
             if (produtoImagem.fkCdProduto === produto.cdProduto) {
-                imagem.src = produtoImagem.imgProduto;
+                imagem.src = produtoImagem.imgProdutoLink;
             }
         });
 

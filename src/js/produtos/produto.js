@@ -40,13 +40,13 @@ const montarProduto = (produto, imagens, categoria) => {
     document.querySelector(".caminho").innerText =
         "Início > " + categoria.nmCategoria;
 
-    document.querySelector(".imagem-full").src = imagens[0].imgProduto;
+    document.querySelector(".imagem-full").src = imagens[0].imgProdutoLink;
 
     const miniaturas = document.querySelector(".miniaturas");
 
     imagens.forEach((imagem) => {
         let img = document.createElement("img");
-        img.src = imagem.imgProduto;
+        img.src = imagem.imgProdutoLink;
 
         miniaturas.append(img);
     });

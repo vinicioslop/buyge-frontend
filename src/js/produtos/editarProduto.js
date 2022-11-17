@@ -1,55 +1,58 @@
 const fetchUrl = "https://localhost:7240/api";
 
-async function carregarProduto(id) {
+async function carregarProduto(id, token) {
     const response = await fetch(`${fetchUrl}/produtos/${id}`, {
         method: "GET",
         mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
     });
     const produto = await response.json();
 
     return produto;
 }
 
-async function carregarCategorias() {
+async function carregarCategorias(token) {
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",
         mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
     });
     const categorias = await response.json();
 
     return categorias;
 }
 
-async function carregarMercante(idMercante) {
-    const response = await fetch(
-        `${fetchUrl}/mercantes/${idMercante}`,
-        {
-            method: "GET",
-            mode: "cors",
-        }
-    );
+async function carregarMercante(idMercante, token) {
+    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
     const mercante = await response.json();
 
     return mercante;
 }
 
-async function removerProduto(id) {
-    const result = await fetch(`${fetchUrl}/produtos/${id}`, {
-        method: "DELETE",
-        mode: "cors",
-    });
-
-    const response = result.status;
-
-    return response;
-}
-
-async function atualizarProduto(produto) {
+async function atualizarProduto(produto, token) {
     const result = await fetch(`${fetchUrl}/produtos/${produto.cdProduto}`, {
         method: "PATCH",
         mode: "cors",
         headers: {
+            Accept: "application/json",
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
         },
         body: JSON.stringify(produto),
     });
@@ -59,9 +62,24 @@ async function atualizarProduto(produto) {
     return response;
 }
 
+async function removerProduto(id, token) {
+    const result = await fetch(`${fetchUrl}/produtos/${id}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+
+    const response = result.status;
+
+    return response;
+}
+
 function editarImagens(idProduto) {
     const urlParams = new URLSearchParams(window.location.search);
-
     const idMercante = urlParams.get("idMercante");
 
     window.location =
@@ -71,10 +89,27 @@ function editarImagens(idProduto) {
         idProduto;
 }
 
+function autenticado() {
+    const token = sessionStorage.getItem("token");
+
+    if (token !== null) {
+        return token;
+    }
+
+    return null;
+}
+
 async function carregarInformacoesProduto(idProduto) {
-    const produto = await carregarProduto(idProduto);
-    const categorias = await carregarCategorias();
-    const mercante = await carregarMercante(produto.fkCdMercante);
+    const token = await autenticado();
+
+    if (token === false) {
+        console.log("Usuário não está autenticado.");
+        return;
+    }
+
+    const produto = await carregarProduto(idProduto, token);
+    const categorias = await carregarCategorias(token);
+    const mercante = await carregarMercante(produto.fkCdMercante, token);
 
     const nome = document.querySelector("#nome");
     const descricao = document.querySelector("#descricao");
@@ -107,45 +142,51 @@ async function carregarInformacoesProduto(idProduto) {
     mercanteSelect.appendChild(mercanteItem);
 }
 
-const enviarRemoverProduto = (idProduto) => {
-    removerProduto(idProduto);
+async function enviarRemoverProduto(idProduto) {
+    const token = await autenticado();
+
+    if (token === false) {
+        console.log("Usuário não está autenticado.");
+        return;
+    }
+
+    removerProduto(idProduto, token);
 
     window.location = "/src/pages/mercantes/mercantes.html";
-};
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
+document
+    .querySelector("#atualizarProduto")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
 
-    const idProduto = urlParams.get("idProduto");
+        const urlParams = new URLSearchParams(window.location.search);
+        const idProduto = urlParams.get("idProduto");
 
-    carregarInformacoesProduto(idProduto);
-});
+        const produto = {
+            cdProduto: idProduto,
+            nmProduto: document.querySelector("#nome").value,
+            dsProduto: document.querySelector("#descricao").value,
+            vlProduto: parseFloat(document.querySelector("#preco").value),
+            qtProduto: parseFloat(document.querySelector("#quantidade").value),
+            fkCdMercante: document.querySelector("#mercador").value,
+            fkCdCategoria: document.querySelector("#categoria").value,
+        };
 
-document.querySelector("#atualizarProduto").addEventListener("click", (e) => {
-    e.preventDefault();
+        const token = await autenticado();
 
-    const urlParams = new URLSearchParams(window.location.search);
+        if (token === false) {
+            console.log("Usuário não está autenticado.");
+            return;
+        }
 
-    const id = urlParams.get("idProduto");
-
-    const produto = {
-        cdProduto: id,
-        nmProduto: document.querySelector("#nome").value,
-        dsProduto: document.querySelector("#descricao").value,
-        vlProduto: parseFloat(document.querySelector("#preco").value),
-        qtProduto: parseFloat(document.querySelector("#quantidade").value),
-        fkCdMercante: document.querySelector("#mercador").value,
-        fkCdCategoria: document.querySelector("#categoria").value,
-    };
-
-    atualizarProduto(produto);
-    // Recarrega a página atual sem usar o cache
-    document.location.reload(true);
-});
+        atualizarProduto(produto, token);
+        // Recarrega a página atual sem usar o cache
+        document.location.reload(true);
+    });
 
 document.querySelector("#excluirProduto").addEventListener("click", () => {
     const urlParams = new URLSearchParams(window.location.search);
-
     const idProduto = urlParams.get("idProduto");
 
     enviarRemoverProduto(idProduto);
@@ -157,4 +198,12 @@ document.querySelector("#editarImagens").addEventListener("click", () => {
     const idProduto = urlParams.get("idProduto");
 
     editarImagens(idProduto);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const idProduto = urlParams.get("idProduto");
+
+    carregarInformacoesProduto(idProduto);
 });

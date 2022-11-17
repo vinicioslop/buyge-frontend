@@ -84,7 +84,7 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
 
         produtoImagens.forEach((produtoImagem) => {
             if (produtoImagem.fkCdProduto === produto.cdProduto) {
-                imagem.src = produtoImagem.imgProduto;
+                imagem.src = produtoImagem.imgProdutoLink;
             }
         });
 

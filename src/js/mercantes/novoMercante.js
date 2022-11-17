@@ -30,12 +30,27 @@ async function carregarCliente(idCliente, token) {
     return cliente;
 }
 
-async function montar() {
-    const idCliente = sessionStorage.getItem("idCliente");
+function autenticado() {
     const token = sessionStorage.getItem("token");
 
-    const cliente = await carregarCliente(idCliente, token);
+    if (token !== null) {
+        return token;
+    }
 
+    return null;
+}
+
+async function montar() {
+    const token = autenticado();
+
+    if (token === false) {
+        console.log("Usuário não autenticado");
+        return;
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+
+    const cliente = await carregarCliente(idCliente, token);
     const clienteSelect = document.querySelector("#administrador");
 
     let clienteItem = document.createElement("option");
@@ -60,14 +75,13 @@ document
         };
 
         const token = sessionStorage.getItem("token");
-
         const resposta = await enviarMercante(mercador, token);
 
-        if (resposta === 200) {
+        if (resposta === 201) {
             window.location = "/src/pages/mercantes/mercantes.html";
         } else {
             console.log("Ocorreu um erro");
         }
     });
 
-document.addEventListener("DOMContentLoaded", montar());
+document.addEventListener("DOMContentLoaded", montar(), autenticado());

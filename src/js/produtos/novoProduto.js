@@ -22,19 +22,76 @@ function mascaraMoeda(campo, evento) {
     campo.value = resultado.reverse();
 }
 
-const enviarProduto = async (produto) => {
+async function enviarProduto(produto, token) {
     const requisicao = await fetch(`${fetchUrl}/produtos`, {
         method: "POST",
         mode: "cors",
         headers: {
+            Accept: "application/json",
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
         },
         body: JSON.stringify(produto),
     });
     const resposta = await requisicao.json();
-};
 
-function montar(mercante, categorias) {
+    return resposta;
+}
+
+async function carregarCategorias(token) {
+    const response = await fetch(`${fetchUrl}/categorias`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const categorias = await response.json();
+
+    return categorias;
+}
+
+async function carregarMercante(idMercante, token) {
+    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const mercante = await response.json();
+
+    return mercante;
+}
+
+function autenticado() {
+    const token = sessionStorage.getItem("token");
+
+    if (token !== null) {
+        return token;
+    }
+
+    return null;
+}
+
+async function montar() {
+    const token = await autenticado();
+
+    if (token === false) {
+        console.log("Usuário não está autenticado.");
+        return;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idMercante = urlParams.get("idMercante");
+    const mercante = await carregarMercante(idMercante, token);
+
+    const categorias = await carregarCategorias(token);
+
     const categoriaSelect = document.querySelector("#categoria");
     const mercanteSelect = document.querySelector("#mercador");
 
@@ -53,23 +110,7 @@ function montar(mercante, categorias) {
     mercanteSelect.appendChild(mercanteItem);
 }
 
-const carregarCategorias = async (mercante) => {
-    const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
-    const categorias = await response.json();
-
-    montar(mercante, categorias);
-};
-
-const carregarMercante = async (idMercante) => {
-    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
-        method: "GET",
-        mode: "cors",
-    });
-    const mercante = await response.json();
-    carregarCategorias(mercante);
-};
-
-document.querySelector("#enviar").addEventListener("click", (e) => {
+document.querySelector("#enviar").addEventListener("click", async (e) => {
     e.preventDefault();
 
     let produto = {
@@ -81,23 +122,20 @@ document.querySelector("#enviar").addEventListener("click", (e) => {
         fkCdCategoria: parseInt(document.querySelector("#categoria").value),
     };
 
-    enviarProduto(produto);
+    const token = await autenticado();
+
+    if (token === false) {
+        console.log("Usuário não está autenticado.");
+        return;
+    }
+
+    enviarProduto(produto, token);
 
     const urlParams = new URLSearchParams(window.location.search);
-
     const idMercante = urlParams.get("idMercante");
 
-    window.location = "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
-    // Recarrega a página atual sem usar o cache
-    //document.location.reload(true);
+    window.location =
+        "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
 });
 
-document.addEventListener("DOMContentLoaded", (e) => {
-    e.preventDefault();
-
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const idMercante = urlParams.get("idMercante");
-
-    carregarMercante(idMercante);
-});
+document.addEventListener("DOMContentLoaded", montar());

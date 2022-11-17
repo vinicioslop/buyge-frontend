@@ -97,7 +97,7 @@ async function inserirInformacoesEditar(idImagem) {
 
     codigoImagem.append(codigoImagemItem);
 
-    imagemUrl.value = imagem.imgProduto;
+    imagemUrl.value = imagem.imgProdutoLink;
     descricaoImagem.value = imagem.dsImagemProduto;
 }
 
@@ -123,7 +123,7 @@ async function inserirImagensContainer(idProduto) {
         imagemGrupo.classList.add("imagem-grupo");
 
         const img = document.createElement("img");
-        img.src = imagem.imgProduto;
+        img.src = imagem.imgProdutoLink;
         img.classList.add("imagem");
 
         const containerIcones = document.createElement("div");
@@ -244,7 +244,7 @@ document.querySelector("#inserirImagem").addEventListener("click", (e) => {
 
     let imagem = {
         cdProdutoImagem: 0,
-        imgProduto: document.querySelector("#imagemUrl").value,
+        imgProdutoLink: document.querySelector("#imagemUrl").value,
         dsImagemProduto: document.querySelector("#descricaoImagem").value,
         fkCdProduto: idProduto,
     };
@@ -265,7 +265,7 @@ document.querySelector("#atualizarImagem").addEventListener("click", (e) => {
         cdProdutoImagem: parseInt(
             document.querySelector("#codigoImagem").value
         ),
-        imgProduto: document.querySelector("#novaImagemUrl").value,
+        imgProdutoLink: document.querySelector("#novaImagemUrl").value,
         dsImagemProduto: document.querySelector("#novaDescricaoImagem").value,
         fkCdProduto: parseInt(idProduto),
     };
