@@ -68,15 +68,24 @@
                         />
                     </div>
                 </div>
-                <div class="celular entrada-dados">
-                    <label for="telefone">Celular</label>
-                    <input
-                        type="tel"
-                        id="telefone"
-                        name="telefone"
-                        required
-                        placeholder="Informe o seu telefone para contato"
-                    />
+                <div class="grupo-celular-tipo">
+                    <div class="celular entrada-dados">
+                        <label for="telefone">Celular</label>
+                        <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            required
+                            placeholder="Informe o seu telefone para contato"
+                        />
+                    </div>
+                    <div class="entrada-dados tipo-conta">
+                        <label for="tipoConta">Tipo de Conta</label>
+                        <select required name="tipoConta" id="tipoConta">
+                            <option value="Padrão">Normal</option>
+                            <option value="Mercador">Mercador</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="grupo-login">
                     <div class="entrada-dados">

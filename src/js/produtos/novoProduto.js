@@ -68,20 +68,10 @@ async function carregarMercante(idMercante, token) {
     return mercante;
 }
 
-function autenticado() {
+async function montar() {
     const token = sessionStorage.getItem("token");
 
-    if (token !== null) {
-        return token;
-    }
-
-    return null;
-}
-
-async function montar() {
-    const token = await autenticado();
-
-    if (token === false) {
+    if (token === null) {
         console.log("Usuário não está autenticado.");
         return;
     }
@@ -122,9 +112,9 @@ document.querySelector("#enviar").addEventListener("click", async (e) => {
         fkCdCategoria: parseInt(document.querySelector("#categoria").value),
     };
 
-    const token = await autenticado();
+    const token = sessionStorage.getItem("token");
 
-    if (token === false) {
+    if (token === null) {
         console.log("Usuário não está autenticado.");
         return;
     }

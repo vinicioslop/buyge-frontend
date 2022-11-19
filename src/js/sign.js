@@ -25,11 +25,12 @@ document.querySelector("#cadastrar").addEventListener("click", async (e) => {
         nrTelefone: document.querySelector("#telefone").value,
         nmLogin: document.querySelector("#login").value,
         nmSenha: document.querySelector("#senha").value,
+        nmTipoConta: document.querySelector("#tipoConta").value
     };
 
     const resposta = await cadastrar(cliente);
 
-    if (resposta === 200) {
+    if (resposta === 201) {
         window.location = "/src/pages/login.html";
     } else {
         console.log("Ocorreu uma falha");

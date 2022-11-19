@@ -10,24 +10,6 @@ async function carregarMercantes() {
     return mercantes;
 }
 
-async function carregarMercantesMercador(idMercador, token) {
-    const response = await fetch(
-        `${fetchUrl}/mercantes/mercador/${idMercador}`,
-        {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
-        }
-    );
-    const mercantes = await response.json();
-
-    return mercantes;
-}
-
 function produtosMercante(idMercante) {
     window.location =
         "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
@@ -36,27 +18,6 @@ function produtosMercante(idMercante) {
 function editarMercante(idMercante) {
     window.location =
         "/src/pages/mercantes/editarMercante.html?idMercante=" + idMercante;
-}
-
-function autenticado() {
-    const token = sessionStorage.getItem("token");
-
-    if (token !== null) {
-        return token;
-    }
-
-    return null;
-}
-
-async function montarTodosMercantes() {
-    const mercantes = await carregarMercantes();
-    montarCartoes(mercantes);
-}
-
-async function montarTodosMercantesLogado(token) {
-    const idCliente = sessionStorage.getItem("idCliente");
-    const mercantes = await carregarMercantesMercador(idCliente, token);
-    montarCartoes(mercantes);
 }
 
 function montarCartoes(mercantes) {
@@ -112,11 +73,6 @@ function montarCartoes(mercantes) {
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
-    const token = await autenticado();
-
-    if (token === null) {
-        montarTodosMercantes();
-    } else {
-        montarTodosMercantesLogado(token);
-    }
+    const mercantes = await carregarMercantes();
+    montarCartoes(mercantes);
 });

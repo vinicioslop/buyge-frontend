@@ -89,20 +89,10 @@ function editarImagens(idProduto) {
         idProduto;
 }
 
-function autenticado() {
+async function carregarInformacoesProduto(idProduto) {
     const token = sessionStorage.getItem("token");
 
-    if (token !== null) {
-        return token;
-    }
-
-    return null;
-}
-
-async function carregarInformacoesProduto(idProduto) {
-    const token = await autenticado();
-
-    if (token === false) {
+    if (token === null) {
         console.log("Usuário não está autenticado.");
         return;
     }
@@ -143,9 +133,9 @@ async function carregarInformacoesProduto(idProduto) {
 }
 
 async function enviarRemoverProduto(idProduto) {
-    const token = await autenticado();
+    const token = sessionStorage.getItem("token");
 
-    if (token === false) {
+    if (token === null) {
         console.log("Usuário não está autenticado.");
         return;
     }
@@ -173,9 +163,9 @@ document
             fkCdCategoria: document.querySelector("#categoria").value,
         };
 
-        const token = await autenticado();
+        const token = sessionStorage.getItem("token");
 
-        if (token === false) {
+        if (token === null) {
             console.log("Usuário não está autenticado.");
             return;
         }

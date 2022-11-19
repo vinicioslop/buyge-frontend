@@ -31,7 +31,7 @@
         padding-bottom: 30px;
 
         /* DIMENSIONAMENTO */
-        width: 70%;
+        width: 80%;
         height: fit-content;
     }
 
@@ -44,7 +44,8 @@
     }
 
     .cadastro .nome-sobrenome,
-    .cpf-datanasc {
+    .cpf-datanasc,
+    .grupo-celular-tipo {
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: row;
@@ -81,8 +82,8 @@
         padding-right: 10px;
 
         /* DIMENSIONAMENTO */
-        height: 40px;
-        width: 90%;
+        height: 35px;
+        width: 95%;
     }
 
     .cadastro .celular {
@@ -97,7 +98,24 @@
 
     .cadastro .celular input {
         /* DIMENSIONAMENTO */
-        width: 45%;
+        width: 95%;
+    }
+
+    .cadastro .tipo-conta {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        /* DIMENSIONADO */
+        width: 90%;
+    }
+
+    .cadastro .tipo-conta select {
+        /* DIMENSIONAMENTO */
+        width: 95%;
+        height: 35px;
+        font-size: 14px;
     }
 
     .cadastro .grupo-login,
@@ -162,6 +180,9 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        width: 100%;
+        height: 100%;
     }
 
     .cadastro {
@@ -171,14 +192,8 @@
         align-items: center;
         justify-content: center;
 
-        padding-top: 30px;
-        padding-bottom: 30px;
-
-        margin-top: 30px;
-        margin-bottom: 30px;
-
         /* DIMENSIONAMENTO */
-        width: 90%;
+        width: 95%;
         height: fit-content;
     }
 
@@ -187,11 +202,12 @@
         margin-bottom: 10px;
 
         /* DIMENSIONAMENTO */
-        height: 60px;
+        height: 50px;
     }
 
     .cadastro .nome-sobrenome,
-    .cpf-datanasc {
+    .cpf-datanasc,
+    .grupo-celular-tipo {
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: column;
@@ -228,8 +244,8 @@
         padding-right: 10px;
 
         /* DIMENSIONAMENTO */
-        height: 40px;
-        width: 90%;
+        height: 30px;
+        width: 100%;
     }
 
     .cadastro .celular {
@@ -239,12 +255,29 @@
         justify-content: center;
 
         /* DIMENSIONAMENTO */
-        width: 90%;
+        width: 100%;
     }
 
     .cadastro .celular input {
         /* DIMENSIONAMENTO */
-        width: 90%;
+        width: 100%;
+    }
+
+    .cadastro .tipo-conta {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        /* DIMENSIONADO */
+        width: 100%;
+    }
+
+    .cadastro .tipo-conta select {
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 30px;
+        font-size: 14px;
     }
 
     .cadastro .grupo-login,
@@ -281,6 +314,10 @@
 
     .termos input {
         /* POSICIONAMENTO */
+        display: flex;
+        align-self: flex-start;
+
+        margin-top: 5px;
         margin-right: 10px;
     }
 
@@ -289,13 +326,13 @@
         text-align: center;
         justify-content: center;
 
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
 
         font-size: 18px;
 
         /* DIMENSIONAMENTO */
-        width: 50%;
+        width: 90%;
         height: auto;
     }
 }
@@ -311,7 +348,8 @@
 }
 
 .cadastro .nome-sobrenome,
-.cpf-datanasc {
+.cpf-datanasc,
+.grupo-celular-tipo {
     /* APARÊNCIA */
     background-color: transparent;
 }
@@ -406,7 +444,7 @@
 
 .cadastro .termos label {
     /* APARÊNCIA */
-    font-size: 16px;
+    font-size: 14px;
     color: var(--cor-clara);
 
     background-color: transparent;
@@ -417,6 +455,7 @@
     color: var(--cor-clara);
     font-weight: bold;
     text-decoration: none;
+    text-align: justify;
 
     background-color: transparent;
 }

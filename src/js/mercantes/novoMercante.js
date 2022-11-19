@@ -30,20 +30,10 @@ async function carregarCliente(idCliente, token) {
     return cliente;
 }
 
-function autenticado() {
+async function montar() {
     const token = sessionStorage.getItem("token");
 
-    if (token !== null) {
-        return token;
-    }
-
-    return null;
-}
-
-async function montar() {
-    const token = autenticado();
-
-    if (token === false) {
+    if (token === null) {
         console.log("Usuário não autenticado");
         return;
     }
@@ -84,4 +74,4 @@ document
         }
     });
 
-document.addEventListener("DOMContentLoaded", montar(), autenticado());
+document.addEventListener("DOMContentLoaded", montar());

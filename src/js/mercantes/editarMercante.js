@@ -66,7 +66,7 @@ async function removerMercante(idMercante, token) {
 }
 
 async function enviarRemoverMercante(idMercante) {
-    const token = autenticado();
+    const token = sessionStorage.getItem("token");
 
     if (token === null) {
         console.log("Usuário não autenticado");
@@ -81,7 +81,7 @@ async function enviarRemoverMercante(idMercante) {
 }
 
 async function carregarInformacoesMercante() {
-    const token = autenticado();
+    const token = sessionStorage.getItem("token");
 
     if (token === null) {
         console.log("Cliente não autenticado");
@@ -106,22 +106,12 @@ async function carregarInformacoesMercante() {
     cnpj.value = mercante.nrCnpj;
 }
 
-function autenticado() {
-    const token = sessionStorage.getItem("token");
-
-    if (token !== null) {
-        return token;
-    }
-
-    return null;
-}
-
 document.querySelector("#atualizarMercante").addEventListener("click", (e) => {
     e.preventDefault();
 
-    const token = autenticado();
+    const token = sessionStorage.getItem("token");
 
-    if (token === false) {
+    if (token === null) {
         console.log("Cliente não autenticado");
         return;
     }
@@ -144,9 +134,9 @@ document.querySelector("#atualizarMercante").addEventListener("click", (e) => {
 });
 
 document.querySelector("#excluirMercante").addEventListener("click", () => {
-    const token = autenticado();
+    const token = sessionStorage.getItem("token");
 
-    if (token === false) {
+    if (token === null) {
         console.log("Cliente não autenticado");
         return;
     }
