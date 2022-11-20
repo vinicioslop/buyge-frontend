@@ -15,21 +15,6 @@ async function carregarMercante(idMercante, token) {
     return mercante;
 }
 
-async function carregarCliente(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/clientes/${idCliente}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
-    const cliente = await response.json();
-
-    return cliente;
-}
-
 async function atualizarMercante(mercante, token) {
     const requisicao = await fetch(
         `${fetchUrl}/mercantes/${mercante.cdMercante}`,
@@ -65,21 +50,6 @@ async function removerMercante(idMercante, token) {
     return requisicao.status;
 }
 
-async function enviarRemoverMercante(idMercante) {
-    const token = sessionStorage.getItem("token");
-
-    if (token === null) {
-        console.log("Usuário não autenticado");
-        return;
-    } else {
-        const resposta = await removerMercante(idMercante, token);
-        console.log(resposta);
-
-        // Recarrega a página atual sem usar o cache
-        window.location = "/src/pages/mercantes/mercantes.html";
-    }
-}
-
 async function carregarInformacoesMercante() {
     const token = sessionStorage.getItem("token");
 
@@ -93,7 +63,6 @@ async function carregarInformacoesMercante() {
     const mercante = await carregarMercante(idMercante, token);
 
     const idCliente = sessionStorage.getItem("idCliente");
-    const cliente = await carregarCliente(idCliente, token);
 
     const nome = document.querySelector("#nome");
     const descricao = document.querySelector("#descricao");
@@ -106,45 +75,71 @@ async function carregarInformacoesMercante() {
     cnpj.value = mercante.nrCnpj;
 }
 
-document.querySelector("#atualizarMercante").addEventListener("click", (e) => {
-    e.preventDefault();
+document
+    .querySelector("#atualizarMercante")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
 
-    const token = sessionStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
 
-    if (token === null) {
-        console.log("Cliente não autenticado");
-        return;
-    }
+        if (token === null) {
+            console.log("Cliente não autenticado");
+            return;
+        }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
+        const urlParams = new URLSearchParams(window.location.search);
+        const idMercante = urlParams.get("idMercante");
+        const idCliente = sessionStorage.getItem("idCliente");
 
-    const mercante = {
-        cdMercante: parseInt(idMercante),
-        nmLoja: document.querySelector("#nome").value,
-        dsLoja: document.querySelector("#descricao").value,
-        imgLogo: document.querySelector("#logoUrl").value,
-        nrCnpj: document.querySelector("#cnpj").value,
-        fkCdCliente: null,
-    };
+        const mercante = {
+            cdMercante: parseInt(idMercante),
+            nmLoja: document.querySelector("#nome").value,
+            dsLoja: document.querySelector("#descricao").value,
+            imgLogo: document.querySelector("#logoUrl").value,
+            nrCnpj: document.querySelector("#cnpj").value,
+            fkCdCliente: parseInt(idCliente),
+        };
 
-    atualizarMercante(mercante, token);
-    // Recarrega a página atual sem usar o cache
-    //document.location.reload(true);
-});
+        const status = await atualizarMercante(mercante, token);
 
-document.querySelector("#excluirMercante").addEventListener("click", () => {
-    const token = sessionStorage.getItem("token");
+        switch (status) {
+            case 200:
+                console.log("Lojista atualizado.");
+                break;
+            default:
+                console.log("Ocorreu um erro na requisição. STATUS" + status);
+                break;
+        }
+    });
 
-    if (token === null) {
-        console.log("Cliente não autenticado");
-        return;
-    }
+document
+    .querySelector("#excluirMercante")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
+        const token = sessionStorage.getItem("token");
 
-    enviarRemoverMercante(idMercante, token);
-});
+        if (token === null) {
+            console.log("Cliente não autenticado");
+            return;
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const idMercante = urlParams.get("idMercante");
+
+        const status = await removerMercante(idMercante, token);
+
+        switch (status) {
+            case 200:
+                console.log("Loja removida com sucesso!");
+                window.location = "/src/pages/mercantes/mercantes.html";
+                break;
+            default:
+                console.log(
+                    "Ocorreu uma falha na requisicao. STATUS: " + status
+                );
+                break;
+        }
+    });
 
 document.addEventListener("DOMContentLoaded", carregarInformacoesMercante());

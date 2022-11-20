@@ -9,17 +9,51 @@
     --cor-principal-clara: #ad7cb5;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 750px) {
     .container {
         /* POSICIONAMENTO */
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
 
         /* DIMENSIONAMENTO */
         width: 100vw;
         height: 100vh;
+    }
+
+    .fundo-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 40%;
+        min-height: 90%;
+    }
+
+    .fundo-logo .conteudo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fundo-logo .conteudo .logo-icone {
+        margin-bottom: 10px;
+
+        object-fit: scale-down;
+        height: 100px;
+    }
+
+    .fundo-logo .conteudo .bem-vindo {
+        margin-bottom: 10px;
+    }
+
+    .fundo-logo .conteudo .textinho {
+        margin-bottom: 10px;
+
+        width: 80%;
     }
 
     /* FORMULÁRIO DE ENTRADA DE LOGIN */
@@ -30,20 +64,15 @@
         align-items: center;
         justify-content: center;
 
-        padding-bottom: 30px;
-
         /* DIMENSIONAMENTO */
-        height: 450px;
-        width: 400px;
+        min-height: 90%;
+        width: 40%;
     }
 
     /* LOGO DO PROJETO */
-    .form-login .logo {
+    .form-login .titulo-login {
         /* POSICIONAMENTO */
         margin-bottom: 30px;
-
-        /* APARÊNCIA */
-        height: 80px;
     }
 
     /* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */
@@ -51,6 +80,8 @@
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: column;
+
+        margin-bottom: 30px;
 
         width: 80%;
     }
@@ -75,9 +106,148 @@
     .form-login .esqueceu {
         /* POSICIONAMENTO */
         display: flex;
-        align-self: flex-end;
-        margin-right: 50px;
-        margin-top: 12px;
+        align-items: center;
+
+        margin-bottom: 30px;
+    }
+
+    /* FORMATO DE BOTÃO */
+    .form-login .botao {
+        /* POSICIONAMENTO */
+        text-align: center;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        /* DIMENSIONAMENTO */
+        width: 200px;
+        height: auto;
+    }
+
+    /* BOTÃO DE ENTRAR/LOGAR */
+    .form-login #entrar {
+        /* POSICIONAMENTO */
+        margin-bottom: 10px;
+    }
+
+    /* CRÉDITOS DA EQUIPE */
+    .container .equipe {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .container {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .fundo-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        width: 90%;
+        height: fit-content;
+    }
+
+    .fundo-logo .conteudo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fundo-logo .conteudo .logo-icone {
+        margin-bottom: 10px;
+
+        object-fit: scale-down;
+        height: 100px;
+    }
+
+    .fundo-logo .conteudo .bem-vindo {
+        margin-bottom: 10px;
+    }
+
+    .fundo-logo .conteudo .textinho {
+        margin-bottom: 10px;
+
+        width: 80%;
+    }
+
+    /* FORMULÁRIO DE ENTRADA DE LOGIN */
+    .form-login {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        /* DIMENSIONAMENTO */
+        width: 90%;
+        min-height: 400px;
+    }
+
+    /* LOGO DO PROJETO */
+    .form-login .titulo-login {
+        /* POSICIONAMENTO */
+        margin-bottom: 30px;
+    }
+
+    /* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */
+    .form-login .grupo-input {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+
+        margin-bottom: 30px;
+
+        width: 80%;
+    }
+
+    /* ENTRADA DE TEXTO DO FORMULÁRIO */
+    .form-login .entrada-texto {
+        /* POSICIONAMENTO */
+        padding-left: 10px;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        height: 50px;
+    }
+
+    /* ENTRADA DE TEXTO PARA SENHA */
+    #senha {
+        /* ESPAÇAMENTO PARA COMPONENTES */
+        margin-top: 20px;
+    }
+
+    /* ESQUECEU SUA SENHA */
+    .form-login .esqueceu {
+        /* POSICIONAMENTO */
+        display: flex;
+        align-items: center;
+
+        margin-bottom: 30px;
     }
 
     /* FORMATO DE BOTÃO */
@@ -110,116 +280,64 @@
     }
 }
 
-@media screen and (max-width: 500px) {
-    .container {
-        /* POSICIONAMENTO */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+.fundo-logo {
+    background-color: var(--cor-principal);
 
-        /* DIMENSIONAMENTO */
-        width: 100vw;
-        height: 100vh;
-    }
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
-    /* FORMULÁRIO DE ENTRADA DE LOGIN */
-    .form-login {
-        /* POSICIONAMENTO */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+.fundo-logo .conteudo {
+    background-color: transparent;
+}
 
-        padding-bottom: 20px;
+.fundo-logo .conteudo .bem-vindo {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--cor-clara);
 
-        /* DIMENSIONAMENTO */
-        height: 85%;
-        width: 80%;
-    }
+    background-color: transparent;
+}
 
-    /* LOGO DO PROJETO */
-    .form-login .logo {
-        /* POSICIONAMENTO */
-        margin-bottom: 30px;
+.fundo-logo .conteudo .textinho {
+    font-size: 18px;
+    text-align: center;
+    color: var(--cor-clara);
 
-        /* APARÊNCIA */
-        height: 80px;
-    }
+    background-color: transparent;
+}
 
-    /* GRUPO DE ENTRADA DE DADOS DO FORMULÁRIO */
-    .form-login .grupo-input {
-        /* POSICIONAMENTO */
-        display: flex;
-        flex-direction: column;
+.fundo-logo .conteudo .logo-icone {
+    background-color: transparent;
+}
 
-        width: 80%;
-    }
+.fundo-logo .conteudo .criar {
+    width: 180px;
+    height: 40px;
 
-    /* ENTRADA DE TEXTO DO FORMULÁRIO */
-    .form-login .entrada-texto {
-        /* POSICIONAMENTO */
-        padding-left: 10px;
+    font-size: 18px;
+    color: var(--cor-clara);
 
-        /* DIMENSIONAMENTO */
-        width: 100%;
-        height: 45px;
-    }
+    outline: none;
 
-    /* ENTRADA DE TEXTO PARA SENHA */
-    #senha {
-        /* ESPAÇAMENTO PARA COMPONENTES */
-        margin-top: 20px;
-    }
+    border-color: #000;
 
-    /* ESQUECEU SUA SENHA */
-    .form-login .esqueceu {
-        /* POSICIONAMENTO */
-        display: flex;
-        align-self: flex-end;
-        margin-right: 40px;
-        margin-top: 12px;
-    }
-
-    /* FORMATO DE BOTÃO */
-    .form-login .botao {
-        /* POSICIONAMENTO */
-        text-align: center;
-        justify-content: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
-
-        /* DIMENSIONAMENTO */
-        width: 60%;
-        height: auto;
-    }
-
-    /* BOTÃO DE ENTRAR/LOGAR */
-    .form-login #entrar {
-        /* POSICIONAMENTO */
-        margin-top: 12px;
-        margin-bottom: 10px;
-    }
-
-    /* CRÉDITOS DA EQUIPE */
-    .container .equipe {
-        /* POSICIONAMENTO */
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        margin-top: 20px;
-    }
+    background: var(--cor-principal);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
 
 /* FORMULÁRIO DE ENTRADA DE LOGIN */
 .form-login {
     /* APARÊNCIA */
-    background-color: var(--cor-principal);
+    background-color: var(--cor-clara);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* LOGO DO PROJETO */
-.form-login .logo {
+.form-login .titulo-login {
+    font-size: 34px;
+    font-weight: normal;
+
     /* APARÊNCIA */
     background-color: transparent;
 }
@@ -238,8 +356,14 @@
     border-radius: 5px;
     border: none;
 
+    background-color: var(--cor-principal-clara);
+
     /* SOMBRA DA ENTRADA DE TEXTO */
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.form-login .entrada-texto::placeholder {
+    color: var(--cor-clara);
 }
 
 /* PERSONALIZAÇÃO DA ENTRADA DE TEXTO */
@@ -251,7 +375,8 @@
 /* ESQUECEU SUA SENHA */
 .form-login .esqueceu {
     /* APARÊNCIA */
-    color: var(--cor-clara);
+    font-size: 20px;
+    color: #000;
     background-color: transparent;
 
     /* ANIMAÇÃO DE TRANSIÇÃO SUAVE */
@@ -267,9 +392,10 @@
 /* SIMULAÇÃO DE BOTÃO PARA O ESQUECEU SUA SENHA */
 .form-login .esqueceu:hover {
     cursor: pointer;
+    font-weight: bold;
 
     /* APARÊNCIA */
-    color: var(--cor-principal-clara);
+    color: var(--cor-principal);
 }
 
 /* FORMATO DE BOTÃO */
@@ -295,8 +421,8 @@
 /* BOTÃO DE ENTRAR/LOGAR */
 .form-login #entrar {
     /* APARÊNCIA */
-    background-color: var(--cor-clara);
-    color: black;
+    background-color: var(--cor-principal);
+    color: var(--cor-clara);
 
     /* ANIMAÇÃO DE TRANSIÇÃO SUAVE*/
     -webkit-transition: 0.2s ease-in;
@@ -312,26 +438,6 @@
     color: var(--cor-clara);
 }
 
-/* BOTÃO DE CRIAR UMA CONTA */
-.form-login #criar {
-    /* APARÊNCIA */
-    background-color: var(--cor-principal-clara);
-    color: var(--cor-clara);
-
-    /* ANIMAÇÃO DE TRANSIÇÃO SUAVE */
-    -webkit-transition: 0.2s ease-in;
-    -moz-transition: 0.2s ease-in;
-    -o-transition: 0.2s ease-in;
-    transition: 0.2s ease-in;
-}
-
-/* SIMULAÇÃO DE BOTÃO */
-.form-login #criar:hover {
-    /* APARÊNCIA */
-    background-color: var(--cor-clara);
-    color: black;
-}
-
 /* CRÉDITOS DA EQUIPE */
 .container .equipe {
     /* APARÊNCIA DO TEXTO DO BOTÃO */
@@ -339,4 +445,87 @@
 
     /* SOMBREAMENTO */
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.falha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    height: 200px;
+    width: 380px;
+
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7), 0px 20px 30px rgba(0, 0, 0, 0.3),
+        0px 10px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+
+    background-color: var(--cor-principal);
+}
+
+.falha p {
+    font-size: 20px;
+    color: var(--cor-clara);
+    text-align: center;
+
+    width: 80%;
+
+    background-color: transparent;
+}
+
+.falha #fecharCaixa {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid var(--cor-clara);
+    border-radius: 0.6em;
+    color: var(--cor-clara);
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.falha #fecharCaixa:hover,
+.falha #fecharCaixa:focus {
+    color: var(--cor-clara);
+    outline: 0;
+}
+
+.efeito {
+    border-color: red;
+    color: var(--cor-clara);
+    background-image: -webkit-linear-gradient(45deg, red 50%, transparent 50%);
+    background-image: linear-gradient(45deg, red 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+.efeito:hover {
+    background-position: 0;
 }

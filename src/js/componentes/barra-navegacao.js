@@ -1,10 +1,92 @@
 const url = "https://localhost:7240/api";
 
-const carregarDados = async () => {
-    const response = await fetch(`${url}/categorias`, { mode: "cors" });
-    const result = await response.json();
-    montaBarra(result);
-};
+async function buscarCategorias() {
+    const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function buscarClienteLogado(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/clientes/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+function removeSessao() {
+    sessionStorage.setItem("idCliente", null);
+    sessionStorage.setItem("token", null);
+}
+
+async function testarToken(token) {
+    const requisicao = await fetch(`${fetchUrl}/token`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = await requisicao.status;
+    console.log(status);
+
+    switch (status) {
+        case 200:
+            return true;
+        case 401:
+            return false;
+    }
+}
+
+async function testar() {
+    const token = sessionStorage.getItem("token");
+    const valido = await testarToken(token);
+
+    if (valido) {
+        console.log("Sessão válida");
+        return true;
+    } else {
+        removeSessao();
+        console.log("Desconectado");
+        return false;
+    }
+}
 
 function montaBarraNavegacaoPequena(categorias) {
     // BARRA DE NAVEGAÇÃO
@@ -206,7 +288,7 @@ function montaBarraNavegacaoGrande(categorias) {
     const mercantesIcone = document.createElement("img");
     mercantesIcone.classList.add("icone");
     mercantesIcone.setAttribute("id", "mercante-icon");
-    mercantesIcone.setAttribute("src", "/src/icons/shopping-bag-branco.svg");
+    mercantesIcone.setAttribute("src", "/src/icons/lojas-branco.svg");
     mercantesIcone.setAttribute("alt", "Ícone de mercantes branco");
     mercantesLink.appendChild(mercantesIcone);
     // ICONE DE PRODUTOS
@@ -338,4 +420,41 @@ function montaBarra(categorias) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", carregarDados());
+document.addEventListener("change", async (e) => {
+    e.preventDefault();
+
+    await testar();
+});
+
+document.addEventListener("load", async (e) => {
+    e.preventDefault();
+
+    await testar();
+});
+
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault();
+
+    const valido = await testar();
+
+    if (valido) {
+        console.log("Sessão válida");
+
+        const token = sessionStorage.getItem("token");
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const categoriasResposta = await buscarCategorias();
+        const usuarioResposta = await buscarClienteLogado(idCliente, token);
+
+        const categorias = categoriasResposta.dados;
+        const cliente = usuarioResposta.dados;
+
+        montaBarra(categorias, cliente);
+    } else {
+        const categoriasResposta = await buscarCategorias();
+
+        const categorias = categoriasResposta.dados;
+
+        montaBarra(categorias);
+    }
+});

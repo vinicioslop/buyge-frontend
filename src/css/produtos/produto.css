@@ -379,12 +379,17 @@
         width: fit-content;
     }
 
+    .dadosProduto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo {
+        width: 80%;
+    }
+
     .dadosProduto .informacoes .titulo-avaliacoes .titulo-favoritos .favoritar {
         /* POSICIONAMENTO */
         display: flex;
         position: absolute;
         width: 60px;
-        right: 50px;
+
+        right: 40px;
 
         /* DIMENSIONAMENTO */
         height: 36px;

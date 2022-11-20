@@ -1,48 +1,57 @@
 const fetchUrl = "https://localhost:7240/api";
 
-async function carregarProduto(id, token) {
+async function carregarProduto(id) {
     const response = await fetch(`${fetchUrl}/produtos/${id}`, {
         method: "GET",
         mode: "cors",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
         },
     });
-    const produto = await response.json();
 
-    return produto;
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            return status;
+    }
 }
 
-async function carregarCategorias(token) {
+async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",
         mode: "cors",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
         },
     });
-    const categorias = await response.json();
 
-    return categorias;
-}
+    const status = await response.status;
 
-async function carregarMercante(idMercante, token) {
-    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
-    const mercante = await response.json();
+    switch (status) {
+        case 200:
+            const dados = await response.json();
 
-    return mercante;
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            return status;
+    }
 }
 
 async function atualizarProduto(produto, token) {
@@ -57,7 +66,7 @@ async function atualizarProduto(produto, token) {
         body: JSON.stringify(produto),
     });
 
-    const response = result.status;
+    const response = await result.status;
 
     return response;
 }
@@ -73,20 +82,9 @@ async function removerProduto(id, token) {
         },
     });
 
-    const response = result.status;
+    const response = await result.status;
 
     return response;
-}
-
-function editarImagens(idProduto) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
-
-    window.location =
-        "/src/pages/produtos/produtoImagens.html?idMercante=" +
-        idMercante +
-        "&idProduto=" +
-        idProduto;
 }
 
 async function carregarInformacoesProduto(idProduto) {
@@ -97,15 +95,32 @@ async function carregarInformacoesProduto(idProduto) {
         return;
     }
 
-    const produto = await carregarProduto(idProduto, token);
-    const categorias = await carregarCategorias(token);
-    const mercante = await carregarMercante(produto.fkCdMercante, token);
+    const requisicaoProduto = await carregarProduto(idProduto);
+
+    if (requisicaoProduto.status !== 200) {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " + requisicaoProduto.status
+        );
+        return;
+    }
+
+    const requisicaoCategorias = await carregarCategorias();
+
+    if (requisicaoCategorias.status !== 200) {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " +
+                requisicaoCategorias.status
+        );
+        return;
+    }
+
+    const produto = requisicaoProduto.dados;
+    const categorias = requisicaoCategorias.dados;
 
     const nome = document.querySelector("#nome");
     const descricao = document.querySelector("#descricao");
     const preco = document.querySelector("#preco");
     const quantidade = document.querySelector("#quantidade");
-    const mercanteSelect = document.querySelector("#mercador");
     const categoriaSelect = document.querySelector("#categoria");
 
     nome.value = produto.nmProduto;
@@ -124,25 +139,6 @@ async function carregarInformacoesProduto(idProduto) {
 
         categoriaSelect.appendChild(categoriaItem);
     });
-
-    let mercanteItem = document.createElement("option");
-    mercanteItem.value = mercante.cdMercante;
-    mercanteItem.innerHTML = mercante.nmLoja;
-
-    mercanteSelect.appendChild(mercanteItem);
-}
-
-async function enviarRemoverProduto(idProduto) {
-    const token = sessionStorage.getItem("token");
-
-    if (token === null) {
-        console.log("Usuário não está autenticado.");
-        return;
-    }
-
-    removerProduto(idProduto, token);
-
-    window.location = "/src/pages/mercantes/mercantes.html";
 }
 
 document
@@ -152,6 +148,7 @@ document
 
         const urlParams = new URLSearchParams(window.location.search);
         const idProduto = urlParams.get("idProduto");
+        const idMercante = urlParams.get("idMercante");
 
         const produto = {
             cdProduto: idProduto,
@@ -159,7 +156,7 @@ document
             dsProduto: document.querySelector("#descricao").value,
             vlProduto: parseFloat(document.querySelector("#preco").value),
             qtProduto: parseFloat(document.querySelector("#quantidade").value),
-            fkCdMercante: document.querySelector("#mercador").value,
+            fkCdMercante: parseInt(idMercante),
             fkCdCategoria: document.querySelector("#categoria").value,
         };
 
@@ -170,29 +167,61 @@ document
             return;
         }
 
-        atualizarProduto(produto, token);
-        // Recarrega a página atual sem usar o cache
-        document.location.reload(true);
+        const status = await atualizarProduto(produto, token);
+
+        switch (status) {
+            case 200:
+                console.log("Produto atualizado com sucesso");
+                window.location =
+                    "src/pages/mercantes/produtosMercante.html?idMercante=" +
+                    idMercante;
+            default:
+                console.log("Ocorreu um erro na requisição. STATUS: " + status);
+                break;
+        }
     });
 
-document.querySelector("#excluirProduto").addEventListener("click", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const idProduto = urlParams.get("idProduto");
+document
+    .querySelector("#excluirProduto")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
 
-    enviarRemoverProduto(idProduto);
-});
+        const urlParams = new URLSearchParams(window.location.search);
+        const idProduto = urlParams.get("idProduto");
+
+        const token = sessionStorage.getItem("token");
+
+        if (token === null) {
+            console.log("Usuário não está autenticado.");
+            return;
+        }
+
+        const status = await removerProduto(idProduto, token);
+
+        switch (status) {
+            case 200:
+                console.log("Produto removido com sucesso.");
+                window.location = "/src/pages/mercantes/mercantes.html";
+            default:
+                console.log("Ocorreu um erro na requisição. STATUS: " + status);
+                break;
+        }
+    });
 
 document.querySelector("#editarImagens").addEventListener("click", () => {
     const urlParams = new URLSearchParams(window.location.search);
-
     const idProduto = urlParams.get("idProduto");
+    const idMercante = urlParams.get("idMercante");
 
-    editarImagens(idProduto);
+    window.location =
+        "/src/pages/produtos/produtoImagens.html?idMercante=" +
+        idMercante +
+        "&idProduto=" +
+        idProduto;
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
-
     const idProduto = urlParams.get("idProduto");
 
     carregarInformacoesProduto(idProduto);

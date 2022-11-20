@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" href="/src/css/login.css" />
-        <link rel="stylesheet" href="/src/css/componentes/style.css">
+        <link rel="stylesheet" href="/src/css/componentes/style.css" />
 
         <link
             rel="shortcut icon"
@@ -18,49 +18,55 @@
     </head>
     <body>
         <div class="container">
-                <form class="form-login">
-                    <img
-                        src="/src/imgs/logo/buyge_logo_novo_branco_full.png"
-                        alt="Logo do projeto na cor preta"
-                        class="logo"
+            <form class="form-login">
+                <h1 class="titulo-login">Entrar</h1>
+                <div class="grupo-input">
+                    <input
+                        class="entrada-texto"
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
                     />
-                    <div class="grupo-input">
-                        <input
-                            class="entrada-texto"
-                            type="text"
-                            name="email"
-                            id="email"
-                            placeholder="Email ou usuario"
-                        />
 
-                        <input
-                            class="entrada-texto"
-                            type="password"
-                            name="senha"
-                            id="senha"
-                            placeholder="Senha"
-                        />
+                    <input
+                        class="entrada-texto"
+                        type="password"
+                        name="senha"
+                        id="senha"
+                        placeholder="Senha"
+                    />
+                </div>
+                <p class="esqueceu">Esqueceu sua senha?</p>
+                <a type="button" class="botao" id="entrar" href="/index.html"
+                    >Entrar</a
+                >
+            </form>
+            <div class="fundo-logo">
+                <div class="conteudo">
+                    <img
+                        src="/src/imgs/logo/logo_buyge_novo_branco.png"
+                        class="logo-icone"
+                    />
+                    <h1 class="bem-vindo">Olá!</h1>
+                    <div class="textinho">
+                        Introduza os seus dados pessoais para abrir uma conta
+                        conosco.
                     </div>
-                    <p class="esqueceu">Esqueceu sua senha?</p>
-                    <a
-                        type="button"
-                        class="botao"
-                        id="entrar"
-                        href="/index.html"
-                        >Entrar</a
-                    >
-                    <a
-                        type="button"
-                        class="botao"
-                        id="criar"
-                        href="/src/pages/sign.html"
-                        >Criar uma conta</a
-                    >
-                </form>
-            <div class="equipe">
-                <p>Criado por <b>LikeCaramelo ©</b></p>
+                    <button class="criar" onclick="criar()">Inscreva-se</button>
+                </div>
             </div>
         </div>
+
+        <!--
+        <div class="equipe">
+            <p>Criado por <b>LikeCaramelo ©</b></p>
+        </div>
+        <div id="falha">
+            <p>Email e/ou login incorretos!</p>
+            <button id="fecharCaixa" class="efeito">OK</button>
+        </div>
+        -->
 
         <script src="/src/js/login.js"></script>
     </body>

@@ -1,41 +1,118 @@
 const fetchUrl = "https://localhost:7240/api";
 
-const carregarProduto = async (idProduto) => {
+function mascaraPreco(preco) {
+    const valorFormatado = preco.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+    return valorFormatado;
+}
+
+async function carregarProduto(idProduto) {
     const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
         method: "GET",
         mode: "cors",
     });
-    const produto = await response.json();
-    carregarImagens(produto);
-};
 
-const carregarImagens = async (produto) => {
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function carregarImagens(idProduto) {
     const response = await fetch(
-        `${fetchUrl}/produtos/produto-imagem/${produto.cdProduto}`,
+        `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
         {
             method: "GET",
             mode: "cors",
         }
     );
-    const imagens = await response.json();
+    const status = await response.status;
 
-    carregarCategorias(produto, imagens);
-};
+    switch (status) {
+        case 200:
+            const dados = await response.json();
 
-const carregarCategorias = async (produto, imagens) => {
-    const response = await fetch(
-        `${fetchUrl}/categorias/${produto.fkCdCategoria}`,
-        {
-            method: "GET",
-            mode: "cors",
-        }
-    );
-    const categoria = await response.json();
-    montarProduto(produto, imagens, categoria);
-};
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
 
-const montarProduto = (produto, imagens, categoria) => {
-    console.log(produto, imagens);
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function carregarCategorias(idCategoria) {
+    const response = await fetch(`${fetchUrl}/categorias/${idCategoria}`, {
+        method: "GET",
+        mode: "cors",
+    });
+
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function montarProduto(idProduto) {
+    const produtoResposta = await carregarProduto(idProduto);
+    if (produtoResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " + produtoResposta.status
+        );
+        return;
+    }
+    const produto = produtoResposta.dados;
+
+    const categoriasResposta = await carregarCategorias(produto.fkCdCategoria);
+    if (categoriasResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " +
+                categoriasResposta.status
+        );
+        return;
+    }
+    const categoria = categoriasResposta.dados;
+
+    const imagensResposta = await carregarImagens(produto.cdProduto);
+    if (imagensResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " + imagensResposta.status
+        );
+        return;
+    }
+    const imagens = imagensResposta.dados;
+
+    console.log(imagens);
 
     document.querySelector(".caminho").innerText =
         "Início > " + categoria.nmCategoria;
@@ -52,16 +129,17 @@ const montarProduto = (produto, imagens, categoria) => {
     });
 
     document.querySelector(".titulo").innerText = produto.nmProduto;
-    document.querySelector(".atual").innerText = "R$ " + produto.vlProduto;
+    document.querySelector(".atual").innerText = mascaraPreco(
+        produto.vlProduto
+    );
     document.querySelector(".parcelas").innerText =
-        "em 3x R$ " + produto.vlProduto / 3;
+        "em 3x R$ " + mascaraPreco(produto.vlProduto / 3);
     document.querySelector(".texto").innerText = produto.dsProduto;
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
-
     const idProduto = urlParams.get("idProduto");
 
-    carregarProduto(idProduto);
+    montarProduto(idProduto);
 });

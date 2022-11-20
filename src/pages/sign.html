@@ -18,75 +18,53 @@
 
     <body>
         <div class="container">
+            <div class="fundo-logo">
+                <div class="conteudo">
+                    <img
+                        src="/src/imgs/logo/logo_buyge_novo_branco.png"
+                        class="logo-icone"
+                    />
+                    <h1 class="bem-vindo">Bem vindo de volta!</h1>
+                    <div class="textinho">
+                        Para se manter conectado conosco, faça o login com seus
+                        dados pessoais.
+                    </div>
+                    <button class="entrar" onclick="entrar()">Entrar</button>
+                </div>
+            </div>
             <form class="cadastro">
-                <img
-                    src="/src/imgs/logo/buyge_logo_novo_branco_full.png"
-                    alt=""
-                    class="logo"
-                />
-                <div class="nome-sobrenome">
-                    <div class="entrada-dados">
-                        <label for="nome">Nome</label>
-                        <input
-                            type="text"
-                            id="nome"
-                            name="nome"
-                            required
-                            placeholder="Informe o seu nome"
-                        />
-                    </div>
-                    <div class="entrada-dados">
-                        <label for="sobrenome">Sobrenome</label>
-                        <input
-                            type="text"
-                            id="sobrenome"
-                            name="sobrenome"
-                            required
-                            placeholder="Informe o seu sobrenome"
-                        />
-                    </div>
+                <h1 class="titulo-cadastro">Criar conta</h1>
+
+                <div class="entrada-dados">
+                    <label for="nome">Nome</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        required
+                        placeholder="Informe o seu nome"
+                    />
                 </div>
-                <div class="cpf-datanasc">
-                    <div class="entrada-dados">
-                        <label for="cpf">CPF</label>
-                        <input
-                            type="text"
-                            id="cpf"
-                            name="cpf"
-                            required
-                            placeholder="Informe o seu CPF"
-                        />
-                    </div>
-                    <div class="entrada-dados">
-                        <label for="dataNasc">Data de Nascimento</label>
-                        <input
-                            type="date"
-                            id="dataNasc"
-                            name="dataNasc"
-                            required
-                            placeholder="Informe a sua data de nascimento"
-                        />
-                    </div>
+
+                <div class="entrada-dados">
+                    <label for="dataNasc">Data de Nascimento</label>
+                    <input
+                        type="date"
+                        id="dataNasc"
+                        name="dataNasc"
+                        required
+                        placeholder="Informe a sua data de nascimento"
+                    />
                 </div>
-                <div class="grupo-celular-tipo">
-                    <div class="celular entrada-dados">
-                        <label for="telefone">Celular</label>
-                        <input
-                            type="tel"
-                            id="telefone"
-                            name="telefone"
-                            required
-                            placeholder="Informe o seu telefone para contato"
-                        />
-                    </div>
-                    <div class="entrada-dados tipo-conta">
-                        <label for="tipoConta">Tipo de Conta</label>
-                        <select required name="tipoConta" id="tipoConta">
-                            <option value="Padrão">Normal</option>
-                            <option value="Mercador">Mercador</option>
-                        </select>
-                    </div>
+
+                <div class="entrada-dados tipo-conta">
+                    <label for="tipoConta">Tipo de Conta</label>
+                    <select required name="tipoConta" id="tipoConta">
+                        <option value="Padrão">Normal</option>
+                        <option value="Mercador">Mercador</option>
+                    </select>
                 </div>
+
                 <div class="grupo-login">
                     <div class="entrada-dados">
                         <label for="login">Login</label>
@@ -145,7 +123,7 @@
                         <a href="#">condições da plataforma</a> .</label
                     >
                 </div>
-                <button type="submit" id="cadastrar" class="cadastrar">
+                <button type="submit" id="cadastrar" class="cadastrar efeito">
                     Cadastrar sua conta
                 </button>
             </form>

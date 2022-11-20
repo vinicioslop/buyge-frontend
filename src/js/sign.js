@@ -9,9 +9,14 @@ async function cadastrar(cliente) {
         },
         body: JSON.stringify(cliente),
     });
-    const resposta = await requisicao.status;
 
-    return resposta;
+    const status = await requisicao.status;
+
+    return status;
+}
+
+function entrar() {
+    window.location = "/src/pages/login.html";
 }
 
 document.querySelector("#cadastrar").addEventListener("click", async (e) => {
@@ -19,19 +24,27 @@ document.querySelector("#cadastrar").addEventListener("click", async (e) => {
 
     let cliente = {
         nmCliente: document.querySelector("#nome").value,
-        nmSobrenome: document.querySelector("#sobrenome").value,
-        nrCpf: document.querySelector("#cpf").value,
         dtNascimento: document.querySelector("#dataNasc").value,
-        nrTelefone: document.querySelector("#telefone").value,
         nmLogin: document.querySelector("#login").value,
         nmSenha: document.querySelector("#senha").value,
-        nmTipoConta: document.querySelector("#tipoConta").value
+        nmTipoConta: document.querySelector("#tipoConta").value,
     };
 
-    const resposta = await cadastrar(cliente);
+    const status = await cadastrar(cliente);
+
+    switch (status) {
+        case 201:
+            window.location = "/src/pages/login.html";
+            break;
+        case 400:
+            console.log("Falha na criação da conta.");
+            break;
+        default:
+            console.log("Falha na auntenticação");
+            break;
+    }
 
     if (resposta === 201) {
-        window.location = "/src/pages/login.html";
     } else {
         console.log("Ocorreu uma falha");
     }

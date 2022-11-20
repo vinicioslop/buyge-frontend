@@ -9,16 +9,56 @@ async function logar(user) {
         },
         body: JSON.stringify(user),
     });
-    const resposta = await requisicao.json();;
 
-    return resposta;
+    const status = await requisicao.status;
+
+    if (status === 200) {
+        const dados = await requisicao.json();
+
+        const resposta = {
+            dados: dados,
+            status: status,
+        };
+
+        return resposta;
+    } else {
+        return status;
+    }
 }
 
-function gravaSessao(cliente, token) {
-    sessionStorage.setItem("idCliente", cliente.cdCliente);
+function gravaSessao(idCliente, token) {
+    sessionStorage.setItem("idCliente", idCliente);
     sessionStorage.setItem("token", token);
+}
 
-    //console.log(sessionStorage.getItem("idCliente"), sessionStorage.getItem("token"));
+function mostraCaixa() {
+    const container = document.querySelector(".container");
+
+    const falha = document.createElement("div");
+    falha.classList.add("falha");
+    const texto = document.createElement("p");
+    texto.innerText = "Email e/ou login incorretos ou inexistente!";
+    const botao = document.createElement("button");
+    botao.id = "fecharCaixa";
+    botao.classList.add("efeito");
+    botao.innerText = "OK";
+    botao.setAttribute("onclick", "removeCaixa()");
+
+    falha.appendChild(texto);
+    falha.appendChild(botao);
+
+    container.append(falha);
+}
+
+function removeCaixa() {
+    const container = document.querySelector(".container");
+    const falha = document.getElementsByClassName("falha")[0];
+
+    container.removeChild(falha);
+}
+
+function criar() {
+    window.location = "/src/pages/sign.html";
 }
 
 document.getElementById("entrar").addEventListener("click", async (e) => {
@@ -26,15 +66,27 @@ document.getElementById("entrar").addEventListener("click", async (e) => {
 
     let user = {
         login: document.getElementById("email").value,
-        senha: document.getElementById("senha").value
-    }
+        senha: document.getElementById("senha").value,
+    };
 
     const resposta = await logar(user);
 
-    let cliente = resposta.cliente;
-    let token = resposta.token;
+    switch (resposta.status) {
+        case 200:
+            let dados = resposta.dados;
 
-    gravaSessao(cliente, token);
+            let cliente = dados.cliente;
+            let token = dados.token;
 
-    window.location.replace("/");
+            gravaSessao(cliente.cdCliente, token);
+
+            window.location.replace("/");
+            break;
+        case 404:
+            mostraCaixa();
+            break;
+        default:
+            mostraCaixa();
+            break;
+    }
 });

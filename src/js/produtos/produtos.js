@@ -1,5 +1,14 @@
 const fetchUrl = "https://localhost:7240/api";
 
+function mascaraPreco(preco) {
+    var valorFormatado = preco.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+    return valorFormatado;
+}
+
 async function carregarProdutos() {
     const response = await fetch(`${fetchUrl}/produtos`, { mode: "cors" });
     const produtos = await response.json();
@@ -30,7 +39,7 @@ async function carregarMercantes() {
     return mercantes;
 }
 
-const exibirProduto = function (idProduto) {
+function exibirProduto (idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
 };
 
@@ -131,14 +140,9 @@ async function montaCartao() {
         precoParcela.classList.add("preco-parcela");
         const preco = document.createElement("p");
         preco.classList.add("preco");
-
-        preco.innerText = "R$ " + produto.vlProduto;
-        const parcela = document.createElement("p");
-        parcela.classList.add("parcela");
-        parcela.innerText = "ou 2x R$ " + produto.vlProduto / 2;
+        preco.innerText = mascaraPreco(produto.vlProduto);
 
         precoParcela.appendChild(preco);
-        precoParcela.appendChild(parcela);
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");

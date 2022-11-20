@@ -1,33 +1,94 @@
 const fetchUrl = "https://localhost:7240/api";
 
+function mascaraPreco(preco) {
+    const valorFormatado = preco.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+    return valorFormatado;
+}
+
 async function carregarProdutos() {
     const response = await fetch(`${fetchUrl}/produtos`, { mode: "cors" });
-    const produtos = await response.json();
+    const status = await response.status;
 
-    return produtos;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function carregarImagems() {
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
         mode: "cors",
     });
-    const produtoImagens = await response.json();
+    const status = await response.status;
 
-    return produtoImagens;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
-    const categorias = await response.json();
+    const status = await response.status;
 
-    return categorias;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function carregarMercantes() {
     const response = await fetch(`${fetchUrl}/mercantes`, { mode: "cors" });
-    const mercantes = await response.json();
+    const status = await response.status;
 
-    return mercantes;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 function produtosMercante(idMercante) {
@@ -40,10 +101,41 @@ function exibirProduto(idProduto) {
 }
 
 async function montaCartao() {
-    const produtos = await carregarProdutos();
-    const produtoImagens = await carregarImagems();
-    const categorias = await carregarCategorias();
-    const mercantes = await carregarMercantes();
+    const produtosResposta = await carregarProdutos();
+    if (produtosResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                produtosResposta.status
+        );
+    }
+    const produtos = produtosResposta.dados;
+
+    const produtoImagensResposta = await carregarImagems();
+    if (produtoImagensResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                produtoImagensResposta.status
+        );
+    }
+    const produtoImagens = produtoImagensResposta.dados;
+
+    const categoriasResposta = await carregarCategorias();
+    if (categoriasResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                categoriasResposta.status
+        );
+    }
+    const categorias = categoriasResposta.dados;
+
+    const mercantesResposta = await carregarMercantes();
+    if (mercantesResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                mercantesResposta.status
+        );
+    }
+    const mercantes = mercantesResposta.dados;
 
     const maisVendidos = new Flickity("#mais-vendidos");
     const novidades = new Flickity("#novidades");
@@ -133,14 +225,9 @@ async function montaCartao() {
         precoParcela.classList.add("preco-parcela");
         const preco = document.createElement("p");
         preco.classList.add("preco");
-
-        preco.innerText = "R$ " + produto.vlProduto;
-        const parcela = document.createElement("p");
-        parcela.classList.add("parcela");
-        parcela.innerText = "ou 2x R$ " + produto.vlProduto / 2;
+        preco.innerText = mascaraPreco(produto.vlProduto);
 
         precoParcela.appendChild(preco);
-        precoParcela.appendChild(parcela);
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
@@ -244,14 +331,9 @@ async function montaCartao() {
         precoParcela.classList.add("preco-parcela");
         const preco = document.createElement("p");
         preco.classList.add("preco");
-
-        preco.innerText = "R$ " + produto.vlProduto;
-        const parcela = document.createElement("p");
-        parcela.classList.add("parcela");
-        parcela.innerText = "ou 2x R$ " + produto.vlProduto / 2;
+        preco.innerText = mascaraPreco(produto.vlProduto);
 
         precoParcela.appendChild(preco);
-        precoParcela.appendChild(parcela);
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
@@ -355,14 +437,9 @@ async function montaCartao() {
         precoParcela.classList.add("preco-parcela");
         const preco = document.createElement("p");
         preco.classList.add("preco");
-
-        preco.innerText = "R$ " + produto.vlProduto;
-        const parcela = document.createElement("p");
-        parcela.classList.add("parcela");
-        parcela.innerText = "ou 2x R$ " + produto.vlProduto / 2;
+        preco.innerText = mascaraPreco(produto.vlProduto);
 
         precoParcela.appendChild(preco);
-        precoParcela.appendChild(parcela);
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
@@ -383,4 +460,8 @@ async function montaCartao() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", montaCartao());
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault();
+
+    montaCartao();
+});

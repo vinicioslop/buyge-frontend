@@ -76,14 +76,9 @@ async function montar() {
         return;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
-    const mercante = await carregarMercante(idMercante, token);
-
     const categorias = await carregarCategorias(token);
 
     const categoriaSelect = document.querySelector("#categoria");
-    const mercanteSelect = document.querySelector("#mercador");
 
     categorias.forEach((categoria) => {
         let categoriaItem = document.createElement("option");
@@ -92,23 +87,20 @@ async function montar() {
 
         categoriaSelect.appendChild(categoriaItem);
     });
-
-    let mercanteItem = document.createElement("option");
-    mercanteItem.value = mercante.cdMercante;
-    mercanteItem.innerHTML = mercante.nmLoja;
-
-    mercanteSelect.appendChild(mercanteItem);
 }
 
 document.querySelector("#enviar").addEventListener("click", async (e) => {
     e.preventDefault();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idMercante = urlParams.get("idMercante");
 
     let produto = {
         nmProduto: document.querySelector("#nome").value,
         dsProduto: document.querySelector("#descricao").value,
         vlProduto: parseFloat(document.querySelector("#preco").value),
         qtProduto: parseInt(document.querySelector("#quantidade").value),
-        fkCdMercante: parseInt(document.querySelector("#mercador").value),
+        fkCdMercante: parseInt(idMercante),
         fkCdCategoria: parseInt(document.querySelector("#categoria").value),
     };
 
@@ -120,9 +112,6 @@ document.querySelector("#enviar").addEventListener("click", async (e) => {
     }
 
     enviarProduto(produto, token);
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
 
     window.location =
         "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;

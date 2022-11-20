@@ -5,9 +5,22 @@ async function carregarMercantes() {
         method: "GET",
         mode: "cors",
     });
-    const mercantes = await response.json();
+    const status = await response.status;
 
-    return mercantes;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 function produtosMercante(idMercante) {
@@ -29,7 +42,7 @@ function montarCartoes(mercantes) {
 
         let img = document.createElement("img");
         img.classList.add("logo-loja");
-        img.src = mercante.imgLogo;
+        img.src = mercante.imgLogoLink;
 
         let informacoes = document.createElement("div");
         informacoes.classList.add("informacoes");
@@ -73,6 +86,17 @@ function montarCartoes(mercantes) {
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
-    const mercantes = await carregarMercantes();
+    const mercantesResposta = await carregarMercantes();
+
+    if (mercantesResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro ao carregar lojas. STATUS: " +
+                mercantesResposta.status
+        );
+        return;
+    }
+
+    const mercantes = mercantesResposta.dados;
+
     montarCartoes(mercantes);
 });
