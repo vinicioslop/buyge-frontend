@@ -16,7 +16,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-top: 10%;
         position: relative;
         bottom: 0;
 
@@ -126,7 +125,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: left;
-        margin-top: 10%;
         position: relative;
         bottom: 0;
 
@@ -205,7 +203,7 @@
 
 .rodape-linha {
     /* DIMENSIONAMENTO */
-    width: 98%;
+    width: 100%;
     height: 2px;
     border-width: 0;
 
@@ -214,7 +212,7 @@
     background-color: var(--cor-principal);
 }
 
-.rodape-superior .rodape-titulo {    
+.rodape-superior .rodape-titulo {
     /* APARÊNCIA */
     font-size: 16px;
     font-weight: bold;
@@ -236,7 +234,7 @@
     cursor: pointer;
 }
 
-.rodape-superior .social-icones .social-icon .texto{
+.rodape-superior .social-icones .social-icon .texto {
     /* APARÊNCIA */
     font-size: 16px;
     font-weight: bold;
@@ -257,7 +255,7 @@
     background-color: var(--cor-principal-clara);
 }
 
-.rodape-inferior .direitos {    
+.rodape-inferior .direitos {
     /* APARÊNCIA */
     font-size: 15px;
     color: var(--cor-clara);

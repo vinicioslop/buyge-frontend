@@ -128,7 +128,7 @@ async function montarProduto(idProduto) {
         miniaturas.append(img);
     });
 
-    document.querySelector(".titulo").innerText = produto.nmProduto;
+    document.querySelector(".titulo-produto").innerText = produto.nmProduto;
     document.querySelector(".atual").innerText = mascaraPreco(
         produto.vlProduto
     );

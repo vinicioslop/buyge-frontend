@@ -152,7 +152,10 @@ async function montaCartao() {
         imagem.classList.add("imagem");
 
         produtoImagens.forEach((produtoImagem) => {
-            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+            if (
+                produtoImagem.fkCdProduto === produto.cdProduto &&
+                produtoImagem.idPrincipal === 1
+            ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
         });
@@ -258,7 +261,10 @@ async function montaCartao() {
         imagem.classList.add("imagem");
 
         produtoImagens.forEach((produtoImagem) => {
-            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+            if (
+                produtoImagem.fkCdProduto === produto.cdProduto &&
+                produtoImagem.idPrincipal === 1
+            ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
         });
@@ -364,7 +370,10 @@ async function montaCartao() {
         imagem.classList.add("imagem");
 
         produtoImagens.forEach((produtoImagem) => {
-            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+            if (
+                produtoImagem.fkCdProduto === produto.cdProduto &&
+                produtoImagem.idPrincipal === 1
+            ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
         });

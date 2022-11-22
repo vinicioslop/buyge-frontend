@@ -34,76 +34,465 @@
         <header id="barra-navegacao" class="barra-navegacao"></header>
 
         <div class="container">
-            <div class="conteudo">
-                <h1 class="titulo">EDITAR MERCANTES</h1>
-                <form id="editarMercante">
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="nome">Nome da Loja</label>
-                        </div>
-                        <div class="col-75">
-                            <input
-                                type="text"
-                                id="nome"
-                                name="nome"
-                                placeholder="Digite o nome da loja..."
-                            />
+            <div class="barra-lateral">
+                <div class="grupo-nome-loja">
+                    <h2 class="nome-loja">Olá, NOME DA LOJA!</h2>
+                </div>
+                <hr class="linha" />
+                <div class="opcoes">
+                    <div onclick="clicaSecao('secaoMinhaLoja')" class="item">
+                        <img
+                            class="icone"
+                            src="/src/icons/minha-loja-branco.svg"
+                            alt=""
+                        />
+                        <p class="texto">Minha Loja Virtual</p>
+                    </div>
+                    <div onclick="clicaSecao('secaoProdutos')" class="item">
+                        <div class="grupo-item">
+                            <div class="principal">
+                                <div class="secao-primaria">
+                                    <img
+                                        class="icone"
+                                        src="/src/icons/box-branco.svg"
+                                        alt=""
+                                    />
+                                    <p class="texto">Produtos</p>
+                                    <img
+                                        src="/src/icons/seta-baixo-branco.svg"
+                                        alt=""
+                                        class="seta"
+                                    />
+                                </div>
+                            </div>
+                            <div class="items-secao">
+                                <div
+                                    onclick="clicaSecaoInternaProdutos('seusProdutos')"
+                                    class="item-secao"
+                                >
+                                    <p class="texto">Seus Produtos</p>
+                                </div>
+                                <div
+                                    onclick="clicaSecaoInternaProdutos('cadastrarProdutos')"
+                                    class="item-secao"
+                                >
+                                    <p class="texto">Cadastrar Produto</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="descricao">Descrição da Loja</label>
-                        </div>
-                        <div class="col-75">
-                            <textarea
-                                id="descricao"
-                                name="descricao"
-                                placeholder="Digite aqui a descrição da loja..."
-                                style="height: 100px"
-                            ></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="logoUrl">Logo Mercante URL</label>
-                        </div>
-                        <div class="col-75">
-                            <input
-                                type="text"
-                                id="logoUrl"
-                                name="logoUrl"
-                                placeholder="Informe aqui a url do logo da loja..."
-                            />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="cnpj">CNPJ</label>
-                        </div>
-                        <div class="col-75">
-                            <input
-                                type="text"
-                                id="cnpj"
-                                name="cnpj"
-                                placeholder="Informe o CNPJ da loja, se possuir..."
-                            />
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <input
-                            class="botao"
-                            type="submit"
-                            id="atualizarMercante"
-                            value="Atualizar"
+                    <div onclick="clicaSecao('secaoVenda')" class="item">
+                        <img
+                            class="icone"
+                            src="/src/icons/carrinho-diferente-branco.svg"
+                            alt=""
+                        />
+                        <p class="texto">Venda</p>
+                        <img
+                            src="/src/icons/seta-baixo-branco.svg"
+                            alt=""
+                            class="seta"
                         />
                     </div>
-                </form>
+                    <div onclick="clicaSecao('secaoMensagens')" class="item">
+                        <img
+                            class="icone"
+                            src="/src/icons/chat-quest-branco.svg"
+                            alt=""
+                        />
+                        <p class="texto">Mensagens</p>
+                    </div>
+                    <div onclick="clicaSecao('secaoSaldo')" class="item">
+                        <img
+                            class="icone"
+                            src="/src/icons/cifrao-branco.svg"
+                            alt=""
+                        />
+                        <p class="texto">Saldo</p>
+                    </div>
+                </div>
+            </div>
 
-                <div class="botoes">
-                    <button class="botao excluir" id="excluirMercante">
-                        Excluir
-                    </button>
+            <div id="secaoMinhaLoja" class="conteudo mostrar">
+                <div class="nome-loja">Minha Loja</div>
+                <div class="navegacao">
+                    <div
+                        onclick="clicaSecaoInternaMinhaLoja('perfilLoja')"
+                        class="item"
+                    >
+                        Perfil da Loja
+                    </div>
+                    <div
+                        onclick="clicaSecaoInternaMinhaLoja('dadosLoja')"
+                        class="item"
+                    >
+                        Dados da Loja
+                    </div>
+                    <div class="item">Documentos</div>
+                    <div class="item">Dados Financeiros</div>
+                    <div class="item">Gamificação</div>
+                </div>
+                <hr class="linha" />
+                <div id="perfilLoja" class="informacoes mostrar">
+                    <h1 class="titulo-secao">Perfil da Loja</h1>
+                    <!--<div class="logo">LOGO</div>-->
+                    <form class="formulario">
+                        <div class="grupo-lateral">
+                            <div class="entrada-dados">
+                                <label for="nome">Nome da Loja</label>
+                                <input
+                                    required
+                                    type="text"
+                                    name="nome"
+                                    id="nome"
+                                    placeholder="Informe o nome da loja"
+                                />
+                            </div>
+                            <div class="entrada-dados">
+                                <label for="email">Email da Loja</label>
+                                <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Informe o email da loja"
+                                />
+                            </div>
+                        </div>
+                        <div class="entrada-dados">
+                            <label for="descricao">Descrição da Loja</label>
+                            <textarea
+                                required
+                                name="descricao"
+                                id="descricao"
+                                id=""
+                                placeholder="Informe o descrição da loja"
+                            ></textarea>
+                        </div>
+                        <button id="enviar">Salvar Alterações</button>
+                    </form>
+                </div>
+                <div id="dadosLoja" class="informacoes esconder">
+                    <h1 class="titulo-secao">Dados da Loja</h1>
+                    <!--<div class="logo">LOGO</div>-->
+                    <form class="formulario">
+                        <div class="grupo-secao">
+                            <h3 class="secao-formulario">Dados do Vendedor</h3>
+                            <div class="entrada-dados">
+                                <select required name="natureza" id="natureza">
+                                    <option value="PJ">Pessoa Jurídica</option>
+                                    <option value="PF">Pessoa Física</option>
+                                </select>
+                            </div>
+                            <div class="entrada-dados">
+                                <label for="cnpj">CNPJ</label>
+                                <input
+                                    required
+                                    type="text"
+                                    name="cnpj"
+                                    id="cnpj"
+                                    placeholder="Informe o CNPJ"
+                                />
+                            </div>
+                        </div>
+                        <div class="grupo-secao">
+                            <h3 class="secao-formulario">Endereço</h3>
+                            <div class="grupo-lateral">
+                                <div class="entrada-dados">
+                                    <label for="pais">País de Residência</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="pais"
+                                        id="pais"
+                                        placeholder="Informe o país"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="cep">CEP</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="cep"
+                                        id="cep"
+                                        placeholder="Informe o CEP"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="estado">Estado</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="estado"
+                                        id="estado"
+                                        placeholder="Informe o Estado"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="municipio"
+                                        >Cidade / Município</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="municipio"
+                                        id="municipio"
+                                        placeholder="Informe a Cidade"
+                                    />
+                                </div>
+                            </div>
+                            <div class="grupo-lateral">
+                                <div class="entrada-dados">
+                                    <label for="logradouro">Logradouro</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="logradouro"
+                                        id="logradouro"
+                                        placeholder="Informe o Logradouro"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="numero">Número</label>
+                                    <input
+                                        required
+                                        type="number"
+                                        name="numero"
+                                        id="numero"
+                                        placeholder="Informe o Número"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="complemento">Complemento</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="complemento"
+                                        id="complemento"
+                                        placeholder="Informe o Complemento"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="bairro">Bairro</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="bairro"
+                                        id="bairro"
+                                        placeholder="Informe o Bairro"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <button id="enviar">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="secaoProdutos" class="conteudo esconder">
+                <div id="seusProdutos" class="informacoes mostrar">
+                    <h1 class="titulo-secao">Seus Produtos</h1>
+                    <div class="recarregar-pesquisa">
+                        <img
+                            src="/src/icons/loader-preto.svg"
+                            alt=""
+                            id="recarregar"
+                        />
+
+                        <input
+                            required
+                            type="text"
+                            name="pesquisarProdutos"
+                            id="pesquisarProdutos"
+                            placeholder="Busca"
+                        />
+                    </div>
+                    <hr class="linha" />
+                    <div class="grupo-informacoes-baixo">
+                        <p class="total-produtos">
+                            Total de 0 produtos registrados
+                        </p>
+                        <div class="todos-produtos">
+                            <div class="item">
+                                <div class="fundo">
+                                    <img
+                                        src="/src/icons/image-preto.svg"
+                                        alt=""
+                                        class="imagem"
+                                    />
+                                </div>
+                                <div class="nome-data-criacao">
+                                    <h4 class="nome-produto">
+                                        Nome do Produto
+                                    </h4>
+                                    <p class="criacao">Criado em 00/00/0000</p>
+                                </div>
+                                <div class="disponibilidade">Desabilitado</div>
+                                <div class="acoes">
+                                    <img
+                                        src="/src/icons/menu-scale-preto.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="cadastrarProdutos" class="informacoes esconder">
+                    <h1 class="titulo-secao">Cadastrar Produto</h1>
+                    <hr class="linha" />
+                    <form class="formulario">
+                        <div class="grupos">
+                            <div class="grupo-esquerda">
+                                <div class="entrada-dados">
+                                    <label for="nomeProduto"
+                                        >Nome do Produto</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="nomeProduto"
+                                        id="nomeProduto"
+                                        placeholder="Informe o nome do produto"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="descricaoProduto"
+                                        >Descrição do Produto</label
+                                    >
+                                    <textarea
+                                        required
+                                        name="descricaoProduto"
+                                        id="descricaoProduto"
+                                        placeholder="Informe a descrição do Produto"
+                                    ></textarea>
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="categoriaProduto"
+                                        >Categoria</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="categoriaProduto"
+                                        id="categoriaProduto"
+                                        placeholder="Seleciona a Categoria"
+                                    />
+                                </div>
+                            </div>
+                            <div class="grupo-direita">
+                                <div class="entrada-dados">
+                                    <label for="precoProduto"
+                                        >Preco do Produto</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="precoProduto"
+                                        id="precoProduto"
+                                        placeholder="999,99"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="quantidadeProduto"
+                                        >Quantidade do Produto</label
+                                    >
+                                    <input
+                                        required
+                                        type="number"
+                                        name="quantidadeProduto"
+                                        id="quantidadeProduto"
+                                        placeholder="0"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="pesoProduto"
+                                        >Peso do Produto (g)</label
+                                    >
+                                    <input
+                                        required
+                                        type="number"
+                                        name="pesoProduto"
+                                        id="pesoProduto"
+                                        placeholder="Informe o peso do Produto"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="tamanhoProduto"
+                                        >Tamanho do Produto (cm)</label
+                                    >
+                                    <input
+                                        required
+                                        type="number"
+                                        name="tamanhoProduto"
+                                        id="tamanhoProduto"
+                                        placeholder="Informe o tamanho do Produto"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="freteProduto"
+                                        >Frete do Produto</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="freteProduto"
+                                        id="freteProduto"
+                                        placeholder="Informe o peso do Produto"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <button id="enviar">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="secaoVenda" class="conteudo esconder">
+                <div class="titulo-secao">Minha Loja</div>
+                <div class="navegacao">
+                    <div class="item">Perfil da Loja</div>
+                    <div class="item">Dados da Loja</div>
+                    <div class="item">Documentos</div>
+                    <div class="item">Dados Financeiros</div>
+                    <div class="item">Gamificação</div>
+                </div>
+                <hr class="linha" />
+                <div class="informacoes">
+                    <h1 class="titulo-secao">Venda</h1>
+                    <!--<div class="logo">LOGO</div>-->
+                </div>
+            </div>
+
+            <div id="secaoMensagens" class="conteudo esconder">
+                <div class="titulo-secao">Minha Loja</div>
+                <div class="navegacao">
+                    <div class="item">Perfil da Loja</div>
+                    <div class="item">Dados da Loja</div>
+                    <div class="item">Documentos</div>
+                    <div class="item">Dados Financeiros</div>
+                    <div class="item">Gamificação</div>
+                </div>
+                <hr class="linha" />
+                <div class="informacoes">
+                    <h1 class="titulo-secao">Mensagens</h1>
+                    <!--<div class="logo">LOGO</div>-->
+                </div>
+            </div>
+
+            <div id="secaoSaldo" class="conteudo esconder">
+                <div class="titulo-secao">Minha Loja</div>
+                <div class="navegacao">
+                    <div class="item">Perfil da Loja</div>
+                    <div class="item">Dados da Loja</div>
+                    <div class="item">Documentos</div>
+                    <div class="item">Dados Financeiros</div>
+                    <div class="item">Gamificação</div>
+                </div>
+                <hr class="linha" />
+                <div class="informacoes">
+                    <h1 class="titulo-secao">Saldo</h1>
+                    <!--<div class="logo">LOGO</div>-->
                 </div>
             </div>
         </div>

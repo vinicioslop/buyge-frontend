@@ -25,7 +25,7 @@ document.querySelector("#cadastrar").addEventListener("click", async (e) => {
     let cliente = {
         nmCliente: document.querySelector("#nome").value,
         dtNascimento: document.querySelector("#dataNasc").value,
-        nmLogin: document.querySelector("#login").value,
+        nmEmail: document.querySelector("#email").value,
         nmSenha: document.querySelector("#senha").value,
         nmTipoConta: document.querySelector("#tipoConta").value,
     };

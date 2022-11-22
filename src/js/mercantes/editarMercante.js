@@ -62,84 +62,121 @@ async function carregarInformacoesMercante() {
     const idMercante = urlParams.get("idMercante");
     const mercante = await carregarMercante(idMercante, token);
 
-    const idCliente = sessionStorage.getItem("idCliente");
-
     const nome = document.querySelector("#nome");
+    const email = document.querySelector("#email");
     const descricao = document.querySelector("#descricao");
-    const logoUrl = document.querySelector("#logoUrl");
-    const cnpj = document.querySelector("#cnpj");
 
     nome.value = mercante.nmLoja;
+    email.value = mercante.nmEmail;
     descricao.value = mercante.dsLoja;
-    logoUrl.value = mercante.imgLogo;
-    cnpj.value = mercante.nrCnpj;
 }
 
-document
-    .querySelector("#atualizarMercante")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+function clicaSecaoInternaMinhaLoja(idComponente) {
+    const secoes = ["perfilLoja", "dadosLoja"];
 
-        const token = sessionStorage.getItem("token");
+    secoes.forEach((secao) => {
+        const componente = document.querySelector("#" + secao);
 
-        if (token === null) {
-            console.log("Cliente não autenticado");
-            return;
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const idMercante = urlParams.get("idMercante");
-        const idCliente = sessionStorage.getItem("idCliente");
-
-        const mercante = {
-            cdMercante: parseInt(idMercante),
-            nmLoja: document.querySelector("#nome").value,
-            dsLoja: document.querySelector("#descricao").value,
-            imgLogo: document.querySelector("#logoUrl").value,
-            nrCnpj: document.querySelector("#cnpj").value,
-            fkCdCliente: parseInt(idCliente),
-        };
-
-        const status = await atualizarMercante(mercante, token);
-
-        switch (status) {
-            case 200:
-                console.log("Lojista atualizado.");
-                break;
-            default:
-                console.log("Ocorreu um erro na requisição. STATUS" + status);
-                break;
+        if (secao === idComponente) {
+            componente.setAttribute("class", "informacoes mostrar");
+        } else {
+            componente.setAttribute("class", "informacoes esconder");
         }
     });
+}
 
-document
-    .querySelector("#excluirMercante")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+function clicaSecaoInternaProdutos(idComponente) {
+    const secoes = ["seusProdutos", "cadastrarProdutos"];
 
-        const token = sessionStorage.getItem("token");
+    secoes.forEach((secao) => {
+        const componente = document.querySelector("#" + secao);
 
-        if (token === null) {
-            console.log("Cliente não autenticado");
-            return;
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const idMercante = urlParams.get("idMercante");
-
-        const status = await removerMercante(idMercante, token);
-
-        switch (status) {
-            case 200:
-                console.log("Loja removida com sucesso!");
-                window.location = "/src/pages/mercantes/mercantes.html";
-                break;
-            default:
-                console.log(
-                    "Ocorreu uma falha na requisicao. STATUS: " + status
-                );
-                break;
+        if (secao === idComponente) {
+            componente.setAttribute("class", "informacoes mostrar");
+        } else {
+            componente.setAttribute("class", "informacoes esconder");
         }
     });
+}
+
+function clicaSecao(idComponente) {
+    const secoes = [
+        "secaoMinhaLoja",
+        "secaoProdutos",
+        "secaoVenda",
+        "secaoMensagens",
+        "secaoSaldo",
+    ];
+
+    secoes.forEach((secao) => {
+        const componente = document.querySelector("#" + secao);
+
+        if (secao === idComponente) {
+            componente.setAttribute("class", "conteudo mostrar");
+        } else {
+            componente.setAttribute("class", "conteudo esconder");
+        }
+    });
+}
+
+document.querySelector("#enviar").addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idMercante = urlParams.get("idMercante");
+    const idCliente = sessionStorage.getItem("idCliente");
+
+    const mercante = {
+        cdMercante: parseInt(idMercante),
+        nmLoja: document.querySelector("#nome").value,
+        nmEmail: document.querySelector("#desc").value,
+        dsLoja: document.querySelector("#descricao").value,
+        fkCdCliente: parseInt(idCliente),
+    };
+
+    const status = await atualizarMercante(mercante, token);
+
+    switch (status) {
+        case 200:
+            console.log("Lojista atualizado.");
+            break;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS" + status);
+            break;
+    }
+});
+
+document.querySelector("#enviar").addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idMercante = urlParams.get("idMercante");
+
+    const status = await removerMercante(idMercante, token);
+
+    switch (status) {
+        case 200:
+            console.log("Loja removida com sucesso!");
+            window.location = "/src/pages/mercantes/mercantes.html";
+            break;
+        default:
+            console.log("Ocorreu uma falha na requisicao. STATUS: " + status);
+            break;
+    }
+});
 
 document.addEventListener("DOMContentLoaded", carregarInformacoesMercante());

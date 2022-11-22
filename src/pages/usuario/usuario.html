@@ -5,18 +5,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="/src/css/componentes/style.css">
-        <link rel="stylesheet" href="/src/css/componentes/barra-navegacao.css" />
+        <link rel="stylesheet" href="/src/css/componentes/style.css" />
+        <link
+            rel="stylesheet"
+            href="/src/css/componentes/barra-navegacao.css"
+        />
         <link rel="stylesheet" href="/src/css/componentes/rodape.css" />
 
         <link rel="stylesheet" href="/src/css/usuario/usuario.css" />
-        
-        <script 
-            src="https://kit.fontawesome.com/74e8571330.js" 
-            crossorigin="anonymous">
-        </script>
 
-        <link rel="shortcut icon" href="/src/imgs/logo/logo_buyge_novo_branco.png" type="image/x-icon"/>
+        <script
+            src="https://kit.fontawesome.com/74e8571330.js"
+            crossorigin="anonymous"
+        ></script>
+
+        <link
+            rel="shortcut icon"
+            href="/src/imgs/logo/logo_buyge_novo_branco.png"
+            type="image/x-icon"
+        />
 
         <title>Usuário</title>
     </head>
@@ -24,69 +31,67 @@
         <header id="barra-navegacao" class="barra-navegacao"></header>
 
         <div class="container-usuario">
-
             <div id="cor-diferente" class="container-usuario-nav">
-
                 <div class="dropdown">
-
                     <div class="container-usuario-nav-tl">
                         <i class="fa-solid fa-list"></i>
                         Minha conta
                     </div>
-    
-                    <div class="container-usuario-nav-itens">
 
+                    <div class="container-usuario-nav-itens">
                         <div class="item-nav">
                             <div class="item-nav-div">
                                 <i class="fa-solid fa-user"></i>
                                 Meus dados
                             </div>
                         </div>
-    
+
                         <div class="item-nav">
                             <div class="item-nav-div">
                                 <i class="fa-solid fa-lock"></i>
                                 Segurança
                             </div>
                         </div>
-                        
+
                         <div class="item-nav">
                             <div class="item-nav-div">
                                 <i class="fa-solid fa-credit-card"></i>
                                 Cartões
                             </div>
                         </div>
-    
+
                         <div class="item-nav">
                             <div class="item-nav-div">
-                                <i class="fa-solid fa-location-dot"></i></i>
+                                <i class="fa-solid fa-location-dot"></i>
                                 Endereços
                             </div>
                         </div>
-    
+
                         <div class="item-nav">
                             <div class="item-nav-div">
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 Compras
                             </div>
                         </div>
-    
+
                         <div class="item-nav">
                             <div class="item-nav-div">
                                 <i class="fa-solid fa-shop"></i>
                                 Vendas
                             </div>
                         </div>
-    
+
                         <a href="cadastro_loja.html">
                             <div class="item-nav">
                                 <div class="item-nav-div">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    <i
+                                        class="fa-solid fa-arrow-up-right-from-square"
+                                    ></i>
                                     Torne-se vendedor
                                 </div>
                             </div>
                         </a>
-    
+
                         <div class="item-nav">
                             <div class="item-nav-div">
                                 <i class="fa-solid fa-gear"></i>
@@ -94,69 +99,87 @@
                             </div>
                         </div>
                     </div>
-         	</div>            
-	    </div>
+                </div>
+            </div>
 
             <div class="container-usuario-data">
-
                 <div class="container-usuario-data-user">
-
                     <div class="icon-user">
-                        <i id="icon-user-id" class="fa-regular fa-circle-user"></i>
+                        <i
+                            id="icon-user-id"
+                            class="fa-regular fa-circle-user"
+                        ></i>
                     </div>
-
                 </div>
 
                 <div class="container-usuario-data-user-info">
-
                     <form class="container-usuario-data-user-info-form">
-
                         <div class="user-info-form-item">
-
                             <div>
                                 <label for="name">
                                     <strong>
-                                        <i class="fa-regular fa-user"></i>
+                                        <img src="/src/icons/user-preto.svg" alt="">
                                         NOME
                                     </strong>
                                 </label>
                             </div>
                             <div>
-                                <input 
-                                    type="text" 
-                                    id="name" 
-                                    name="name" 
-                                    value="CARAMELO BUYGE DA SILVA" 
-                                    disabled
-                                >
+                                <input required type="text" id="name" name="name" />
                             </div>
-
                         </div>
-
                         <div class="user-info-form-item">
-
                             <div>
-                                <label for="email">
+                                <label for="sobrenome">
                                     <strong>
-                                        <i class="fa-regular fa-envelope"></i>
-                                        EMAIL    
+                                        <img src="/src/icons/user-preto.svg" alt="">
+                                        SOBRENOME
                                     </strong>
                                 </label>
                             </div>
                             <div>
-                                <input 
-                                    type="text" 
-                                    id="email"
-                                    name="email"
-                                    value="caramelo@buyge.com"
-                                    disabled
-                                >
+                                <input required type="text" id="sobrenome" name="sobrenome" />
                             </div>
-
                         </div>
-
                         <div class="user-info-form-item">
-
+                            <div>
+                                <label for="tell">
+                                    <strong>
+                                        <i class="fa-solid fa-phone"></i>
+                                        NÚMERO DE TELEFONE
+                                    </strong>
+                                </label>
+                            </div>
+                            <div>
+                                <input required type="text" id="tell" name="tell" />
+                            </div>
+                        </div>
+                        <div class="user-info-form-item">
+                            <div>
+                                <label for="datanasc">
+                                    <strong>
+                                        <img src="/src/icons/calendario-preto.svg" alt="">
+                                        DATA DE NASCIMENTO
+                                    </strong>
+                                </label>
+                            </div>
+                            <div>
+                                <input required type="date" id="datanasc" name="datanasc" />
+                            </div>
+                        </div>
+                        <div class="user-info-form-item">
+                            <div>
+                                <label for="email">
+                                    <strong>
+                                        <img src="/src/icons/email-preto.svg" alt="">
+                                        EMAIL
+                                    </strong>
+                                </label>
+                            </div>
+                            <div>
+                                <input required type="email" id="email" name="email" />
+                            </div>
+                        </div>
+                        <div class="user-info-form-item">
                             <div>
                                 <label for="cpf">
                                     <strong>
@@ -166,52 +189,17 @@
                                 </label>
                             </div>
                             <div>
-                                <input 
-                                    type="text"
-                                    id="cpf"
-                                    name="cpf"
-                                    value="000.000.000-00"
-                                    disabled
-                                    >
+                                <input required type="text" id="cpf" name="cpf" />
                             </div>
-
                         </div>
-
-                        <div class="user-info-form-item">
-
-                            <div>
-                                <label for="tell">
-                                    <strong>
-                                        <i class="fa-solid fa-phone"></i>
-                                        NÚMERO
-                                    </strong>
-                                </label>
-                            </div>
-                            <div>
-                                <input 
-                                    type="text"
-                                    id="tell"
-                                    name="tell"
-                                    value="(00) 00000-0000"
-                                    disabled
-                                    >
-                            </div>
-
-                        </div>
-
                         <div class="user-info-form-button">
-
-                            <button class="edit-form-button">
+                            <button id="atualizarCliente" class="edit-form-button">
                                 <i class="fa-regular fa-pen-to-square"></i>
                                 Editar
                             </button>
-
                         </div>
-
                     </form>
-
                 </div>
-
             </div>
         </div>
 
@@ -290,6 +278,8 @@
                 </p>
             </div>
         </footer>
+
+        <script src="/src/js/usuario/usuario.js"></script>
 
         <script src="/src/js/componentes/barra-navegacao.js"></script>
     </body>

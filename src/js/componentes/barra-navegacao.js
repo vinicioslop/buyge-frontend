@@ -1,7 +1,7 @@
 const url = "https://localhost:7240/api";
 
 async function buscarCategorias() {
-    const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
+    const response = await fetch(`${url}/categorias`, { mode: "cors" });
     const status = await response.status;
 
     switch (status) {
@@ -20,41 +20,8 @@ async function buscarCategorias() {
     }
 }
 
-async function buscarClienteLogado(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/clientes/${idCliente}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
-    const status = await response.status;
-
-    switch (status) {
-        case 200:
-            const dados = await response.json();
-
-            const resposta = {
-                dados: dados,
-                status: status,
-            };
-
-            return resposta;
-        default:
-            console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
-    }
-}
-
-function removeSessao() {
-    sessionStorage.setItem("idCliente", null);
-    sessionStorage.setItem("token", null);
-}
-
-async function testarToken(token) {
-    const requisicao = await fetch(`${fetchUrl}/token`, {
+async function veriricarToken(token) {
+    const requisicao = await fetch(`${url}/token`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -71,20 +38,6 @@ async function testarToken(token) {
             return true;
         case 401:
             return false;
-    }
-}
-
-async function testar() {
-    const token = sessionStorage.getItem("token");
-    const valido = await testarToken(token);
-
-    if (valido) {
-        console.log("Sessão válida");
-        return true;
-    } else {
-        removeSessao();
-        console.log("Desconectado");
-        return false;
     }
 }
 
@@ -271,12 +224,13 @@ function montaBarraNavegacaoGrande(categorias) {
 
     // ICONE DE USUARIO
     const userLink = document.createElement("a");
-    userLink.setAttribute("href", "/src/pages/login.html");
+    userLink.id = "userLink";
     userLink.classList.add("icone-link");
+    userLink.setAttribute("onclick", "clicarUsuario()");
     const userIcone = document.createElement("img");
     userIcone.classList.add("icone");
     userIcone.setAttribute("id", "user-icon");
-    userIcone.setAttribute("src", "/src/icons/user-branco.svg");
+    userIcone.setAttribute("src", "/src/icons/user-branco-circulo.svg");
     userIcone.setAttribute("alt", "Ícone de usuario branco");
     userLink.appendChild(userIcone);
     // ICONE DE USUARIO
@@ -349,6 +303,13 @@ function montaBarraNavegacaoGrande(categorias) {
         menuConteudo.appendChild(item);
     });
 
+    const criarLoja = document.createElement("a");
+    criarLoja.setAttribute("href", "/src/pages/mercantes");
+    criarLoja.id = "criarLoja";
+    criarLoja.innerText = "Criar Loja";
+
+    menuConteudo.appendChild(criarLoja);
+
     dropdown.appendChild(menuCategorias);
     dropdown.appendChild(menuConteudo);
 
@@ -420,41 +381,37 @@ function montaBarra(categorias) {
     }
 }
 
-document.addEventListener("change", async (e) => {
-    e.preventDefault();
+async function clicarUsuario() {
+    const token = sessionStorage.getItem("token");
+    const valido = await veriricarToken(token);
 
-    await testar();
-});
+    if (valido) {
+        logado();
+    } else {
+        deslogado();
+    }
+}
+
+function logado() {
+    window.location = "/src/pages/usuario/usuario.html";
+
+}
+
+function deslogado() {
+    window.location = "/src/pages/login.html";
+}
 
 document.addEventListener("load", async (e) => {
     e.preventDefault();
 
-    await testar();
+    await veriricarToken();
 });
 
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
-    const valido = await testar();
+    const categoriasResposta = await buscarCategorias();
+    const categorias = categoriasResposta.dados;
 
-    if (valido) {
-        console.log("Sessão válida");
-
-        const token = sessionStorage.getItem("token");
-        const idCliente = sessionStorage.getItem("idCliente");
-
-        const categoriasResposta = await buscarCategorias();
-        const usuarioResposta = await buscarClienteLogado(idCliente, token);
-
-        const categorias = categoriasResposta.dados;
-        const cliente = usuarioResposta.dados;
-
-        montaBarra(categorias, cliente);
-    } else {
-        const categoriasResposta = await buscarCategorias();
-
-        const categorias = categoriasResposta.dados;
-
-        montaBarra(categorias);
-    }
+    montaBarra(categorias);
 });

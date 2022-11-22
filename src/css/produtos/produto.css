@@ -124,7 +124,7 @@
         justify-content: space-between;
 
         /* DIMENSIONAMENTO */
-        width: 95%;
+        width: 100%;
     }
 
     .dadosProduto .informacoes .titulo-avaliacoes .titulo-favoritos .favoritar {
@@ -376,10 +376,10 @@
         margin-bottom: 10px;
 
         /* DIMENSIONAMENTO */
-        width: fit-content;
+        width: 100%;
     }
 
-    .dadosProduto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo {
+    .dadosProduto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo-produto {
         width: 80%;
     }
 
@@ -557,7 +557,7 @@
     cursor: pointer;
 }
 
-.dadosProduto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo {
+.dadosProduto .informacoes .titulo-avaliacoes .titulo-favoritos .titulo-produto {
     /* APARÊNCIA */
     font-size: 14px;
     color: var(--cor-clara);
