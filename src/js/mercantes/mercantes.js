@@ -121,11 +121,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
     if (token === null) {
         console.log("Cliente não autenticado");
-        return;
     }
 
-    const idCliente = sessionStorage.getItem("idCliente");
-
+    //const idCliente = sessionStorage.getItem("idCliente");
     //const mercantesResposta = await carregarMercantes(idCliente, token);
     const mercantesResposta = await carregarMercantes();
 
