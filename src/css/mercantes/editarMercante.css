@@ -276,7 +276,7 @@
     margin-left: 3%;
 
     width: 80%;
-    height: 140px;
+    height: 120px;
 
     color: var(--cor-clara);
 
@@ -319,7 +319,7 @@
 }
 
 .conteudo .informacoes .todos-produtos .item .nome-data-criacao .nome-produto {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: normal;
 
     background-color: transparent;

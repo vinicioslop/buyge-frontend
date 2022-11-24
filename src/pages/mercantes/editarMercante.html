@@ -139,37 +139,40 @@
                     <form class="formulario">
                         <div class="grupo-lateral">
                             <div class="entrada-dados">
-                                <label for="nome">Nome da Loja</label>
+                                <label for="nomePerfilLoja">Nome da Loja</label>
                                 <input
                                     required
                                     type="text"
-                                    name="nome"
-                                    id="nome"
+                                    name="nomePerfilLoja"
+                                    id="nomePerfilLoja"
                                     placeholder="Informe o nome da loja"
                                 />
                             </div>
                             <div class="entrada-dados">
-                                <label for="email">Email da Loja</label>
+                                <label for="emailPerfilLoja"
+                                    >Email da Loja</label
+                                >
                                 <input
                                     required
                                     type="email"
-                                    name="email"
-                                    id="email"
+                                    name="emailPerfilLoja"
+                                    id="emailPerfilLoja"
                                     placeholder="Informe o email da loja"
                                 />
                             </div>
                         </div>
                         <div class="entrada-dados">
-                            <label for="descricao">Descrição da Loja</label>
+                            <label for="descricaoPerfilLoja"
+                                >Descrição da Loja</label
+                            >
                             <textarea
                                 required
-                                name="descricao"
-                                id="descricao"
-                                id=""
+                                name="descricaoPerfilLoja"
+                                id="descricaoPerfilLoja"
                                 placeholder="Informe o descrição da loja"
                             ></textarea>
                         </div>
-                        <button id="enviar">Salvar Alterações</button>
+                        <button id="enviarPerfilLoja">Salvar Alterações</button>
                     </form>
                 </div>
                 <div id="dadosLoja" class="informacoes esconder">
@@ -312,30 +315,7 @@
                         <p class="total-produtos">
                             Total de 0 produtos registrados
                         </p>
-                        <div class="todos-produtos">
-                            <div class="item">
-                                <div class="fundo">
-                                    <img
-                                        src="/src/icons/image-preto.svg"
-                                        alt=""
-                                        class="imagem"
-                                    />
-                                </div>
-                                <div class="nome-data-criacao">
-                                    <h4 class="nome-produto">
-                                        Nome do Produto
-                                    </h4>
-                                    <p class="criacao">Criado em 00/00/0000</p>
-                                </div>
-                                <div class="disponibilidade">Desabilitado</div>
-                                <div class="acoes">
-                                    <img
-                                        src="/src/icons/menu-scale-preto.svg"
-                                        alt=""
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                        <div id="todosProdutos" class="todos-produtos"></div>
                     </div>
                 </div>
                 <div id="cadastrarProdutos" class="informacoes esconder">
@@ -371,13 +351,15 @@
                                     <label for="categoriaProduto"
                                         >Categoria</label
                                     >
-                                    <input
+                                    <select
                                         required
-                                        type="text"
                                         name="categoriaProduto"
                                         id="categoriaProduto"
-                                        placeholder="Seleciona a Categoria"
-                                    />
+                                    >
+                                        <option value="">
+                                            -- selecione --
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="grupo-direita">
@@ -390,6 +372,7 @@
                                         type="text"
                                         name="precoProduto"
                                         id="precoProduto"
+                                        onKeyUp="mascaraMoeda(this, event)"
                                         placeholder="999,99"
                                     />
                                 </div>
@@ -407,26 +390,28 @@
                                 </div>
                                 <div class="entrada-dados">
                                     <label for="pesoProduto"
-                                        >Peso do Produto (g)</label
+                                        >Peso do Produto (kg)</label
                                     >
                                     <input
                                         required
-                                        type="number"
+                                        type="text"
                                         name="pesoProduto"
                                         id="pesoProduto"
-                                        placeholder="Informe o peso do Produto"
+                                        onKeyUp="mascaraMoeda(this, event)"
+                                        placeholder="0"
                                     />
                                 </div>
                                 <div class="entrada-dados">
                                     <label for="tamanhoProduto"
-                                        >Tamanho do Produto (cm)</label
+                                        >Tamanho do Produto (m)</label
                                     >
                                     <input
                                         required
-                                        type="number"
+                                        type="text"
                                         name="tamanhoProduto"
                                         id="tamanhoProduto"
-                                        placeholder="Informe o tamanho do Produto"
+                                        onKeyUp="mascaraMoeda(this, event)"
+                                        placeholder="0"
                                     />
                                 </div>
                                 <div class="entrada-dados">
@@ -438,12 +423,13 @@
                                         type="text"
                                         name="freteProduto"
                                         id="freteProduto"
-                                        placeholder="Informe o peso do Produto"
+                                        onKeyUp="mascaraMoeda(this, event)"
+                                        placeholder="0"
                                     />
                                 </div>
                             </div>
                         </div>
-                        <button id="enviar">Salvar Alterações</button>
+                        <button id="cadastrarProduto">Salvar Alterações</button>
                     </form>
                 </div>
             </div>

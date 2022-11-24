@@ -38,14 +38,13 @@ async function enviarProduto(produto, token) {
     return resposta;
 }
 
-async function carregarCategorias(token) {
+async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",
         mode: "cors",
         headers: {
             Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
+            "Content-Type": "application/json"
         },
     });
     const categorias = await response.json();
@@ -76,8 +75,7 @@ async function montar() {
         return;
     }
 
-    const categorias = await carregarCategorias(token);
-
+    const categorias = await carregarCategorias();
     const categoriaSelect = document.querySelector("#categoria");
 
     categorias.forEach((categoria) => {

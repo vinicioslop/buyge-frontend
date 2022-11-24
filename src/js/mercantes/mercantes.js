@@ -23,6 +23,37 @@ async function carregarMercantes() {
     }
 }
 
+/*async function carregarMercantes(idVendedor, token) {
+    const response = await fetch(`${fetchUrl}/mercantes/${idVendedor}`, {
+        ethod: "GET",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        },
+    });
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}*/
+
 function produtosMercante(idMercante) {
     window.location =
         "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
@@ -86,6 +117,16 @@ function montarCartoes(mercantes) {
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+
+    //const mercantesResposta = await carregarMercantes(idCliente, token);
     const mercantesResposta = await carregarMercantes();
 
     if (mercantesResposta.status !== 200) {

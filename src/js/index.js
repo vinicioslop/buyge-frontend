@@ -154,7 +154,7 @@ async function montaCartao() {
         produtoImagens.forEach((produtoImagem) => {
             if (
                 produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === 1
+                produtoImagem.idPrincipal === true
             ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
@@ -263,7 +263,7 @@ async function montaCartao() {
         produtoImagens.forEach((produtoImagem) => {
             if (
                 produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === 1
+                produtoImagem.idPrincipal === true
             ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
@@ -372,7 +372,7 @@ async function montaCartao() {
         produtoImagens.forEach((produtoImagem) => {
             if (
                 produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === 1
+                produtoImagem.idPrincipal === true
             ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
