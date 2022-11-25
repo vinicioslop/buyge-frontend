@@ -67,6 +67,19 @@ async function carregarProdutos(idMercante) {
     return produtos;
 }
 
+async function carregarProduto(idProduto) {
+    const response = await fetch(
+        `${fetchUrl}/produtos/${idProduto}`,
+        {
+            method: "GET",
+            mode: "cors",
+        }
+    );
+    const produto = await response.json();
+
+    return produto;
+}
+
 async function carregarImagens() {
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
         method: "GET",
@@ -112,6 +125,20 @@ async function removerMercante(idMercante, token) {
     return requisicao.status;
 }
 
+async function apagarProduto(idProduto, token) {
+    const requisicao = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+
+    return requisicao.status;
+}
+
 async function cadastrarProduto(produto, token) {
     const requisicao = await fetch(`${fetchUrl}/produtos`, {
         method: "POST",
@@ -126,6 +153,33 @@ async function cadastrarProduto(produto, token) {
     const resposta = await requisicao.json();
 
     return resposta;
+}
+
+function editarProduto(idProduto) {
+    clicaSecaoInternaProdutos("editarProduto");
+
+    carregarInformacoesEditarProduto(idProduto);
+}
+
+async function removerProduto(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const status = await apagarProduto(idProduto, token);
+
+    switch (status) {
+        case 200:
+            console.log("Produto removido com sucesso!");
+            window.location.reload();
+            break;
+        default:
+            console.log("Ocorreu uma falha na requisicao. STATUS: " + status);
+            break;
+    }
 }
 
 async function montarCategorias() {
@@ -182,7 +236,6 @@ async function montarProdutos() {
     }
 
     const idVendedor = sessionStorage.getItem("idCliente");
-    const mercante = await carregarMercantes(idVendedor, token);
 
     const produtos = await carregarProdutos(idVendedor);
     const imagens = await carregarImagens();
@@ -237,6 +290,14 @@ async function montarProdutos() {
                 alt=""
             />
         </div>
+        <div class="grupo-botoes">
+            <a onclick="editarProduto(${produto.cdProduto})">
+                <img src="/src/icons/edit-branco2.svg"/>
+            </a>
+            <a onclick="removerProduto(${produto.cdProduto})">
+                <img src="/src/icons/bin-minus-branco.svg"/>
+            </a>
+        </div>
         `;
 
         todosProdutos.appendChild(item);
@@ -278,7 +339,7 @@ async function carregarInformacoesMercantePerfilLoja() {
     descricao.value = mercante[0].dsLoja;
 }
 
-async function carregarInformacoesEditarProduto() {
+async function carregarInformacoesEditarProduto(idProduto) {
     const token = sessionStorage.getItem("token");
 
     if (token === null) {
@@ -286,16 +347,27 @@ async function carregarInformacoesEditarProduto() {
         return;
     }
 
-    const idVendedor = sessionStorage.getItem("idCliente");
-    const mercante = await carregarMercantes(idVendedor, token);
+    const produto = await carregarProduto(idProduto);
 
-    const nome = document.querySelector("#nomePerfilLoja");
-    const email = document.querySelector("#emailPerfilLoja");
-    const descricao = document.querySelector("#descricaoPerfilLoja");
+    console.log(produto);
 
-    nome.value = mercante[0].nmLoja;
-    email.value = mercante[0].nmEmail;
-    descricao.value = mercante[0].dsLoja;
+    let nomeProduto = document.querySelector("#nomeProdutoEdicao");
+    let descProduto = document.querySelector("#descricaoProdutoEdicao");
+    let categoriaProduto = document.querySelector("#categoriaProdutoEdicao");
+    let precoProduto = document.querySelector("#precoProdutoEdicao");
+    let quantidadeProduto = document.querySelector("#quantidadeProdutoEdicao");
+    let pesoProduto = document.querySelector("#pesoProdutoEdicao");
+    let tamanhoProduto = document.querySelector("#tamanhoProdutoEdicao");
+    let freteProduto = document.querySelector("#freteProdutoEdicao");
+
+    nomeProduto.value = produto.nmProduto;
+    descProduto.value = produto.dsProduto;
+    categoriaProduto.value = "COLOCAR";
+    precoProduto.value = produto.vlProduto;
+    quantidadeProduto.value = produto.qtProduto;
+    pesoProduto.value = produto.vlPeso;
+    tamanhoProduto.value = produto.vlTamanho;
+    freteProduto.value = produto.vlFrete;
 }
 
 function clicaSecaoInternaMinhaLoja(idComponente) {

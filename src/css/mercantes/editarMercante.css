@@ -121,12 +121,9 @@
 .barra-lateral .opcoes .item .items-secao {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
-    height: 100px;
-
-    margin-top: 20px;
-    margin-bottom: 10px;
+    height: 80px;
 
     background-color: transparent;
 }
@@ -365,6 +362,25 @@
 .conteudo .informacoes .todos-produtos .item .acoes img {
     height: 40px;
     background-color: transparent;
+}
+
+.conteudo .informacoes .todos-produtos .item .grupo-botoes, a, img {
+    background-color: transparent;
+}
+
+.conteudo .informacoes .todos-produtos .item .grupo-botoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    margin-right: 10px;
+
+    height: 90%;
+}
+
+.conteudo .informacoes .todos-produtos .item .grupo-botoes img:hover {
+    cursor: pointer;
 }
 
 .conteudo .informacoes .logo-loja {
