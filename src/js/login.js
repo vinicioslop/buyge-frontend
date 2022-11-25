@@ -64,7 +64,7 @@ function criar() {
 document.getElementById("entrar").addEventListener("click", async (e) => {
     e.preventDefault();
 
-    let user = {
+    const user = {
         login: document.getElementById("email").value,
         senha: document.getElementById("senha").value,
     };
@@ -73,10 +73,10 @@ document.getElementById("entrar").addEventListener("click", async (e) => {
 
     switch (resposta.status) {
         case 200:
-            let dados = resposta.dados;
+            const dados = resposta.dados;
 
-            let cliente = dados.cliente;
-            let token = dados.token;
+            const cliente = dados.cliente;
+            const token = dados.token;
 
             gravaSessao(cliente.cdCliente, token);
 

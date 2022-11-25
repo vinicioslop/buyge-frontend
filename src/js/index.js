@@ -30,7 +30,7 @@ async function carregarProdutos() {
 }
 
 async function carregarImagems() {
-    const response = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
+    const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
         mode: "cors",
     });
     const status = await response.status;
@@ -154,7 +154,7 @@ async function montaCartao() {
         produtoImagens.forEach((produtoImagem) => {
             if (
                 produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === true
+                produtoImagem.idPrincipal === 1
             ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
@@ -263,7 +263,7 @@ async function montaCartao() {
         produtoImagens.forEach((produtoImagem) => {
             if (
                 produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === true
+                produtoImagem.idPrincipal === 1
             ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
@@ -372,7 +372,7 @@ async function montaCartao() {
         produtoImagens.forEach((produtoImagem) => {
             if (
                 produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === true
+                produtoImagem.idPrincipal === 1
             ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }

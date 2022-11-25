@@ -22,19 +22,22 @@ function mascaraMoeda(campo, evento) {
     campo.value = resultado.reverse();
 }
 
-async function carregarMercante(idMercante, token) {
-    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
-    const mercante = await response.json();
+async function carregarMercantes(idVendedor, token) {
+    const response = await fetch(
+        `${fetchUrl}/mercantes/vendedor/${idVendedor}`,
+        {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const mercantes = await response.json();
 
-    return mercante;
+    return mercantes;
 }
 
 async function carregarCategorias() {
@@ -62,6 +65,16 @@ async function carregarProdutos(idMercante) {
     const produtos = await response.json();
 
     return produtos;
+}
+
+async function carregarImagens() {
+    const response = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
+        method: "GET",
+        mode: "cors",
+    });
+    const imagens = await response.json();
+
+    return imagens;
 }
 
 async function atualizarMercante(mercante, token) {
@@ -99,7 +112,7 @@ async function removerMercante(idMercante, token) {
     return requisicao.status;
 }
 
-async function enviarProduto(produto, token) {
+async function cadastrarProduto(produto, token) {
     const requisicao = await fetch(`${fetchUrl}/produtos`, {
         method: "POST",
         mode: "cors",
@@ -136,10 +149,6 @@ async function montarCategorias() {
 }
 
 async function montarProdutos() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
-
-    const produtos = await carregarProdutos(idMercante);
     /*
     <div class="item">
         <div class="fundo">
@@ -165,16 +174,52 @@ async function montarProdutos() {
     </div>
     */
 
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const idVendedor = sessionStorage.getItem("idCliente");
+    const mercante = await carregarMercantes(idVendedor, token);
+
+    const produtos = await carregarProdutos(idVendedor);
+    const imagens = await carregarImagens();
+
+    const produtosImagens = [];
+    const codigosProdutos = [];
+
+    produtos.forEach((produto) => {
+        codigosProdutos.push(produto.cdProduto);
+    });
+
+    imagens.forEach((imagem) => {
+        codigosProdutos.forEach((codigo) => {
+            if (imagem.fkCdProduto === codigo && imagem.idPrincipal === 1) {
+                produtosImagens.push(imagem);
+            }
+        });
+    });
+
     const todosProdutos = document.querySelector("#todosProdutos");
 
     produtos.forEach((produto) => {
+        let imagem = {};
+
+        produtosImagens.forEach((produtoImagem) => {
+            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+                imagem = produtoImagem;
+            }
+        });
+
         const item = document.createElement("div");
         item.className = "item";
 
         item.innerHTML = `
         <div class="fundo">
             <img
-                src="/src/icons/image-preto.svg"
+                src="${imagem.imgProdutoLink}"
                 alt=""
                 class="imagem"
             />
@@ -188,7 +233,7 @@ async function montarProdutos() {
         <div class="disponibilidade">Desabilitado</div>
         <div class="acoes">
             <img
-                src="/src/icons/menu-scale-preto.svg"
+                src="/src/icons/tres-pontinhos-branco.svg"
                 alt=""
             />
         </div>
@@ -196,6 +241,21 @@ async function montarProdutos() {
 
         todosProdutos.appendChild(item);
     });
+}
+
+async function carregarInformacoesBarraLateral() {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const idVendedor = sessionStorage.getItem("idCliente");
+    const mercante = await carregarMercantes(idVendedor, token);
+
+    const nomeLoja = document.querySelector("#nomeLoja");
+    nomeLoja.innerText = "Olá, " + mercante[0].nmLoja;
 }
 
 async function carregarInformacoesMercantePerfilLoja() {
@@ -206,17 +266,36 @@ async function carregarInformacoesMercantePerfilLoja() {
         return;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
-    const mercante = await carregarMercante(idMercante, token);
+    const idVendedor = sessionStorage.getItem("idCliente");
+    const mercante = await carregarMercantes(idVendedor, token);
 
     const nome = document.querySelector("#nomePerfilLoja");
     const email = document.querySelector("#emailPerfilLoja");
     const descricao = document.querySelector("#descricaoPerfilLoja");
 
-    nome.value = mercante.nmLoja;
-    email.value = mercante.nmEmail;
-    descricao.value = mercante.dsLoja;
+    nome.value = mercante[0].nmLoja;
+    email.value = mercante[0].nmEmail;
+    descricao.value = mercante[0].dsLoja;
+}
+
+async function carregarInformacoesEditarProduto() {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const idVendedor = sessionStorage.getItem("idCliente");
+    const mercante = await carregarMercantes(idVendedor, token);
+
+    const nome = document.querySelector("#nomePerfilLoja");
+    const email = document.querySelector("#emailPerfilLoja");
+    const descricao = document.querySelector("#descricaoPerfilLoja");
+
+    nome.value = mercante[0].nmLoja;
+    email.value = mercante[0].nmEmail;
+    descricao.value = mercante[0].dsLoja;
 }
 
 function clicaSecaoInternaMinhaLoja(idComponente) {
@@ -234,7 +313,7 @@ function clicaSecaoInternaMinhaLoja(idComponente) {
 }
 
 function clicaSecaoInternaProdutos(idComponente) {
-    const secoes = ["seusProdutos", "cadastrarProdutos"];
+    const secoes = ["seusProdutos", "cadastrarProdutos", "editarProduto"];
 
     secoes.forEach((secao) => {
         const componente = document.querySelector("#" + secao);
@@ -296,6 +375,7 @@ document
         switch (status) {
             case 200:
                 console.log("Lojista atualizado.");
+                window.location.reload();
                 break;
             default:
                 console.log("Ocorreu um erro na requisição. STATUS" + status);
@@ -308,15 +388,21 @@ document
     .addEventListener("click", async (e) => {
         e.preventDefault();
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const idMercante = urlParams.get("idMercante");
+        const token = sessionStorage.getItem("token");
 
-        let produto = {
+        if (token === null) {
+            console.log("Cliente não autenticado");
+            return;
+        }
+
+        const idVendedor = sessionStorage.getItem("idCliente");
+        const mercantes = await carregarMercantes(idVendedor, token);
+
+        console.log(mercantes);
+
+        const produto = {
             nmProduto: document.querySelector("#nomeProduto").value,
             dsProduto: document.querySelector("#descricaoProduto").value,
-            fkCdCategoria: parseInt(
-                document.querySelector("#categoriaProduto").value
-            ),
             vlProduto: parseFloat(
                 document.querySelector("#precoProduto").value
             ),
@@ -328,22 +414,61 @@ document
                 document.querySelector("#tamanhoProduto").value
             ),
             vlFrete: parseFloat(document.querySelector("#freteProduto").value),
+            idDisponibilidade: 0,
             dtCricao: Date.now(),
-            fkCdMercante: parseInt(idMercante),
+            fkCdMercante: parseInt(mercantes[0].cdMercante),
+            fkCdCategoria: parseInt(
+                document.querySelector("#categoriaProduto").value
+            ),
         };
+
+        cadastrarProduto(produto, token);
+    });
+
+document
+    .querySelector("#editarProduto")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
 
         const token = sessionStorage.getItem("token");
 
         if (token === null) {
-            console.log("Usuário não está autenticado.");
+            console.log("Cliente não autenticado");
             return;
         }
 
-        enviarProduto(produto, token);
+        const idVendedor = sessionStorage.getItem("idCliente");
+        const mercantes = await carregarMercantes(idVendedor, token);
 
-        window.location =
-            "/src/pages/mercantes/produtosMercante.html?idMercante=" +
-            idMercante;
+        console.log(mercantes);
+
+        const produto = {
+            nmProduto: document.querySelector("#nomeProdutoEdicao").value,
+            dsProduto: document.querySelector("#descricaoProdutoEdicao").value,
+            vlProduto: parseFloat(
+                document.querySelector("#precoProdutoEdicao").value
+            ),
+            qtProduto: parseInt(
+                document.querySelector("#quantidadeProdutoEdicao").value
+            ),
+            vlPeso: parseFloat(
+                document.querySelector("#pesoProdutoEdicao").value
+            ),
+            vlTamanho: parseFloat(
+                document.querySelector("#tamanhoProdutoEdicao").value
+            ),
+            vlFrete: parseFloat(
+                document.querySelector("#freteProdutoEdicao").value
+            ),
+            idDisponibilidade: 0,
+            dtCricao: Date.now(),
+            fkCdMercante: parseInt(mercantes[0].cdMercante),
+            fkCdCategoria: parseInt(
+                document.querySelector("#categoriaProdutoEdicao").value
+            ),
+        };
+
+        cadastrarProduto(produto, token);
     });
 
 document.querySelector("#enviar").addEventListener("click", async (e) => {
@@ -372,9 +497,17 @@ document.querySelector("#enviar").addEventListener("click", async (e) => {
     }
 });
 
-document.addEventListener(
-    "DOMContentLoaded",
-    carregarInformacoesMercantePerfilLoja(),
-    montarCategorias(),
-    montarProdutos()
-);
+document.addEventListener("DOMContentLoaded", (e) => {
+    e.preventDefault();
+
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        window.location = "/";
+    }
+
+    carregarInformacoesBarraLateral();
+    carregarInformacoesMercantePerfilLoja();
+    montarCategorias();
+    montarProdutos();
+});

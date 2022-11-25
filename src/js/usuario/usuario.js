@@ -46,8 +46,7 @@ async function atualizarCliente(cliente, token) {
 }
 
 function removeSessao() {
-    sessionStorage.setItem("idCliente", null);
-    sessionStorage.setItem("token", null);
+    sessionStorage.clear();
 }
 
 async function testarToken(token) {
@@ -153,13 +152,13 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
     const token = sessionStorage.getItem("token");
-    const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+    const idCliente = sessionStorage.getItem("idCliente");
 
     const valido = await testar();
 
     if (!valido) {
         console.log("Cliente não autenticado");
-        window.location = "/";
+        window.location = "/src/pages/login.html";
     }
 
     const clienteResposta = await buscarClienteLogado(idCliente, token);

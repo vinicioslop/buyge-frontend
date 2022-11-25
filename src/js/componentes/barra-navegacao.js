@@ -43,8 +43,8 @@ async function veriricarToken(token) {
 
 function montaBarraNavegacaoPequena(categorias) {
     // BARRA DE NAVEGAÇÃO
-    const barraNavegacao = document.querySelector("#barra-navegacao");
-    barraNavegacao.innerHTML = `
+    const barraPequena = document.querySelector("#barraPequena");
+    barraPequena.innerHTML = `
     <div class="grupo-esquerdo navbar">
         <div class="dropdown">
             <img src="/src/icons/menu-branco.svg" class="menu dropbtn">
@@ -62,6 +62,7 @@ function montaBarraNavegacaoPequena(categorias) {
         </a>
     </div>
     `;
+    barraPequena.setAttribute("class", "mostrar-row");
 
     // CONTEÚDO DO MENU
     const menuConteudo = document.getElementsByClassName("dropdown-content")[0];
@@ -76,36 +77,9 @@ function montaBarraNavegacaoPequena(categorias) {
 }
 
 function montaBarraNavegacaoGrande(categorias) {
-    // BARRA DE PESQUISA
-    const barraPesquisa = document.createElement("div");
-    barraPesquisa.classList.add("barra-pesquisa");
-
-    // BARRA DE PESQUISA INPUT
-    const barraPesquisaInput = document.createElement("input");
-    barraPesquisaInput.setAttribute("type", "text");
-    barraPesquisaInput.setAttribute("id", "barra-pesquisa-input");
-    barraPesquisaInput.setAttribute(
-        "placeholder",
-        "Digite aqui o que procura..."
-    );
-    barraPesquisa.appendChild(barraPesquisaInput);
-    // BARRA DE PESQUISA INPUT
-
-    // BARRA DE PESQUISA ICONE
-    const barraPesquisaLink = document.createElement("a");
-    barraPesquisaLink.classList.add("barra-pesquisa-link");
-    barraPesquisaLink.href = "/src/pages/produtos/produtos.html";
-    const barraPesquisaIcone = document.createElement("img");
-    barraPesquisaIcone.setAttribute("src", "/src/icons/search-roxo.svg");
-    barraPesquisaIcone.setAttribute("alt", "Ícone de pesquisa");
-    barraPesquisaIcone.setAttribute("id", "barra-pesquisa-icone");
-    barraPesquisaLink.appendChild(barraPesquisaIcone);
-    barraPesquisa.appendChild(barraPesquisaLink);
-    // BARRA DE PESQUISA ICONE
-
     // BARRA DE NAVEGAÇÃO
-    const barraNavegacao = document.querySelector("#barra-navegacao");
-    barraNavegacao.innerHTML = `
+    const barraGrande = document.querySelector("#barraGrande");
+    barraGrande.innerHTML = `
     <div class="grupo-superior">
         <div class="grupo-superior-esquerdo">
             <a href="/index.html" class="logo-link">
@@ -134,6 +108,14 @@ function montaBarraNavegacaoGrande(categorias) {
         </div>
         <div class="grupo-superior-direito">
             <div class="grupo-icones">
+                <a href="/src/pages/mercantes/editarMercante.html" class="icone-link">
+                    <img
+                        class="icone"
+                        id="mercantes-icon"
+                        src="/src/icons/lojas-branco.svg"
+                        alt="Ícone de mercantes branco"
+                    />
+                </a>
                 <a href="/src/pages/favoritos.html" class="icone-link">
                     <img
                         class="icone"
@@ -150,7 +132,7 @@ function montaBarraNavegacaoGrande(categorias) {
                         alt="Ícone de carrinho branco"
                     />
                 </a>
-                <a href="/src/pages/login.html" class="icone-link"
+                <a href="/src/pages/usuario/usuario.html" class="icone-link"
                     ><img
                         class="icone"
                         id="user-icon"
@@ -188,7 +170,7 @@ function montaBarraNavegacaoGrande(categorias) {
         </div>
     </div>
     `;
-    
+
     // CONTEÚDO DO MENU
     const menuConteudo = document.getElementsByClassName("dropdown-content")[0];
 
@@ -200,18 +182,41 @@ function montaBarraNavegacaoGrande(categorias) {
         menuConteudo.appendChild(item);
     });
 
-    const criarLoja = document.createElement("a");
-    criarLoja.setAttribute("href", "/src/pages/mercantes/mercantes.html");
-    criarLoja.id = "criarLoja";
-    criarLoja.innerText = "Criar Loja";
+    const todasLojas = document.createElement("a");
+    todasLojas.setAttribute("href", "/src/pages/mercantes/mercantes.html");
+    todasLojas.id = "todasLojas";
+    todasLojas.innerText = "Todas as Lojas";
 
-    menuConteudo.appendChild(criarLoja);
+    const desconectar = document.createElement("a");
+    desconectar.setAttribute("onclick", "desconectar()");
+    desconectar.id = "desconectar";
+    desconectar.innerText = "Desconectar";
+
+    menuConteudo.appendChild(todasLojas);
+    menuConteudo.appendChild(desconectar);
+
+    barraGrande.setAttribute("class", "mostrar-column");
+}
+
+function esconderConteudoBarra(barra) {
+    switch (barra) {
+        case "pequena":
+            let barraPequena = document.querySelector("#barraPequena");
+            barraPequena.setAttribute("class", "esconder");
+            break;
+        case "grande":
+            let barraGrande = document.querySelector("#barraGrande");
+            barraGrande.setAttribute("class", "esconder");
+            break;
+    }
 }
 
 function montaBarra(categorias) {
     if (window.screen.width < 820) {
+        esconderConteudoBarra("grande");
         montaBarraNavegacaoPequena(categorias);
     } else {
+        esconderConteudoBarra("pequena");
         montaBarraNavegacaoGrande(categorias);
     }
 }
@@ -233,6 +238,12 @@ function logado() {
 
 function deslogado() {
     window.location = "/src/pages/login.html";
+}
+
+function desconectar() {
+    sessionStorage.clear();
+
+    window.location.reload();
 }
 
 document.addEventListener("load", async (e) => {

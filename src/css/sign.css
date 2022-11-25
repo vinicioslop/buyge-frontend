@@ -115,7 +115,7 @@
         font-size: 14px;
     }
 
-    .cadastro .grupo-login,
+    .cadastro .grupo-email,
     .grupo-senha {
         /* POSICIONAMENTO */
         display: flex;
@@ -127,19 +127,19 @@
         width: 90%;
     }
 
-    .grupo-login,
+    .grupo-email,
     .grupo-senha .entrada-dados label {
         /* DIMENSIONAMENTO */
         width: fit-content;
     }
 
-    .grupo-login,
+    .grupo-email,
     .grupo-senha .entrada-dados input {
         /* DIMENSIONAMENTO */
         width: 100%;
     }
 
-    .entrada-dados #login,
+    .entrada-dados #email,
     #senha {
         /* DIMENSIONAMENTO */
         width: 95%;
@@ -277,7 +277,7 @@
         font-size: 14px;
     }
 
-    .cadastro .grupo-login,
+    .cadastro .grupo-email,
     .grupo-senha {
         /* POSICIONAMENTO */
         display: flex;
@@ -289,13 +289,13 @@
         width: 100%;
     }
 
-    .grupo-login,
+    .grupo-email,
     .grupo-senha .entrada-dados label {
         /* DIMENSIONAMENTO */
         width: 90%;
     }
 
-    .grupo-login,
+    .grupo-email,
     .grupo-senha .entrada-dados input {
         /* DIMENSIONAMENTO */
         width: 100%;
@@ -415,7 +415,7 @@ select {
     color: var(--cor-clara);
 }
 
-.cadastro .grupo-login,
+.cadastro .grupo-email,
 .grupo-senha {
     background-color: transparent;
 }

@@ -22,12 +22,12 @@ function entrar() {
 document.querySelector("#cadastrar").addEventListener("click", async (e) => {
     e.preventDefault();
 
-    let cliente = {
+    const cliente = {
         nmCliente: document.querySelector("#nome").value,
         dtNascimento: document.querySelector("#dataNasc").value,
         nmEmail: document.querySelector("#email").value,
         nmSenha: document.querySelector("#senha").value,
-        nmTipoConta: document.querySelector("#tipoConta").value,
+        nmTipoConta: "Padrão",
     };
 
     const status = await cadastrar(cliente);
