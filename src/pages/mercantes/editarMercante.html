@@ -37,83 +37,63 @@
         </header>
 
         <div class="container">
-            <div class="barra-lateral">
-                <div class="grupo-nome-loja">
-                    <h2 id="nomeLoja" class="nome-loja">Olá, NOME DA LOJA!</h2>
-                </div>
-                <hr class="linha" />
-                <div class="opcoes">
-                    <div onclick="clicaSecao('secaoMinhaLoja')" class="item">
-                        <img
-                            class="icone"
-                            src="/src/icons/minha-loja-branco.svg"
-                            alt=""
-                        />
-                        <p class="texto">Minha Loja Virtual</p>
-                    </div>
-                    <div onclick="clicaSecao('secaoProdutos')" class="item">
-                        <div class="grupo-item">
-                            <div class="principal">
-                                <div class="secao-primaria">
-                                    <img
-                                        class="icone"
-                                        src="/src/icons/box-branco.svg"
-                                        alt=""
-                                    />
-                                    <p class="texto">Produtos</p>
-                                    <img
-                                        src="/src/icons/seta-baixo-branco.svg"
-                                        alt=""
-                                        class="seta"
-                                    />
-                                </div>
-                            </div>
-                            <div class="items-secao">
-                                <div
-                                    onclick="clicaSecaoInternaProdutos('seusProdutos')"
-                                    class="item-secao"
-                                >
-                                    <p class="texto">Seus Produtos</p>
-                                </div>
-                                <div
-                                    onclick="clicaSecaoInternaProdutos('cadastrarProdutos')"
-                                    class="item-secao"
-                                >
-                                    <p class="texto">Cadastrar Produto</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div onclick="clicaSecao('secaoVenda')" class="item">
-                        <img
-                            class="icone"
-                            src="/src/icons/carrinho-diferente-branco.svg"
-                            alt=""
-                        />
-                        <p class="texto">Venda</p>
-                        <img
-                            src="/src/icons/seta-baixo-branco.svg"
-                            alt=""
-                            class="seta"
-                        />
-                    </div>
-                    <div onclick="clicaSecao('secaoMensagens')" class="item">
-                        <img
-                            class="icone"
-                            src="/src/icons/chat-quest-branco.svg"
-                            alt=""
-                        />
-                        <p class="texto">Mensagens</p>
-                    </div>
-                    <div onclick="clicaSecao('secaoSaldo')" class="item">
-                        <img
-                            class="icone"
-                            src="/src/icons/cifrao-branco.svg"
-                            alt=""
-                        />
-                        <p class="texto">Saldo</p>
-                    </div>
-                </div>
+            <div class="navigation">
+                <div class="menuToggle"></div>
+                <ul>
+                    <li class="list active">
+                        <a onclick="clicaSecao('secaoMinhaLoja')" style="--clr: #f44336">
+                            <span class="icon">
+                                <img
+                                    src="/src/icons/minha-loja-preto.svg"
+                                    alt=""
+                                />
+                            </span>
+                            <span class="text">Minha Loja Virtual</span>
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a onclick="clicaSecao('secaoProdutos')" style="--clr: #ffa117">
+                            <span class="icon">
+                                <img src="/src/icons/box-preto.svg" alt="" />
+                            </span>
+                            <span class="text">Produtos</span>
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a onclick="clicaSecao('secaoVenda')" style="--clr: #bfc70f">
+                            <span class="icon">
+                                <img
+                                    src="/src/icons/carrinho-diferente-preto.svg"
+                                    alt=""
+                                />
+                            </span>
+                            <span class="text">Venda</span>
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a onclick="clicaSecao('secaoMensagens')" style="--clr: #2196f3">
+                            <span class="icon">
+                                <img
+                                    src="/src/icons/chat-quest-preto.svg"
+                                    alt=""
+                                />
+                            </span>
+                            <span class="text">Mensagens</span>
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a onclick="clicaSecao('secaoSaldo')" style="--clr: #b145e9">
+                            <span class="icon">
+                                <img src="/src/icons/cifrao-preto.svg" alt="" />
+                            </span>
+                            <span class="text">Saldo</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
             <div id="secaoMinhaLoja" class="conteudo mostrar">
@@ -299,11 +279,23 @@
                 <div id="seusProdutos" class="informacoes mostrar">
                     <h1 class="titulo-secao">Seus Produtos</h1>
                     <div class="recarregar-pesquisa">
-                        <img
-                            src="/src/icons/loader-preto.svg"
-                            alt=""
-                            id="recarregar"
-                        />
+                        <div class="botoes">
+                            <a onclick="recarregar()">
+                                <img
+                                    src="/src/icons/loader-preto.svg"
+                                    alt=""
+                                    class="action"
+                                />
+                            </a>
+    
+                            <a onclick="clicaSecaoInternaProdutos('cadastrarProdutos')">
+                                <img
+                                    src="/src/icons/plus-preto.svg"
+                                    alt=""
+                                    class="action"
+                                />
+                            </a>
+                        </div>
 
                         <input
                             required
@@ -442,6 +434,18 @@
                         <div class="grupos">
                             <div class="grupo-esquerda">
                                 <div class="entrada-dados">
+                                    <label for="codigoProdutoEdicao"
+                                        >Código do Produto</label
+                                    >
+                                    <input
+                                        required
+                                        disabled
+                                        type="number"
+                                        name="codigoProdutoEdicao"
+                                        id="codigoProdutoEdicao"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
                                     <label for="nomeProdutoEdicao"
                                         >Nome do Produto</label
                                     >
@@ -472,11 +476,7 @@
                                         required
                                         name="categoriaProdutoEdicao"
                                         id="categoriaProdutoEdicao"
-                                    >
-                                        <option value="">
-                                            -- selecione --
-                                        </option>
-                                    </select>
+                                    ></select>
                                 </div>
                             </div>
                             <div class="grupo-direita">
@@ -546,7 +546,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="editarProduto">Salvar Alterações</button>
+                        <button id="atualizarProduto">Salvar Alterações</button>
                     </form>
                 </div>
             </div>
@@ -675,6 +675,22 @@
                 </p>
             </div>
         </footer>
+
+        <script>
+            let menuToggle = document.querySelector(".menuToggle");
+            let navigation = document.querySelector(".navigation");
+
+            menuToggle.onclick = function () {
+                navigation.classList.toggle("active");
+            };
+
+            let list = document.querySelectorAll(".list");
+            function activeLink() {
+                list.forEach((item) => item.classList.remove("active"));
+                this.classList.add("active");
+            }
+            list.forEach((item) => item.addEventListener("click", activeLink));
+        </script>
 
         <script src="/src/js/mercantes/editarMercante.js"></script>
 

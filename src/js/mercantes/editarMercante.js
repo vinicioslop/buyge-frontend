@@ -22,6 +22,10 @@ function mascaraMoeda(campo, evento) {
     campo.value = resultado.reverse();
 }
 
+function recarregar() {
+    window.location.reload();
+}
+
 async function carregarMercantes(idVendedor, token) {
     const response = await fetch(
         `${fetchUrl}/mercantes/vendedor/${idVendedor}`,
@@ -38,56 +42,6 @@ async function carregarMercantes(idVendedor, token) {
     const mercantes = await response.json();
 
     return mercantes;
-}
-
-async function carregarCategorias() {
-    const response = await fetch(`${fetchUrl}/categorias`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-    });
-    const categorias = await response.json();
-
-    return categorias;
-}
-
-async function carregarProdutos(idMercante) {
-    const response = await fetch(
-        `${fetchUrl}/produtos/mercante/${idMercante}`,
-        {
-            method: "GET",
-            mode: "cors",
-        }
-    );
-    const produtos = await response.json();
-
-    return produtos;
-}
-
-async function carregarProduto(idProduto) {
-    const response = await fetch(
-        `${fetchUrl}/produtos/${idProduto}`,
-        {
-            method: "GET",
-            mode: "cors",
-        }
-    );
-    const produto = await response.json();
-
-    return produto;
-}
-
-async function carregarImagens() {
-    const response = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
-        method: "GET",
-        mode: "cors",
-    });
-    const imagens = await response.json();
-
-    return imagens;
 }
 
 async function atualizarMercante(mercante, token) {
@@ -125,18 +79,18 @@ async function removerMercante(idMercante, token) {
     return requisicao.status;
 }
 
-async function apagarProduto(idProduto, token) {
-    const requisicao = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
-        method: "DELETE",
+async function carregarCategorias() {
+    const response = await fetch(`${fetchUrl}/categorias`, {
+        method: "GET",
         mode: "cors",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
         },
     });
+    const categorias = await response.json();
 
-    return requisicao.status;
+    return categorias;
 }
 
 async function cadastrarProduto(produto, token) {
@@ -155,10 +109,72 @@ async function cadastrarProduto(produto, token) {
     return resposta;
 }
 
-function editarProduto(idProduto) {
-    clicaSecaoInternaProdutos("editarProduto");
+async function carregarProdutos(idMercante) {
+    const response = await fetch(
+        `${fetchUrl}/produtos/mercante/${idMercante}`,
+        {
+            method: "GET",
+            mode: "cors",
+        }
+    );
+    const produtos = await response.json();
 
-    carregarInformacoesEditarProduto(idProduto);
+    return produtos;
+}
+
+async function carregarProduto(idProduto) {
+    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+        method: "GET",
+        mode: "cors",
+    });
+    const produto = await response.json();
+
+    return produto;
+}
+
+async function atualizarProduto(produto, token) {
+    const requisicao = await fetch(
+        `${fetchUrl}/produtos/${produto.cdProduto}`,
+        {
+            method: "PATCH",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+            },
+            body: JSON.stringify(produto),
+        }
+    );
+
+    return requisicao.status;
+}
+
+async function apagarProduto(idProduto, token) {
+    const requisicao = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+
+    return requisicao.status;
+}
+
+async function carregarImagens() {
+    const response = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
+        method: "GET",
+        mode: "cors",
+    });
+    const imagens = await response.json();
+
+    return imagens;
 }
 
 async function removerProduto(idProduto) {
@@ -182,6 +198,12 @@ async function removerProduto(idProduto) {
     }
 }
 
+function editarProduto(idProduto) {
+    clicaSecaoInternaProdutos("editarProduto");
+
+    carregarInformacoesEditarProduto(idProduto);
+}
+
 async function montarCategorias() {
     const token = sessionStorage.getItem("token");
 
@@ -199,6 +221,32 @@ async function montarCategorias() {
         categoriaItem.innerHTML = categoria.nmCategoria;
 
         categoriaSelect.appendChild(categoriaItem);
+    });
+}
+
+async function montarCategoriasEdicao(cdCategoria) {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Usuário não está autenticado.");
+        return;
+    }
+
+    const categorias = await carregarCategorias();
+    const categoriaSelectEdicao = document.querySelector(
+        "#categoriaProdutoEdicao"
+    );
+
+    categorias.forEach((categoria) => {
+        let categoriaItem = document.createElement("option");
+        categoriaItem.value = categoria.cdCategoria;
+        categoriaItem.innerHTML = categoria.nmCategoria;
+
+        if (cdCategoria == categoria.cdCategoria) {
+            categoriaItem.selected = true;
+        }
+
+        categoriaSelectEdicao.appendChild(categoriaItem);
     });
 }
 
@@ -304,21 +352,6 @@ async function montarProdutos() {
     });
 }
 
-async function carregarInformacoesBarraLateral() {
-    const token = sessionStorage.getItem("token");
-
-    if (token === null) {
-        console.log("Cliente não autenticado");
-        return;
-    }
-
-    const idVendedor = sessionStorage.getItem("idCliente");
-    const mercante = await carregarMercantes(idVendedor, token);
-
-    const nomeLoja = document.querySelector("#nomeLoja");
-    nomeLoja.innerText = "Olá, " + mercante[0].nmLoja;
-}
-
 async function carregarInformacoesMercantePerfilLoja() {
     const token = sessionStorage.getItem("token");
 
@@ -351,18 +384,20 @@ async function carregarInformacoesEditarProduto(idProduto) {
 
     console.log(produto);
 
+    montarCategoriasEdicao(produto.fkCdCategoria);
+
+    let codigoProduto = document.querySelector("#codigoProdutoEdicao");
     let nomeProduto = document.querySelector("#nomeProdutoEdicao");
     let descProduto = document.querySelector("#descricaoProdutoEdicao");
-    let categoriaProduto = document.querySelector("#categoriaProdutoEdicao");
     let precoProduto = document.querySelector("#precoProdutoEdicao");
     let quantidadeProduto = document.querySelector("#quantidadeProdutoEdicao");
     let pesoProduto = document.querySelector("#pesoProdutoEdicao");
     let tamanhoProduto = document.querySelector("#tamanhoProdutoEdicao");
     let freteProduto = document.querySelector("#freteProdutoEdicao");
 
+    codigoProduto.value = produto.cdProduto;
     nomeProduto.value = produto.nmProduto;
     descProduto.value = produto.dsProduto;
-    categoriaProduto.value = "COLOCAR";
     precoProduto.value = produto.vlProduto;
     quantidadeProduto.value = produto.qtProduto;
     pesoProduto.value = produto.vlPeso;
@@ -398,7 +433,7 @@ function clicaSecaoInternaProdutos(idComponente) {
     });
 }
 
-function clicaSecao(idComponente) {
+function clicaSecao(secaoClicada) {
     const secoes = [
         "secaoMinhaLoja",
         "secaoProdutos",
@@ -410,12 +445,21 @@ function clicaSecao(idComponente) {
     secoes.forEach((secao) => {
         const componente = document.querySelector("#" + secao);
 
-        if (secao === idComponente) {
+        if (secao === secaoClicada) {
             componente.setAttribute("class", "conteudo mostrar");
         } else {
             componente.setAttribute("class", "conteudo esconder");
         }
     });
+
+    switch (secaoClicada) {
+        case "secaoMinhaLoja":
+            clicaSecaoInternaMinhaLoja("perfilLoja");
+            break;
+        case "secaoProdutos":
+            clicaSecaoInternaProdutos("seusProdutos");
+            break;
+    }
 }
 
 document
@@ -470,8 +514,6 @@ document
         const idVendedor = sessionStorage.getItem("idCliente");
         const mercantes = await carregarMercantes(idVendedor, token);
 
-        console.log(mercantes);
-
         const produto = {
             nmProduto: document.querySelector("#nomeProduto").value,
             dsProduto: document.querySelector("#descricaoProduto").value,
@@ -498,7 +540,7 @@ document
     });
 
 document
-    .querySelector("#editarProduto")
+    .querySelector("#atualizarProduto")
     .addEventListener("click", async (e) => {
         e.preventDefault();
 
@@ -512,9 +554,8 @@ document
         const idVendedor = sessionStorage.getItem("idCliente");
         const mercantes = await carregarMercantes(idVendedor, token);
 
-        console.log(mercantes);
-
         const produto = {
+            cdProduto: document.querySelector("#codigoProdutoEdicao").value,
             nmProduto: document.querySelector("#nomeProdutoEdicao").value,
             dsProduto: document.querySelector("#descricaoProdutoEdicao").value,
             vlProduto: parseFloat(
@@ -532,7 +573,7 @@ document
             vlFrete: parseFloat(
                 document.querySelector("#freteProdutoEdicao").value
             ),
-            idDisponibilidade: 0,
+            idDisponibilidade: 1,
             dtCricao: Date.now(),
             fkCdMercante: parseInt(mercantes[0].cdMercante),
             fkCdCategoria: parseInt(
@@ -540,7 +581,7 @@ document
             ),
         };
 
-        cadastrarProduto(produto, token);
+        atualizarProduto(produto, token);
     });
 
 document.querySelector("#enviar").addEventListener("click", async (e) => {
@@ -578,7 +619,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         window.location = "/";
     }
 
-    carregarInformacoesBarraLateral();
     carregarInformacoesMercantePerfilLoja();
     montarCategorias();
     montarProdutos();
