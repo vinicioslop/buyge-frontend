@@ -41,7 +41,10 @@
                 <div class="menuToggle"></div>
                 <ul>
                     <li class="list active">
-                        <a onclick="clicaSecao('secaoMinhaLoja')" style="--clr: #f44336">
+                        <a
+                            onclick="clicaSecao('secaoMinhaLoja')"
+                            style="--clr: #f44336"
+                        >
                             <span class="icon">
                                 <img
                                     src="/src/icons/minha-loja-preto.svg"
@@ -53,7 +56,10 @@
                     </li>
 
                     <li class="list">
-                        <a onclick="clicaSecao('secaoProdutos')" style="--clr: #ffa117">
+                        <a
+                            onclick="clicaSecao('secaoProdutos')"
+                            style="--clr: #ffa117"
+                        >
                             <span class="icon">
                                 <img src="/src/icons/box-preto.svg" alt="" />
                             </span>
@@ -62,7 +68,10 @@
                     </li>
 
                     <li class="list">
-                        <a onclick="clicaSecao('secaoVenda')" style="--clr: #bfc70f">
+                        <a
+                            onclick="clicaSecao('secaoVenda')"
+                            style="--clr: #bfc70f"
+                        >
                             <span class="icon">
                                 <img
                                     src="/src/icons/carrinho-diferente-preto.svg"
@@ -74,7 +83,10 @@
                     </li>
 
                     <li class="list">
-                        <a onclick="clicaSecao('secaoMensagens')" style="--clr: #2196f3">
+                        <a
+                            onclick="clicaSecao('secaoMensagens')"
+                            style="--clr: #2196f3"
+                        >
                             <span class="icon">
                                 <img
                                     src="/src/icons/chat-quest-preto.svg"
@@ -86,7 +98,10 @@
                     </li>
 
                     <li class="list">
-                        <a onclick="clicaSecao('secaoSaldo')" style="--clr: #b145e9">
+                        <a
+                            onclick="clicaSecao('secaoSaldo')"
+                            style="--clr: #b145e9"
+                        >
                             <span class="icon">
                                 <img src="/src/icons/cifrao-preto.svg" alt="" />
                             </span>
@@ -287,8 +302,10 @@
                                     class="action"
                                 />
                             </a>
-    
-                            <a onclick="clicaSecaoInternaProdutos('cadastrarProdutos')">
+
+                            <a
+                                onclick="clicaSecaoInternaProdutos('cadastrarProdutos')"
+                            >
                                 <img
                                     src="/src/icons/plus-preto.svg"
                                     alt=""
@@ -307,7 +324,7 @@
                     </div>
                     <hr class="linha" />
                     <div class="grupo-informacoes-baixo">
-                        <p class="total-produtos">
+                        <p id="totalProdutos" class="total-produtos">
                             Total de 0 produtos registrados
                         </p>
                         <div id="todosProdutos" class="todos-produtos"></div>
@@ -676,24 +693,9 @@
             </div>
         </footer>
 
-        <script>
-            let menuToggle = document.querySelector(".menuToggle");
-            let navigation = document.querySelector(".navigation");
-
-            menuToggle.onclick = function () {
-                navigation.classList.toggle("active");
-            };
-
-            let list = document.querySelectorAll(".list");
-            function activeLink() {
-                list.forEach((item) => item.classList.remove("active"));
-                this.classList.add("active");
-            }
-            list.forEach((item) => item.addEventListener("click", activeLink));
-        </script>
-
         <script src="/src/js/mercantes/editarMercante.js"></script>
 
         <script src="/src/js/componentes/barra-navegacao.js"></script>
+        <script src="/src/js/componentes/componentes.js"></script>
     </body>
 </html>

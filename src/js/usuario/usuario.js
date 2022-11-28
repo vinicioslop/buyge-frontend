@@ -83,14 +83,13 @@ async function testar() {
         return false;
     }
 }
-
 function insereInformaçõesUsuário(cliente) {
-    const nome = document.getElementById("name");
-    const sobrenome = document.getElementById("sobrenome");
-    const email = document.getElementById("email");
-    const cpf = document.getElementById("cpf");
-    const telefone = document.getElementById("tell");
-    const dataNasc = document.getElementById("datanasc");
+    const nome = document.getElementById("nomeCliente");
+    const sobrenome = document.getElementById("sobrenomeCliente");
+    const email = document.getElementById("emailCliente");
+    const cpf = document.getElementById("cpfCliente");
+    const telefone = document.getElementById("numeroTelefone");
+    const dataNasc = document.getElementById("dataNascimento");
 
     const data = new Date(cliente.dtNascimento).toLocaleDateString().toString();
 
@@ -114,6 +113,25 @@ function insereInformaçõesUsuário(cliente) {
     dataNasc.value = dataNascimento;
 }
 
+function clicaSecao(secaoClicada) {
+    const secoes = [
+        "secaoMeusDados",
+        "secaoEndereco",
+        "secaoCompras",
+        "secaoSeguranca",
+    ];
+
+    secoes.forEach((secao) => {
+        const componente = document.querySelector("#" + secao);
+
+        if (secao === secaoClicada) {
+            componente.setAttribute("class", "conteudo mostrar");
+        } else {
+            componente.setAttribute("class", "conteudo esconder");
+        }
+    });
+}
+
 document
     .querySelector("#atualizarCliente")
     .addEventListener("click", async (e) => {
@@ -131,18 +149,19 @@ document
 
         const cliente = {
             cdCliente: idCliente,
-            nmCliente: document.querySelector("#name").value,
-            nmSobrenome: document.querySelector("#sobrenome").value,
-            nrCpf: document.querySelector("#cpf").value,
-            dtNascimento: document.querySelector("#datanasc").value,
-            nrTelefone: document.querySelector("#tell").value,
-            nmEmail: document.querySelector("#email").value,
+            nmCliente: document.querySelector("#nomeCliente").value,
+            nmSobrenome: document.querySelector("#sobrenomeCliente").value,
+            nrCpf: document.querySelector("#cpfCliente").value,
+            dtNascimento: document.querySelector("#dataNascimento").value,
+            nrTelefone: document.querySelector("#numeroTelefone").value,
+            nmEmail: document.querySelector("#emailCliente").value,
         };
 
         const status = await atualizarCliente(cliente, token);
 
         if (status === 200) {
             console.log("Cliente atualizado com sucesso");
+            window.location.reload();
         } else {
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
         }

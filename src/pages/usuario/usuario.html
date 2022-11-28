@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" href="/src/css/componentes/style.css" />
+        <link rel="stylesheet" href="/src/css/componentes/componentes.css" />
         <link
             rel="stylesheet"
             href="/src/css/componentes/barra-navegacao.css"
@@ -13,11 +14,6 @@
         <link rel="stylesheet" href="/src/css/componentes/rodape.css" />
 
         <link rel="stylesheet" href="/src/css/usuario/usuario.css" />
-
-        <script
-            src="https://kit.fontawesome.com/74e8571330.js"
-            crossorigin="anonymous"
-        ></script>
 
         <link
             rel="shortcut icon"
@@ -33,176 +29,151 @@
             <div id="barraGrande" class="esconder"></div>
         </header>
 
-        <div class="container-usuario">
-            <div id="cor-diferente" class="container-usuario-nav">
-                <div class="dropdown">
-                    <div class="container-usuario-nav-tl">
-                        <i class="fa-solid fa-list"></i>
-                        Minha conta
-                    </div>
+        <div class="container">
+            <div class="navigation">
+                <div class="menuToggle"></div>
+                <ul>
+                    <li class="list active">
+                        <a onclick="clicaSecao('secaoMeusDados')">
+                            <span class="icon">
+                                <img src="/src/icons/user-preto.svg" alt="" />
+                            </span>
+                            <span class="text">Meus Dados</span>
+                        </a>
+                    </li>
 
-                    <div class="container-usuario-nav-itens">
-                        <div class="item-nav">
-                            <div class="item-nav-div">
-                                <i class="fa-solid fa-user"></i>
-                                Meus dados
-                            </div>
-                        </div>
+                    <li class="list">
+                        <a onclick="clicaSecao('secaoEndereco')">
+                            <span class="icon">
+                                <img
+                                    src="/src/icons/map-pin-preto.svg"
+                                    alt=""
+                                />
+                            </span>
+                            <span class="text">Endereços</span>
+                        </a>
+                    </li>
 
-                        <div class="item-nav">
-                            <div class="item-nav-div">
-                                <i class="fa-solid fa-lock"></i>
-                                Segurança
-                            </div>
-                        </div>
+                    <li class="list">
+                        <a onclick="clicaSecao('secaoCompras')">
+                            <span class="icon">
+                                <img
+                                    src="/src/icons/shopping-bag-preto.svg"
+                                    alt=""
+                                />
+                            </span>
+                            <span class="text">Minhas Compras</span>
+                        </a>
+                    </li>
 
-                        <div class="item-nav">
-                            <div class="item-nav-div">
-                                <i class="fa-solid fa-credit-card"></i>
-                                Cartões
-                            </div>
-                        </div>
+                    <li class="list">
+                        <a onclick="clicaSecao('secaoSeguranca')">
+                            <span class="icon">
+                                <img
+                                    src="/src/icons/cadeado-preto.svg"
+                                    alt=""
+                                />
+                            </span>
+                            <span class="text">Segurança</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                        <div class="item-nav">
-                            <div class="item-nav-div">
-                                <i class="fa-solid fa-location-dot"></i>
-                                Endereços
-                            </div>
-                        </div>
-
-                        <div class="item-nav">
-                            <div class="item-nav-div">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                                Compras
-                            </div>
-                        </div>
-
-                        <div class="item-nav">
-                            <div class="item-nav-div">
-                                <i class="fa-solid fa-shop"></i>
-                                Vendas
-                            </div>
-                        </div>
-
-                        <a href="cadastro_loja.html">
-                            <div class="item-nav">
-                                <div class="item-nav-div">
-                                    <i
-                                        class="fa-solid fa-arrow-up-right-from-square"
-                                    ></i>
-                                    Torne-se vendedor
+            <div id="secaoMeusDados" class="conteudo mostrar">
+                <div class="nome-loja">Meus Dados</div>
+                <hr class="linha" />
+                <div class="informacoes mostrar">
+                    <form class="formulario">
+                        <div class="grupos">
+                            <div class="grupo-esquerda">
+                                <div class="entrada-dados">
+                                    <label for="nomeCliente">Nome</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="nomeCliente"
+                                        id="nomeCliente"
+                                        placeholder="Informe o seu nome"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="emailCliente">E-mail</label>
+                                    <input
+                                        required
+                                        type="email"
+                                        name="emailCliente"
+                                        id="emailCliente"
+                                        placeholder="Informe o seu e-mail"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="cpfCliente">CPF</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="cpfCliente"
+                                        id="cpfCliente"
+                                        placeholder="Informe o seu CPF"
+                                    />
                                 </div>
                             </div>
-                        </a>
-
-                        <div class="item-nav">
-                            <div class="item-nav-div">
-                                <i class="fa-solid fa-gear"></i>
-                                Ajustes
+                            <div class="grupo-direita">
+                                <div class="entrada-dados">
+                                    <label for="sobrenomeCliente">Sobrenome</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="sobrenomeCliente"
+                                        id="sobrenomeCliente"
+                                        placeholder="Informe o seu sobrenome"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="dataNascimento">Data de Nascimento</label>
+                                    <input
+                                        required
+                                        type="date"
+                                        name="dataNascimento"
+                                        id="dataNascimento"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="numeroTelefone">Número de Celular</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="numeroTelefone"
+                                        id="numeroTelefone"
+                                        placeholder="(13) 91234-5678"
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <button id="atualizarCliente">Salvar Alterações</button>
+                    </form>
                 </div>
             </div>
 
-            <div class="container-usuario-data">
-                <div class="container-usuario-data-user">
-                    <div class="icon-user">
-                        <i
-                            id="icon-user-id"
-                            class="fa-regular fa-circle-user"
-                        ></i>
-                    </div>
-                </div>
+            <div id="secaoEndereco" class="conteudo esconder">
+                <div class="nome-loja">Endereço</div>
 
-                <div class="container-usuario-data-user-info">
-                    <form class="container-usuario-data-user-info-form">
-                        <div class="user-info-form-item">
-                            <div>
-                                <label for="name">
-                                    <strong>
-                                        <img src="/src/icons/user-preto.svg" alt="">
-                                        NOME
-                                    </strong>
-                                </label>
-                            </div>
-                            <div>
-                                <input required type="text" id="name" name="name" />
-                            </div>
-                        </div>
-                        <div class="user-info-form-item">
-                            <div>
-                                <label for="sobrenome">
-                                    <strong>
-                                        <img src="/src/icons/user-preto.svg" alt="">
-                                        SOBRENOME
-                                    </strong>
-                                </label>
-                            </div>
-                            <div>
-                                <input required type="text" id="sobrenome" name="sobrenome" />
-                            </div>
-                        </div>
-                        <div class="user-info-form-item">
-                            <div>
-                                <label for="tell">
-                                    <strong>
-                                        <i class="fa-solid fa-phone"></i>
-                                        NÚMERO DE TELEFONE
-                                    </strong>
-                                </label>
-                            </div>
-                            <div>
-                                <input required type="text" id="tell" name="tell" />
-                            </div>
-                        </div>
-                        <div class="user-info-form-item">
-                            <div>
-                                <label for="datanasc">
-                                    <strong>
-                                        <img src="/src/icons/calendario-preto.svg" alt="">
-                                        DATA DE NASCIMENTO
-                                    </strong>
-                                </label>
-                            </div>
-                            <div>
-                                <input required type="date" id="datanasc" name="datanasc" />
-                            </div>
-                        </div>
-                        <div class="user-info-form-item">
-                            <div>
-                                <label for="email">
-                                    <strong>
-                                        <img src="/src/icons/email-preto.svg" alt="">
-                                        EMAIL
-                                    </strong>
-                                </label>
-                            </div>
-                            <div>
-                                <input required type="email" id="email" name="email" />
-                            </div>
-                        </div>
-                        <div class="user-info-form-item">
-                            <div>
-                                <label for="cpf">
-                                    <strong>
-                                        <i class="fa-solid fa-id-card"></i>
-                                        CPF
-                                    </strong>
-                                </label>
-                            </div>
-                            <div>
-                                <input required type="text" id="cpf" name="cpf" />
-                            </div>
-                        </div>
-                        <div class="user-info-form-button">
-                            <button id="atualizarCliente" class="edit-form-button">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                                Editar
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                <hr class="linha" />
+                <div class="informacoes mostrar"></div>
+            </div>
+
+            <div id="secaoCompras" class="conteudo esconder">
+                <div class="nome-loja">Compras</div>
+
+                <hr class="linha" />
+                <div class="informacoes mostrar"></div>
+            </div>
+
+            <div id="secaoSeguranca" class="conteudo esconder">
+                <div class="nome-loja">Segurança</div>
+
+                <hr class="linha" />
+                <div class="informacoes mostrar"></div>
             </div>
         </div>
 
@@ -285,5 +256,6 @@
         <script src="/src/js/usuario/usuario.js"></script>
 
         <script src="/src/js/componentes/barra-navegacao.js"></script>
+        <script src="/src/js/componentes/componentes.js"></script>
     </body>
 </html>

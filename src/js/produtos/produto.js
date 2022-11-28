@@ -112,8 +112,6 @@ async function montarProduto(idProduto) {
     }
     const imagens = imagensResposta.dados;
 
-    console.log(imagens);
-
     document.querySelector(".caminho").innerText =
         "Início > " + categoria.nmCategoria;
 
