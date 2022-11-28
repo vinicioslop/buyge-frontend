@@ -83,6 +83,7 @@ async function testar() {
         return false;
     }
 }
+
 function insereInformaçõesUsuário(cliente) {
     const nome = document.getElementById("nomeCliente");
     const sobrenome = document.getElementById("sobrenomeCliente");
