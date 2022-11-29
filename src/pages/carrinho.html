@@ -6,7 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" href="/src/css/componentes/style.css" />
-        <link rel="stylesheet" href="/src/css/componentes/barra-navegacao.css" />
+        <link
+            rel="stylesheet"
+            href="/src/css/componentes/barra-navegacao.css"
+        />
         <link rel="stylesheet" href="/src/css/componentes/rodape.css" />
 
         <link rel="stylesheet" href="/src/css/carrinho.css" />
@@ -25,7 +28,88 @@
             <div id="barraGrande" class="esconder"></div>
         </header>
 
-        <div class="container"></div>
+        <div class="container">
+            <h1 class="titulo">Meu Carrinho</h1>
+            <div class="informacoes">
+                <div class="grupo-esquerda">
+                    <table class="tabela-produtos">
+                        <tr class="titulos">
+                            <th class="nome-imagem">Produto</th>
+                            <th class="quantidade">Quantidade</th>
+                            <th class="valor-unitario">Valor Unitário</th>
+                            <th class="subtotal">Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                    <hr class="linha">
+                </div>
+                <div class="grupo-direita">
+                    <div class="frete-prazo">
+                        <div class="grupo-texto">
+                            <div class="truck-texto">
+                                <img
+                                    src="/src/icons/delivery-truck-roxo.svg"
+                                    alt=""
+                                    class="truck"
+                                />
+                                <p class="texto">Calcular o Frete e o Prazo</p>
+                            </div>
+                            <form class="frete">
+                                <input
+                                    type="text"
+                                    name="cep"
+                                    id="cep"
+                                    placeholder="Digite o CEP aqui"
+                                />
+                                <button class="calcularFrete">Calcular</button>
+                            </form>
+                        </div>
+                    </div>
+                    <hr class="linha" />
+                    <div class="valores">
+                        <div class="valor">
+                            <p>Valor da Compra</p>
+                            <p>R$ Valor</p>
+                        </div>
+                        <div class="valor">
+                            <p>Subtotal</p>
+                            <p>R$ Valor</p>
+                        </div>
+                        <div class="valor">
+                            <p>Desconto</p>
+                            <p>-R$ Valor</p>
+                        </div>
+                        <div class="valor">
+                            <p>Entrega</p>
+                            <p>Grátis</p>
+                        </div>
+                        <div class="valor">
+                            <p>Total</p>
+                            <p>R$ Valor</p>
+                        </div>
+                    </div>
+                    <hr class="linha" />
+                    <div class="cupom-desconto">
+                        <div class="texto">
+                            <p>Possui cupom de desconto?</p>
+                            <img src="/src/icons/seta-cima-preto.svg" alt="" />
+                        </div>
+                        <form class="form-cupom">
+                            <input
+                                type="text"
+                                name="cupom"
+                                id="cupom"
+                                placeholder="Digite ou cole o código"
+                            />
+                            <button class="calcularCupom">Aplicar</button>
+                        </form>
+                    </div>
+                    <button id="comprar" class="comprar">
+                        Continuar a Compra
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <footer class="rodape">
             <hr class="rodape-linha" />
@@ -102,6 +186,8 @@
                 </p>
             </div>
         </footer>
+
+        <script src="/src/js/carrinho.js"></script>
 
         <script src="/src/js/componentes/barra-navegacao.js"></script>
     </body>

@@ -1,0 +1,323 @@
+/* VARIÁVEIS PARA CORES DO PROJETO */
+:root {
+    --cor-fundo: #f1e9f3;
+    --cor-clara: #f9f9f9;
+    --cor-principal-rgb10: rgba(119, 37, 131, 0.1);
+    --cor-principal-rgb40: rgba(119, 37, 131, 0.4);
+    --cor-principal-rgb60: rgba(119, 37, 131, 0.6);
+    --cor-principal: #772583;
+    --cor-principal-clara: #ad7cb5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+
+    width: 95%;
+    min-height: 80vh;
+}
+
+.container .titulo {
+    display: flex;
+
+    font-size: 38px;
+    font-weight: normal;
+}
+
+.informacoes {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+}
+
+.informacoes .grupo-esquerda {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-top: 20px;
+
+    width: 80%;
+    height: 100%;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos {
+    width: 95%;
+    height: 100%;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .titulos {
+    height: 40px;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos tr {
+    height: 80px;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto {
+    align-items: center;
+
+    margin-top: 5px;
+
+    height: 80px;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-size: 16px;
+
+    width: 90%;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto .imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 60px;
+    width: 60px;
+
+    background-color: var(--cor-clara);
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto p {
+    margin-left: 10px;
+
+    width: 100%;
+
+    text-align: justify;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto .imagem img {
+    height: 24px;
+    object-fit: scale-down;
+
+    background-color: transparent;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto .quantidade-produto {
+    width: 20%;
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto .quantidade-produto .adicionar,
+.remover {
+    width: 30px;
+    height: 30px;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border-radius: 3px;
+
+    background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-esquerda .tabela-produtos .produto .quantidade-produto input {
+    text-align: center;
+
+    width: 60px;
+    height: 30px;
+
+    outline: none;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+
+    background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-esquerda .linha {
+    align-self: center;
+    
+    width: 95%;
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.informacoes .grupo-direita {
+    display: flex;
+    flex-direction: column;
+
+    width: 30%;
+    height: 100%;
+}
+
+.informacoes .grupo-direita .linha {
+    align-self: center;
+    
+    width: 100%;
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.informacoes .grupo-direita .frete-prazo {
+    display: flex;
+    flex-direction: column;
+}
+
+.informacoes .grupo-direita .frete-prazo .grupo-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.informacoes .grupo-direita .frete-prazo .grupo-texto .truck-texto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 30px;
+}
+
+.informacoes .grupo-direita .frete-prazo .grupo-texto .truck-texto .truck {
+    margin-right: 10px;
+
+    height: 24px;
+}
+
+.informacoes .grupo-direita .frete-prazo .frete {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    height: 40px;
+    width: 100%;
+}
+
+.informacoes .grupo-direita .frete-prazo .frete input {
+    padding-left: 10px;
+
+    height: 26px;
+    width: 70%;
+
+    outline: none;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+
+    background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-direita .frete-prazo .frete input::placeholder {
+    color: var(--cor-clara);
+}
+
+.informacoes .grupo-direita .frete-prazo .frete button {
+    height: 26px;
+    width: 90px;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border-radius: 3px;
+
+    background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-direita .valores {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.informacoes .grupo-direita .valores .valor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-bottom: 5px;
+
+    width: 100%;
+}
+
+.informacoes .grupo-direita .cupom-desconto {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.informacoes .grupo-direita .cupom-desconto .texto {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.informacoes .grupo-direita .cupom-desconto .form-cupom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top: 5px;
+
+    width: 100%;
+}
+
+.informacoes .grupo-direita .cupom-desconto .form-cupom input {
+    padding-left: 10px;
+
+    height: 26px;
+    width: 70%;
+
+    outline: none;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+
+    background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-direita .cupom-desconto .form-cupom input::placeholder {
+    color: var(--cor-clara);
+}
+
+.informacoes .grupo-direita .cupom-desconto .form-cupom button {
+    height: 26px;
+    width: 90px;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border-radius: 3px;
+
+    background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-direita .comprar {
+    height: 40px;
+
+    font-size: 18px;
+    color: var(--cor-clara);
+
+    border-radius: 3px;
+
+    background-color: var(--cor-principal-clara);
+}

@@ -83,6 +83,43 @@ async function carregarCategorias(idCategoria) {
     }
 }
 
+async function adicionarItemCarrinho(idCliente, idProduto, token) {
+    const requisicao = await fetch(
+        `${fetchUrl}/carrinho/items/${idCliente}/${idProduto}`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const resposta = await requisicao.json();
+
+    return resposta;
+}
+
+async function comprarProduto(idProduto) {
+    console.log(idProduto);
+}
+
+async function adicionarCarrinho(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        console.log("Cliente não autenticado!");
+        return;
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+
+    const itemCarrinhoResposta = await adicionarItemCarrinho(idCliente, idProduto, token);
+
+    console.log(itemCarrinhoResposta);
+}
+
 async function montarProduto(idProduto) {
     const produtoResposta = await carregarProduto(idProduto);
     if (produtoResposta.status !== 200) {
@@ -133,6 +170,12 @@ async function montarProduto(idProduto) {
     document.querySelector(".parcelas").innerText =
         "em 3x R$ " + mascaraPreco(produto.vlProduto / 3);
     document.querySelector(".texto").innerText = produto.dsProduto;
+
+    const comprar = document.querySelector(".comprar");
+    comprar.setAttribute("onclick", `comprarProduto(${produto.cdProduto})`);
+
+    const adicionarCarrinho = document.querySelector(".carrinho");
+    adicionarCarrinho.setAttribute("onclick", `adicionarCarrinho(${produto.cdProduto})`);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
