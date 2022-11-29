@@ -1,6 +1,19 @@
+/* VARIÁVEIS PARA CORES DO PROJETO */
+:root {
+    --cor-fundo: #f1e9f3;
+    --cor-clara: #f9f9f9;
+    --cor-principal-rgb10: rgba(119, 37, 131, 0.1);
+    --cor-principal-rgb40: rgba(119, 37, 131, 0.4);
+    --cor-principal-rgb60: rgba(119, 37, 131, 0.6);
+    --cor-principal: #772583;
+    --cor-principal-clara: #ad7cb5;
+}
+
 .container {
     display: flex;
     flex-direction: row;
+
+    min-height: 90vh;
 }
 
 .esconder {
@@ -202,4 +215,55 @@ input::placeholder {
     border-radius: 5px;
 
     background-color: var(--cor-principal-clara);
+}
+
+.enderecos {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+    margin-left: 20px;
+
+    padding: 10px;
+
+    height: 200px;
+    width: 300px;
+
+    border-radius: 5px;
+
+    color: var(--cor-clara);
+
+    background-color: var(--cor-principal-clara);
+}
+
+.enderecos .titulo-principal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    width: 100%;
+
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.enderecos .dados-endereco {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: 60%;
+}
+
+.enderecos .editar-link {
+    position: relative;
+
+    top: 55px;
+    left: 260px;
+}
+
+.enderecos h3,a,div,p,img {
+    background-color: transparent;
 }

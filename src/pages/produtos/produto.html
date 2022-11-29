@@ -81,7 +81,7 @@
                         <p class="texto"></p>
                     </div>
                     <div class="botoes">
-                        <button class="cho-container comprar"></button>
+                        <button class="comprar">Comprar</button>
                         <button class="carrinho">
                             <img src="/src/icons/shopping-cart-preto.svg" />
                         </button>
@@ -167,23 +167,10 @@
         </footer>
 
         <script src="/src/js/produtos/produto.js"></script>
-        <script src="https://sdk.mercadopago.com/js/v2"></script>
-        <script>
-            const mp = new MercadoPago("TEST-09f06e7d-987a-4e0d-90be-d65220606e4d", {
-                locale: "pt-BR",
-            });
-
-            mp.checkout({
-                preference: {
-                    id: "YOUR_PREFERENCE_ID",
-                },
-                render: {
-                    container: ".cho-container",
-                    label: "Comprar",
-                },
-            });
-        </script>
 
         <script src="/src/js/componentes/barra-navegacao.js"></script>
+
+        <!-- SDK MercadoPago.js V2 -->
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
     </body>
 </html>

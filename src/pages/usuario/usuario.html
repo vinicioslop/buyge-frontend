@@ -120,7 +120,9 @@
                             </div>
                             <div class="grupo-direita">
                                 <div class="entrada-dados">
-                                    <label for="sobrenomeCliente">Sobrenome</label>
+                                    <label for="sobrenomeCliente"
+                                        >Sobrenome</label
+                                    >
                                     <input
                                         required
                                         type="text"
@@ -130,7 +132,9 @@
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="dataNascimento">Data de Nascimento</label>
+                                    <label for="dataNascimento"
+                                        >Data de Nascimento</label
+                                    >
                                     <input
                                         required
                                         type="date"
@@ -139,7 +143,9 @@
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="numeroTelefone">Número de Celular</label>
+                                    <label for="numeroTelefone"
+                                        >Número de Celular</label
+                                    >
                                     <input
                                         required
                                         type="text"
@@ -156,10 +162,178 @@
             </div>
 
             <div id="secaoEndereco" class="conteudo esconder">
-                <div class="nome-loja">Endereço</div>
+                <div id="meusEnderecos" class="informacoes mostrar">
+                    <h1 class="titulo-secao">Meus Endereços</h1>
 
-                <hr class="linha" />
-                <div class="informacoes mostrar"></div>
+                    <hr class="linha" />
+                    <div class="enderecos"></div>
+                </div>
+
+                <div id="editarEndereco" class="informacoes esconder">
+                    <h1 class="titulo-secao">Editar Endereco</h1>
+                    <form class="formulario">
+                        <div class="grupos">
+                            <div class="grupo-esquerda">
+                                <input
+                                    required
+                                    hidden
+                                    type="number"
+                                    name="idEnderecoEditar"
+                                    id="idEnderecoEditar"
+                                />
+                                <div class="entrada-dados">
+                                    <label for="cepClienteEditar">CEP</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="cepClienteEditar"
+                                        id="cepClienteEditar"
+                                        placeholder="Informe o CEP"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="bairroClienteEditar"
+                                        >Bairro</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="bairroClienteEditar"
+                                        id="bairroClienteEditar"
+                                        placeholder="Informe o Bairro"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="sgEstadoEditar">Estado</label>
+                                    <select
+                                        required
+                                        name="sgEstadoEditar"
+                                        id="sgEstadoEditar"
+                                    >
+                                        <option id="AC" value="AC">Acre</option>
+                                        <option id="AL" value="AL">
+                                            Alagoas
+                                        </option>
+                                        <option id="AP" value="AP">
+                                            Amapá
+                                        </option>
+                                        <option id="AM" value="AM">
+                                            Amazonas
+                                        </option>
+                                        <option id="BA" value="BA">
+                                            Bahia
+                                        </option>
+                                        <option id="CE" value="CE">
+                                            Ceará
+                                        </option>
+                                        <option id="ES" value="ES">
+                                            Espírito Santo
+                                        </option>
+                                        <option id="GO" value="GO">
+                                            Goiás
+                                        </option>
+                                        <option id="MA" value="MA">
+                                            Maranhão
+                                        </option>
+                                        <option id="MT" value="MT">
+                                            Mato Grosso
+                                        </option>
+                                        <option id="MS" value="MS">
+                                            Mato Grosso do Sul
+                                        </option>
+                                        <option id="MG" value="MG">
+                                            Minas Gerais
+                                        </option>
+                                        <option id="PA" value="PA">Pará</option>
+                                        <option id="PB" value="PB">
+                                            Paraíba
+                                        </option>
+                                        <option id="PR" value="PR">
+                                            Paraná
+                                        </option>
+                                        <option id="PE" value="PE">
+                                            Pernambuco
+                                        </option>
+                                        <option id="PI" value="PI">
+                                            Piauí
+                                        </option>
+                                        <option id="RJ" value="RJ">
+                                            Rio de Janeiro
+                                        </option>
+                                        <option id="RN" value="RN">
+                                            Rio Grande do Norte
+                                        </option>
+                                        <option id="RS" value="RS">
+                                            Rio Grande do Sul
+                                        </option>
+                                        <option id="RO" value="RO">
+                                            Rondônia
+                                        </option>
+                                        <option id="RR" value="RR">
+                                            Roraima
+                                        </option>
+                                        <option id="SC" value="SC">
+                                            Santa Catarina
+                                        </option>
+                                        <option id="SP" value="SP">
+                                            São Paulo
+                                        </option>
+                                        <option id="SE" value="SE">
+                                            Sergipe
+                                        </option>
+                                        <option id="TO" value="TO">
+                                            Tocantins
+                                        </option>
+                                        <option id="DF" value="DF">
+                                            Distrito Federal
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grupo-direita">
+                                <div class="entrada-dados">
+                                    <label for="logradouroClienteEditar"
+                                        >Logradouro</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="logradouroClienteEditar"
+                                        id="logradouroClienteEditar"
+                                        placeholder="Informe o seu sobrenome"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="cidadeClienteEditar"
+                                        >Cidade</label
+                                    >
+                                    <input
+                                        required
+                                        type="text"
+                                        name="cidadeClienteEditar"
+                                        id="cidadeClienteEditar"
+                                        placeholder="Informe a cidade"
+                                    />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="numeroClienteEditar"
+                                        >Número</label
+                                    >
+                                    <input
+                                        required
+                                        type="number"
+                                        name="numeroClienteEditar"
+                                        id="numeroClienteEditar"
+                                        placeholder="Informe o número"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <button id="atualizarEndereco">
+                            Salvar Alterações
+                        </button>
+                    </form>
+                </div>
             </div>
 
             <div id="secaoCompras" class="conteudo esconder">
