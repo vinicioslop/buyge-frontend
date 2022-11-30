@@ -1,25 +1,12 @@
 const fetchUrl = "https://localhost:7240/api";
 
-String.prototype.reverse = function () {
-    return this.split("").reverse().join("");
-};
+function mascaraPreco(preco) {
+    const valorFormatado = preco.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
 
-function mascaraMoeda(campo, evento) {
-    var tecla = !evento ? window.event.keyCode : evento.which;
-    var valor = campo.value.replace(/[^\d]+/gi, "").reverse();
-    var resultado = "";
-    var mascara = "##.###.###,##".reverse();
-    for (var x = 0, y = 0; x < mascara.length && y < valor.length; ) {
-        if (mascara.charAt(x) != "#") {
-            resultado += mascara.charAt(x);
-            x++;
-        } else {
-            resultado += valor.charAt(y);
-            y++;
-            x++;
-        }
-    }
-    campo.value = resultado.reverse();
+    return valorFormatado;
 }
 
 async function carregarProduto(idProduto) {
@@ -101,21 +88,12 @@ async function removerItemCarrinho(idItemCarrinho) {
     }
 }
 
-async function montarItemCarrinho() {
-    const token = sessionStorage.getItem("token");
-
-    if (token === null) {
-        console.log("Cliente não autenticado");
-        return;
-    }
-
+async function montarItemCarrinho(itemsCarrinho) {
     const tabelaProdutos = document.querySelector(".tabela-produtos");
 
-    const idCliente = sessionStorage.getItem("idCliente");
-
-    const itemsCarrinho = await carregarItensCarrinho(idCliente, token);
-
     itemsCarrinho.forEach(async (item) => {
+        console.log(item);
+
         let produto = await carregarProduto(item.fkCdProduto);
 
         const tr = document.createElement("tr");
@@ -131,19 +109,19 @@ async function montarItemCarrinho() {
             <p>${produto.nmProduto}</p>
         </td>
         <td class="quantidade-produto">
-            <button class="adicionar">+</button>
+            <button class="remover">-</button>
             <input
                 type="number"
                 name="quantidadeProduto"
                 id="quantidadeProduto"
-                value="1"
+                value="${item.vlQuantidade}"
             />
-            <button class="remover">-</button>
+            <button class="adicionar">+</button>
         </td>
         <td class="valor-unitario-produto">
-            ${produto.vlProduto}
+            ${mascaraPreco(produto.vlProduto)}
         </td>
-        <td class="subtotal-produto">${produto.vlProduto}</td>
+        <td class="subtotal-produto">${mascaraPreco(produto.vlProduto)}</td>
         <td onclick="removerItemCarrinho(${item.cdItemCarrinho})" class="removerProduto">
             <img src="/src/icons/remover-preto.svg" alt="">
         </td>`;
@@ -152,14 +130,17 @@ async function montarItemCarrinho() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
     const token = sessionStorage.getItem("token");
 
     if (token == null) {
         window.location = "/";
-    }
+    } else {
+        const idCliente = sessionStorage.getItem("idCliente");
+        const itemsCarrinho = await carregarItensCarrinho(idCliente, token);
 
-    montarItemCarrinho();
+        montarItemCarrinho(itemsCarrinho);
+    }
 });

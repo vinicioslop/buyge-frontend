@@ -101,6 +101,35 @@ async function carregarEnderecos(idCliente, token) {
     }
 }
 
+async function adicionarEndereco(endereco, token) {
+    const response = await fetch(`${fetchUrl}/enderecos/`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(endereco),
+    });
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
 async function atualizarEndereco(endereco, token) {
     const response = await fetch(
         `${fetchUrl}/enderecos/${endereco.cdEndereco}`,
@@ -130,6 +159,45 @@ async function atualizarEndereco(endereco, token) {
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
             return status;
+    }
+}
+
+async function removerEndereco(idEndereco, token) {
+    const response = await fetch(
+        `${fetchUrl}/enderecos/${idEndereco}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            }
+        }
+    );
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            return status;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function excluirEndereco(idEndereco) {
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        console.log("Sessão inválida!");
+        window.location = "/";
+    }
+
+    const resposta = await removerEndereco(idEndereco, token);
+
+    if (resposta == 200) {
+        window.location.reload();
     }
 }
 
@@ -203,6 +271,8 @@ async function montarEnderecos() {
 
     const enderecos = enderecosResposta.dados;
 
+    console.log(enderecos);
+
     const divEnderecos = document.querySelector(".enderecos");
 
     enderecos.forEach((endereco) => {
@@ -211,7 +281,10 @@ async function montarEnderecos() {
 
         item.innerHTML = `
         <div class="titulo-principal">
-            <h3 class="titulo">TITULO ENDERECO</h3>
+            <div class="titulo-tipo">
+                <h3 class="titulo">${endereco.nmTituloEndereco}</h3>
+                <p class="tipo">${endereco.nmTipoEndereco}</tipo>
+            </div>
             <a href="#" class="principal-link">
                 <img src="/src/icons/star-branca.svg" alt="">
             </a>
@@ -222,6 +295,9 @@ async function montarEnderecos() {
         </div>
         <a onclick="editarEndereco(${endereco.cdEndereco})" class="editar-link">
             <img src="/src/icons/edit-branco3.svg" alt="">
+        </a>
+        <a onclick="excluirEndereco(${endereco.cdEndereco})" class="remover-link">
+            <img src="/src/icons/bin-minus-branco.svg" alt="">
         </a>
         `;
 
@@ -236,7 +312,7 @@ function editarEndereco(idEndereco) {
 }
 
 function clicaSecaoInternaEnderecos(idComponente) {
-    const secoes = ["meusEnderecos", "editarEndereco"];
+    const secoes = ["meusEnderecos", "novoEndereco", "editarEndereco"];
 
     secoes.forEach((secao) => {
         const componente = document.querySelector("#" + secao);
@@ -280,7 +356,7 @@ function insereInformacoesUsuario(cliente) {
 }
 
 async function insereEnderecoUsuario(idEndereco) {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
 
     if (token == null) {
         console.log("Sessão inválida!");
@@ -292,6 +368,8 @@ async function insereEnderecoUsuario(idEndereco) {
     const endereco = enderecoResposta.dados;
 
     const cdEndereco = document.getElementById("idEnderecoEditar");
+    const nmTitulo = document.getElementById("tituloEnderecoEditar");
+    const nmTipo = document.getElementById("tipoEnderecoEditar");
     const cep = document.getElementById("cepClienteEditar");
     const bairro = document.getElementById("bairroClienteEditar");
     const logradouro = document.getElementById("logradouroClienteEditar");
@@ -307,6 +385,8 @@ async function insereEnderecoUsuario(idEndereco) {
     logradouro.value = endereco.nmLogradouro;
     cidade.value = endereco.nmCidade;
     numero.value = endereco.nrEndereco;
+    nmTitulo.value = endereco.nmTituloEndereco;
+    nmTipo.value = endereco.nmTipoEndereco;
 }
 
 function clicaSecao(secaoClicada) {
@@ -393,6 +473,9 @@ document
                 .value,
             nmCidade: document.getElementById("cidadeClienteEditar").value,
             nrEndereco: document.getElementById("numeroClienteEditar").value,
+            nmTituloEndereco: document.getElementById("tituloEnderecoEditar")
+                .value,
+            nmTipoEndereco: document.getElementById("tipoEnderecoEditar").value,
             fkCdCliente: idCliente,
         };
 
@@ -402,6 +485,49 @@ document
 
         if (resposta.status === 200) {
             console.log("Endereco atualizado com sucesso");
+            window.location.reload();
+        } else {
+            console.log(
+                "Ocorreu um erro na requisição. STATUS: " + resposta.status
+            );
+        }
+    });
+
+document
+    .querySelector("#adicionarEndereco")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const token = sessionStorage.getItem("token");
+        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+
+        const valido = await testar();
+
+        if (!valido) {
+            console.log("Cliente não autenticado");
+            window.location = "/";
+        }
+
+        const endereco = {
+            nrCep: document.getElementById("cepClienteNovo").value,
+            nmBairro: document.getElementById("bairroClienteNovo").value,
+            sgEstado: document.getElementById("sgEstadoNovo").value,
+            nmLogradouro: document.getElementById("logradouroClienteNovo")
+                .value,
+            nmCidade: document.getElementById("cidadeClienteNovo").value,
+            nrEndereco: document.getElementById("numeroClienteNovo").value,
+            nmTituloEndereco:
+                document.getElementById("tituloEnderecoNovo").value,
+            nmTipoEndereco: document.getElementById("tipoEnderecoNovo").value,
+            fkCdCliente: idCliente,
+        };
+
+        console.log(endereco);
+
+        const resposta = await adicionarEndereco(endereco, token);
+
+        if (resposta.status === 201) {
+            console.log("Endereco adicionado com sucesso");
             window.location.reload();
         } else {
             console.log(

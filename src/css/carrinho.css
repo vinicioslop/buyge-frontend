@@ -141,6 +141,10 @@
     background-color: var(--cor-principal-clara);
 }
 
+.informacoes .grupo-esquerda .tabela-produtos .produto .valor-unitario-produto, .subtotal-produto {
+    text-align: center;
+}
+
 .informacoes .grupo-esquerda .linha {
     align-self: center;
     
@@ -320,4 +324,14 @@
     border-radius: 3px;
 
     background-color: var(--cor-principal-clara);
+}
+
+.container .sem-itens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 80vh;
+    width: 100%;
 }
