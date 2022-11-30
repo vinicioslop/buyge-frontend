@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: row;
 
-    min-height: 90vh;
+    min-height: 100vh;
 }
 
 .esconder {

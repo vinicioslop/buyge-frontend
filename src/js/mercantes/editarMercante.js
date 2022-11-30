@@ -373,6 +373,10 @@ async function carregarInformacoesMercantePerfilLoja() {
     const idVendedor = sessionStorage.getItem("idCliente");
     const mercante = await carregarMercantes(idVendedor, token);
 
+    if (mercante.length == 0) {
+        window.location = "/";
+    }
+
     const nome = document.querySelector("#nomePerfilLoja");
     const email = document.querySelector("#emailPerfilLoja");
     const descricao = document.querySelector("#descricaoPerfilLoja");

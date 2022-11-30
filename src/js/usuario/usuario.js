@@ -154,7 +154,7 @@ async function adicionarEndereco(endereco, token) {
     const status = await response.status;
 
     switch (status) {
-        case 200:
+        case 201:
             const dados = await response.json();
 
             const resposta = {
@@ -531,7 +531,6 @@ document
             nmTituloEndereco: document.getElementById("tituloEnderecoEditar")
                 .value,
             nmTipoEndereco: document.getElementById("tipoEnderecoEditar").value,
-            idPrincipal: document.getElementById("idPrincipalEditar").value,
             fkCdCliente: idCliente,
         };
 
@@ -575,7 +574,6 @@ document
             nmTituloEndereco:
                 document.getElementById("tituloEnderecoNovo").value,
             nmTipoEndereco: document.getElementById("tipoEnderecoNovo").value,
-            idPrincipal: document.getElementById("idPrincipalNovo").value,
             fkCdCliente: idCliente,
         };
 
@@ -583,7 +581,7 @@ document
 
         const resposta = await adicionarEndereco(endereco, token);
 
-        if (resposta.status === 201) {
+        if (resposta.status == 201) {
             console.log("Endereco adicionado com sucesso");
             window.location.reload();
         } else {

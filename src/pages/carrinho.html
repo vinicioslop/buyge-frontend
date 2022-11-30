@@ -41,7 +41,7 @@
                             <th></th>
                         </tr>
                     </table>
-                    <hr class="linha">
+                    <hr class="linha" />
                 </div>
                 <div class="grupo-direita">
                     <div class="frete-prazo">
@@ -69,23 +69,25 @@
                     <div class="valores">
                         <div class="valor">
                             <p>Valor da Compra</p>
-                            <p>R$ Valor</p>
+                            <p id="valorBruto">R$ Valor</p>
                         </div>
+                        <!--
                         <div class="valor">
                             <p>Subtotal</p>
                             <p>R$ Valor</p>
                         </div>
+                        -->
                         <div class="valor">
                             <p>Desconto</p>
-                            <p>-R$ Valor</p>
+                            <p id="valorDesconto">-R$ Valor</p>
                         </div>
                         <div class="valor">
                             <p>Entrega</p>
-                            <p>Grátis</p>
+                            <p id="valorEntrega">+Grátis</p>
                         </div>
                         <div class="valor">
                             <p>Total</p>
-                            <p>R$ Valor</p>
+                            <p id="valorTotal">R$ Valor</p>
                         </div>
                     </div>
                     <hr class="linha" />
@@ -104,13 +106,18 @@
                             <button class="calcularCupom">Aplicar</button>
                         </form>
                     </div>
-                    <button id="comprar" class="comprar">
+                    <button
+                        type="button"
+                        id="comprar"
+                        class="comprar"
+                        onclick="acionaMercadoPago()"
+                    >
                         Continuar a Compra
                     </button>
                 </div>
             </div>
             <div class="sem-itens">
-                <img src="/src/icons/box-roxa.svg" alt="">
+                <img src="/src/icons/box-roxa.svg" alt="" />
                 <h2 class="titulo">Você não possui itens no carrinho!</h2>
             </div>
         </div>
