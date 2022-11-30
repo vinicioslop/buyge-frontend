@@ -551,6 +551,8 @@ document
         };
 
         cadastrarProduto(produto, token);
+
+        window.location.reload();
     });
 
 document
