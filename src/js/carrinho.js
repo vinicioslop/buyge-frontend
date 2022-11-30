@@ -114,7 +114,7 @@ async function montarItemCarrinho(itemsCarrinho) {
                 type="number"
                 name="quantidadeProduto"
                 id="quantidadeProduto"
-                value="${item.vlQuantidade}"
+                value="${item.qtItemCarrinho}"
             />
             <button class="adicionar">+</button>
         </td>

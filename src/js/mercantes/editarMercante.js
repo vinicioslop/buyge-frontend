@@ -292,13 +292,11 @@ async function montarProdutos() {
 
     if (produtos.length == 0) {
         totalProdutos.innerText = `Total de ${produtos.length} produtos registrados`;
-    } else if (produtos.length > 0 && produtos.length <= 1) {
+    } else if (produtos.length <= 1) {
         totalProdutos.innerText = `Total de ${produtos.length} produto registrado`;
     } else if (produtos.length > 1) {
         totalProdutos.innerText = `Total de ${produtos.length} produtos registrados`;
     }
-
-    totalProdutos.innerText = `Total de ${produtos.length} produtos registrados`;
 
     const produtosImagens = [];
     const codigosProdutos = [];

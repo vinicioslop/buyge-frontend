@@ -276,6 +276,14 @@ input::placeholder {
     font-weight: normal;
 }
 
+.enderecos .endereco .titulo-principal .principal-link img {
+    height: 24px;
+}
+
+.enderecos .endereco .titulo-principal .principal-link img:hover {
+    cursor: pointer;
+}
+
 .enderecos .endereco .titulo-principal .titulo-tipo {
     display: flex;
     flex-direction: column;

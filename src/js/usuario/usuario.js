@@ -1,5 +1,44 @@
 const fetchUrl = "https://localhost:7240/api";
 
+function removeSessao() {
+    sessionStorage.clear();
+}
+
+async function testarToken(token) {
+    const requisicao = await fetch(`${url}/token`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = await requisicao.status;
+    console.log(status);
+
+    switch (status) {
+        case 200:
+            return true;
+        case 401:
+            return false;
+    }
+}
+
+async function testar() {
+    const token = sessionStorage.getItem("token");
+    const valido = await testarToken(token);
+
+    if (valido) {
+        console.log("Sessão válida");
+        return true;
+    } else {
+        removeSessao();
+        console.log("Desconectado");
+        return false;
+    }
+}
+
 async function buscarClienteLogado(idCliente, token) {
     const response = await fetch(`${fetchUrl}/clientes/${idCliente}`, {
         method: "GET",
@@ -162,19 +201,47 @@ async function atualizarEndereco(endereco, token) {
     }
 }
 
-async function removerEndereco(idEndereco, token) {
+async function mudarPrincipal(idEndereco, token) {
     const response = await fetch(
-        `${fetchUrl}/enderecos/${idEndereco}`,
+        `${fetchUrl}/enderecos/principal/${idEndereco}`,
         {
-            method: "DELETE",
+            method: "PATCH",
             mode: "cors",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + token,
-            }
+            },
         }
     );
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function removerEndereco(idEndereco, token) {
+    const response = await fetch(`${fetchUrl}/enderecos/${idEndereco}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
     const status = await response.status;
 
     switch (status) {
@@ -198,45 +265,6 @@ async function excluirEndereco(idEndereco) {
 
     if (resposta == 200) {
         window.location.reload();
-    }
-}
-
-function removeSessao() {
-    sessionStorage.clear();
-}
-
-async function testarToken(token) {
-    const requisicao = await fetch(`${url}/token`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
-    const status = await requisicao.status;
-    console.log(status);
-
-    switch (status) {
-        case 200:
-            return true;
-        case 401:
-            return false;
-    }
-}
-
-async function testar() {
-    const token = sessionStorage.getItem("token");
-    const valido = await testarToken(token);
-
-    if (valido) {
-        console.log("Sessão válida");
-        return true;
-    } else {
-        removeSessao();
-        console.log("Desconectado");
-        return false;
     }
 }
 
@@ -279,14 +307,22 @@ async function montarEnderecos() {
         const item = document.createElement("div");
         item.className = "endereco";
 
+        let srcIcone = "";
+
+        if (endereco.idPrincipal == 1) {
+            srcIcone = "/src/icons/star-fill-preto.svg";
+        } else {
+            srcIcone = "/src/icons/star-preto.svg";
+        }
+
         item.innerHTML = `
         <div class="titulo-principal">
             <div class="titulo-tipo">
                 <h3 class="titulo">${endereco.nmTituloEndereco}</h3>
                 <p class="tipo">${endereco.nmTipoEndereco}</tipo>
             </div>
-            <a href="#" class="principal-link">
-                <img src="/src/icons/star-branca.svg" alt="">
+            <a onclick="enderecoPrincipal(${endereco.cdEndereco})" class="principal-link">
+                <img src="${srcIcone}" alt="">
             </a>
         </div>
         <div class="dados-endereco">
@@ -309,6 +345,25 @@ function editarEndereco(idEndereco) {
     clicaSecaoInternaEnderecos("editarEndereco");
 
     insereEnderecoUsuario(idEndereco);
+}
+
+async function enderecoPrincipal(idEndereco) {
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        console.log("Sessão inválida!");
+        window.location = "/";
+    }
+
+    const resposta = await mudarPrincipal(idEndereco, token);
+
+    if (resposta.status == 200) {
+        window.location.reload();
+    } else {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " + resposta.status
+        );
+    }
 }
 
 function clicaSecaoInternaEnderecos(idComponente) {
@@ -476,6 +531,7 @@ document
             nmTituloEndereco: document.getElementById("tituloEnderecoEditar")
                 .value,
             nmTipoEndereco: document.getElementById("tipoEnderecoEditar").value,
+            idPrincipal: document.getElementById("idPrincipalEditar").value,
             fkCdCliente: idCliente,
         };
 
@@ -519,6 +575,7 @@ document
             nmTituloEndereco:
                 document.getElementById("tituloEnderecoNovo").value,
             nmTipoEndereco: document.getElementById("tipoEnderecoNovo").value,
+            idPrincipal: document.getElementById("idPrincipalNovo").value,
             fkCdCliente: idCliente,
         };
 

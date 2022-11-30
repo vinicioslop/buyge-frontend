@@ -165,7 +165,12 @@
                 <div id="meusEnderecos" class="informacoes mostrar">
                     <div class="titulo-adicionar">
                         <h1 class="titulo-secao">Meus Endereços</h1>
-                        <button onclick="clicaSecaoInternaEnderecos('novoEndereco')" class="adicionar">Novo endereço</button>
+                        <button
+                            onclick="clicaSecaoInternaEnderecos('novoEndereco')"
+                            class="adicionar"
+                        >
+                            Novo endereço
+                        </button>
                     </div>
 
                     <hr class="linha" />
@@ -178,7 +183,9 @@
                         <div class="grupos">
                             <div class="grupo-esquerda">
                                 <div class="entrada-dados">
-                                    <label for="tituloEnderecoNovo">Título</label>
+                                    <label for="tituloEnderecoNovo"
+                                        >Título</label
+                                    >
                                     <input
                                         required
                                         type="text"
@@ -298,9 +305,7 @@
                             </div>
                             <div class="grupo-direita">
                                 <div class="entrada-dados">
-                                    <label for="tipoEnderecoNovo"
-                                        >Tipo</label
-                                    >
+                                    <label for="tipoEnderecoNovo">Tipo</label>
                                     <input
                                         required
                                         type="text"
@@ -345,6 +350,19 @@
                                         placeholder="Informe o número"
                                     />
                                 </div>
+                                <div class="entrada-dados">
+                                    <label for="idPrincipalNovo"
+                                        >Principal?</label
+                                    >
+                                    <select
+                                        required
+                                        name="idPrincipalNovo"
+                                        id="idPrincipalNovo"
+                                    >
+                                        <option value="1">Sim</option>
+                                        <option value="0">Não</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <button id="adicionarEndereco">
@@ -366,7 +384,9 @@
                                     id="idEnderecoEditar"
                                 />
                                 <div class="entrada-dados">
-                                    <label for="tituloEnderecoEditar">Título</label>
+                                    <label for="tituloEnderecoEditar"
+                                        >Título</label
+                                    >
                                     <input
                                         required
                                         type="text"
@@ -486,9 +506,7 @@
                             </div>
                             <div class="grupo-direita">
                                 <div class="entrada-dados">
-                                    <label for="tipoEnderecoEditar"
-                                        >Tipo</label
-                                    >
+                                    <label for="tipoEnderecoEditar">Tipo</label>
                                     <input
                                         required
                                         type="text"
@@ -532,6 +550,19 @@
                                         id="numeroClienteEditar"
                                         placeholder="Informe o número"
                                     />
+                                </div>
+                                <div class="entrada-dados">
+                                    <label for="idPrincipalEditar"
+                                        >Principal?</label
+                                    >
+                                    <select
+                                        required
+                                        name="idPrincipalEditar"
+                                        id="idPrincipalEditar"
+                                    >
+                                        <option value="1">Sim</option>
+                                        <option value="0">Não</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
