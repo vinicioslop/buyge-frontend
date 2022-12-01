@@ -221,8 +221,18 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         const idCliente = sessionStorage.getItem("idCliente");
         const itemsCarrinho = await carregarItensCarrinho(idCliente, token);
 
-        if (itemsCarrinho.length == undefined) {
-            window.location = "/";
+        if (itemsCarrinho.dados.length === 0) {
+            let semItems = document.querySelector(".sem-itens");
+            let informacoes = document.querySelector(".informacoes");
+
+            informacoes.className = "informacoes esconder";
+            semItems.className = "sem-itens mostrar-linha";
+        } else {
+            let semItems = document.querySelector(".sem-itens");
+            let informacoes = document.querySelector(".informacoes");
+
+            informacoes.className = "informacoes mostrar-coluna";
+            semItems.className = "sem-itens esconder";
         }
 
         await montarItemCarrinho(itemsCarrinho);

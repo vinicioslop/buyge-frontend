@@ -9,6 +9,20 @@
     --cor-principal-clara: #ad7cb5;
 }
 
+.esconder {
+    display: none;
+}
+
+.mostrar-coluna {
+    display: flex;
+    flex-direction: row;
+}
+
+.mostrar-linha {
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -29,8 +43,7 @@
 }
 
 .informacoes {
-    display: flex;
-    flex-direction: row;
+    
 
     width: 100%;
     height: 100%;
@@ -326,12 +339,16 @@
     background-color: var(--cor-principal-clara);
 }
 
-.container .sem-itens {
-    display: flex;
-    flex-direction: column;
+.sem-itens {
     align-items: center;
     justify-content: center;
 
     min-height: 80vh;
     width: 100%;
+}
+
+.sem-itens img {
+    margin-bottom: 20px;
+
+    height: 80px;
 }
