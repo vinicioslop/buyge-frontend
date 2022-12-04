@@ -1,0 +1,12 @@
+http://127.0.0.1:5500/src/pages/compras/compra.html?collection_id=1311149535&collection_status=approved&payment_id=1311149535&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=6711468801&preference_id=265323495-babc9526-1fc0-4eb1-9ed6-c3718ee9ad08&site_id=MLB&processing_mode=aggregator&merchant_account_id=null
+
+Estado do pagamento
+- pending: The user has not yet completed the payment process.
+- approved: The payment has been approved and accredited.
+- authorized: The payment has been authorized but not captured yet.
+- in_process: Payment is being reviewed.
+- in_mediation: Users have initiated a dispute.
+- rejected: Payment was rejected. The user may retry payment.
+- cancelled: Payment was cancelled by one of the parties or because time for payment has expired
+- refunded: Payment was refunded to the user.
+- charged_back: A chargeback was made in the buyer’s credit card.

@@ -299,8 +299,6 @@ async function montarEnderecos() {
 
     const enderecos = enderecosResposta.dados;
 
-    console.log(enderecos);
-
     const divEnderecos = document.querySelector(".enderecos");
 
     enderecos.forEach((endereco) => {

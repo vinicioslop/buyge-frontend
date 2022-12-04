@@ -81,7 +81,7 @@
 
     margin-top: 5px;
 
-    height: 80px;
+    height: 120px;
 }
 
 .informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto {
@@ -99,22 +99,22 @@
     align-items: center;
     justify-content: center;
 
-    height: 60px;
-    width: 60px;
+    min-height: 100px;
+    min-width: 100px;
 
     background-color: var(--cor-clara);
 }
 
 .informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto p {
-    margin-left: 10px;
+    margin-left: 12px;
 
-    width: 100%;
+    width: 90%;
 
     text-align: justify;
 }
 
 .informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto .imagem img {
-    height: 24px;
+    height: 100px;
     object-fit: scale-down;
 
     background-color: transparent;

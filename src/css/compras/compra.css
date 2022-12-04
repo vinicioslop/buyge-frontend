@@ -1,0 +1,32 @@
+:root {
+    --cor-fundo: #f1e9f3;
+    --cor-clara: #f9f9f9;
+    --cor-principal-rgb10: rgba(119, 37, 131, 0.1);
+    --cor-principal-rgb40: rgba(119, 37, 131, 0.4);
+    --cor-principal-rgb60: rgba(119, 37, 131, 0.6);
+    --cor-principal: #772583;
+    --cor-principal-clara: #ad7cb5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.mostrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.esconder {
+    display: none;
+}
+
+.container .titulo {
+    height: 30px;
+}

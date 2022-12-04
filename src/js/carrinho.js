@@ -23,6 +23,31 @@ async function carregarProduto(idProduto) {
     return produto;
 }
 
+async function carregarImagems(idProduto) {
+    const response = await fetch(
+        `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
+        {
+            mode: "cors",
+        }
+    );
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
 async function carregarItensCarrinho(idCliente, token) {
     const response = await fetch(`${fetchUrl}/carrinho/items/${idCliente}`, {
         method: "GET",
@@ -51,9 +76,9 @@ async function carregarItensCarrinho(idCliente, token) {
     }
 }
 
-async function adicionarItemCarrinho(idCliente, idItemCarrinho, token) {
+async function adicionarItemCarrinho(idCliente, idProduto, token) {
     const requisicao = await fetch(
-        `${fetchUrl}/carrinho/items/${idCliente}/${idItemCarrinho}`,
+        `${fetchUrl}/carrinho/items/${idCliente}/${idProduto}`,
         {
             method: "POST",
             mode: "cors",
@@ -135,6 +160,15 @@ async function montarItemCarrinho(itemsCarrinho) {
 
     itemsCarrinho.dados.forEach(async (item) => {
         let produto = await carregarProduto(item.fkCdProduto);
+        let imagens = await carregarImagems(item.fkCdProduto);
+
+        let imagemPrincipal = {};
+
+        imagens.dados.forEach((imagem) => {
+            if (imagem.idPrincipal == 1) {
+                imagemPrincipal = imagem;
+            }
+        });
 
         const tr = document.createElement("tr");
         tr.classList.add("produto");
@@ -142,7 +176,7 @@ async function montarItemCarrinho(itemsCarrinho) {
         tr.innerHTML = `<td class="nome-produto">
             <div class="imagem">
                 <img
-                    src="/src/icons/image-preto.svg"
+                    src="${imagemPrincipal.imgProdutoLink}"
                     alt=""
                 />
             </div>
@@ -173,27 +207,17 @@ async function montarItemCarrinho(itemsCarrinho) {
 }
 
 async function montarValores(itemsCarrinho) {
-    const valorBrutoCampo = document.querySelector("#valorBruto");
-    const valorDescontoCampo = document.querySelector("#valorDesconto");
-    const valorEntregaCampo = document.querySelector("#valorEntrega");
-    const valorTotalCampo = document.querySelector("#valorTotal");
-
     let valorBruto = 0;
 
-    itemsCarrinho.dados.forEach(async (item) => {
+    itemsCarrinho.dados.map(async (item) => {
         let produto = await carregarProduto(item.fkCdProduto);
 
-        valorBruto = valorBruto + produto.vlProduto;
+        valorBruto += produto.vlProduto * item.qtItemCarrinho;
 
         console.log(valorBruto);
     });
-
+    
     console.log(valorBruto);
-
-    valorBrutoCampo.innerText = mascaraPreco(valorBruto);
-    valorDescontoCampo.innerText = mascaraPreco(0);
-    valorEntregaCampo.innerText = mascaraPreco(0);
-    valorTotalCampo.innerText = mascaraPreco(valorBruto);
 }
 
 async function acionaMercadoPago() {
@@ -206,7 +230,13 @@ async function acionaMercadoPago() {
 
         const resposta = await gerarPreferencia(idCliente, token);
 
-        console.log(resposta);
+        if (resposta.status === 200) {
+            window.location = resposta.dados.sandboxInitPoint;
+        } else {
+            console.log(
+                "Ocorreu um erro na requisição. STATUS: " + resposta.status
+            );
+        }
     }
 }
 
@@ -216,10 +246,12 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const token = sessionStorage.getItem("token");
 
     if (token == null) {
-        window.location = "/";
+        //window.location = "/";
     } else {
         const idCliente = sessionStorage.getItem("idCliente");
         const itemsCarrinho = await carregarItensCarrinho(idCliente, token);
+
+        console.log(itemsCarrinho);
 
         if (itemsCarrinho.dados.length === 0) {
             let semItems = document.querySelector(".sem-itens");

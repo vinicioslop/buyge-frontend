@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <link rel="stylesheet" href="/src/css/compras/compra.css" />
+
         <link rel="stylesheet" href="/src/css/componentes/style.css" />
         <link
             rel="stylesheet"
@@ -12,15 +14,15 @@
         />
         <link rel="stylesheet" href="/src/css/componentes/rodape.css" />
 
-        <link rel="stylesheet" href="/src/css/carrinho.css" />
-
         <link
             rel="shortcut icon"
             href="/src/imgs/logo/logo_buyge_novo_branco.png"
             type="image/x-icon"
         />
 
-        <title>Página de Carrinho</title>
+        <link rel="stylesheet" href="/src/css/compras/compra.css">
+
+        <title>Página de Compra</title>
     </head>
     <body>
         <header id="barra-navegacao" class="barra-navegacao">
@@ -29,99 +31,16 @@
         </header>
 
         <div class="container">
-            <h1 class="titulo">Meu Carrinho</h1>
-            <div class="informacoes esconder">
-                <div class="grupo-esquerda">
-                    <table class="tabela-produtos">
-                        <tr class="titulos">
-                            <th class="nome-imagem">Produto</th>
-                            <th class="quantidade">Quantidade</th>
-                            <th class="valor-unitario">Valor Unitário</th>
-                            <th class="subtotal">Subtotal</th>
-                            <th></th>
-                        </tr>
-                    </table>
-                    <hr class="linha" />
-                </div>
-                <div class="grupo-direita">
-                    <div class="frete-prazo">
-                        <div class="grupo-texto">
-                            <div class="truck-texto">
-                                <img
-                                    src="/src/icons/delivery-truck-roxo.svg"
-                                    alt=""
-                                    class="truck"
-                                />
-                                <p class="texto">Calcular o Frete e o Prazo</p>
-                            </div>
-                            <form class="frete">
-                                <input
-                                    type="text"
-                                    name="cep"
-                                    id="cep"
-                                    placeholder="Digite o CEP aqui"
-                                />
-                                <button class="calcularFrete">Calcular</button>
-                            </form>
-                        </div>
-                    </div>
-                    <hr class="linha" />
-                    <div class="valores">
-                        <div class="valor">
-                            <p>Valor da Compra</p>
-                            <div id="valorBruto"></div>
-                        </div>
-
-                        <!--
-                        <div class="valor">
-                            <p>Subtotal</p>
-                            <p>R$ Valor</p>
-                        </div>
-                        -->
-
-                        <div class="valor">
-                            <p>Desconto</p>
-                            <div id="valorDesconto"></div>
-                        </div>
-                        <div class="valor">
-                            <p>Entrega</p>
-                            <div id="valorEntrega"></div>
-                        </div>
-                        <div class="valor">
-                            <p>Total</p>
-                            <div id="valorTotal"></div>
-                        </div>
-                    </div>
-                    <hr class="linha" />
-                    <div class="cupom-desconto">
-                        <div class="texto">
-                            <p>Possui cupom de desconto?</p>
-                            <img src="/src/icons/seta-cima-preto.svg" alt="" />
-                        </div>
-                        <form class="form-cupom">
-                            <input
-                                type="text"
-                                name="cupom"
-                                id="cupom"
-                                placeholder="Digite ou cole o código"
-                            />
-                            <button class="calcularCupom">Aplicar</button>
-                        </form>
-                    </div>
-                    <button
-                        type="button"
-                        id="comprar"
-                        class="comprar"
-                        onclick="acionaMercadoPago()"
-                    >
-                        Continuar a Compra
-                    </button>
-                </div>
+            <div class="compra-ok mostrar">
+                <h2 class="titulo">Compra OK</h2>
             </div>
 
-            <div class="sem-itens esconder">
-                <img src="/src/icons/box-roxa.svg" alt="" />
-                <h2 class="titulo">Você não possui itens no carrinho!</h2>
+            <div class="compra-processando mostrar">
+                <h2 class="titulo">Compra Processando</h2>
+            </div>
+
+            <div class="compra-fail mostrar">
+                <h2 class="titulo">Compra Fail</h2>
             </div>
         </div>
 
@@ -201,7 +120,7 @@
             </div>
         </footer>
 
-        <script src="/src/js/carrinho.js"></script>
+        <script src="/src/js/compras/compra.js"></script>
 
         <script src="/src/js/componentes/barra-navegacao.js"></script>
     </body>
