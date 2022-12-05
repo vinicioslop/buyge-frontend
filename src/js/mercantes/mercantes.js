@@ -61,7 +61,7 @@ function produtosMercante(idMercante) {
 
 function editarMercante(idMercante) {
     window.location =
-        "/src/pages/mercantes/editarMercante.html?idMercante=" + idMercante;
+        "/src/pages/mercantes/mercante.html?idMercante=" + idMercante;
 }
 
 function montarCartoes(mercantes) {

@@ -188,7 +188,7 @@ async function montarItemCarrinho(itemsCarrinho) {
                 type="number"
                 name="quantidadeProduto"
                 id="quantidadeProduto"
-                value="${1}"
+                value="${item.qtItemCarrinho}"
             />
             <button class="adicionar">+</button>
         </td>
@@ -213,11 +213,7 @@ async function montarValores(itemsCarrinho) {
         let produto = await carregarProduto(item.fkCdProduto);
 
         valorBruto += produto.vlProduto * item.qtItemCarrinho;
-
-        console.log(valorBruto);
     });
-    
-    console.log(valorBruto);
 }
 
 async function acionaMercadoPago() {
@@ -251,18 +247,20 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         const idCliente = sessionStorage.getItem("idCliente");
         const itemsCarrinho = await carregarItensCarrinho(idCliente, token);
 
-        console.log(itemsCarrinho);
-
         if (itemsCarrinho.dados.length === 0) {
+            let titulo = document.querySelector(".titulo");
             let semItems = document.querySelector(".sem-itens");
             let informacoes = document.querySelector(".informacoes");
 
+            titulo.className = "titulo esconder";
             informacoes.className = "informacoes esconder";
             semItems.className = "sem-itens mostrar-linha";
         } else {
+            let titulo = document.querySelector(".titulo");
             let semItems = document.querySelector(".sem-itens");
             let informacoes = document.querySelector(".informacoes");
 
+            titulo.className = "titulo";
             informacoes.className = "informacoes mostrar-coluna";
             semItems.className = "sem-itens esconder";
         }

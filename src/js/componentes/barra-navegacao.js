@@ -20,6 +20,34 @@ async function buscarCategorias() {
     }
 }
 
+async function buscarDadosCliente(idCliente, token) {
+    const response = await fetch(`${url}/clientes/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
 async function veriricarToken(token) {
     const requisicao = await fetch(`${url}/token`, {
         method: "GET",
@@ -39,6 +67,24 @@ async function veriricarToken(token) {
         case 401:
             return false;
     }
+}
+
+function logar() {
+    window.location = "/src/pages/login.html";
+}
+
+function criarConta() {
+    window.location = "/src/pages/sign.html";
+}
+
+function desconectar() {
+    sessionStorage.clear();
+
+    window.location.reload();
+}
+
+function redirecionarPefilUsuario() {
+    window.location = "/src/pages/usuario/usuario.html";
 }
 
 function montaBarraNavegacaoPequena(categorias) {
@@ -76,9 +122,10 @@ function montaBarraNavegacaoPequena(categorias) {
     });
 }
 
-function montaBarraNavegacaoGrande(categorias) {
+async function montaBarraNavegacaoGrande(categorias) {
     // BARRA DE NAVEGAÇÃO
     const barraGrande = document.querySelector("#barraGrande");
+
     barraGrande.innerHTML = `
     <div class="grupo-superior">
         <div class="grupo-superior-esquerdo">
@@ -106,17 +153,10 @@ function montaBarraNavegacaoGrande(categorias) {
                 </a>
             </div>
         </div>
-        <div class="grupo-superior-direito navbar">
+        <div class="grupo-superior-direito navbarDireita">
             <div class="grupo-icones">
-                <a href="/src/pages/mercantes/editarMercante.html" class="icone-link">
-                    <img
-                        class="icone"
-                        id="mercantes-icon"
-                        src="/src/icons/lojas-branco.svg"
-                        alt="Ícone de mercantes branco"
-                    />
-                </a>
-                <a href="/src/pages/favoritos.html" class="icone-link">
+                
+                <a href="/src/pages/favoritos.html" id="linkFavoritos" class="icone-link">
                     <img
                         class="icone"
                         id="favoritos-icon"
@@ -132,8 +172,8 @@ function montaBarraNavegacaoGrande(categorias) {
                         alt="Ícone de carrinho branco"
                     />
                 </a>
-                <div class="dropdown">
-                    <div class="usuario dropbtn">
+                <div class="menuUsuario">
+                    <div class="usuario ativador">
                         <img
                             class="icone"
                             id="user-icon"
@@ -141,15 +181,15 @@ function montaBarraNavegacaoGrande(categorias) {
                             alt="Ícone de usuario branco"
                         />
                     </div>
-                <div id="usuarioConteudo" class="dropdown-content"></div>
+                    <div id="usuarioConteudo" class="usuarioConteudo"></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="grupo-inferior">
-        <div class="grupo-inferior-esquerdo navbar">
-            <div class="dropdown">
-                <div class="categorias dropbtn">
+        <div class="grupo-inferior-esquerdo navbarEsquerda">
+            <div class="menuCategorias">
+                <div class="categorias ativador">
                     <img
                         class="icone"
                         id="categorias-icone"
@@ -158,7 +198,7 @@ function montaBarraNavegacaoGrande(categorias) {
                     />
                     <p id="categorias-titulo">Todas as categorias</p>
                 </div>
-                <div id="categoriasConteudo" class="dropdown-content"></div>
+                <div id="categoriasConteudo" class="categoriasConteudo"></div>
             </div>
         </div>
         <div class="grupo-inferior-direito">
@@ -195,18 +235,66 @@ function montaBarraNavegacaoGrande(categorias) {
 
     const usuarioConteudo = document.getElementById("usuarioConteudo");
 
-    const logar = document.createElement("a");
-    logar.setAttribute("onclick", "clicarUsuario()");
-    logar.id = "logar";
-    logar.innerText = "Logar";
+    const token = sessionStorage.getItem("token");
 
-    const desconectar = document.createElement("a");
-    desconectar.setAttribute("onclick", "desconectar()");
-    desconectar.id = "desconectar";
-    desconectar.innerText = "Desconectar";
+    if (token === null) {
+        const logar = document.createElement("a");
+        logar.setAttribute("onclick", "logar()");
+        logar.id = "logar";
+        logar.innerText = "Logar";
 
-    usuarioConteudo.appendChild(logar);
-    usuarioConteudo.appendChild(desconectar);
+        const criarConta = document.createElement("a");
+        criarConta.setAttribute("onclick", "criarConta()");
+        criarConta.id = "criarConta";
+        criarConta.innerText = "Criar Conta";
+
+        usuarioConteudo.appendChild(logar);
+        usuarioConteudo.appendChild(criarConta);
+    } else {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await buscarDadosCliente(idCliente, token);
+        const cliente = resposta.dados;
+
+        if (cliente.nmTipoConta == "Vendedor") {
+            const grupoIcones = document.querySelector(".grupo-icones");
+            const iconeFavoritos = document.querySelector("#linkFavoritos");
+
+            const mercanteLink = document.createElement("a");
+            mercanteLink.setAttribute("href", "/src/pages/mercantes/mercante.html");
+            mercanteLink.className = "icone-link";
+
+            mercanteLink.innerHTML =
+            `
+            <img
+                class="icone"
+                id="mercantes-icon"
+                src="/src/icons/lojas-branco.svg"
+                alt="Ícone de mercantes branco"
+            />
+            `;
+
+            grupoIcones.insertBefore(mercanteLink, iconeFavoritos);
+        }
+
+        const nomeCliente = document.createElement("a");
+        nomeCliente.id = "nomeCliente";
+        nomeCliente.innerText = `Olá, ${cliente.nmCliente}`;
+
+        const perfilUsuario = document.createElement("a");
+        perfilUsuario.setAttribute("onclick", "redirecionarPefilUsuario()");
+        perfilUsuario.id = "perfilUsuario";
+        perfilUsuario.innerText = "Minha Conta";
+
+        const desconectar = document.createElement("a");
+        desconectar.setAttribute("onclick", "desconectar()");
+        desconectar.id = "desconectar";
+        desconectar.innerText = "Desconectar";
+
+        usuarioConteudo.appendChild(nomeCliente);
+        usuarioConteudo.appendChild(perfilUsuario);
+        usuarioConteudo.appendChild(desconectar);
+    }
 
     barraGrande.setAttribute("class", "mostrar-column");
 }
@@ -232,31 +320,6 @@ function montaBarra(categorias) {
         esconderConteudoBarra("pequena");
         montaBarraNavegacaoGrande(categorias);
     }
-}
-
-async function clicarUsuario() {
-    const token = sessionStorage.getItem("token");
-    const valido = await veriricarToken(token);
-
-    if (valido) {
-        logado();
-    } else {
-        deslogado();
-    }
-}
-
-function logado() {
-    window.location = "/src/pages/usuario/usuario.html";
-}
-
-function deslogado() {
-    window.location = "/src/pages/login.html";
-}
-
-function desconectar() {
-    sessionStorage.clear();
-
-    window.location.reload();
 }
 
 document.addEventListener("load", async (e) => {

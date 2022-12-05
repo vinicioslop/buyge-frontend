@@ -84,7 +84,7 @@ async function carregarCategorias(idCategoria) {
 }
 
 async function adicionarItemCarrinho(idCliente, idProduto, token) {
-    const requisicao = await fetch(
+    const response = await fetch(
         `${fetchUrl}/carrinho/items/${idCliente}/${idProduto}`,
         {
             method: "POST",
@@ -96,13 +96,30 @@ async function adicionarItemCarrinho(idCliente, idProduto, token) {
             },
         }
     );
-    const resposta = await requisicao.json();
+    const status = response.status;
 
-    return resposta;
+    switch (status) {
+        case 201:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function comprarProduto(idProduto) {
-    console.log(idProduto);
+    const respostaCarrinho = await adicionarCarrinho(idProduto);
+
+    if (respostaCarrinho.status == 201) {
+        window.location = "/src/pages/carrinho.html";
+    }
 }
 
 async function adicionarCarrinho(idProduto) {
@@ -115,9 +132,13 @@ async function adicionarCarrinho(idProduto) {
 
     const idCliente = sessionStorage.getItem("idCliente");
 
-    const itemCarrinhoResposta = await adicionarItemCarrinho(idCliente, idProduto, token);
+    const itemCarrinhoResposta = await adicionarItemCarrinho(
+        idCliente,
+        idProduto,
+        token
+    );
 
-    console.log(itemCarrinhoResposta);
+    return itemCarrinhoResposta;
 }
 
 async function montarProduto(idProduto) {
@@ -175,7 +196,16 @@ async function montarProduto(idProduto) {
     comprar.setAttribute("onclick", `comprarProduto(${produto.cdProduto})`);
 
     const adicionarCarrinho = document.querySelector(".carrinho");
-    adicionarCarrinho.setAttribute("onclick", `adicionarCarrinho(${produto.cdProduto})`);
+    adicionarCarrinho.setAttribute(
+        "onclick",
+        `adicionarCarrinho(${produto.cdProduto})`
+    );
+
+    const comprarProduto = document.querySelector(".comprar");
+    comprarProduto.setAttribute(
+        "onclick",
+        `comprarProduto(${produto.cdProduto})`
+    );
 }
 
 document.addEventListener("DOMContentLoaded", () => {

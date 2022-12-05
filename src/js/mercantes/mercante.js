@@ -79,6 +79,34 @@ async function removerMercante(idMercante, token) {
     return requisicao.status;
 }
 
+async function carregarEnderecoLoja(idMercante, token) {
+    const response = await fetch(`${fetchUrl}/enderecos/${idMercante}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
 async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",

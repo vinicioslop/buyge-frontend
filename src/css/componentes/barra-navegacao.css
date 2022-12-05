@@ -338,10 +338,10 @@
     .barra-navegacao .grupo-superior .grupo-superior-direito .grupo-icones {
         /* POSICIONAMENTO */
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
 
         /* DIMENSIONAMENTO */
-        width: 80%;
+        width: 90%;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -369,7 +369,88 @@
         justify-content: center;
 
         width: 60px;
+
+        background-color: transparent;
     }
+
+    /* MENU FLUTUANTE */
+    /* Navbar container */
+    .navbarDireita {
+        overflow: hidden;
+    }
+
+    /* Links inside the navbar */
+    .navbarDireita a {
+        float: left;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* The dropdown container */
+    .menuUsuario {
+        align-self: center;
+
+        height: 100%;
+
+        float: left;
+        overflow: visible;
+
+        background-color: transparent;
+    }
+
+    /* Dropdown button */
+    .menuUsuario .ativador {
+        border: none;
+        outline: none;
+
+        background-color: transparent;
+    }
+
+    /* Add a red background color to navbar links on hover */
+    .navbarDireita a:hover,
+    .menuUsuario:hover .ativador {
+        background-color: transparent;
+    }
+
+    /* Dropdown content (hidden by default) */
+    .usuarioConteudo {
+        display: none;
+        position: absolute;
+
+        top: 55px;
+        right: 18px;
+
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .usuarioConteudo a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+
+        background-color: var(--cor-fundo);
+    }
+
+    /* Add a grey background color to dropdown links on hover */
+    .usuarioConteudo a:hover {
+        color: var(--cor-clara);
+        background-color: var(--cor-principal-clara);
+    }
+
+    /* Show the dropdown menu on hover */
+    .menuUsuario:hover .usuarioConteudo {
+        display: block;
+    }
+    /* MENU FLUTUANTE */
 
     /* GRUPO INFERIOR DA BARRA DE NAVEGAÇÃO */
     .barra-navegacao .grupo-inferior {
@@ -454,12 +535,12 @@
 
     /* MENU FLUTUANTE */
     /* Navbar container */
-    .navbar {
+    .navbarEsquerda {
         overflow: hidden;
     }
 
     /* Links inside the navbar */
-    .navbar a {
+    .navbarEsquerda a {
         float: left;
         font-size: 16px;
         color: white;
@@ -469,7 +550,7 @@
     }
 
     /* The dropdown container */
-    .dropdown {
+    .menuCategorias {
         align-self: center;
 
         float: left;
@@ -479,7 +560,7 @@
     }
 
     /* Dropdown button */
-    .dropdown .dropbtn {
+    .menuCategorias .ativador {
         border: none;
         outline: none;
 
@@ -487,22 +568,26 @@
     }
 
     /* Add a red background color to navbar links on hover */
-    .navbar a:hover,
-    .dropdown:hover .dropbtn {
+    .navbarEsquerda a:hover,
+    .menuCategorias:hover .ativador {
         background-color: transparent;
     }
 
     /* Dropdown content (hidden by default) */
-    .dropdown-content {
+    .categoriasConteudo {
         display: none;
         position: absolute;
+
+        top: 118px;
+        left: 65px;
+
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
     }
 
     /* Links inside the dropdown */
-    .dropdown-content a {
+    .categoriasConteudo a {
         float: none;
         color: black;
         padding: 12px 16px;
@@ -514,13 +599,13 @@
     }
 
     /* Add a grey background color to dropdown links on hover */
-    .dropdown-content a:hover {
+    .categoriasConteudo a:hover {
         color: var(--cor-clara);
         background-color: var(--cor-principal-clara);
     }
 
     /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {
+    .menuCategorias:hover .categoriasConteudo {
         display: block;
     }
     /* MENU FLUTUANTE */
@@ -605,7 +690,9 @@
     height: 100%;
 }
 
-.esconder, .mostrar-row, .mostrar-column {
+.esconder,
+.mostrar-row,
+.mostrar-column {
     background-color: transparent;
 }
 
