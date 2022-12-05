@@ -341,7 +341,7 @@
         justify-content: space-between;
 
         /* DIMENSIONAMENTO */
-        width: 70%;
+        width: 80%;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -356,10 +356,19 @@
     /* ÍCONE SUPERIOR */
     .barra-navegacao .grupo-superior .grupo-superior-direito .icone {
         /* DIMENSIONAMENTO */
-        height: 24px;
+        height: 26px;
 
         /* APARÊNCIA */
         background-color: transparent;
+    }
+
+    .barra-navegacao .grupo-superior .grupo-superior-direito .usuario {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 60px;
     }
 
     /* GRUPO INFERIOR DA BARRA DE NAVEGAÇÃO */
@@ -461,6 +470,8 @@
 
     /* The dropdown container */
     .dropdown {
+        align-self: center;
+
         float: left;
         overflow: hidden;
 

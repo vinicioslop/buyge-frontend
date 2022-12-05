@@ -383,9 +383,8 @@ input::placeholder {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 
-    margin-bottom: 20px;
+    width: 100%;
 
     background-color: transparent;
 }
@@ -395,14 +394,12 @@ input::placeholder {
     flex-direction: column;
     align-items: center;
 
-    width: 50%;
+    width: 100%;
 
     background-color: transparent;
 }
 
 .conteudo .informacoes .formulario .grupo-lateral .entrada-dados input {
-    padding-right: 10px;
-
     width: 95%;
 }
 

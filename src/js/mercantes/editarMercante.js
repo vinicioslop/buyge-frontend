@@ -377,10 +377,12 @@ async function carregarInformacoesMercantePerfilLoja() {
         window.location = "/";
     }
 
+    const idMercante = document.querySelector("#idMercantePerfilLoja");
     const nome = document.querySelector("#nomePerfilLoja");
     const email = document.querySelector("#emailPerfilLoja");
     const descricao = document.querySelector("#descricaoPerfilLoja");
 
+    idMercante.value = mercante[0].cdMercante;
     nome.value = mercante[0].nmLoja;
     email.value = mercante[0].nmEmail;
     descricao.value = mercante[0].dsLoja;
@@ -487,17 +489,15 @@ document
             console.log("Cliente não autenticado");
             return;
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const idMercante = urlParams.get("idMercante");
+        
         const idCliente = sessionStorage.getItem("idCliente");
 
         const mercante = {
-            cdMercante: parseInt(idMercante),
+            cdMercante: document.querySelector("#idMercantePerfilLoja").value,
             nmLoja: document.querySelector("#nomePerfilLoja").value,
             nmEmail: document.querySelector("#emailPerfilLoja").value,
             dsLoja: document.querySelector("#descricaoPerfilLoja").value,
-            fkCdCliente: parseInt(idCliente),
+            fkCdCliente: idCliente,
         };
 
         const status = await atualizarMercante(mercante, token);

@@ -106,7 +106,7 @@ function montaBarraNavegacaoGrande(categorias) {
                 </a>
             </div>
         </div>
-        <div class="grupo-superior-direito">
+        <div class="grupo-superior-direito navbar">
             <div class="grupo-icones">
                 <a href="/src/pages/mercantes/editarMercante.html" class="icone-link">
                     <img
@@ -132,13 +132,17 @@ function montaBarraNavegacaoGrande(categorias) {
                         alt="Ícone de carrinho branco"
                     />
                 </a>
-                <a href="/src/pages/usuario/usuario.html" class="icone-link"
-                    ><img
-                        class="icone"
-                        id="user-icon"
-                        src="/src/icons/user-branco.svg"
-                        alt="Ícone de usuario branco"
-                /></a>
+                <div class="dropdown">
+                    <div class="usuario dropbtn">
+                        <img
+                            class="icone"
+                            id="user-icon"
+                            src="/src/icons/user-branco.svg"
+                            alt="Ícone de usuario branco"
+                        />
+                    </div>
+                <div id="usuarioConteudo" class="dropdown-content"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -154,7 +158,7 @@ function montaBarraNavegacaoGrande(categorias) {
                     />
                     <p id="categorias-titulo">Todas as categorias</p>
                 </div>
-                <div class="dropdown-content"></div>
+                <div id="categoriasConteudo" class="dropdown-content"></div>
             </div>
         </div>
         <div class="grupo-inferior-direito">
@@ -172,14 +176,14 @@ function montaBarraNavegacaoGrande(categorias) {
     `;
 
     // CONTEÚDO DO MENU
-    const menuConteudo = document.getElementsByClassName("dropdown-content")[0];
+    const categoriasConteudo = document.getElementById("categoriasConteudo");
 
     categorias.forEach((categoria) => {
         let item = document.createElement("a");
         item.setAttribute("href", "#");
         item.innerText = categoria.nmCategoria;
 
-        menuConteudo.appendChild(item);
+        categoriasConteudo.appendChild(item);
     });
 
     const todasLojas = document.createElement("a");
@@ -187,13 +191,22 @@ function montaBarraNavegacaoGrande(categorias) {
     todasLojas.id = "todasLojas";
     todasLojas.innerText = "Todas as Lojas";
 
+    categoriasConteudo.appendChild(todasLojas);
+
+    const usuarioConteudo = document.getElementById("usuarioConteudo");
+
+    const logar = document.createElement("a");
+    logar.setAttribute("onclick", "clicarUsuario()");
+    logar.id = "logar";
+    logar.innerText = "Logar";
+
     const desconectar = document.createElement("a");
     desconectar.setAttribute("onclick", "desconectar()");
     desconectar.id = "desconectar";
     desconectar.innerText = "Desconectar";
 
-    menuConteudo.appendChild(todasLojas);
-    menuConteudo.appendChild(desconectar);
+    usuarioConteudo.appendChild(logar);
+    usuarioConteudo.appendChild(desconectar);
 
     barraGrande.setAttribute("class", "mostrar-column");
 }

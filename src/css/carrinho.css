@@ -43,8 +43,6 @@
 }
 
 .informacoes {
-    
-
     width: 100%;
     height: 100%;
 }
@@ -113,7 +111,13 @@
     text-align: justify;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto .imagem img {
+.informacoes
+    .grupo-esquerda
+    .tabela-produtos
+    .produto
+    .nome-produto
+    .imagem
+    img {
     height: 100px;
     object-fit: scale-down;
 
@@ -124,7 +128,12 @@
     width: 20%;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .quantidade-produto .adicionar,
+.informacoes
+    .grupo-esquerda
+    .tabela-produtos
+    .produto
+    .quantidade-produto
+    .adicionar,
 .remover {
     width: 30px;
     height: 30px;
@@ -137,7 +146,12 @@
     background-color: var(--cor-principal-clara);
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .quantidade-produto input {
+.informacoes
+    .grupo-esquerda
+    .tabela-produtos
+    .produto
+    .quantidade-produto
+    input {
     text-align: center;
 
     width: 60px;
@@ -154,13 +168,14 @@
     background-color: var(--cor-principal-clara);
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .valor-unitario-produto, .subtotal-produto {
+.informacoes .grupo-esquerda .tabela-produtos .produto .valor-unitario-produto,
+.subtotal-produto {
     text-align: center;
 }
 
 .informacoes .grupo-esquerda .linha {
     align-self: center;
-    
+
     width: 95%;
 
     border: 1px solid rgba(0, 0, 0, 0.4);
@@ -176,7 +191,7 @@
 
 .informacoes .grupo-direita .linha {
     align-self: center;
-    
+
     width: 100%;
 
     border: 1px solid rgba(0, 0, 0, 0.4);

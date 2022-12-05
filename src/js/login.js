@@ -31,30 +31,24 @@ function gravaSessao(idCliente, token) {
     sessionStorage.setItem("token", token);
 }
 
-function mostraCaixa() {
-    const container = document.querySelector(".container");
+function mostraMensagem() {
+    let falhas = document.querySelectorAll('.falha');
+
+    if (falhas.length > 0) {
+        falhas.remove();
+    }
+
+    const formLogin = document.querySelector(".form-login");
+    const grupoInput = document.querySelector(".grupo-input");
 
     const falha = document.createElement("div");
     falha.classList.add("falha");
     const texto = document.createElement("p");
     texto.innerText = "Email e/ou login incorretos ou inexistente!";
-    const botao = document.createElement("button");
-    botao.id = "fecharCaixa";
-    botao.classList.add("efeito");
-    botao.innerText = "OK";
-    botao.setAttribute("onclick", "removeCaixa()");
 
     falha.appendChild(texto);
-    falha.appendChild(botao);
 
-    container.append(falha);
-}
-
-function removeCaixa() {
-    const container = document.querySelector(".container");
-    const falha = document.getElementsByClassName("falha")[0];
-
-    container.removeChild(falha);
+    formLogin.insertBefore(falha, grupoInput);
 }
 
 function criar() {
@@ -83,10 +77,10 @@ document.getElementById("entrar").addEventListener("click", async (e) => {
             window.location.replace("/");
             break;
         case 404:
-            mostraCaixa();
+            mostraMensagem();
             break;
         default:
-            mostraCaixa();
+            mostraMensagem();
             break;
     }
 });
