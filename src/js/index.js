@@ -91,6 +91,115 @@ async function carregarMercantes() {
     }
 }
 
+async function carregarFavoritos(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function adicionarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const status = response.status;
+
+    switch (status) {
+        case 201:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function apagarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
 function produtosMercante(idMercante) {
     window.location =
         "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
@@ -100,7 +209,35 @@ function exibirProduto(idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
 }
 
-async function montaCartao() {
+async function favoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await adicionarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 201) {
+            window.location.reload();
+        }
+    }
+}
+
+async function desfavoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await apagarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 200) {
+            window.location.reload();
+        }
+    }
+}
+
+async function montaCartao(idCliente, token) {
     const produtosResposta = await carregarProdutos();
     if (produtosResposta.status !== 200) {
         console.log(
@@ -137,6 +274,15 @@ async function montaCartao() {
     }
     const mercantes = mercantesResposta.dados;
 
+    const favoritosResposta = await carregarFavoritos(idCliente, token);
+    if (favoritosResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                favoritosResposta.status
+        );
+    }
+    const favoritos = favoritosResposta.dados;
+
     const maisVendidos = new Flickity("#mais-vendidos");
     const novidades = new Flickity("#novidades");
     const queimaEstoque = new Flickity("#queima-estoque");
@@ -166,7 +312,27 @@ async function montaCartao() {
 
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
-        iconeFavorito.src = "/src/icons/heart-roxo.svg";
+        iconeFavorito.id = "produto" + produto.cdProduto;
+
+        favoritos.forEach((favorito) => {
+            if (favorito.fkCdProduto == produto.cdProduto) {
+                iconeFavorito.src = "/src/icons/heart-cheio.svg";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `desfavoritar(${produto.cdProduto})`
+                );
+            }
+        });
+
+        if (iconeFavorito.src == "") {
+            iconeFavorito.src = "/src/icons/heart.svg";
+
+            iconeFavorito.setAttribute(
+                "onclick",
+                `favoritar(${produto.cdProduto})`
+            );
+        }
 
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
@@ -235,7 +401,7 @@ async function montaCartao() {
         const botao = document.createElement("button");
         botao.classList.add("comprar");
         botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "COMPRA";
+        botao.innerText = "VISUALIZAR";
 
         precoParcelaBotao.appendChild(precoParcela);
         precoParcelaBotao.appendChild(botao);
@@ -275,7 +441,27 @@ async function montaCartao() {
 
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
-        iconeFavorito.src = "/src/icons/heart-roxo.svg";
+        iconeFavorito.id = "produto" + produto.cdProduto;
+
+        favoritos.forEach((favorito) => {
+            if (favorito.fkCdProduto == produto.cdProduto) {
+                iconeFavorito.src = "/src/icons/heart-cheio.svg";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `desfavoritar(${produto.cdProduto})`
+                );
+            }
+        });
+
+        if (iconeFavorito.src == "") {
+            iconeFavorito.src = "/src/icons/heart.svg";
+
+            iconeFavorito.setAttribute(
+                "onclick",
+                `favoritar(${produto.cdProduto})`
+            );
+        }
 
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
@@ -384,7 +570,27 @@ async function montaCartao() {
 
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
-        iconeFavorito.src = "/src/icons/heart-roxo.svg";
+        iconeFavorito.id = "produto" + produto.cdProduto;
+
+        favoritos.forEach((favorito) => {
+            if (favorito.fkCdProduto == produto.cdProduto) {
+                iconeFavorito.src = "/src/icons/heart-cheio.svg";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `desfavoritar(${produto.cdProduto})`
+                );
+            }
+        });
+
+        if (iconeFavorito.src == "") {
+            iconeFavorito.src = "/src/icons/heart.svg";
+
+            iconeFavorito.setAttribute(
+                "onclick",
+                `favoritar(${produto.cdProduto})`
+            );
+        }
 
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
@@ -472,5 +678,11 @@ async function montaCartao() {
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
-    montaCartao();
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        montaCartao(idCliente, token);
+    }
 });

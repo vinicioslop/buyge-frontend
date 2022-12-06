@@ -44,21 +44,9 @@ const carregarMercante = async (
     montarCartoes(produtos, produtoImagens, categorias, mercante);
 };
 
-const editarProduto = function (idProduto) {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const idMercante = urlParams.get("idMercante");
-
-    window.location =
-        "/src/pages/produtos/editarProduto.html?idMercante=" +
-        idMercante +
-        "&idProduto=" +
-        idProduto;
-};
-
-const exibirProduto = function (idProduto) {
+function exibirProduto(idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
-};
+}
 
 function montarCartoes(produtos, produtoImagens, categorias, mercante) {
     const container = document.querySelector(".container");
@@ -94,19 +82,10 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
 
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
-        iconeFavorito.src = "/src/icons/heart-roxo.svg";
-
-        const iconeEditar = document.createElement("img");
-        iconeEditar.classList.add("editar");
-        iconeEditar.src = "/src/icons/edit2-roxo.svg";
-        iconeEditar.setAttribute(
-            "onclick",
-            `editarProduto(${produto.cdProduto})`
-        );
+        iconeFavorito.src = "/src/icons/heart.svg";
 
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
-        imagemFavorito.appendChild(iconeEditar);
 
         const informacoes = document.createElement("div");
         informacoes.classList.add("informacoes");
@@ -162,11 +141,8 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
-        botao.setAttribute(
-            "onclick",
-            "window.location.href = '/src/pages/produtos/produto.html'"
-        );
-        botao.innerText = "COMPRA";
+        botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
+        botao.innerText = "VISUALIZAR";
 
         precoParcelaBotao.appendChild(precoParcela);
         precoParcelaBotao.appendChild(botao);
@@ -190,15 +166,4 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const idMercante = urlParams.get("idMercante");
 
     carregarProdutos(idMercante);
-});
-
-document.getElementById("adicionarProduto").addEventListener("click", (e) => {
-    e.preventDefault();
-
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const idMercante = urlParams.get("idMercante");
-
-    window.location =
-        "/src/pages/produtos/novoProduto.html?idMercante=" + idMercante;
 });

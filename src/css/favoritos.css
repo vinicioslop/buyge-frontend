@@ -39,6 +39,30 @@
         /* DIMENSIONAMENTO */
         width: 95%;
     }
+
+    .container .produtos-favoritados {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        margin-top: 20px;
+
+        width: 100%;
+    }
+
+    .container .produtos-favoritados .cartao {
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.mostrar {
+    display: flex;
+    flex-direction: column;
+}
+
+.esconder {
+    display: none;
 }
 
 .container .titulo {
@@ -46,22 +70,4 @@
     font-weight: normal;
 
     margin-top: 30px;
-}
-
-.favorito {
-    display: flex;
-    flex-direction: column;
-
-    height: 300px;
-    width: 200px;
-
-    background-color: var(--cor-clara);
-}
-
-.favorito img, div {
-    background-color: transparent;
-}
-
-.favorito #remover {
-    height: 30px;
 }

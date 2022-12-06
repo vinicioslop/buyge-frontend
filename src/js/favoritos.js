@@ -1,7 +1,7 @@
 const fetchUrl = "https://localhost:7240/api";
 
 function mascaraPreco(preco) {
-    var valorFormatado = preco.toLocaleString("pt-BR", {
+    const valorFormatado = preco.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
     });
@@ -11,53 +11,124 @@ function mascaraPreco(preco) {
 
 async function carregarProdutos() {
     const response = await fetch(`${fetchUrl}/produtos`, { mode: "cors" });
-    const produtos = await response.json();
+    const status = await response.status;
 
-    return produtos;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function carregarImagems() {
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
         mode: "cors",
     });
-    const produtoImagens = await response.json();
+    const status = await response.status;
 
-    return produtoImagens;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
-    const categorias = await response.json();
+    const status = await response.status;
 
-    return categorias;
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function carregarMercantes() {
     const response = await fetch(`${fetchUrl}/mercantes`, { mode: "cors" });
-    const mercantes = await response.json();
+    const status = await response.status;
 
-    return mercantes;
-}
+    switch (status) {
+        case 200:
+            const dados = await response.json();
 
-function exibirProduto (idProduto) {
-    window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
-};
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
 
-function produtosMercante(idMercante) {
-    window.location =
-        "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
 }
 
 async function montaCartao() {
-    const produtos = await carregarProdutos();
-    const produtoImagens = await carregarImagems();
-    const categorias = await carregarCategorias();
-    const mercantes = await carregarMercantes();
+    const produtosResposta = await carregarProdutos();
+    if (produtosResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                produtosResposta.status
+        );
+    }
+    const produtos = produtosResposta.dados;
 
-    const container = document.querySelector(".container");
+    const produtoImagensResposta = await carregarImagems();
+    if (produtoImagensResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                produtoImagensResposta.status
+        );
+    }
+    const produtoImagens = produtoImagensResposta.dados;
 
-    const containerProdutos = document.createElement("div");
-    containerProdutos.classList.add("produtos");
+    const categoriasResposta = await carregarCategorias();
+    if (categoriasResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                categoriasResposta.status
+        );
+    }
+    const categorias = categoriasResposta.dados;
+
+    const mercantesResposta = await carregarMercantes();
+    if (mercantesResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na coleta de produtos. STATUS: " +
+                mercantesResposta.status
+        );
+    }
+    const mercantes = mercantesResposta.dados;
+
+    const produtosFavoritados = document.querySelector(".produtos-favoritados");
 
     produtos.forEach((produto) => {
         const cartao = document.createElement("div");
@@ -70,7 +141,10 @@ async function montaCartao() {
         imagem.classList.add("imagem");
 
         produtoImagens.forEach((produtoImagem) => {
-            if (produtoImagem.fkCdProduto === produto.cdProduto) {
+            if (
+                produtoImagem.fkCdProduto === produto.cdProduto &&
+                produtoImagem.idPrincipal === 1
+            ) {
                 imagem.src = produtoImagem.imgProdutoLink;
             }
         });
@@ -129,7 +203,10 @@ async function montaCartao() {
         mercantes.forEach((item) => {
             if (item.cdMercante === produto.fkCdMercante) {
                 nomeLoja.innerText = item.nmLoja;
-                nomeLoja.setAttribute("onclick", `produtosMercante(${item.cdMercante})`)
+                nomeLoja.setAttribute(
+                    "onclick",
+                    `produtosMercante(${item.cdMercante})`
+                );
             }
         });
 
@@ -147,7 +224,7 @@ async function montaCartao() {
         const botao = document.createElement("button");
         botao.classList.add("comprar");
         botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "COMPRA";
+        botao.innerText = "VISUALIZAR";
 
         precoParcelaBotao.appendChild(precoParcela);
         precoParcelaBotao.appendChild(botao);
@@ -159,10 +236,29 @@ async function montaCartao() {
         cartao.appendChild(imagemFavorito);
         cartao.appendChild(informacoes);
 
-        containerProdutos.append(cartao);
+        produtosFavoritados.append(cartao);
     });
-
-    container.append(containerProdutos);
 }
 
-document.addEventListener("DOMContentLoaded", montaCartao());
+function exibirProduto(idProduto) {
+    window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
+}
+
+document.addEventListener("DOMContentLoaded", (e) => {
+    e.preventDefault();
+
+    const deslogado = document.querySelector("#deslogado");
+    const meusFavoritos = document.querySelector("#meusFavoritos");
+
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        deslogado.className = "mostrar";
+        meusFavoritos.className = "esconder";
+    } else {
+        deslogado.className = "esconder";
+        meusFavoritos.className = "mostrar";
+
+        montaCartao();
+    }
+});

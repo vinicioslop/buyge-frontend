@@ -11,6 +11,7 @@
             href="/src/css/componentes/barra-navegacao.css"
         />
         <link rel="stylesheet" href="/src/css/componentes/rodape.css" />
+        <link rel="stylesheet" href="/src/css/componentes/componentes.css" />
 
         <link rel="stylesheet" href="/src/css/favoritos.css" />
 
@@ -36,26 +37,12 @@
         </header>
 
         <div class="container">
-            <h2 class="titulo">Meus Favoritos</h2>
-            <div class="produtos-favoritados">
-                <div class="favorito">
-                    <img
-                        src="/src/icons/remover-preto.svg"
-                        alt=""
-                        id="remover"
-                    />
-                    <div class="grupo-imagem">
-                        <img src="/src/icons/image-preto.svg" alt="" />
-                    </div>
-                    <div class="grupo-informacoes">
-                        <div class="categoria-produto">
-                            CATEGORIA DO PRODUTO
-                        </div>
-                        <div class="nome-produto">NOME DO PRODUTO</div>
-                        <div class="nome-vendedor">Nome do Vendedor</div>
-                        <div class="valor-produto">Valor do Produto</div>
-                    </div>
-                </div>
+            <div id="meusFavoritos" class="esconder">
+                <h2 class="titulo">Meus Favoritos</h2>
+                <div class="produtos-favoritados"></div>
+            </div>
+            <div id="deslogado" class=" esconder">
+                <div>Não conectado</div>
             </div>
         </div>
 
@@ -134,6 +121,8 @@
                 </p>
             </div>
         </footer>
+
+        <script src="/src/js/favoritos.js"></script>
 
         <script src="/src/js/componentes/barra-navegacao.js"></script>
     </body>

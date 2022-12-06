@@ -93,9 +93,9 @@
 
 .cartao .imagem-favorito .favorito {
     /* POSICIONAMENTO */
-    position: absolute;
-    margin-top: 10px;
-    margin-left: 180px;
+    position: relative;
+    
+    top: 10px;
 
     /* DIMENSIONAMENTO */
     height: 24px;
