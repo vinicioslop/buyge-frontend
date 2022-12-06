@@ -29,7 +29,7 @@
                         Para se manter conectado conosco, faça o login com seus
                         dados pessoais.
                     </div>
-                    <button class="entrar" onclick="entrar()">Entrar</button>
+                    <button class="entrar" onclick="conectar()">Entrar</button>
                 </div>
             </div>
             <form class="cadastro">
@@ -43,10 +43,11 @@
                         name="nome"
                         required
                         placeholder="Informe o seu nome"
+                        pattern="([aA-zZ]+)"
                     />
                 </div>
 
-                <div class="entrada-dados">
+                <div id="grupoDataNascimento" class="entrada-dados">
                     <label for="dataNasc">Data de Nascimento</label>
                     <input
                         type="date"
@@ -74,11 +75,20 @@
                             type="email"
                             id="confirmaEmail"
                             name="confirmaEmail"
+                            disabled
                             required
                             placeholder="Confirme o seu email"
                         />
                     </div>
                 </div>
+                <ul id="condicoes">
+                    <li id="menor">Senha precisa ter pelo menos 6 caractéres;</li>
+                    <li id="maior">Senha precisa ser menor ou igual a 16 caractéres;</li>
+                    <li id="maiuscula">Senha precisa ter pelo menos uma letra maiúscula;</li>
+                    <li id="minuscula">Senha precisa ter pelo menos uma letra miníscula;</li>
+                    <li id="especial">Senha precisa ter pelo menos um caractér especial;</li>
+                    <li id="numeros">Senha precisa ter pelo menos um número.</li>
+                </ul>
                 <div class="grupo-senha">
                     <div class="entrada-dados">
                         <label for="senha">Senha</label>
@@ -96,6 +106,7 @@
                             type="password"
                             id="confirmarSenha"
                             name="confirmarSenha"
+                            disabled
                             required
                             placeholder="Confirme a sua senha"
                         />

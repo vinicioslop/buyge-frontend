@@ -145,6 +145,40 @@
         width: 95%;
     }
 
+    .esconder {
+        display: none;
+    }
+
+    #condicoes {
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        width: 85%;
+
+        text-align: left;
+
+        background-color: transparent;
+    }
+
+    #condicoes li {
+        background-color: transparent;
+    }
+
+    .campo-invalido {
+        align-self: flex-start;
+
+        margin-left: 5%;
+        margin-bottom: 1%;
+
+        font-size: 16px;
+        color: red;
+
+        background-color: transparent;
+    }
+
     .termos {
         /* POSICIONAMENTO */
         display: flex;
@@ -307,6 +341,36 @@
         width: 100%;
     }
 
+    #condicoes {
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        width: 85%;
+
+        text-align: left;
+
+        background-color: transparent;
+    }
+
+    #condicoes li {
+        background-color: transparent;
+    }
+
+    .campo-invalido {
+        align-self: flex-start;
+
+        margin-left: 5%;
+        margin-bottom: 1%;
+
+        font-size: 16px;
+        color: red;
+
+        background-color: transparent;
+    }
+
     .termos {
         /* POSICIONAMENTO */
         display: flex;
@@ -413,6 +477,10 @@ select {
 
 .cadastro .entrada-dados input::placeholder {
     color: var(--cor-clara);
+}
+
+.cadastro .entrada-dados input:disabled {
+    background-color: var(--cor-principal-rgb40);
 }
 
 .cadastro .grupo-email,

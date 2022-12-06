@@ -15,7 +15,6 @@ async function testarToken(token) {
         },
     });
     const status = await requisicao.status;
-    console.log(status);
 
     switch (status) {
         case 200:
@@ -30,11 +29,9 @@ async function testar() {
     const valido = await testarToken(token);
 
     if (valido) {
-        console.log("Sessão válida");
         return true;
     } else {
         removeSessao();
-        console.log("Desconectado");
         return false;
     }
 }
