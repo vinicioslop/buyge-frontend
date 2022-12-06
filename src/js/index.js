@@ -180,10 +180,7 @@ async function apagarFavorito(idCliente, idProduto, token) {
 
     switch (status) {
         case 200:
-            const dados = await response.json();
-
             var resposta = {
-                dados: dados,
                 status: status,
             };
 
@@ -192,11 +189,10 @@ async function apagarFavorito(idCliente, idProduto, token) {
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
 
             var resposta = {
-                dados: "",
                 status: status,
             };
 
-            return status;
+            return resposta;
     }
 }
 
@@ -274,14 +270,20 @@ async function montaCartao(idCliente, token) {
     }
     const mercantes = mercantesResposta.dados;
 
-    const favoritosResposta = await carregarFavoritos(idCliente, token);
-    if (favoritosResposta.status !== 200) {
-        console.log(
-            "Ocorreu um erro na coleta de produtos. STATUS: " +
-                favoritosResposta.status
-        );
+    var favoritos = [];
+
+    if (idCliente != null) {
+        var resposta = await carregarFavoritos(idCliente, token);
+
+        if (resposta.status !== 200) {
+            console.log(
+                "Ocorreu um erro na coleta de produtos. STATUS: " +
+                    resposta.status
+            );
+        }
+
+        favoritos = resposta.dados;
     }
-    const favoritos = favoritosResposta.dados;
 
     const maisVendidos = new Flickity("#mais-vendidos");
     const novidades = new Flickity("#novidades");
@@ -312,18 +314,19 @@ async function montaCartao(idCliente, token) {
 
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
-        iconeFavorito.id = "produto" + produto.cdProduto;
 
-        favoritos.forEach((favorito) => {
-            if (favorito.fkCdProduto == produto.cdProduto) {
-                iconeFavorito.src = "/src/icons/heart-cheio.svg";
+        if (favoritos.length > 0) {
+            favoritos.forEach((favorito) => {
+                if (favorito.fkCdProduto == produto.cdProduto) {
+                    iconeFavorito.src = "/src/icons/heart-cheio.svg";
 
-                iconeFavorito.setAttribute(
-                    "onclick",
-                    `desfavoritar(${produto.cdProduto})`
-                );
-            }
-        });
+                    iconeFavorito.setAttribute(
+                        "onclick",
+                        `desfavoritar(${produto.cdProduto})`
+                    );
+                }
+            });
+        }
 
         if (iconeFavorito.src == "") {
             iconeFavorito.src = "/src/icons/heart.svg";
@@ -443,16 +446,18 @@ async function montaCartao(idCliente, token) {
         iconeFavorito.classList.add("favorito");
         iconeFavorito.id = "produto" + produto.cdProduto;
 
-        favoritos.forEach((favorito) => {
-            if (favorito.fkCdProduto == produto.cdProduto) {
-                iconeFavorito.src = "/src/icons/heart-cheio.svg";
+        if (favoritos.length > 0) {
+            favoritos.forEach((favorito) => {
+                if (favorito.fkCdProduto == produto.cdProduto) {
+                    iconeFavorito.src = "/src/icons/heart-cheio.svg";
 
-                iconeFavorito.setAttribute(
-                    "onclick",
-                    `desfavoritar(${produto.cdProduto})`
-                );
-            }
-        });
+                    iconeFavorito.setAttribute(
+                        "onclick",
+                        `desfavoritar(${produto.cdProduto})`
+                    );
+                }
+            });
+        }
 
         if (iconeFavorito.src == "") {
             iconeFavorito.src = "/src/icons/heart.svg";
@@ -572,16 +577,18 @@ async function montaCartao(idCliente, token) {
         iconeFavorito.classList.add("favorito");
         iconeFavorito.id = "produto" + produto.cdProduto;
 
-        favoritos.forEach((favorito) => {
-            if (favorito.fkCdProduto == produto.cdProduto) {
-                iconeFavorito.src = "/src/icons/heart-cheio.svg";
+        if (favoritos.length > 0) {
+            favoritos.forEach((favorito) => {
+                if (favorito.fkCdProduto == produto.cdProduto) {
+                    iconeFavorito.src = "/src/icons/heart-cheio.svg";
 
-                iconeFavorito.setAttribute(
-                    "onclick",
-                    `desfavoritar(${produto.cdProduto})`
-                );
-            }
-        });
+                    iconeFavorito.setAttribute(
+                        "onclick",
+                        `desfavoritar(${produto.cdProduto})`
+                    );
+                }
+            });
+        }
 
         if (iconeFavorito.src == "") {
             iconeFavorito.src = "/src/icons/heart.svg";
@@ -684,5 +691,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         const idCliente = sessionStorage.getItem("idCliente");
 
         montaCartao(idCliente, token);
+    } else {
+        montaCartao(null, null);
     }
 });

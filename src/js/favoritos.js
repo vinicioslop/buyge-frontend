@@ -9,9 +9,45 @@ function mascaraPreco(preco) {
     return valorFormatado;
 }
 
-async function carregarProdutos() {
-    const response = await fetch(`${fetchUrl}/produtos`, { mode: "cors" });
-    const status = await response.status;
+async function carregarFavoritos(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function carregarProduto(idProduto) {
+    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+        mode: "cors",
+    });
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -29,11 +65,15 @@ async function carregarProdutos() {
     }
 }
 
-async function carregarImagems() {
-    const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
-        mode: "cors",
-    });
-    const status = await response.status;
+async function carregarImagems(idProduto) {
+    const response = await fetch(
+        `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
+        {
+            mode: "cors",
+        }
+    );
+
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -53,7 +93,7 @@ async function carregarImagems() {
 
 async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -71,9 +111,11 @@ async function carregarCategorias() {
     }
 }
 
-async function carregarMercantes() {
-    const response = await fetch(`${fetchUrl}/mercantes`, { mode: "cors" });
-    const status = await response.status;
+async function carregarMercante(idMercante) {
+    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
+        mode: "cors",
+    });
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -91,25 +133,55 @@ async function carregarMercantes() {
     }
 }
 
-async function montaCartao() {
-    const produtosResposta = await carregarProdutos();
-    if (produtosResposta.status !== 200) {
-        console.log(
-            "Ocorreu um erro na coleta de produtos. STATUS: " +
-                produtosResposta.status
-        );
-    }
-    const produtos = produtosResposta.dados;
+async function apagarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
 
-    const produtoImagensResposta = await carregarImagems();
-    if (produtoImagensResposta.status !== 200) {
-        console.log(
-            "Ocorreu um erro na coleta de produtos. STATUS: " +
-                produtoImagensResposta.status
-        );
-    }
-    const produtoImagens = produtoImagensResposta.dados;
+    const status = response.status;
 
+    switch (status) {
+        case 200:
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
+async function desfavoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await apagarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 200) {
+            window.location.reload();
+        }
+    }
+}
+
+async function montaCartao(idCliente, token) {
     const categoriasResposta = await carregarCategorias();
     if (categoriasResposta.status !== 200) {
         console.log(
@@ -119,18 +191,21 @@ async function montaCartao() {
     }
     const categorias = categoriasResposta.dados;
 
-    const mercantesResposta = await carregarMercantes();
-    if (mercantesResposta.status !== 200) {
-        console.log(
-            "Ocorreu um erro na coleta de produtos. STATUS: " +
-                mercantesResposta.status
-        );
-    }
-    const mercantes = mercantesResposta.dados;
+    const favoritosResposta = await carregarFavoritos(idCliente, token);
+    const favoritos = favoritosResposta.dados;
 
     const produtosFavoritados = document.querySelector(".produtos-favoritados");
 
-    produtos.forEach((produto) => {
+    favoritos.forEach(async (favorito) => {
+        const produtoResposta = await carregarProduto(favorito.fkCdProduto);
+        const produto = produtoResposta.dados;
+
+        const imagensResposta = await carregarImagems(produto.cdProduto);
+        const produtoImagens = await imagensResposta.dados;
+
+        const mercantesResposta = await carregarMercante(produto.fkCdMercante);
+        const mercante = await mercantesResposta.dados;
+
         const cartao = document.createElement("div");
         cartao.classList.add("cartao");
         cartao.classList.add("carrosel-cell");
@@ -155,7 +230,11 @@ async function montaCartao() {
 
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
-        iconeFavorito.src = "/src/icons/heart.svg";
+        iconeFavorito.src = "/src/icons/heart-cheio.svg";
+        iconeFavorito.setAttribute(
+            "onclick",
+            `desfavoritar(${produto.cdProduto})`
+        );
 
         imagemFavorito.appendChild(imagem);
         imagemFavorito.appendChild(iconeFavorito);
@@ -200,15 +279,11 @@ async function montaCartao() {
         const nomeLoja = document.createElement("h2");
         nomeLoja.classList.add("nome-loja");
 
-        mercantes.forEach((item) => {
-            if (item.cdMercante === produto.fkCdMercante) {
-                nomeLoja.innerText = item.nmLoja;
-                nomeLoja.setAttribute(
-                    "onclick",
-                    `produtosMercante(${item.cdMercante})`
-                );
-            }
-        });
+        nomeLoja.innerText = mercante.nmLoja;
+        nomeLoja.setAttribute(
+            "onclick",
+            `produtosMercante(${mercante.cdMercante})`
+        );
 
         const precoParcelaBotao = document.createElement("div");
         precoParcelaBotao.classList.add("preco-parcela-botao");
@@ -259,6 +334,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
         deslogado.className = "esconder";
         meusFavoritos.className = "mostrar";
 
-        montaCartao();
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        montaCartao(idCliente, token);
     }
 });
