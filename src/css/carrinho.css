@@ -13,14 +13,9 @@
     display: none;
 }
 
-.mostrar-coluna {
+.mostrar {
     display: flex;
     flex-direction: column;
-}
-
-.mostrar-linha {
-    display: flex;
-    flex-direction: row;
 }
 
 .container {
@@ -40,9 +35,14 @@
     height: 100%;
 }
 
-.informacoes, #semItens .titulo {
+.informacoes .titulo {
     font-size: 38px;
     font-weight: normal;
+}
+
+.informacoes .grupos {
+    display: flex;
+    flex-direction: row;
 }
 
 .informacoes .grupo-esquerda {
@@ -359,6 +359,11 @@
 
     min-height: 80vh;
     width: 100%;
+}
+
+#semItens .texto {
+    font-size: 38px;
+    font-weight: normal;
 }
 
 #semItens img {

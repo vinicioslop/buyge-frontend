@@ -1,5 +1,6 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
+
 async function salvarDadosCompra(idCliente, token, novaCompra) {
     const response = await fetch(`${fetchUrl}/comprar/salvar/${idCliente}`, {
         method: "POST",

@@ -122,23 +122,49 @@ async function comprarProduto(idProduto) {
     }
 }
 
+function salvaItemCarrinhoDeslogado(idProduto) {
+    var listaItemsCarrinho = JSON.parse(
+        localStorage.getItem("itemsCarrinho") || "[]"
+    );
+
+    listaItemsCarrinho.forEach((item) => {
+        if (item.id == idProduto) {
+            console.log("Produto já adicionado ao carrinho!");
+            return;
+        }
+    });
+
+    const item = {
+        id: idProduto,
+    };
+
+    listaItemsCarrinho.push(item);
+
+    localStorage.setItem("itemsCarrinho", JSON.stringify(listaItemsCarrinho));
+}
+
+function retornaItemsCarrinhoDeslogado() {
+    var listaItemsCarrinho = JSON.parse(
+        localStorage.getItem("itemsCarrinho") || "[]"
+    );
+
+    return listaItemsCarrinho;
+}
+
 async function adicionarCarrinho(idProduto) {
     const token = sessionStorage.getItem("token");
 
     if (token == null) {
         console.log("Cliente não autenticado!");
-        return;
+
+        //localStorage.clear();
+        salvaItemCarrinhoDeslogado(idProduto);
+        retornaItemsCarrinhoDeslogado();
+    } else {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        await adicionarItemCarrinho(idCliente, idProduto, token);
     }
-
-    const idCliente = sessionStorage.getItem("idCliente");
-
-    const itemCarrinhoResposta = await adicionarItemCarrinho(
-        idCliente,
-        idProduto,
-        token
-    );
-
-    return itemCarrinhoResposta;
 }
 
 async function montarProduto(idProduto) {

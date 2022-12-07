@@ -31,97 +31,106 @@
         <div class="container">
             <div class="informacoes esconder">
                 <h1 class="titulo">Meu Carrinho</h1>
-                <div class="grupo-esquerda">
-                    <table class="tabela-produtos">
-                        <tr class="titulos">
-                            <th class="nome-imagem">Produto</th>
-                            <th class="quantidade">Quantidade</th>
-                            <th class="valor-unitario">Valor Unitário</th>
-                            <th class="subtotal">Subtotal</th>
-                            <th></th>
-                        </tr>
-                    </table>
-                    <hr class="linha" />
-                </div>
-                <div class="grupo-direita">
-                    <div class="frete-prazo">
-                        <div class="grupo-texto">
-                            <div class="truck-texto">
-                                <img
-                                    src="/src/icons/delivery-truck-roxo.svg"
-                                    alt=""
-                                    class="truck"
-                                />
-                                <p class="texto">Calcular o Frete e o Prazo</p>
+                <div class="grupos">
+                    <div class="grupo-esquerda">
+                        <table class="tabela-produtos">
+                            <tr class="titulos">
+                                <th class="nome-imagem">Produto</th>
+                                <th class="quantidade">Quantidade</th>
+                                <th class="valor-unitario">Valor Unitário</th>
+                                <th class="subtotal">Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </table>
+                        <hr class="linha" />
+                    </div>
+                    <div class="grupo-direita">
+                        <div class="frete-prazo">
+                            <div class="grupo-texto">
+                                <div class="truck-texto">
+                                    <img
+                                        src="/src/icons/delivery-truck-roxo.svg"
+                                        alt=""
+                                        class="truck"
+                                    />
+                                    <p class="texto">
+                                        Calcular o Frete e o Prazo
+                                    </p>
+                                </div>
+                                <form class="frete">
+                                    <input
+                                        type="text"
+                                        name="cep"
+                                        id="cep"
+                                        placeholder="Digite o CEP aqui"
+                                    />
+                                    <button class="calcularFrete">
+                                        Calcular
+                                    </button>
+                                </form>
                             </div>
-                            <form class="frete">
+                        </div>
+                        <hr class="linha" />
+                        <div class="valores">
+                            <div class="valor">
+                                <p>Valor da Compra</p>
+                                <div id="valorBruto"></div>
+                            </div>
+
+                            <!--
+                            <div class="valor">
+                                <p>Subtotal</p>
+                                <p>R$ Valor</p>
+                            </div>
+                            -->
+
+                            <div class="valor">
+                                <p>Desconto</p>
+                                <div id="valorDesconto"></div>
+                            </div>
+                            <div class="valor">
+                                <p>Entrega</p>
+                                <div id="valorEntrega"></div>
+                            </div>
+                            <div class="valor">
+                                <p>Total</p>
+                                <div id="valorTotal"></div>
+                            </div>
+                        </div>
+                        <hr class="linha" />
+                        <div class="cupom-desconto">
+                            <div class="texto">
+                                <p>Possui cupom de desconto?</p>
+                                <img
+                                    src="/src/icons/seta-cima-preto.svg"
+                                    alt=""
+                                />
+                            </div>
+                            <form class="form-cupom">
                                 <input
                                     type="text"
-                                    name="cep"
-                                    id="cep"
-                                    placeholder="Digite o CEP aqui"
+                                    name="cupom"
+                                    id="cupom"
+                                    placeholder="Digite ou cole o código"
                                 />
-                                <button class="calcularFrete">Calcular</button>
+                                <button class="calcularCupom">Aplicar</button>
                             </form>
                         </div>
+                        <button
+                            type="button"
+                            id="comprar"
+                            class="comprar"
+                            onclick="acionaMercadoPago()"
+                        >
+                            Continuar a Compra
+                        </button>
                     </div>
-                    <hr class="linha" />
-                    <div class="valores">
-                        <div class="valor">
-                            <p>Valor da Compra</p>
-                            <div id="valorBruto"></div>
-                        </div>
-
-                        <!--
-                        <div class="valor">
-                            <p>Subtotal</p>
-                            <p>R$ Valor</p>
-                        </div>
-                        -->
-
-                        <div class="valor">
-                            <p>Desconto</p>
-                            <div id="valorDesconto"></div>
-                        </div>
-                        <div class="valor">
-                            <p>Entrega</p>
-                            <div id="valorEntrega"></div>
-                        </div>
-                        <div class="valor">
-                            <p>Total</p>
-                            <div id="valorTotal"></div>
-                        </div>
-                    </div>
-                    <hr class="linha" />
-                    <div class="cupom-desconto">
-                        <div class="texto">
-                            <p>Possui cupom de desconto?</p>
-                            <img src="/src/icons/seta-cima-preto.svg" alt="" />
-                        </div>
-                        <form class="form-cupom">
-                            <input
-                                type="text"
-                                name="cupom"
-                                id="cupom"
-                                placeholder="Digite ou cole o código"
-                            />
-                            <button class="calcularCupom">Aplicar</button>
-                        </form>
-                    </div>
-                    <button
-                        type="button"
-                        id="comprar"
-                        class="comprar"
-                        onclick="acionaMercadoPago()"
-                    >
-                        Continuar a Compra
-                    </button>
                 </div>
             </div>
 
             <div id="semItens" class="esconder">
                 <img src="/src/icons/box-roxa.svg" alt="" />
-                <h2 class="titulo">Você não possui itens no carrinho!</h2>
+                <h2 class="texto">Você não possui itens no carrinho!</h2>
             </div>
         </div>
 

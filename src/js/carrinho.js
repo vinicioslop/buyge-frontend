@@ -236,42 +236,132 @@ async function acionaMercadoPago() {
     }
 }
 
+async function montarItemCarrinhoDeslogado(itemsCarrinho) {
+    const tabelaProdutos = document.querySelector(".tabela-produtos");
+
+    itemsCarrinho.forEach(async (item) => {
+        let produto = await carregarProduto(item.id);
+        let imagens = await carregarImagems(item.id);
+
+        let imagemPrincipal = {};
+
+        imagens.dados.forEach((imagem) => {
+            if (imagem.idPrincipal == 1) {
+                imagemPrincipal = imagem;
+            }
+        });
+
+        const tr = document.createElement("tr");
+        tr.classList.add("produto");
+
+        tr.innerHTML = `<td class="nome-produto">
+                <div class="imagem">
+                <img
+                    src="${imagemPrincipal.imgProdutoLink}"
+                    alt=""
+                />
+                </div>
+                <p>${produto.nmProduto}</p>
+            </td>
+            <td class="quantidade-produto">
+                <button class="remover">-</button>
+                <input
+                type="number"
+                name="quantidadeProduto"
+                id="quantidadeProduto"
+                value="${0}"
+                />
+                <button class="adicionar">+</button>
+            </td>
+            <td class="valor-unitario-produto">
+                ${mascaraPreco(produto.vlProduto)}
+            </td>
+            <td class="subtotal-produto">${mascaraPreco(produto.vlProduto)}</td>
+            <td onclick="removerItemCarrinhoDeslogado(${
+                item.id
+            })" class="removerProduto">
+                <img src="/src/icons/remover-preto.svg" alt="">
+            </td>`;
+
+        tabelaProdutos.appendChild(tr);
+    });
+}
+
+function retornaItemsCarrinhoDeslogado() {
+    var listaItemsCarrinho = JSON.parse(
+        localStorage.getItem("itemsCarrinho") || "[]"
+    );
+
+    return listaItemsCarrinho;
+}
+
+function removerItemCarrinhoDeslogado(idProduto) {
+    var listaItemsCarrinho = JSON.parse(
+        localStorage.getItem("itemsCarrinho") || "[]"
+    );
+
+    listaItemsCarrinho.forEach((item, index) => {
+        if (item.id == idProduto) {
+            listaItemsCarrinho.splice(index, 1);
+            console.log(listaItemsCarrinho[index]);
+        }
+    });
+
+    localStorage.setItem("itemsCarrinho", JSON.stringify(listaItemsCarrinho));
+
+    window.location.reload();
+}
+
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
     const token = sessionStorage.getItem("token");
 
     if (token == null) {
-        let titulo = document.querySelector(".titulo");
-        let semItems = document.querySelector("#semItens");
-        let informacoes = document.querySelector(".informacoes");
+        var itemsCarrinho = retornaItemsCarrinhoDeslogado();
 
-        titulo.className = "titulo";
-        informacoes.className = "informacoes esconder";
-        semItems.className = "mostrar-coluna";
+        if (itemsCarrinho == 0) {
+            let titulo = document.querySelector(".titulo");
+            let semItems = document.querySelector("#semItens");
+            let informacoes = document.querySelector(".informacoes");
+
+            titulo.className = "titulo";
+            informacoes.className = "informacoes esconder";
+            semItems.className = "mostrar";
+        } else {
+            montarItemCarrinhoDeslogado(itemsCarrinho);
+
+            let titulo = document.querySelector(".titulo");
+            let semItems = document.querySelector("#semItens");
+            let informacoes = document.querySelector(".informacoes");
+
+            titulo.className = "titulo";
+            informacoes.className = "informacoes mostrar";
+            semItems.className = "esconder";
+        }
     } else {
         const idCliente = sessionStorage.getItem("idCliente");
         const itemsCarrinho = await carregarItensCarrinho(idCliente, token);
 
         if (itemsCarrinho.dados.length === 0) {
             let titulo = document.querySelector(".titulo");
-            let semItems = document.querySelector(".sem-itens");
+            let semItems = document.querySelector("#semItens");
             let informacoes = document.querySelector(".informacoes");
 
             titulo.className = "titulo esconder";
             informacoes.className = "informacoes esconder";
-            semItems.className = "mostrar-coluna";
+            semItems.className = "mostrar";
         } else {
+            await montarItemCarrinho(itemsCarrinho);
+            await montarValores(itemsCarrinho);
+
             let titulo = document.querySelector(".titulo");
-            let semItems = document.querySelector(".sem-itens");
+            let semItems = document.querySelector("#semItens");
             let informacoes = document.querySelector(".informacoes");
 
             titulo.className = "titulo";
-            informacoes.className = "informacoes mostrar-linha";
+            informacoes.className = "informacoes mostrar";
             semItems.className = "esconder";
         }
-
-        await montarItemCarrinho(itemsCarrinho);
-        await montarValores(itemsCarrinho);
     }
 });

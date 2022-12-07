@@ -1,5 +1,6 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
+
 function removeSessao() {
     sessionStorage.clear();
 }

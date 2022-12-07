@@ -329,6 +329,7 @@
 
         /* DIMENSIONAMENTO */
         width: 20%;
+        height: 10vh;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -339,9 +340,11 @@
         /* POSICIONAMENTO */
         display: flex;
         justify-content: space-evenly;
+        align-items: center;
 
         /* DIMENSIONAMENTO */
         width: 90%;
+        height: 100%;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -368,8 +371,6 @@
         align-items: center;
         justify-content: center;
 
-        width: 60px;
-
         background-color: transparent;
     }
 
@@ -385,7 +386,6 @@
         font-size: 16px;
         color: white;
         text-align: center;
-        padding: 14px 16px;
         text-decoration: none;
     }
 
@@ -395,14 +395,13 @@
 
         height: 100%;
 
-        float: left;
-        overflow: visible;
-
         background-color: transparent;
     }
 
     /* Dropdown button */
     .menuUsuario .ativador {
+        height: 10vh;
+
         border: none;
         outline: none;
 
@@ -476,6 +475,7 @@
 
         /* DIMENSIONAMENTO */
         width: 25%;
+        height: 10vh;
 
         /* APARÊNCIA */
         background-color: transparent;
@@ -491,6 +491,7 @@
 
         /* DIMENSINAMENTO */
         width: 100%;
+        height: 10vh;
 
         /* APARÊNCIA */
         background-color: transparent;
