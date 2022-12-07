@@ -1,5 +1,4 @@
-const fetchUrl = "https://129.148.45.5:30001/api";
-
+const fetchUrl = "https://localhost:30001/api";
 
 String.prototype.reverse = function () {
     return this.split("").reverse().join("");
@@ -122,7 +121,7 @@ async function carregarCategorias() {
     return categorias;
 }
 
-async function cadastrarProduto(produto, token) {
+async function cadastrarProduto(produtoComImagem, token) {
     const requisicao = await fetch(`${fetchUrl}/produtos`, {
         method: "POST",
         mode: "cors",
@@ -131,7 +130,7 @@ async function cadastrarProduto(produto, token) {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
         },
-        body: JSON.stringify(produto),
+        body: JSON.stringify(produtoComImagem),
     });
     const resposta = await requisicao.json();
 
@@ -614,9 +613,9 @@ document
             ),
         };
 
-        cadastrarProduto(produto, token);
+        const resposta = await cadastrarProduto(produto, token);
 
-        window.location.reload();
+        console.log(resposta);
     });
 
 document

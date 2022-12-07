@@ -390,7 +390,7 @@ function exibirProduto(idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
 }
 
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
     const deslogado = document.querySelector("#deslogado");
@@ -402,11 +402,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
         deslogado.className = "mostrar";
         meusFavoritos.className = "esconder";
     } else {
+        const idCliente = sessionStorage.getItem("idCliente");
+        await montaCartao(idCliente, token);
+
         deslogado.className = "esconder";
         meusFavoritos.className = "mostrar";
-
-        const idCliente = sessionStorage.getItem("idCliente");
-
-        montaCartao(idCliente, token);
     }
 });

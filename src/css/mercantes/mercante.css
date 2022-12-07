@@ -279,7 +279,7 @@ img {
     padding-left: 5%;
     padding-right: 5%;
 
-    width: 80%;
+    width: 100%;
     height: fit-content;
 
     background-color: transparent;
@@ -333,7 +333,7 @@ textarea {
     padding-left: 10px;
 
     height: 40px;
-    width: 100%;
+    width: 90%;
 
     outline: none;
 
@@ -358,7 +358,7 @@ input::placeholder {
 
 .conteudo .informacoes .formulario select {
     /* DIMENSIONAMENTO */
-    width: 95%;
+    width: 90%;
     padding: 12px;
 
     /* APARÊNCIA */
@@ -370,6 +370,24 @@ input::placeholder {
     resize: vertical;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.conteudo .informacoes .formulario input[type="file"] {
+    padding-left: 10px;
+
+    height: 40px;
+    width: 90%;
+
+    outline: none;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    background-color: var(--cor-principal-clara);
 }
 
 .conteudo .informacoes .formulario .secao-formulario {
@@ -408,6 +426,8 @@ input::placeholder {
 
     min-height: fit-content;
     min-width: fit-content;
+
+    margin-right: 5%;
 
     padding: 10px;
 
