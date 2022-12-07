@@ -15,12 +15,12 @@
 
 .mostrar-coluna {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .mostrar-linha {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .container {
@@ -35,14 +35,14 @@
     min-height: 80vh;
 }
 
-.container .titulo {
-    font-size: 38px;
-    font-weight: normal;
-}
-
 .informacoes {
     width: 100%;
     height: 100%;
+}
+
+.informacoes, #semItens .titulo {
+    font-size: 38px;
+    font-weight: normal;
 }
 
 .informacoes .grupo-esquerda {
@@ -353,7 +353,7 @@
     background-color: var(--cor-principal-clara);
 }
 
-.sem-itens {
+#semItens {
     align-items: center;
     justify-content: center;
 
@@ -361,7 +361,7 @@
     width: 100%;
 }
 
-.sem-itens img {
+#semItens img {
     margin-bottom: 20px;
 
     height: 80px;

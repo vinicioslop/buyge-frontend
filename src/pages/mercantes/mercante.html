@@ -136,7 +136,13 @@
                     <!--<div class="logo">LOGO</div>-->
                     <form class="formulario">
                         <div class="grupo-lateral">
-                            <input hidden disabled type="number" name="idMercantePerfilLoja" id="idMercantePerfilLoja">
+                            <input
+                                hidden
+                                disabled
+                                type="number"
+                                name="idMercantePerfilLoja"
+                                id="idMercantePerfilLoja"
+                            />
                             <div class="entrada-dados">
                                 <label for="nomePerfilLoja">Nome da Loja</label>
                                 <input
@@ -178,6 +184,12 @@
                     <h1 class="titulo-secao">Dados da Loja</h1>
                     <!--<div class="logo">LOGO</div>-->
                     <form class="formulario">
+                        <input
+                            disabled
+                            hidden
+                            type="text"
+                            id="idMercanteDadosLoja"
+                        />
                         <div class="grupo-secao">
                             <h3 class="secao-formulario">Dados do Vendedor</h3>
                             <div class="entrada-dados">
@@ -187,12 +199,12 @@
                                 </select>
                             </div>
                             <div class="entrada-dados">
-                                <label for="cnpj">CNPJ</label>
+                                <label for="cnpjDadosLoja">CNPJ</label>
                                 <input
                                     required
                                     type="text"
-                                    name="cnpj"
-                                    id="cnpj"
+                                    name="cnpjDadosLoja"
+                                    id="cnpjDadosLoja"
                                     placeholder="Informe o CNPJ"
                                 />
                             </div>
@@ -201,86 +213,80 @@
                             <h3 class="secao-formulario">Endereço</h3>
                             <div class="grupo-lateral">
                                 <div class="entrada-dados">
-                                    <label for="pais">País de Residência</label>
+                                    <label for="cepDadosLoja">CEP</label>
                                     <input
                                         required
                                         type="text"
-                                        name="pais"
-                                        id="pais"
-                                        placeholder="Informe o país"
-                                    />
-                                </div>
-                                <div class="entrada-dados">
-                                    <label for="cep">CEP</label>
-                                    <input
-                                        required
-                                        type="text"
-                                        name="cep"
-                                        id="cep"
+                                        name="cepDadosLoja"
+                                        id="cepDadosLoja"
                                         placeholder="Informe o CEP"
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="estado">Estado</label>
+                                    <label for="estadoDadosLoja">Estado</label>
                                     <input
                                         required
                                         type="text"
-                                        name="estado"
-                                        id="estado"
+                                        name="estadoDadosLoja"
+                                        id="estadoDadosLoja"
                                         placeholder="Informe o Estado"
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="municipio"
+                                    <label for="municipioDadosLoja"
                                         >Cidade / Município</label
                                     >
                                     <input
                                         required
                                         type="text"
-                                        name="municipio"
-                                        id="municipio"
+                                        name="municipioDadosLoja"
+                                        id="municipioDadosLoja"
                                         placeholder="Informe a Cidade"
                                     />
                                 </div>
                             </div>
                             <div class="grupo-lateral">
                                 <div class="entrada-dados">
-                                    <label for="logradouro">Logradouro</label>
+                                    <label for="logradouroDadosLoja"
+                                        >Logradouro</label
+                                    >
                                     <input
                                         required
                                         type="text"
-                                        name="logradouro"
-                                        id="logradouro"
+                                        name="logradouroDadosLoja"
+                                        id="logradouroDadosLoja"
                                         placeholder="Informe o Logradouro"
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="numero">Número</label>
+                                    <label for="numeroDadosLoja">Número</label>
                                     <input
                                         required
                                         type="number"
-                                        name="numero"
-                                        id="numero"
+                                        name="numeroDadosLoja"
+                                        id="numeroDadosLoja"
                                         placeholder="Informe o Número"
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="complemento">Complemento</label>
+                                    <label for="complementoDadosLoja"
+                                        >Complemento</label
+                                    >
                                     <input
                                         required
                                         type="text"
-                                        name="complemento"
-                                        id="complemento"
+                                        name="complementoDadosLoja"
+                                        id="complementoDadosLoja"
                                         placeholder="Informe o Complemento"
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="bairro">Bairro</label>
+                                    <label for="bairroDadosLoja">Bairro</label>
                                     <input
                                         required
                                         type="text"
-                                        name="bairro"
-                                        id="bairro"
+                                        name="bairroDadosLoja"
+                                        id="bairroDadosLoja"
                                         placeholder="Informe o Bairro"
                                     />
                                 </div>

@@ -284,6 +284,14 @@ async function montarEnderecos() {
     </div>
     */
 
+    const enderecosPrevios = document.querySelectorAll(".endereco");
+
+    if (enderecosPrevios.length > 0) {
+        enderecosPrevios.forEach((endereco) => {
+            endereco.remove();
+        });
+    }
+
     const token = sessionStorage.getItem("token");
 
     if (token === null) {
@@ -353,7 +361,8 @@ async function enderecoPrincipal(idEndereco) {
     const resposta = await mudarPrincipal(idEndereco, token);
 
     if (resposta.status == 200) {
-        window.location.reload();
+        montarEnderecos();
+        clicaSecao("secaoEndereco");
     } else {
         console.log(
             "Ocorreu um erro na requisição. STATUS: " + resposta.status
@@ -375,7 +384,18 @@ function clicaSecaoInternaEnderecos(idComponente) {
     });
 }
 
-function insereInformacoesUsuario(cliente) {
+async function insereInformacoesUsuario() {
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        window.location = "";
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+
+    const clienteResposta = await buscarClienteLogado(idCliente, token);
+    const cliente = clienteResposta.dados;
+
     const nome = document.getElementById("nomeCliente");
     const sobrenome = document.getElementById("sobrenomeCliente");
     const email = document.getElementById("emailCliente");
@@ -529,13 +549,11 @@ document
             fkCdCliente: idCliente,
         };
 
-        console.log(endereco);
-
         const resposta = await atualizarEndereco(endereco, token);
 
         if (resposta.status === 200) {
-            console.log("Endereco atualizado com sucesso");
-            window.location.reload();
+            montarEnderecos();
+            clicaSecao("secaoEndereco");
         } else {
             console.log(
                 "Ocorreu um erro na requisição. STATUS: " + resposta.status
@@ -578,7 +596,8 @@ document
 
         if (resposta.status == 201) {
             console.log("Endereco adicionado com sucesso");
-            window.location.reload();
+            montarEnderecos();
+            clicaSecao("secaoEndereco");
         } else {
             console.log(
                 "Ocorreu um erro na requisição. STATUS: " + resposta.status
@@ -589,9 +608,6 @@ document
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
-    const token = sessionStorage.getItem("token");
-    const idCliente = sessionStorage.getItem("idCliente");
-
     const valido = await testar();
 
     if (!valido) {
@@ -599,10 +615,10 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         window.location = "/src/pages/login.html";
     }
 
-    const clienteResposta = await buscarClienteLogado(idCliente, token);
+    const token = sessionStorage.getItem("token");
 
-    if (clienteResposta.status === 200) {
-        insereInformacoesUsuario(clienteResposta.dados);
+    if (token != null) {
+        insereInformacoesUsuario();
         montarEnderecos();
     } else {
         console.log("Usuário não encontrado");

@@ -65,9 +65,45 @@
     display: none;
 }
 
-.container .titulo {
+#meusFavoritos .titulo {
     font-size: 36px;
     font-weight: normal;
 
     margin-top: 30px;
+}
+
+#semFavoritos {
+    align-items: center;
+    justify-content: center;
+
+    min-height: 80vh;
+    width: 100%;
+}
+
+#semFavoritos img {
+    margin-bottom: 20px;
+
+    height: 80px;
+}
+
+#semFavoritos .texto {
+    font-size: 40px;
+}
+
+#deslogado {
+    align-items: center;
+    justify-content: center;
+
+    min-height: 80vh;
+    width: 100%;
+}
+
+#deslogado img {
+    margin-bottom: 20px;
+
+    height: 80px;
+}
+
+#deslogado .texto {
+    font-size: 40px;
 }

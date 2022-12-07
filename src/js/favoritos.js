@@ -194,6 +194,16 @@ async function montaCartao(idCliente, token) {
     const favoritosResposta = await carregarFavoritos(idCliente, token);
     const favoritos = favoritosResposta.dados;
 
+    if (favoritos == 0) {
+        const deslogado = document.querySelector("#deslogado");
+        const semFavoritos = document.querySelector("#semFavoritos");
+        const meusFavoritos = document.querySelector("#meusFavoritos");
+
+        deslogado.className = "esconder";
+        semFavoritos.className = "mostrar";
+        meusFavoritos.className = "esconder";
+    }
+
     const produtosFavoritados = document.querySelector(".produtos-favoritados");
 
     favoritos.forEach(async (favorito) => {

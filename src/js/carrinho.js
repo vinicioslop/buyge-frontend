@@ -242,7 +242,13 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const token = sessionStorage.getItem("token");
 
     if (token == null) {
-        //window.location = "/";
+        let titulo = document.querySelector(".titulo");
+        let semItems = document.querySelector("#semItens");
+        let informacoes = document.querySelector(".informacoes");
+
+        titulo.className = "titulo";
+        informacoes.className = "informacoes esconder";
+        semItems.className = "mostrar-coluna";
     } else {
         const idCliente = sessionStorage.getItem("idCliente");
         const itemsCarrinho = await carregarItensCarrinho(idCliente, token);
@@ -254,15 +260,15 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
             titulo.className = "titulo esconder";
             informacoes.className = "informacoes esconder";
-            semItems.className = "sem-itens mostrar-linha";
+            semItems.className = "mostrar-coluna";
         } else {
             let titulo = document.querySelector(".titulo");
             let semItems = document.querySelector(".sem-itens");
             let informacoes = document.querySelector(".informacoes");
 
             titulo.className = "titulo";
-            informacoes.className = "informacoes mostrar-coluna";
-            semItems.className = "sem-itens esconder";
+            informacoes.className = "informacoes mostrar-linha";
+            semItems.className = "esconder";
         }
 
         await montarItemCarrinho(itemsCarrinho);

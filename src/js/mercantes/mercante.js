@@ -416,6 +416,41 @@ async function carregarInformacoesMercantePerfilLoja() {
     descricao.value = mercante[0].dsLoja;
 }
 
+async function carregarInformacoesMercanteDadosLoja() {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const idVendedor = sessionStorage.getItem("idCliente");
+
+    const mercanteResposta = await carregarMercantes(idVendedor, token);
+    const enderecoLojaResposta = await carregarEnderecoLoja(idVendedor, token);
+
+    const mercante = mercanteResposta[0];
+    const endereco = enderecoLojaResposta.dados;
+
+    const idMercante = document.querySelector("#idMercanteDadosLoja");
+    const cep = document.querySelector("#cepDadosLoja");
+    const estado = document.querySelector("#estadoDadosLoja");
+    const municipio = document.querySelector("#municipioDadosLoja");
+    const logradouro = document.querySelector("#logradouroDadosLoja");
+    const numero = document.querySelector("#numeroDadosLoja");
+    const complemento = document.querySelector("#complementoDadosLoja");
+    const bairro = document.querySelector("#bairroDadosLoja");
+
+    idMercante.value = mercante.cdMercante;
+    cep.value = endereco.nrCep;
+    estado.value = endereco.sgEstado;
+    municipio.value = endereco.nmCidade;
+    logradouro.value = endereco.nmLogradouro;
+    numero.value = endereco.nrEndereco;
+    complemento.value = "SEM CAMPO NO BANCO";
+    bairro.value = endereco.nmBairro;
+}
+
 async function carregarInformacoesEditarProduto(idProduto) {
     const token = sessionStorage.getItem("token");
 
@@ -517,7 +552,7 @@ document
             console.log("Cliente não autenticado");
             return;
         }
-        
+
         const idCliente = sessionStorage.getItem("idCliente");
 
         const mercante = {
@@ -664,6 +699,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
 
     carregarInformacoesMercantePerfilLoja();
+    carregarInformacoesMercanteDadosLoja();
     montarCategorias();
     montarProdutos();
 });
