@@ -1,4 +1,4 @@
-const fetchUrl = "https://localhost:7240/api";
+const fetchUrl = "https://129.148.45.5:30001/api";
 
 function mascaraPreco(preco) {
     const valorFormatado = preco.toLocaleString("pt-BR", {
@@ -181,6 +181,64 @@ async function desfavoritar(idProduto) {
     }
 }
 
+async function adicionarItemCarrinho(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/carrinho/items/${idCliente}/${idProduto}`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const status = response.status;
+
+    switch (status) {
+        case 201:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function adicionarCarrinho(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        console.log("Cliente não autenticado!");
+        return;
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+
+    const itemCarrinhoResposta = await adicionarItemCarrinho(
+        idCliente,
+        idProduto,
+        token
+    );
+
+    if (itemCarrinhoResposta.status === 200) {
+        window.location.reload();
+    }
+}
+
 async function montaCartao(idCliente, token) {
     const categoriasResposta = await carregarCategorias();
     if (categoriasResposta.status !== 200) {
@@ -217,7 +275,7 @@ async function montaCartao(idCliente, token) {
         const mercante = await mercantesResposta.dados;
 
         const cartao = document.createElement("div");
-        cartao.classList.add("cartao");
+        cartao.classList.add("cartao-favorito");
         cartao.classList.add("carrosel-cell");
 
         const imagemFavorito = document.createElement("div");
@@ -240,7 +298,7 @@ async function montaCartao(idCliente, token) {
 
         const iconeFavorito = document.createElement("img");
         iconeFavorito.classList.add("favorito");
-        iconeFavorito.src = "/src/icons/heart-cheio.svg";
+        iconeFavorito.src = "/src/icons/heart2-cheio.png";
         iconeFavorito.setAttribute(
             "onclick",
             `desfavoritar(${produto.cdProduto})`
@@ -308,8 +366,11 @@ async function montaCartao(idCliente, token) {
 
         const botao = document.createElement("button");
         botao.classList.add("comprar");
-        botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "VISUALIZAR";
+        botao.innerText = "Adicionar ao Carrinho";
+        botao.setAttribute(
+            "onclick",
+            `adicionarCarrinho(${produto.cdProduto})`
+        );
 
         precoParcelaBotao.appendChild(precoParcela);
         precoParcelaBotao.appendChild(botao);

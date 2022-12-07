@@ -1,4 +1,4 @@
-const fetchUrl = "https://localhost:7240/api";
+const fetchUrl = "https://129.148.45.5:30001/api";
 
 function mascaraPreco(preco) {
     const valorFormatado = preco.toLocaleString("pt-BR", {

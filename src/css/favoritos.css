@@ -50,7 +50,7 @@
         width: 100%;
     }
 
-    .container .produtos-favoritados .cartao {
+    .container .produtos-favoritados .cartao-favorito {
         margin-right: 20px;
         margin-bottom: 20px;
     }
@@ -106,4 +106,246 @@
 
 #deslogado .texto {
     font-size: 40px;
+}
+
+.cartao-favorito {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* DIMENSIONAMENTO */
+    box-sizing: border-box;
+    min-height: fit-content;
+    max-height: 550px;
+    width: 240px;
+
+    /* APARÊNCIA */
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: white;
+}
+
+.cartao-favorito .imagem-favorito {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    /* DIMENSIONAMENTO */
+    width: 100%;
+    min-height: 60%;
+    max-height: 60%;
+
+    /* APARÊNCIA */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    background-color: var(--cor-clara);
+}
+
+.cartao-favorito .imagem-favorito .imagem {
+    /* DIMENSIONAMENTO */
+    width: 80%;
+    object-fit: scale-down;
+
+    /* DIMENSIONAMENTO */
+    width: 80%;
+    object-fit: scale-down;
+
+    /* APARÊNCIA */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    background-color: transparent;
+}
+
+.cartao-favorito .imagem-favorito .favorito {
+    /* POSICIONAMENTO */
+    position: absolute;
+
+    margin-left: 200px;
+    margin-top: 10px;
+
+    /* DIMENSIONAMENTO */
+    height: 24px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito .imagem-favorito .favorito:hover {
+    cursor: pointer;
+}
+
+.cartao-favorito .informacoes {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* DIMENSIONAMENTO */
+    height: 50%;
+    width: 100%;
+
+    /* APARÊNCIA */
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--cor-clara);
+}
+
+.cartao-favorito .informacoes .titulo-categoria-avaliacao {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .titulo-categoria-avaliacao .categoria-avaliacao {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    /* DIMENSIONAMENTO */
+    width: 100%;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito
+    .informacoes
+    .titulo-categoria-avaliacao
+    .categoria-avaliacao
+    .avaliacao {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .titulo-categoria-avaliacao .categoria-avaliacao p {
+    /* DIMENSIONAMENTO */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 200%;
+    letter-spacing: 0.65px;
+
+    /* APARÊNCIA */
+    color: #777777;
+    background-color: transparent;
+}
+
+.cartao-favorito
+    .informacoes
+    .titulo-categoria-avaliacao
+    .categoria-avaliacao
+    .avaliacao
+    img {
+    /* POSICIONAMENTO */
+    margin-right: 3px;
+
+    /* DIMENSIONAMENTO */
+    height: 22px;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .titulo-categoria-avaliacao .titulo-produto {
+    /* DIMENSIONAMENTO */
+    font-size: 16px;
+    font-weight: 700;
+    height: 30px;
+
+    /* APARÊNCIA */
+    color: #333333;
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .nome-loja {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: 14px;
+    text-align: right;
+
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .nome-loja:hover {
+    cursor: pointer;
+
+    color: var(--cor-principal);
+}
+
+.cartao-favorito .informacoes .preco-parcela-botao {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: column;
+
+    /* DIMENSIONAMENTO */
+    width: 100%;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .preco-parcela-botao .preco-parcela {
+    /* POSICIONAMENTO */
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+
+    width: 100%;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .preco-parcela-botao .preco-parcela .preco {
+    /* DIMENSIONAMENTO */
+    font-size: 20px;
+    font-weight: 700;
+    color: #333333;
+    text-align: left;
+
+    /* APARÊNCIA */
+    background-color: transparent;
+}
+
+.cartao-favorito .informacoes .preco-parcela-botao .comprar {
+    /* POSICIONAMENTO */
+    margin-top: 10px;
+
+    /* DIMENSIONAMENTO */
+    height: 30px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 200%;
+    letter-spacing: 0.65px;
+
+    /* APARÊNCIA */
+    color: var(--cor-clara);
+    background: var(--cor-principal-clara);
+    border: 1.5px solid var(--cor-principal);
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.cartao-favorito .informacoes .preco-parcela-botao .comprar:hover {
+    cursor: pointer;
 }

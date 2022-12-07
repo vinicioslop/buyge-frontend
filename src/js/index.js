@@ -1,4 +1,4 @@
-const fetchUrl = "https://localhost:7240/api";
+const fetchUrl = "https://129.148.45.5:30001/api";
 
 function mascaraPreco(preco) {
     const valorFormatado = preco.toLocaleString("pt-BR", {
@@ -318,7 +318,7 @@ async function montaCartao(idCliente, token) {
         if (favoritos.length > 0) {
             favoritos.forEach((favorito) => {
                 if (favorito.fkCdProduto == produto.cdProduto) {
-                    iconeFavorito.src = "/src/icons/heart-cheio.svg";
+                    iconeFavorito.src = "/src/icons/heart2-cheio.png";
 
                     iconeFavorito.setAttribute(
                         "onclick",
@@ -329,7 +329,7 @@ async function montaCartao(idCliente, token) {
         }
 
         if (iconeFavorito.src == "") {
-            iconeFavorito.src = "/src/icons/heart.svg";
+            iconeFavorito.src = "/src/icons/heart2.png";
 
             iconeFavorito.setAttribute(
                 "onclick",

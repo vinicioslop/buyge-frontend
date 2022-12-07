@@ -1,4 +1,4 @@
-const url = "https://localhost:7240/api";
+const url = "https://129.148.45.5:30001/api";
 
 async function buscarCategorias() {
     const response = await fetch(`${url}/categorias`, { mode: "cors" });
@@ -36,7 +36,7 @@ async function buscarDadosCliente(idCliente, token) {
         case 200:
             const dados = await response.json();
 
-            const resposta = {
+            var resposta = {
                 dados: dados,
                 status: status,
             };
@@ -44,7 +44,13 @@ async function buscarDadosCliente(idCliente, token) {
             return resposta;
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
     }
 }
 
@@ -122,7 +128,7 @@ function montaBarraNavegacaoPequena(categorias) {
     });
 }
 
-async function montaBarraNavegacaoGrande(categorias) {
+async function montaBarraNavegacaoGrande(categorias, cliente) {
     // BARRA DE NAVEGAÇÃO
     const barraGrande = document.querySelector("#barraGrande");
 
@@ -235,9 +241,7 @@ async function montaBarraNavegacaoGrande(categorias) {
 
     const usuarioConteudo = document.getElementById("usuarioConteudo");
 
-    const token = sessionStorage.getItem("token");
-
-    if (token === null) {
+    if (cliente == null) {
         const logar = document.createElement("a");
         logar.setAttribute("onclick", "logar()");
         logar.id = "logar";
@@ -251,21 +255,18 @@ async function montaBarraNavegacaoGrande(categorias) {
         usuarioConteudo.appendChild(logar);
         usuarioConteudo.appendChild(criarConta);
     } else {
-        const idCliente = sessionStorage.getItem("idCliente");
-
-        const resposta = await buscarDadosCliente(idCliente, token);
-        const cliente = resposta.dados;
-
         if (cliente.nmTipoConta == "Vendedor") {
             const grupoIcones = document.querySelector(".grupo-icones");
             const iconeFavoritos = document.querySelector("#linkFavoritos");
 
             const mercanteLink = document.createElement("a");
-            mercanteLink.setAttribute("href", "/src/pages/mercantes/mercante.html");
+            mercanteLink.setAttribute(
+                "href",
+                "/src/pages/mercantes/mercante.html"
+            );
             mercanteLink.className = "icone-link";
 
-            mercanteLink.innerHTML =
-            `
+            mercanteLink.innerHTML = `
             <img
                 class="icone"
                 id="mercantes-icon"
@@ -322,17 +323,23 @@ function montaBarra(categorias) {
     }
 }
 
-document.addEventListener("load", async (e) => {
-    e.preventDefault();
-
-    await veriricarToken();
-});
-
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
     const categoriasResposta = await buscarCategorias();
     const categorias = categoriasResposta.dados;
 
-    montaBarra(categorias);
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await buscarDadosCliente(idCliente, token);
+
+        const cliente = resposta.dados;
+
+        montaBarra(categorias, cliente);
+    } else {
+        montaBarra(categorias, null);
+    }
 });
