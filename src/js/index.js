@@ -536,7 +536,7 @@ async function montaCartao(idCliente, token) {
         const botao = document.createElement("button");
         botao.classList.add("comprar");
         botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "COMPRA";
+        botao.innerText = "VISUALIZAR";
 
         precoParcelaBotao.appendChild(precoParcela);
         precoParcelaBotao.appendChild(botao);
@@ -667,7 +667,7 @@ async function montaCartao(idCliente, token) {
         const botao = document.createElement("button");
         botao.classList.add("comprar");
         botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "COMPRA";
+        botao.innerText = "VISUALIZAR";
 
         precoParcelaBotao.appendChild(precoParcela);
         precoParcelaBotao.appendChild(botao);

@@ -188,7 +188,7 @@
                             disabled
                             hidden
                             type="text"
-                            id="idMercanteDadosLoja"
+                            id="idEnderecoLoja"
                         />
                         <div class="grupo-secao">
                             <h3 class="secao-formulario">Dados do Vendedor</h3>
@@ -223,24 +223,100 @@
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="estadoDadosLoja">Estado</label>
-                                    <input
+                                    <label for="sgEstadoDadosLoja">Estado</label>
+                                    <select
                                         required
-                                        type="text"
-                                        name="estadoDadosLoja"
-                                        id="estadoDadosLoja"
-                                        placeholder="Informe o Estado"
-                                    />
+                                        name="sgEstadoDadosLoja"
+                                        id="sgEstadoDadosLoja"
+                                    >
+                                        <option id="AC" value="AC">Acre</option>
+                                        <option id="AL" value="AL">
+                                            Alagoas
+                                        </option>
+                                        <option id="AP" value="AP">
+                                            Amapá
+                                        </option>
+                                        <option id="AM" value="AM">
+                                            Amazonas
+                                        </option>
+                                        <option id="BA" value="BA">
+                                            Bahia
+                                        </option>
+                                        <option id="CE" value="CE">
+                                            Ceará
+                                        </option>
+                                        <option id="ES" value="ES">
+                                            Espírito Santo
+                                        </option>
+                                        <option id="GO" value="GO">
+                                            Goiás
+                                        </option>
+                                        <option id="MA" value="MA">
+                                            Maranhão
+                                        </option>
+                                        <option id="MT" value="MT">
+                                            Mato Grosso
+                                        </option>
+                                        <option id="MS" value="MS">
+                                            Mato Grosso do Sul
+                                        </option>
+                                        <option id="MG" value="MG">
+                                            Minas Gerais
+                                        </option>
+                                        <option id="PA" value="PA">Pará</option>
+                                        <option id="PB" value="PB">
+                                            Paraíba
+                                        </option>
+                                        <option id="PR" value="PR">
+                                            Paraná
+                                        </option>
+                                        <option id="PE" value="PE">
+                                            Pernambuco
+                                        </option>
+                                        <option id="PI" value="PI">
+                                            Piauí
+                                        </option>
+                                        <option id="RJ" value="RJ">
+                                            Rio de Janeiro
+                                        </option>
+                                        <option id="RN" value="RN">
+                                            Rio Grande do Norte
+                                        </option>
+                                        <option id="RS" value="RS">
+                                            Rio Grande do Sul
+                                        </option>
+                                        <option id="RO" value="RO">
+                                            Rondônia
+                                        </option>
+                                        <option id="RR" value="RR">
+                                            Roraima
+                                        </option>
+                                        <option id="SC" value="SC">
+                                            Santa Catarina
+                                        </option>
+                                        <option id="SP" value="SP">
+                                            São Paulo
+                                        </option>
+                                        <option id="SE" value="SE">
+                                            Sergipe
+                                        </option>
+                                        <option id="TO" value="TO">
+                                            Tocantins
+                                        </option>
+                                        <option id="DF" value="DF">
+                                            Distrito Federal
+                                        </option>
+                                    </select>
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="municipioDadosLoja"
+                                    <label for="cidadeDadosLoja"
                                         >Cidade / Município</label
                                     >
                                     <input
                                         required
                                         type="text"
-                                        name="municipioDadosLoja"
-                                        id="municipioDadosLoja"
+                                        name="cidadeDadosLoja"
+                                        id="cidadeDadosLoja"
                                         placeholder="Informe a Cidade"
                                     />
                                 </div>
@@ -292,7 +368,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="enviar">Salvar Alterações</button>
+                        <button id="atualizarDadosLoja">
+                            Salvar Alterações
+                        </button>
                     </form>
                 </div>
             </div>

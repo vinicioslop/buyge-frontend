@@ -1,6 +1,5 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
-
 function removeSessao() {
     sessionStorage.clear();
 }
@@ -149,7 +148,7 @@ async function adicionarEndereco(endereco, token) {
         },
         body: JSON.stringify(endereco),
     });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 201:

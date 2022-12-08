@@ -1,4 +1,4 @@
-const fetchUrl = "https://localhost:30001/api";
+const fetchUrl = "https://129.148.45.5:30001/api";
 
 String.prototype.reverse = function () {
     return this.split("").reverse().join("");
@@ -80,22 +80,25 @@ async function removerMercante(idMercante, token) {
 }
 
 async function carregarEnderecoLoja(idMercante, token) {
-    const response = await fetch(`${fetchUrl}/enderecos/${idMercante}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
-    const status = await response.status;
+    const response = await fetch(
+        `${fetchUrl}/mercante/enderecos/${idMercante}`,
+        {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const status = response.status;
 
     switch (status) {
         case 200:
             const dados = await response.json();
 
-            const resposta = {
+            var resposta = {
                 dados: dados,
                 status: status,
             };
@@ -103,7 +106,86 @@ async function carregarEnderecoLoja(idMercante, token) {
             return resposta;
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
+async function cadastrarEnderecoLoja(endereco, token) {
+    const response = await fetch(`${fetchUrl}/mercante/enderecos`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(endereco),
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 201:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
+async function atualizarEnderecoLoja(endereco, token) {
+    const response = await fetch(
+        `${fetchUrl}/mercante/enderecos/${endereco.cdEndereco}`,
+        {
+            method: "PATCH",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify(endereco),
+        }
+    );
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
     }
 }
 
@@ -426,29 +508,29 @@ async function carregarInformacoesMercanteDadosLoja() {
 
     const idVendedor = sessionStorage.getItem("idCliente");
 
-    const mercanteResposta = await carregarMercantes(idVendedor, token);
     const enderecoLojaResposta = await carregarEnderecoLoja(idVendedor, token);
 
-    const mercante = mercanteResposta[0];
-    const endereco = enderecoLojaResposta.dados;
+    if (enderecoLojaResposta.dados.length != 0) {
+        const endereco = enderecoLojaResposta.dados[0];
 
-    const idMercante = document.querySelector("#idMercanteDadosLoja");
-    const cep = document.querySelector("#cepDadosLoja");
-    const estado = document.querySelector("#estadoDadosLoja");
-    const municipio = document.querySelector("#municipioDadosLoja");
-    const logradouro = document.querySelector("#logradouroDadosLoja");
-    const numero = document.querySelector("#numeroDadosLoja");
-    const complemento = document.querySelector("#complementoDadosLoja");
-    const bairro = document.querySelector("#bairroDadosLoja");
+        const idEndereco = document.querySelector("#idEnderecoLoja");
+        const cep = document.querySelector("#cepDadosLoja");
+        const estado = document.querySelector("#sgEstadoDadosLoja");
+        const municipio = document.querySelector("#cidadeDadosLoja");
+        const logradouro = document.querySelector("#logradouroDadosLoja");
+        const numero = document.querySelector("#numeroDadosLoja");
+        const complemento = document.querySelector("#complementoDadosLoja");
+        const bairro = document.querySelector("#bairroDadosLoja");
 
-    idMercante.value = mercante.cdMercante;
-    cep.value = endereco.nrCep;
-    estado.value = endereco.sgEstado;
-    municipio.value = endereco.nmCidade;
-    logradouro.value = endereco.nmLogradouro;
-    numero.value = endereco.nrEndereco;
-    complemento.value = "SEM CAMPO NO BANCO";
-    bairro.value = endereco.nmBairro;
+        idEndereco.value = endereco.cdEndereco;
+        cep.value = endereco.nrCep;
+        estado.value = endereco.sgEstado;
+        municipio.value = endereco.nmCidade;
+        logradouro.value = endereco.nmLogradouro;
+        numero.value = endereco.nrEndereco;
+        complemento.value = "SEM CAMPO NO BANCO";
+        bairro.value = endereco.nmBairro;
+    }
 }
 
 async function carregarInformacoesEditarProduto(idProduto) {
@@ -577,6 +659,57 @@ document
     });
 
 document
+    .querySelector("#atualizarDadosLoja")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const token = sessionStorage.getItem("token");
+        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+
+        if (token == null) {
+            console.log("Cliente não autenticado");
+            window.location = "/";
+        }
+
+        const endereco = {
+            cdEndereco: document.getElementById("idEnderecoLoja").value,
+            nrCep: document.getElementById("cepDadosLoja").value,
+            nmBairro: document.getElementById("bairroDadosLoja").value,
+            sgEstado: document.getElementById("sgEstadoDadosLoja").value,
+            nmLogradouro: document.getElementById("logradouroDadosLoja").value,
+            nmCidade: document.getElementById("cidadeDadosLoja").value,
+            nrEndereco: document.getElementById("numeroDadosLoja").value,
+            fkCdMercante: idCliente,
+        };
+
+        if (endereco.cdEndereco == null) {
+            var resposta = await cadastrarEnderecoLoja(endereco, token);
+
+            if (resposta.status === 200) {
+                carregarInformacoesMercanteDadosLoja();
+                clicaSecao("secaoMinhaLoja");
+                clicaSecaoInternaMinhaLoja("dadosLoja");
+            } else {
+                console.log(
+                    "Ocorreu um erro na requisição. STATUS: " + resposta.status
+                );
+            }
+        } else {
+            var resposta = await atualizarEnderecoLoja(endereco, token);
+
+            if (resposta.status === 200) {
+                carregarInformacoesMercanteDadosLoja();
+                clicaSecao("secaoMinhaLoja");
+                clicaSecaoInternaMinhaLoja("dadosLoja");
+            } else {
+                console.log(
+                    "Ocorreu um erro na requisição. STATUS: " + resposta.status
+                );
+            }
+        }
+    });
+
+document
     .querySelector("#cadastrarProduto")
     .addEventListener("click", async (e) => {
         e.preventDefault();
@@ -662,32 +795,6 @@ document
 
         atualizarProduto(produto, token);
     });
-
-document.querySelector("#enviar").addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    const token = sessionStorage.getItem("token");
-
-    if (token === null) {
-        console.log("Cliente não autenticado");
-        return;
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const idMercante = urlParams.get("idMercante");
-
-    const status = await removerMercante(idMercante, token);
-
-    switch (status) {
-        case 200:
-            console.log("Loja removida com sucesso!");
-            window.location = "/src/pages/mercantes/mercantes.html";
-            break;
-        default:
-            console.log("Ocorreu uma falha na requisicao. STATUS: " + status);
-            break;
-    }
-});
 
 document.addEventListener("DOMContentLoaded", (e) => {
     e.preventDefault();
