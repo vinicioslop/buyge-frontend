@@ -4,7 +4,7 @@
     --cor-principal-rgb10: rgba(119, 37, 131, 0.1);
     --cor-principal-rgb40: rgba(119, 37, 131, 0.4);
     --cor-principal-rgb60: rgba(119, 37, 131, 0.6);
-    --cor-principal: #772583;
+    --cor-principal: rgb(119, 37, 131);
     --cor-principal-clara: #ad7cb5;
 }
 
@@ -19,6 +19,8 @@
 .mostrar {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .esconder {
@@ -33,19 +35,32 @@
     height: 70vh;
 }
 
+.resultado-compra #nomeLoja {
+    font-weight: bold;
+    color: var(--cor-principal);
+}
+
+.resultado-compra .buyge {
+    font-weight: bold;
+    color: var(--cor-principal);
+}
+
 .resultado-compra img {
-    height: 60px;
+    height: 70px;
 }
 
 .resultado-compra .titulo {
-    font-size: 30px;
+    font-size: 34px;
     font-weight: normal;
 }
 
 .resultado-compra .texto {
+    max-width: 80%;
+
     margin-top: 20px;
 
     font-size: 20px;
+    text-align: justify;
 }
 
 .resultado-compra .grupo-botoes {
@@ -60,10 +75,28 @@
 }
 
 .resultado-compra .grupo-botoes button {
-    height: 50px;
+    margin-top: 20px;
+
+    height: 60px;
     width: 200px;
 
-    font-size: 16px;
+    font-size: 18px;
+    color: var(--cor-principal);
+
+    background-color: var(--cor-fundo);
+    border: 2px solid var(--cor-principal);
+    border-radius: 5px;
+}
+
+.resultado-compra .grupo-botoes button:hover {
+    cursor: pointer;
+
+    color: var(--cor-clara);
+
+    background-color: var(--cor-principal);
+    border-color: var(--cor-principal-clara);
+
+    transition: 0.5s;
 }
 
 #approved {

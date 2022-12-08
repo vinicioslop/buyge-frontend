@@ -57,7 +57,8 @@ async function salvarCompra(respostaMercadoPago) {
 }
 
 function exibeResultados(resultado) {
-    const status = [
+    /*
+    const allStatus = [
         "approved",
         "pending",
         "rejected",
@@ -68,6 +69,25 @@ function exibeResultados(resultado) {
         "refunded",
         "charged_back",
     ];
+    */
+
+    const componentes = document.querySelectorAll(".resultado-compra");
+
+    componentes.forEach((componente) => {
+        if (componente.id == resultado) {
+            componente.className = "resultado-compra mostrar";
+        } else {
+            componente.className = "resultado-compra esconder";
+        }
+    });
+}
+
+function acompanharCompra() {
+    window.location = "/src/pages/usuario/usuario.html";
+}
+
+function voltaInicio() {
+    window.location = "/";
 }
 
 document.addEventListener("DOMContentLoaded", async (e) => {
@@ -76,47 +96,59 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const urlParams = new URLSearchParams(window.location.search);
     const statusCompra = urlParams.get("collection_status");
 
+    if (statusCompra === null) {
+        window.location = "/";
+    }
+
+    const respostaMercadoPago = {
+        idPreferencia: urlParams.get("preference_id"),
+        nmCollectionId: urlParams.get("collection_id"),
+        nmCollectionStatus: urlParams.get("collection_status"),
+        nmPaymentId: urlParams.get("payment_id"),
+        nmStatus: urlParams.get("status"),
+        nmPaymentType: urlParams.get("payment_type"),
+        nmMerchantOrderId: urlParams.get("merchant_order_id"),
+        fkCdCliente: null,
+    };
+
+    await salvarCompra(respostaMercadoPago);
+
     switch (statusCompra) {
         case "approved":
-            let respostaMercadoPago = {
-                idPreferencia: urlParams.get("preference_id"),
-                nmCollectionId: urlParams.get("collection_id"),
-                nmCollectionStatus: urlParams.get("collection_status"),
-                nmPaymentId: urlParams.get("payment_id"),
-                nmStatus: urlParams.get("status"),
-                nmPaymentType: urlParams.get("payment_type"),
-                nmMerchantOrderId: urlParams.get("merchant_order_id"),
-                fkCdCliente: null,
-            };
+            exibeResultados("approved");
+            return;
 
-            const respostaSalvarCompra = await salvarCompra(
-                respostaMercadoPago
-            );
-            break;
         case "pending":
-            console.log("Pendente");
-            break;
+            exibeResultados("pending");
+            return;
+
         case "rejected":
-            console.log("Rejeitado");
-            break;
+            exibeResultados("rejected");
+            return;
+
         case "authorized":
-            console.log("Autorizado");
-            break;
+            exibeResultados("authorized");
+            return;
+
         case "in_process":
-            console.log("Em processo");
-            break;
+            exibeResultados("in_process");
+            return;
+
         case "in_mediation":
-            console.log("Em mediação");
-            break;
+            exibeResultados("in_mediation");
+            return;
+
         case "cancelled":
-            console.log("Cancelado");
-            break;
+            exibeResultados("cancelled");
+            return;
+
         case "refunded":
-            console.log("Reembolso");
-            break;
+            exibeResultados("refunded");
+            return;
+
         case "charged_back":
-            console.log("Devolvido");
-            break;
+            exibeResultados("charged_back");
+            return;
     }
 
     exibeResultados(statusCompra);

@@ -32,45 +32,180 @@
 
         <div class="container">
             <div id="approved" class="resultado-compra mostrar">
-                <img src="/src/icons/compra-aprovada-roxa.svg" alt="">
-                <h2 class="titulo">Compra realizada com sucesso!</h2>
-                <p class="texto">Aguarde o contato da Loja para proseguir e receber sua tão desejada compra.</p>
+                <img src="/src/icons/compra-aprovada-roxa.svg" alt="" />
+                <h2 class="titulo">Pedido realizado com sucesso!</h2>
+                <p class="texto">
+                    Aguarde o contato da <span id="nomeLoja">NOME DA LOJA</span> para proseguir e receber seu tão
+                    desejado pedido.
+                </p>
                 <div class="grupo-botoes">
-                    <button class="voltarInicio">Voltar para tela inicial</button>
-                    <button class="verCompras">Visualizar compras realizadas</button>
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Visualizar compras realizadas
+                    </button>
                 </div>
             </div>
 
             <div id="pending" class="resultado-compra esconder">
-                <h2 class="titulo">Em processamento</h2>
+                <img src="/src/icons/compra-em-progresso-roxa.svg" alt="" />
+                <h2 class="titulo">Pedido pendente!</h2>
+                <p class="texto">
+                    Acesse a página de pedidos para dar seguimento ao seu
+                    pedido.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
 
             <div id="rejected" class="resultado-compra esconder">
-                <h2 class="titulo">Rejeitada</h2>
+                <img src="/src/icons/compra-recusada-vermelha.svg" alt="" />
+                <h2 class="titulo">Pedido recusado!</h2>
+                <p class="texto">
+                    Acesse a página de pedidos para descobrir o que ocorreu com
+                    seu pedido.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
 
             <div id="authorized" class="resultado-compra esconder">
-                <h2 class="titulo">Autorizada</h2>
+                <img src="/src/icons/compra-autorizada-roxa.svg" alt="" />
+                <h2 class="titulo">Pedido autorizado!</h2>
+                <p class="texto">
+                    Acesse a página de pedidos para dar seguimento ao pedido.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
 
             <div id="in_process" class="resultado-compra esconder">
-                <h2 class="titulo">Em progresso</h2>
+                <img src="/src/icons/compra-processando-roxa.svg" alt="" />
+                <h2 class="titulo">Pedido em processamento!</h2>
+                <p class="texto">
+                    Acesse a página de pedidos para dar acompanhar o seu pedido.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
 
             <div id="in_mediation" class="resultado-compra esconder">
-                <h2 class="titulo">Em mediação</h2>
+                <img src="/src/icons/compra-em-mediacao-roxa.svg" alt="" />
+                <h2 class="titulo">Pedido em mediação!</h2>
+                <p class="texto">
+                    Pedido está sendo analisada pela equipe do
+                    <span class="buyge">BUYGE</span>! Acesse a página de pedidos
+                    para acompanhar o seu pedido.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
 
             <div id="cancelled" class="resultado-compra esconder">
-                <h2 class="titulo">Cancelada</h2>
+                <img src="/src/icons/compra-cancelada-vermelha.svg" alt="" />
+                <h2 class="titulo">Pedido cancelado!</h2>
+                <p class="texto">
+                    Acesse a página de pedidos para obter mais informações sobre
+                    o cancelamento.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
 
             <div id="refunded" class="resultado-compra esconder">
-                <h2 class="titulo">Reembolso</h2>
+                <img src="/src/icons/compra-reembolsada-roxa.svg" alt="" />
+                <h2 class="titulo">Pedido reembolsado!</h2>
+                <p class="texto">
+                    Acesso a página de pedidos para mais informações.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
 
             <div id="charged_back" class="resultado-compra esconder">
-                <h2 class="titulo">Devolvido</h2>
+                <img src="/src/icons/compra-devolvida-roxa.svg" alt="" />
+                <h2 class="titulo">Pedido devolvido!</h2>
+                <p class="texto">
+                    Acesso a página de pedidos para obter mais informações.
+                </p>
+                <div class="grupo-botoes">
+                    <button class="voltaInicio" onclick="voltaInicio()">
+                        Tela Inicial
+                    </button>
+                    <button
+                        class="verStatusCompra"
+                        onclick="acompanharCompra()"
+                    >
+                        Vizualizar Pedido
+                    </button>
+                </div>
             </div>
         </div>
 
