@@ -20,7 +20,7 @@
             type="image/x-icon"
         />
 
-        <link rel="stylesheet" href="/src/css/compras/compra.css">
+        <link rel="stylesheet" href="/src/css/compras/compra.css" />
 
         <title>Página de Compra</title>
     </head>
@@ -31,16 +31,46 @@
         </header>
 
         <div class="container">
-            <div class="compra-ok mostrar">
-                <h2 class="titulo">Compra OK</h2>
+            <div id="approved" class="resultado-compra mostrar">
+                <img src="/src/icons/compra-aprovada-roxa.svg" alt="">
+                <h2 class="titulo">Compra realizada com sucesso!</h2>
+                <p class="texto">Aguarde o contato da Loja para proseguir e receber sua tão desejada compra.</p>
+                <div class="grupo-botoes">
+                    <button class="voltarInicio">Voltar para tela inicial</button>
+                    <button class="verCompras">Visualizar compras realizadas</button>
+                </div>
             </div>
 
-            <div class="compra-processando mostrar">
-                <h2 class="titulo">Compra Processando</h2>
+            <div id="pending" class="resultado-compra esconder">
+                <h2 class="titulo">Em processamento</h2>
             </div>
 
-            <div class="compra-fail mostrar">
-                <h2 class="titulo">Compra Fail</h2>
+            <div id="rejected" class="resultado-compra esconder">
+                <h2 class="titulo">Rejeitada</h2>
+            </div>
+
+            <div id="authorized" class="resultado-compra esconder">
+                <h2 class="titulo">Autorizada</h2>
+            </div>
+
+            <div id="in_process" class="resultado-compra esconder">
+                <h2 class="titulo">Em progresso</h2>
+            </div>
+
+            <div id="in_mediation" class="resultado-compra esconder">
+                <h2 class="titulo">Em mediação</h2>
+            </div>
+
+            <div id="cancelled" class="resultado-compra esconder">
+                <h2 class="titulo">Cancelada</h2>
+            </div>
+
+            <div id="refunded" class="resultado-compra esconder">
+                <h2 class="titulo">Reembolso</h2>
+            </div>
+
+            <div id="charged_back" class="resultado-compra esconder">
+                <h2 class="titulo">Devolvido</h2>
             </div>
         </div>
 

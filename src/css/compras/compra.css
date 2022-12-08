@@ -12,15 +12,13 @@
     display: flex;
     flex-direction: column;
 
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
 }
 
 .mostrar {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .esconder {
@@ -29,4 +27,86 @@
 
 .container .titulo {
     height: 30px;
+}
+
+.resultado-compra {
+    height: 70vh;
+}
+
+.resultado-compra img {
+    height: 60px;
+}
+
+.resultado-compra .titulo {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.resultado-compra .texto {
+    margin-top: 20px;
+
+    font-size: 20px;
+}
+
+.resultado-compra .grupo-botoes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    margin-top: 10px;
+
+    width: 500px;
+}
+
+.resultado-compra .grupo-botoes button {
+    height: 50px;
+    width: 200px;
+
+    font-size: 16px;
+}
+
+#approved {
+    align-items: center;
+    justify-content: center;
+}
+
+#pending {
+    align-items: center;
+    justify-content: center;
+}
+
+#rejected {
+    align-items: center;
+    justify-content: center;
+}
+
+#authorized {
+    align-items: center;
+    justify-content: center;
+}
+
+#in_process {
+    align-items: center;
+    justify-content: center;
+}
+
+#in_mediation {
+    align-items: center;
+    justify-content: center;
+}
+
+#cancelled {
+    align-items: center;
+    justify-content: center;
+}
+
+#refunded {
+    align-items: center;
+    justify-content: center;
+}
+
+#charged_back {
+    align-items: center;
+    justify-content: center;
 }

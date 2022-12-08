@@ -1,4 +1,4 @@
-const fetchUrl = "https://localhost:30001/api";
+const fetchUrl = "https://129.148.45.5:30001/api";
 
 String.prototype.reverse = function () {
     return this.split("").reverse().join("");

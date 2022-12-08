@@ -1,6 +1,5 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
-
 async function salvarDadosCompra(idCliente, token, novaCompra) {
     const response = await fetch(`${fetchUrl}/comprar/salvar/${idCliente}`, {
         method: "POST",
@@ -57,6 +56,20 @@ async function salvarCompra(respostaMercadoPago) {
     }
 }
 
+function exibeResultados(resultado) {
+    const status = [
+        "approved",
+        "pending",
+        "rejected",
+        "authorized",
+        "in_process",
+        "in_mediation",
+        "cancelled",
+        "refunded",
+        "charged_back",
+    ];
+}
+
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
@@ -79,7 +92,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             const respostaSalvarCompra = await salvarCompra(
                 respostaMercadoPago
             );
-
             break;
         case "pending":
             console.log("Pendente");
@@ -106,4 +118,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             console.log("Devolvido");
             break;
     }
+
+    exibeResultados(statusCompra);
 });
