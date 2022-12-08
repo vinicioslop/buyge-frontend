@@ -1,4 +1,4 @@
-const fetchUrl = "https://129.148.45.5:30001/api";
+const fetchUrl = "https://localhost:30001/api";
 
 String.prototype.reverse = function () {
     return this.split("").reverse().join("");
@@ -179,7 +179,7 @@ async function atualizarEnderecoLoja(endereco, token) {
             return resposta;
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            
+
             var resposta = {
                 dados: null,
                 status: status,
@@ -509,11 +509,12 @@ async function carregarInformacoesMercanteDadosLoja() {
     const idVendedor = sessionStorage.getItem("idCliente");
 
     const enderecoLojaResposta = await carregarEnderecoLoja(idVendedor, token);
+    const mercantes = await carregarMercantes(idVendedor, token);
 
     if (enderecoLojaResposta.dados.length != 0) {
         const endereco = enderecoLojaResposta.dados[0];
 
-        const idEndereco = document.querySelector("#idEnderecoLoja");
+        const cdEndereco = document.querySelector("#cdEnderecoLoja");
         const cep = document.querySelector("#cepDadosLoja");
         const estado = document.querySelector("#sgEstadoDadosLoja");
         const municipio = document.querySelector("#cidadeDadosLoja");
@@ -522,7 +523,7 @@ async function carregarInformacoesMercanteDadosLoja() {
         const complemento = document.querySelector("#complementoDadosLoja");
         const bairro = document.querySelector("#bairroDadosLoja");
 
-        idEndereco.value = endereco.cdEndereco;
+        cdEndereco.value = endereco.cdEndereco;
         cep.value = endereco.nrCep;
         estado.value = endereco.sgEstado;
         municipio.value = endereco.nmCidade;
@@ -531,6 +532,9 @@ async function carregarInformacoesMercanteDadosLoja() {
         complemento.value = "SEM CAMPO NO BANCO";
         bairro.value = endereco.nmBairro;
     }
+
+    const fkCdMercanteLoja = document.querySelector("#fkCdMercanteLoja");
+    fkCdMercanteLoja.value = mercantes[0].cdMercante;
 }
 
 async function carregarInformacoesEditarProduto(idProduto) {
@@ -664,7 +668,6 @@ document
         e.preventDefault();
 
         const token = sessionStorage.getItem("token");
-        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
 
         if (token == null) {
             console.log("Cliente não autenticado");
@@ -672,14 +675,14 @@ document
         }
 
         const endereco = {
-            cdEndereco: document.getElementById("idEnderecoLoja").value,
+            cdEndereco: document.getElementById("cdEnderecoLoja").value,
             nrCep: document.getElementById("cepDadosLoja").value,
             nmBairro: document.getElementById("bairroDadosLoja").value,
             sgEstado: document.getElementById("sgEstadoDadosLoja").value,
             nmLogradouro: document.getElementById("logradouroDadosLoja").value,
             nmCidade: document.getElementById("cidadeDadosLoja").value,
             nrEndereco: document.getElementById("numeroDadosLoja").value,
-            fkCdMercante: idCliente,
+            fkCdMercante: document.querySelector("#fkCdMercanteLoja"),
         };
 
         if (endereco.cdEndereco == null) {
