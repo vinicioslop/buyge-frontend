@@ -81,7 +81,7 @@
             </div>
 
             <div id="secaoMeusDados" class="conteudo mostrar">
-                <div class="nome-loja">Meus Dados</div>
+                <div class="titulo-secao-principal">Meus Dados</div>
                 <hr class="linha" />
                 <div class="informacoes mostrar">
                     <form class="formulario">
@@ -548,14 +548,75 @@
             </div>
 
             <div id="secaoCompras" class="conteudo esconder">
-                <div class="nome-loja">Compras</div>
-
+                <div class="titulo-secao-principal">Minhas Compras</div>
+                <div class="navegacao">
+                    <div
+                        onclick="clicaSecaoInternaCompras('pedidos')"
+                        class="item"
+                    >
+                        Pedidos
+                    </div>
+                    <div
+                        onclick="clicaSecaoInternaCompras('historico')"
+                        class="item"
+                    >
+                        Histórico
+                    </div>
+                </div>
                 <hr class="linha" />
-                <div class="informacoes mostrar"></div>
+                <div id="pedidos" class="informacoes mostrar">
+                    <h1 class="titulo-secao">Pedidos</h1>
+                    <div class="container-pedidos">
+                        <table class="pedidos">
+                            <tr>
+                                <th>Número do Pedido</th>
+                                <th>Status</th>
+                                <th>Quantidade de Produtos</th>
+                                <th>Valor Total</th>
+                                <th>Código de Rastreio</th>
+                            </tr>
+                            <tr class="item">
+                                <td>Número do Pedido</td>
+                                <td>Status da Compra</td>
+                                <td>QUANTIDADE</td>
+                                <td>VALOR</td>
+                                <td>CÓDIGO</td>
+                            </tr>
+                            <tr class="item">
+                                <td>Número do Pedido</td>
+                                <td>Status da Compra</td>
+                                <td>QUANTIDADE</td>
+                                <td>VALOR</td>
+                                <td>CÓDIGO</td>
+                            </tr>
+                            <tr class="item">
+                                <td>Número do Pedido</td>
+                                <td>Status da Compra</td>
+                                <td>QUANTIDADE</td>
+                                <td>VALOR</td>
+                                <td>CÓDIGO</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr class="linha" />
+                </div>
+                <div id="historico" class="informacoes esconder">
+                    <h1 class="titulo-secao">Histórico</h1>
+                    <div class="compras">
+                        <div class="compra">
+                            <div class="fundo-imagem">
+                                <img src="/src/icons/image-preto.svg" alt="" />
+                            </div>
+                            <div class="nome-produto">Nome do Produto</div>
+                            <div class="status">Status</div>
+                            <div class="valor-total">Valor Total</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="secaoSeguranca" class="conteudo esconder">
-                <div class="nome-loja">Segurança</div>
+                <div class="titulo-secao-principal">Segurança</div>
 
                 <hr class="linha" />
                 <div class="informacoes mostrar"></div>

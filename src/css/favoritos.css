@@ -36,6 +36,8 @@
         margin-left: 2.5%;
         margin-right: 2.5%;
 
+        margin-bottom: 10%;
+
         /* DIMENSIONAMENTO */
         width: 95%;
     }
@@ -76,7 +78,7 @@
     align-items: center;
     justify-content: center;
 
-    min-height: 80vh;
+    min-height: 50vh;
     width: 100%;
 }
 

@@ -1,5 +1,14 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
+function mascaraPreco(preco) {
+    const valorFormatado = preco.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+    return valorFormatado;
+}
+
 function removeSessao() {
     sessionStorage.clear();
 }
@@ -250,6 +259,129 @@ async function removerEndereco(idEndereco, token) {
     }
 }
 
+async function carregarCompras(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/compras/todas/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function carregarItensCompra(idCompra, token) {
+    const response = await fetch(`${fetchUrl}/compras/items/${idCompra}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
+async function carregarProduto(idProduto) {
+    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+        method: "GET",
+        mode: "cors",
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
+async function carregarImagens(idProduto) {
+    const response = await fetch(
+        `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
+        {
+            method: "GET",
+            mode: "cors",
+        }
+    );
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
 async function excluirEndereco(idEndereco) {
     const token = sessionStorage.getItem("token");
 
@@ -344,6 +476,59 @@ async function montarEnderecos() {
     });
 }
 
+async function montarCompras() {
+    /*
+    <div class="compra">
+        <div class="fundo-imagem">
+            <img src="/src/icons/image-preto.svg" alt="" />
+        </div>
+        <div class="nome-produto">Nome do Produto</div>
+        <div class="status">Status</div>
+        <div class="valor-total">Valor Total</div>
+    </div>
+    */
+
+    const comprasPrevias = document.querySelectorAll(".compra");
+
+    if (comprasPrevias.length > 0) {
+        comprasPrevias.forEach((compra) => {
+            compra.remove();
+        });
+    }
+
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        window.location = "/";
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+    const comprasResposta = await carregarCompras(idCliente, token);
+
+    const compras = comprasResposta.dados;
+
+    const divCompras = document.querySelector(".compras");
+
+    console.log(compras);
+
+    compras.forEach(async (compra) => {
+        const item = document.createElement("div");
+        item.className = "compra";
+
+        item.innerHTML = `
+        <div class="fundo-imagem">
+            <img src="/src/icons/image-preto.svg" alt="" />
+        </div>
+        <div class="nome-produto">Nome do Produto</div>
+        <div class="status">${compra.nmStatus}</div>
+        <div class="valor-total">${mascaraPreco(compra.vlTotalCompra)}</div>
+        `;
+
+        divCompras.appendChild(item);
+    });
+}
+
 function editarEndereco(idEndereco) {
     clicaSecaoInternaEnderecos("editarEndereco");
 
@@ -368,20 +553,6 @@ async function enderecoPrincipal(idEndereco) {
             "Ocorreu um erro na requisição. STATUS: " + resposta.status
         );
     }
-}
-
-function clicaSecaoInternaEnderecos(idComponente) {
-    const secoes = ["meusEnderecos", "novoEndereco", "editarEndereco"];
-
-    secoes.forEach((secao) => {
-        const componente = document.querySelector("#" + secao);
-
-        if (secao === idComponente) {
-            componente.setAttribute("class", "informacoes mostrar");
-        } else {
-            componente.setAttribute("class", "informacoes esconder");
-        }
-    });
 }
 
 async function insereInformacoesUsuario() {
@@ -457,6 +628,34 @@ async function insereEnderecoUsuario(idEndereco) {
     numero.value = endereco.nrEndereco;
     nmTitulo.value = endereco.nmTituloEndereco;
     nmTipo.value = endereco.nmTipoEndereco;
+}
+
+function clicaSecaoInternaEnderecos(idComponente) {
+    const secoes = ["meusEnderecos", "novoEndereco", "editarEndereco"];
+
+    secoes.forEach((secao) => {
+        const componente = document.querySelector("#" + secao);
+
+        if (secao === idComponente) {
+            componente.setAttribute("class", "informacoes mostrar");
+        } else {
+            componente.setAttribute("class", "informacoes esconder");
+        }
+    });
+}
+
+function clicaSecaoInternaCompras(idComponente) {
+    const secoes = ["pedidos", "historico"];
+
+    secoes.forEach((secao) => {
+        const componente = document.querySelector("#" + secao);
+
+        if (secao === idComponente) {
+            componente.setAttribute("class", "informacoes mostrar");
+        } else {
+            componente.setAttribute("class", "informacoes esconder");
+        }
+    });
 }
 
 function clicaSecao(secaoClicada) {
@@ -620,6 +819,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     if (token != null) {
         insereInformacoesUsuario();
         montarEnderecos();
+        montarCompras();
     } else {
         console.log("Usuário não encontrado");
     }

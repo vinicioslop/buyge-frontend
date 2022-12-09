@@ -102,7 +102,7 @@ async function adicionarItemCarrinho(idCliente, idProduto, token) {
         case 201:
             const dados = await response.json();
 
-            const resposta = {
+            var resposta = {
                 dados: dados,
                 status: status,
             };
@@ -110,7 +110,13 @@ async function adicionarItemCarrinho(idCliente, idProduto, token) {
             return resposta;
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
     }
 }
 

@@ -26,14 +26,11 @@
 }
 
 .conteudo {
-    margin-left: 1%;
-    margin-right: 2%;
-
     min-height: 100%;
-    width: 90vw;
+    width: 80vw;
 }
 
-.conteudo .nome-loja {
+.conteudo .titulo-secao-principal {
     font-size: 30px;
 
     margin-top: 20px;
@@ -43,18 +40,29 @@
     background-color: transparent;
 }
 
-.conteudo .linha {
-    align-self: flex-end;
+.conteudo .navegacao {
+    display: flex;
+    flex-direction: row;
 
-    width: 98%;
+    margin-bottom: 10px;
+    margin-left: 3%;
+
+    background-color: transparent;
+}
+
+.conteudo .navegacao .item {
+    margin-right: 20px;
+}
+
+.conteudo .linha {
+    align-self: center;
+
+    width: 95%;
 
     border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.conteudo .informacoes {
-    height: 100%;
-    width: 100%;
-
+.conteudo .navegacao .item {
     background-color: transparent;
 }
 
@@ -91,6 +99,13 @@
     border-radius: 5px;
 
     background-color: var(--cor-principal-clara);
+}
+
+.conteudo .informacoes {
+    height: 100%;
+    width: 100%;
+
+    background-color: transparent;
 }
 
 .conteudo .informacoes .formulario {
@@ -322,4 +337,65 @@ div,
 p,
 img {
     background-color: transparent;
+}
+
+#pedidos .container-pedidos {
+    margin-left: 3%;
+
+    width: 100%;
+}
+
+#pedidos .pedidos {
+    width: 100%;
+
+    background-color: transparent;
+}
+
+#pedidos th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+#historico .compras {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    margin-left: 3%;
+
+    width: 100%;
+}
+
+#historico .compras .compra {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+    width: 500px;
+    height: 120px;
+
+    color: var(--cor-clara);
+
+    background-color: var(--cor-principal-clara);
+}
+
+#historico .compras .compra .fundo-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 100px;
+
+    background-color: var(--cor-clara);
+}
+
+#historico .compras .compra img {
+    height: 30px;
 }

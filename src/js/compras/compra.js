@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
     const urlParams = new URLSearchParams(window.location.search);
-    const statusCompra = urlParams.get("collection_status");
+    const statusCompra = urlParams.get("status");
 
     if (statusCompra === null) {
         window.location = "/";
