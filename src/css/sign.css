@@ -9,7 +9,7 @@
     --cor-principal-clara: #ad7cb5;
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 900px) {
     .container {
         /* POSICIONAMENTO */
         display: flex;
@@ -64,7 +64,7 @@
         justify-content: center;
 
         /* DIMENSIONAMENTO */
-        width: 50%;
+        width: 40%;
         min-height: 90%;
     }
 
@@ -94,7 +94,7 @@
         padding-right: 10px;
 
         /* DIMENSIONAMENTO */
-        height: 40px;
+        height: 30px;
         width: 100%;
     }
 
@@ -149,8 +149,8 @@
         display: flex;
         flex-direction: column;
 
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
 
         width: 85%;
 
@@ -180,8 +180,8 @@
         display: flex;
         flex-direction: row;
 
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 2px;
+        margin-bottom: 5px;
 
         /* DIMENSIONAMENTO */
         width: 90%;
@@ -193,7 +193,7 @@
     }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 900px) {
     .container {
         /* POSICIONAMENTO */
         display: flex;
@@ -423,7 +423,11 @@
     font-size: 18px;
     color: var(--cor-clara);
 
+    cursor: pointer;
+
     outline: none;
+
+    transition: 0.3s;
 
     border-color: #000;
 
@@ -432,12 +436,17 @@
     border-radius: 10px;
 }
 
+.fundo-logo .conteudo .entrar:hover {
+    background-color: var(--cor-principal-clara);
+}
+
 .cadastro {
     /* APARÊNCIA */
     background-color: white;
 }
 
 .cadastro .titulo-cadastro {
+    font-size: 30px;
     font-weight: normal;
     /* APARÊNCIA */
     background-color: transparent;
@@ -511,10 +520,15 @@ select {
 }
 
 #cadastrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     box-sizing: border-box;
     padding: 12px 12px;
 
-    width: 200px;
+    width: 180px;
+    height: 40px;
 
     cursor: pointer;
 
@@ -523,7 +537,7 @@ select {
     color: var(--cor-principal);
 
     border: 2px solid var(--cor-principal);
-    border-radius: 0.6em;
+    border-radius: 10px;
 
     transition: 0.3s;
 

@@ -1,6 +1,5 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
-
 async function logar(user) {
     const requisicao = await fetch(`${fetchUrl}/login`, {
         method: "POST",
@@ -33,7 +32,7 @@ function gravaSessao(idCliente, token) {
 }
 
 function mostraMensagem() {
-    let falhas = document.querySelectorAll('.falha');
+    let falhas = document.querySelectorAll(".falha");
 
     if (falhas.length > 0) {
         falhas.remove();
