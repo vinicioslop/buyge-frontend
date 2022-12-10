@@ -15,10 +15,10 @@
     /* POSICIONAMENTO */
     margin: 0;
     padding: 0;
-    
+
     /* DIMENSIONAMENTO */
     box-sizing: border-box;
-    
+
     /* APARÊNCIA */
     background-color: var(--cor-fundo);
     font-family: "Roboto", sans-serif;

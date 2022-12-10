@@ -18,11 +18,16 @@
     flex-direction: column;
 }
 
+.mostrar-linha {
+    display: flex;
+    flex-direction: row;
+}
+
 .container {
     display: flex;
     flex-direction: column;
 
-    margin-top: 2.5%;
+    margin-top: 1%;
     margin-left: 2.5%;
     margin-right: 2.5%;
 
@@ -56,24 +61,43 @@
     height: 100%;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos {
-    width: 95%;
+.informacoes .grupo-esquerda .produtos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    width: 100%;
     height: 100%;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .titulos {
+.informacoes .grupo-esquerda .produtos .titulos-produto {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
     height: 40px;
+    width: 100%;
 
     font-size: 18px;
     font-weight: 500;
+    text-align: center;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos tr {
-    height: 80px;
+.informacoes .grupo-esquerda .produtos .titulos-produto .nome-imagem {
+    width: 30%;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto {
+.informacoes .grupo-esquerda .produtos .titulos-produto .quantidade,
+.valor-unitario,
+.subtotal {
+    width: 20%;
+}
+
+.informacoes .grupo-esquerda .produtos .produto {
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
 
     margin-top: 5px;
 
@@ -81,95 +105,96 @@
     width: 100%;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto {
+.informacoes .grupo-esquerda .produtos .produto .nome-produto {
     display: flex;
     flex-direction: row;
     align-items: center;
 
     font-size: 16px;
+    text-align: justify;
 
-    width: 100%;
+    width: 30%;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto .imagem {
+.informacoes .grupo-esquerda .produtos .produto .nome-produto .imagem {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    min-height: 100px;
-    min-width: 100px;
+    height: 100px;
+    width: 100px;
 
     background-color: var(--cor-clara);
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .nome-produto p {
+.informacoes .grupo-esquerda .produtos .produto .nome-produto p {
     margin-left: 12px;
 
-    width: 90%;
+    width: 95%;
 
     text-align: justify;
 }
 
-.informacoes
-    .grupo-esquerda
-    .tabela-produtos
-    .produto
-    .nome-produto
-    .imagem
-    img {
+.informacoes .grupo-esquerda .produtos .produto .nome-produto .imagem img {
     height: 100px;
     object-fit: scale-down;
 
     background-color: transparent;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .quantidade-produto {
+.informacoes .grupo-esquerda .produtos .produto .quantidade-produto,
+.valor-unitario-produto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
     width: 20%;
+    height: 32px;
 }
 
-.informacoes
-    .grupo-esquerda
-    .tabela-produtos
-    .produto
-    .quantidade-produto
-    .adicionar,
+.informacoes .grupo-esquerda .produtos .produto .subtotal-produto,
+.remover-produto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 10%;
+    height: 32px;
+}
+
+.informacoes .grupo-esquerda .produtos .produto .quantidade-produto {
+    display: flex;
+    flex-direction: row;
+
+    border: 1px solid #000;
+    height: 32px;
+    width: 110px;
+    border-radius: 0.25rem;
+}
+
+.informacoes .grupo-esquerda .produtos .produto .quantidade-produto .adicionar,
 .remover {
-    width: 30px;
-    height: 30px;
-
-    font-size: 14px;
-    color: var(--cor-clara);
-
-    border-radius: 3px;
-
-    background-color: var(--cor-principal-clara);
-}
-
-.informacoes
-    .grupo-esquerda
-    .tabela-produtos
-    .produto
-    .quantidade-produto
-    input {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     width: 60px;
-    height: 30px;
+    height: 100%;
 
-    outline: none;
-
-    font-size: 14px;
     color: var(--cor-clara);
 
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 3px;
-
     background-color: var(--cor-principal-clara);
+    border: solid 1px #000;
 }
 
-.informacoes .grupo-esquerda .tabela-produtos .produto .valor-unitario-produto,
-.subtotal-produto {
-    text-align: center;
+.informacoes .grupo-esquerda .produtos .produto .quantidade-produto input {
+    height: 100%;
+    width: 20px;
+    border: none;
+
+    outline: none;
 }
 
 .informacoes .grupo-esquerda .linha {
@@ -370,4 +395,223 @@
     margin-bottom: 20px;
 
     height: 80px;
+}
+
+#dadosEntrega {
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    background-color: transparent;
+}
+
+#dadosEntrega .entrada-pagamento {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 250px;
+}
+
+#dadosEntrega .entrada-pagamento .seta {
+    height: 40px;
+}
+
+#dadosEntrega .label-grupo {
+    display: flex;
+
+    font-size: 20px;
+
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-total-compra {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+
+    height: 100%;
+    width: 90%;
+}
+
+#dadosEntrega .grupo-total-compra .total-compra {
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    width: 500px;
+
+    color: var(--cor-clara);
+
+    background-color: var(--cor-principal-clara);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+}
+
+#dadosEntrega .grupo-total-compra .total-compra .valor-icone {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+#dadosEntrega .grupo-total-compra .total-compra .valor-icone img {
+    margin-left: 10px;
+
+    height: 24px;
+
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-total-compra .total-compra .titulo-grupo,
+.valor-icone,
+.valor-compra {
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-endereco {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 30px;
+
+    height: 100%;
+    width: 90%;
+}
+
+#dadosEntrega .grupo-endereco .endereco {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    width: 500px;
+    height: 110px;
+
+    color: var(--cor-clara);
+
+    background-color: var(--cor-principal-clara);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+}
+
+#dadosEntrega .grupo-endereco .endereco .grupo-icones {
+    position: absolute;
+
+    margin-left: 455px;
+    margin-top: -10px;
+}
+
+#dadosEntrega .grupo-endereco .endereco .nome-numero,
+.bairro-cidade-estado,
+.cep,
+.grupo-icones {
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-endereco .endereco .grupo-icones img {
+    height: 20px;
+
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-endereco .endereco .grupo-icones img:hover {
+    cursor: pointer;
+}
+
+#dadosEntrega .grupo-forma-entrega {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 30px;
+
+    height: 100%;
+    width: 90%;
+}
+
+#dadosEntrega .grupo-forma-entrega .forma-entrega {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    width: 500px;
+
+    color: var(--cor-clara);
+
+    background-color: var(--cor-principal-clara);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+}
+
+#dadosEntrega .grupo-forma-entrega .forma-entrega .icone-forma {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#dadosEntrega .grupo-forma-entrega .forma-entrega .icone-forma img {
+    margin-right: 10px;
+}
+
+#dadosEntrega .grupo-forma-entrega .forma-entrega .forma-prazo {
+    margin-right: 10px;
+}
+
+#dadosEntrega .grupo-forma-entrega .forma-entrega .icone-forma,
+.formato,
+img,
+.forma-prazo {
+    background-color: transparent;
+}
+
+#finalizar {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    width: 300px;
+    height: 60px;
+
+    font-size: 20px;
+    color: var(--cor-clara);
+
+    border-radius: 5px;
+    border: none;
+
+    outline: none;
+
+    background-color: var(--cor-principal);
+
+    transition: 0.3s;
+}
+
+#finalizar:hover {
+    cursor: pointer;
+
+    background-color: var(--cor-principal-clara);
 }

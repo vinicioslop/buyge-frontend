@@ -9,15 +9,6 @@
     --cor-principal-clara: #ad7cb5;
 }
 
-* {
-    /* POSICIONAMENTO */
-    margin: 0;
-
-    /* APARÊNCIA */
-    font-family: "Roboto", sans-serif;
-    background-color: var(--cor-fundo);
-}
-
 @media screen and (max-width: 820px) {
     /* BARRA NAVEGAÇÃO MENOR */
     .barra-navegacao {

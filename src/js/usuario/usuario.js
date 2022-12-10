@@ -975,6 +975,15 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     }
 
     const urlParams = new URLSearchParams(window.location.search);
+
+    const enderecos = urlParams.get("enderecos");
+
+    if (enderecos != null) {
+        montarCompras();
+        clicaSecao("secaoEndereco");
+        clicaSecaoInternaEnderecos("meusEnderecos");
+    }
+
     const pedidos = urlParams.get("pedidos");
 
     if (pedidos != null) {

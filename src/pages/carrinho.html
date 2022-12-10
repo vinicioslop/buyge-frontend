@@ -33,15 +33,14 @@
                 <h1 class="titulo">Meu Carrinho</h1>
                 <div class="grupos">
                     <div class="grupo-esquerda">
-                        <table class="tabela-produtos">
-                            <tr class="titulos">
-                                <th class="nome-imagem">Produto</th>
-                                <th class="quantidade">Quantidade</th>
-                                <th class="valor-unitario">Valor Unitário</th>
-                                <th class="subtotal">Subtotal</th>
-                                <th></th>
-                            </tr>
-                        </table>
+                        <div class="produtos">
+                            <div class="titulos-produto">
+                                <div class="nome-imagem">Produto</div>
+                                <div class="quantidade">Quantidade</div>
+                                <div class="valor-unitario">Valor Unitário</div>
+                                <div class="subtotal">Subtotal</div>
+                            </div>
+                        </div>
                         <hr class="linha" />
                     </div>
                     <div class="grupo-direita">
@@ -76,13 +75,6 @@
                                 <p>Valor da Compra</p>
                                 <div id="valorBruto"></div>
                             </div>
-
-                            <!--
-                            <div class="valor">
-                                <p>Subtotal</p>
-                                <p>R$ Valor</p>
-                            </div>
-                            -->
 
                             <div class="valor">
                                 <p>Desconto</p>
@@ -120,7 +112,7 @@
                             type="button"
                             id="comprar"
                             class="comprar"
-                            onclick="acionaMercadoPago()"
+                            onclick="montarFinalizacao()"
                         >
                             Continuar a Compra
                         </button>
@@ -131,6 +123,81 @@
             <div id="semItens" class="esconder">
                 <img src="/src/icons/box-roxa.svg" alt="" />
                 <h2 class="texto">Você não possui itens no carrinho!</h2>
+            </div>
+
+            <div id="dadosEntrega" class="esconder">
+                <div class="entrada-pagamento">
+                    <img src="/src/icons/delivery-truck-preto.svg" alt="" />
+                    <div>Entrega</div>
+                    <img
+                        class="seta"
+                        src="/src/icons/seta-direita-preta.svg"
+                        alt=""
+                    />
+                    <img src="/src/icons/credit-card-preto.svg" alt="" />
+                    <div>Pagamento</div>
+                </div>
+
+                <div class="grupo-total-compra">
+                    <div id="compraFechada" class="total-compra esconder">
+                        <div class="titulo-grupo">Total da Compra</div>
+                        <div class="valor-icone">
+                            <div class="valor-compra">Valor da Compra</div>
+                            <img
+                                src="/src/icons/seta-baixo-branco.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+
+                    <div id="compraAberta" class="total-compra mostrar-linha">
+                        <div class="titulo-grupo">Total da Compra</div>
+                        <div class="valor-icone">
+                            <div class="valor-compra">Valor da Compra</div>
+                            <img
+                                src="/src/icons/seta-cima-branca.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grupo-endereco">
+                    <div class="endereco">
+                        <div class="nome-numero">
+                            Nome da rua, número da casa
+                        </div>
+                        <div class="bairro-cidade-estado">
+                            Bairro-Cidade-Estado
+                        </div>
+                        <div class="cep">CEP</div>
+                        <div class="grupo-icones">
+                            <img
+                                src="/src/icons/loader2-branco.svg"
+                                alt=""
+                                id="trocarEndereco"
+                                onclick="trocarEndereco()"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grupo-forma-entrega">
+                    <div class="forma-entrega">
+                        <div class="icone-forma">
+                            <img
+                                src="/src/icons/delivery-truck-branco.svg"
+                                alt=""
+                            />
+                            <div class="formato">Normal</div>
+                        </div>
+                        <div class="forma-prazo">Grátis</div>
+                    </div>
+                </div>
+
+                <button onclick="acionaMercadoPago()" id="finalizar">
+                    Finalizar Compra
+                </button>
             </div>
         </div>
 
