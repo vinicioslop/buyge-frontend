@@ -1,5 +1,19 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
+async function cadastrar(cliente) {
+    const requisicao = await fetch(`${fetchUrl}/clientes`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cliente),
+    });
+
+    const status = requisicao.status;
+
+    return status;
+}
 
 function removeInvalidos(listaCampos) {
     if (listaCampos != null) {
@@ -8,12 +22,6 @@ function removeInvalidos(listaCampos) {
         });
     }
 }
-
-document.querySelector("#nome").addEventListener("keydown", function (e) {
-    if (e.key > "0" && e.key < "9") {
-        e.preventDefault();
-    }
-});
 
 function maiorQue18(data) {
     const dataAtual = new Date();
@@ -25,37 +33,6 @@ function maiorQue18(data) {
 
     return dataMais18 <= dataAtual;
 }
-
-document.querySelector("#dataNasc").addEventListener("keyup", function (e) {
-    e.preventDefault();
-
-    const dataNasc = document.querySelector("#dataNasc");
-
-    const camposInvalidosDataNasc = document.querySelectorAll(
-        ".campoInvalidoDataNasc"
-    );
-
-    let data = new Date(dataNasc.value);
-
-    let valido = maiorQue18(data);
-
-    removeInvalidos(camposInvalidosDataNasc);
-
-    if (!valido) {
-        var formulario = document.querySelector(".cadastro");
-        var grupoDataNascimento = document.querySelector(
-            "#grupoDataNascimento"
-        );
-
-        var campoInvalidoDataNasc = document.createElement("div");
-        campoInvalidoDataNasc.className =
-            "campoInvalidoDataNasc campo-invalido";
-        campoInvalidoDataNasc.innerText =
-            "Precisa ser maior de 18 anos para se cadastrar";
-
-        formulario.insertBefore(campoInvalidoDataNasc, grupoDataNascimento);
-    }
-});
 
 function validaEmail(email) {
     var re = /\S+@\S+\.\S+/;
@@ -161,6 +138,47 @@ function testaCondicoesSenha(condicoes) {
         numeros.className = "esconder";
     }
 }
+
+function conectar() {
+    window.location = "/src/pages/login.html";
+}
+
+document.querySelector("#nome").addEventListener("keydown", function (e) {
+    if (e.key > "0" && e.key < "9") {
+        e.preventDefault();
+    }
+});
+
+document.querySelector("#dataNasc").addEventListener("keyup", function (e) {
+    e.preventDefault();
+
+    const dataNasc = document.querySelector("#dataNasc");
+
+    const camposInvalidosDataNasc = document.querySelectorAll(
+        ".campoInvalidoDataNasc"
+    );
+
+    let data = new Date(dataNasc.value);
+
+    let valido = maiorQue18(data);
+
+    removeInvalidos(camposInvalidosDataNasc);
+
+    if (!valido) {
+        var formulario = document.querySelector(".cadastro");
+        var grupoDataNascimento = document.querySelector(
+            "#grupoDataNascimento"
+        );
+
+        var campoInvalidoDataNasc = document.createElement("div");
+        campoInvalidoDataNasc.className =
+            "campoInvalidoDataNasc campo-invalido";
+        campoInvalidoDataNasc.innerText =
+            "Precisa ser maior de 18 anos para se cadastrar";
+
+        formulario.insertBefore(campoInvalidoDataNasc, grupoDataNascimento);
+    }
+});
 
 document.querySelector("#email").addEventListener("keyup", function (e) {
     e.preventDefault();
@@ -274,25 +292,6 @@ document
         }
     });
 
-async function cadastrar(cliente) {
-    const requisicao = await fetch(`${fetchUrl}/clientes`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cliente),
-    });
-
-    const status = requisicao.status;
-
-    return status;
-}
-
-function conectar() {
-    window.location = "/src/pages/login.html";
-}
-
 document.querySelector("#cadastrar").addEventListener("click", async (e) => {
     e.preventDefault();
 
@@ -311,6 +310,7 @@ document.querySelector("#cadastrar").addEventListener("click", async (e) => {
 
     const cliente = {
         nmCliente: document.querySelector("#nome").value,
+        nmSobrenome: document.querySelector("#sobrenome").value,
         dtNascimento: document.querySelector("#dataNasc").value,
         nmEmail: document.querySelector("#email").value,
         nmSenha: document.querySelector("#senha").value,
@@ -329,10 +329,5 @@ document.querySelector("#cadastrar").addEventListener("click", async (e) => {
         default:
             console.log("Falha na auntenticação");
             break;
-    }
-
-    if (resposta === 201) {
-    } else {
-        console.log("Ocorreu uma falha");
     }
 });

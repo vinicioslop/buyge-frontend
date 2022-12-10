@@ -340,7 +340,7 @@ img {
 }
 
 #pedidos .container-pedidos {
-    margin-left: 3%;
+    margin-left: 2%;
 
     width: 100%;
 }
@@ -353,7 +353,7 @@ img {
 
 #pedidos th,
 td {
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
 

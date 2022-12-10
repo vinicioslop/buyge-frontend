@@ -35,16 +35,29 @@
             <form class="cadastro">
                 <h1 class="titulo-cadastro">Criar conta</h1>
 
-                <div class="entrada-dados">
-                    <label for="nome">Nome</label>
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        required
-                        placeholder="Informe o seu nome"
-                        pattern="([aA-zZ]+)"
-                    />
+                <div class="grupo-lateral">
+                    <div class="entrada-dados">
+                        <label for="nome">Nome</label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            required
+                            placeholder="Informe o seu nome"
+                            pattern="([aA-zZ]+)"
+                        />
+                    </div>
+                    <div class="entrada-dados">
+                        <label for="sobrenome">Sobrenome</label>
+                        <input
+                            type="text"
+                            id="sobrenome"
+                            name="sobrenome"
+                            required
+                            placeholder="Informe o seu sobrenome"
+                            pattern="([aA-zZ]+)"
+                        />
+                    </div>
                 </div>
 
                 <div id="grupoDataNascimento" class="entrada-dados">
@@ -58,7 +71,7 @@
                     />
                 </div>
 
-                <div class="grupo-email">
+                <div class="grupo-lateral grupo-email">
                     <div class="entrada-dados">
                         <label for="email">Email</label>
                         <input
@@ -81,15 +94,7 @@
                         />
                     </div>
                 </div>
-                <ul id="condicoes">
-                    <li id="menor">Senha precisa ter pelo menos 6 caractéres;</li>
-                    <li id="maior">Senha precisa ser menor ou igual a 16 caractéres;</li>
-                    <li id="maiuscula">Senha precisa ter pelo menos uma letra maiúscula;</li>
-                    <li id="minuscula">Senha precisa ter pelo menos uma letra miníscula;</li>
-                    <li id="especial">Senha precisa ter pelo menos um caractér especial;</li>
-                    <li id="numeros">Senha precisa ter pelo menos um número.</li>
-                </ul>
-                <div class="grupo-senha">
+                <div class="grupo-lateral grupo-senha">
                     <div class="entrada-dados">
                         <label for="senha">Senha</label>
                         <input
@@ -112,6 +117,26 @@
                         />
                     </div>
                 </div>
+                <ul id="condicoes">
+                    <li id="menor">
+                        Senha precisa ter pelo menos 6 caractéres;
+                    </li>
+                    <li id="maior">
+                        Senha precisa ser menor ou igual a 16 caractéres;
+                    </li>
+                    <li id="maiuscula">
+                        Senha precisa ter pelo menos uma letra maiúscula;
+                    </li>
+                    <li id="minuscula">
+                        Senha precisa ter pelo menos uma letra miníscula;
+                    </li>
+                    <li id="especial">
+                        Senha precisa ter pelo menos um caractér especial;
+                    </li>
+                    <li id="numeros">
+                        Senha precisa ter pelo menos um número.
+                    </li>
+                </ul>
                 <div class="termos">
                     <input
                         type="checkbox"

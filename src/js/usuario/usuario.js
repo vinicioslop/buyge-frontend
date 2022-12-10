@@ -55,13 +55,13 @@ async function buscarClienteLogado(idCliente, token) {
             Authorization: "Bearer " + token,
         },
     });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
             const dados = await response.json();
 
-            const resposta = {
+            var resposta = {
                 dados: dados,
                 status: status,
             };
@@ -69,7 +69,13 @@ async function buscarClienteLogado(idCliente, token) {
             return resposta;
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
+
+            var resposta = {
+                dados: null,
+                status: status,
+            };
+
+            return resposta;
     }
 }
 
@@ -303,6 +309,34 @@ async function carregarItensCompra(idCompra, token) {
         case 200:
             const dados = await response.json();
 
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function carregarItensCompra(idCompra, token) {
+    const response = await fetch(`${fetchUrl}/compras/items/${idCompra}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
             var resposta = {
                 dados: dados,
                 status: status,
@@ -393,7 +427,9 @@ async function excluirEndereco(idEndereco) {
     const resposta = await removerEndereco(idEndereco, token);
 
     if (resposta == 200) {
-        window.location.reload();
+        montarEnderecos;
+        clicaSecao("secaoEndereco");
+        clicaSecaoInternaEnderecos("meusEnderecos");
     }
 }
 
@@ -510,22 +546,135 @@ async function montarCompras() {
 
     const divCompras = document.querySelector(".compras");
 
-    console.log(compras);
-
     compras.forEach(async (compra) => {
         const item = document.createElement("div");
         item.className = "compra";
+
+        let status = "";
+
+        switch (compra.nmStatus) {
+            case "approved":
+                status = "APROVADO";
+                break;
+            case "pending":
+                status = "PENDENTE";
+                break;
+            case "rejected":
+                status = "REJEITADO";
+                break;
+            case "authorized":
+                status = "AUTORIZADO";
+                break;
+            case "in_process":
+                status = "EM PROGRESSO";
+                break;
+            case "in_mediation":
+                status = "EM MEDIAÇÃO";
+                break;
+            case "cancelled":
+                status = "CANCELADO";
+                break;
+            case "refunded":
+                status = "DEVOLVIDO";
+                break;
+            case "charged_back":
+                status = "REEMBOLSADO";
+                break;
+        }
 
         item.innerHTML = `
         <div class="fundo-imagem">
             <img src="/src/icons/image-preto.svg" alt="" />
         </div>
         <div class="nome-produto">Nome do Produto</div>
-        <div class="status">${compra.nmStatus}</div>
+        <div class="status">${status}</div>
         <div class="valor-total">${mascaraPreco(compra.vlTotalCompra)}</div>
         `;
 
         divCompras.appendChild(item);
+    });
+}
+
+async function montarPedidos() {
+    /*
+    <tr class="pedido-item">
+        <td>Número do Pedido</td>
+        <td>Status da Compra</td>
+        <td>QUANTIDADE</td>
+        <td>VALOR</td>
+        <td>CÓDIGO</td>
+    </tr>
+    */
+
+    const pedidosPrevios = document.querySelectorAll(".pedido-item");
+
+    if (pedidosPrevios.length > 0) {
+        pedidosPrevios.forEach((pedido) => {
+            pedido.remove();
+        });
+    }
+
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        window.location = "/";
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+    const comprasResposta = await carregarCompras(idCliente, token);
+
+    const compras = comprasResposta.dados;
+
+    const divPedidos = document.querySelector(".pedidos");
+
+    compras.forEach(async (compra) => {
+        const itemsCompra = await carregarItensCompra(compra.cdCompra, token);
+
+        const itemPedido = document.createElement("tr");
+        itemPedido.className = "pedido-item";
+
+        let status = "";
+
+        switch (compra.nmStatus) {
+            case "approved":
+                status = "APROVADO";
+                break;
+            case "pending":
+                status = "PENDENTE";
+                break;
+            case "rejected":
+                status = "REJEITADO";
+                break;
+            case "authorized":
+                status = "AUTORIZADO";
+                break;
+            case "in_process":
+                status = "EM PROGRESSO";
+                break;
+            case "in_mediation":
+                status = "EM MEDIAÇÃO";
+                break;
+            case "cancelled":
+                status = "CANCELADO";
+                break;
+            case "refunded":
+                status = "DEVOLVIDO";
+                break;
+            case "charged_back":
+                status = "REEMBOLSADO";
+                break;
+        }
+
+        itemPedido.innerHTML = `
+        <td>${compra.cdCompra}</td>
+        <td>${status}</td>
+        <td>${itemsCompra.dados.length}</td>
+        <td>${mascaraPreco(compra.vlTotalCompra)}</td>
+        <td>CÓDIGO</td>
+        `;
+
+        divPedidos.appendChild(itemPedido);
     });
 }
 
@@ -820,7 +969,17 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         insereInformacoesUsuario();
         montarEnderecos();
         montarCompras();
+        montarPedidos();
     } else {
         console.log("Usuário não encontrado");
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const pedidos = urlParams.get("pedidos");
+
+    if (pedidos != null) {
+        montarCompras();
+        clicaSecao("secaoCompras");
+        clicaSecaoInternaCompras("pedidos");
     }
 });

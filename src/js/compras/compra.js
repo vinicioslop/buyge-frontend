@@ -83,7 +83,7 @@ function exibeResultados(resultado) {
 }
 
 function acompanharCompra() {
-    window.location = "/src/pages/usuario/usuario.html";
+    window.location = "/src/pages/usuario/usuario.html?pedidos";
 }
 
 function voltaInicio() {

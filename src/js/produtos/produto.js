@@ -169,7 +169,7 @@ async function adicionarCarrinho(idProduto) {
     } else {
         const idCliente = sessionStorage.getItem("idCliente");
 
-        await adicionarItemCarrinho(idCliente, idProduto, token);
+        return await adicionarItemCarrinho(idCliente, idProduto, token);
     }
 }
 
