@@ -96,6 +96,38 @@ async function atualizarCliente(cliente, token) {
     return response;
 }
 
+async function atualizarSenha(idCliente, novaSenha, token) {
+    const response = await fetch(
+        `${fetchUrl}/clientes/senha/trocar/${idCliente}`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify(novaSenha),
+        }
+    );
+    const status = await response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            const resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
 async function carregarEndereco(idEndereco, token) {
     const response = await fetch(`${fetchUrl}/enderecos/${idEndereco}`, {
         method: "GET",
@@ -816,6 +848,20 @@ function clicaSecaoInternaCompras(idComponente) {
     });
 }
 
+function clicaSecaoInternaSeguranca(idComponente) {
+    const secoes = ["trocarDeSenha"];
+
+    secoes.forEach((secao) => {
+        const componente = document.querySelector("#" + secao);
+
+        if (secao === idComponente) {
+            componente.setAttribute("class", "informacoes mostrar");
+        } else {
+            componente.setAttribute("class", "informacoes esconder");
+        }
+    });
+}
+
 function clicaSecao(secaoClicada) {
     const secoes = [
         "secaoMeusDados",
@@ -960,6 +1006,44 @@ document
             console.log(
                 "Ocorreu um erro na requisição. STATUS: " + resposta.status
             );
+        }
+    });
+
+document
+    .querySelector("#atualizarSenha")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const token = sessionStorage.getItem("token");
+        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+
+        const valido = await testar();
+
+        if (!valido) {
+            console.log("Cliente não autenticado");
+            window.location = "/";
+        }
+
+        if (
+            document.querySelector("#novaSenhaCliente").value !=
+            document.querySelector("#confirmaNovaSenhaCliente").value
+        ) {
+            console.log("Senhas precisam ser iguais!");
+            return;
+        }
+
+        const novaSenha = {
+            senhaAtual: document.querySelector("#senhaAtualCliente").value,
+            novaSenha: document.querySelector("#novaSenhaCliente").value,
+        };
+
+        const status = await atualizarSenha(idCliente, novaSenha, token);
+
+        if (status == 201) {
+            console.log("Cliente atualizado com sucesso");
+            window.location.reload();
+        } else {
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
         }
     });
 

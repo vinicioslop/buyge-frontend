@@ -406,3 +406,41 @@ td {
 #historico .compras .compra .valor-total {
     font-size: 20px;
 }
+
+#trocarDeSenha {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+
+    width: 100%;
+}
+
+#trocarDeSenha .formulario {
+    margin-left: 20px;
+
+    width: 90%;
+}
+
+#trocarDeSenha .formulario button {
+    margin-right: 40px;
+}
+
+#condicoes {
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    font-size: 12px;
+}
+
+.campo-invalido {
+    align-self: flex-start;
+
+    margin-left: 5%;
+    margin-bottom: 1%;
+
+    font-size: 12px;
+    color: red;
+
+    background-color: transparent;
+}

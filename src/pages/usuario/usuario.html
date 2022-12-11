@@ -98,7 +98,9 @@
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="emailClienteEdicao">E-mail</label>
+                                    <label for="emailClienteEdicao"
+                                        >E-mail</label
+                                    >
                                     <input
                                         required
                                         type="email"
@@ -603,9 +605,54 @@
 
             <div id="secaoSeguranca" class="conteudo esconder">
                 <div class="titulo-secao-principal">Segurança</div>
-
+                <div class="navegacao">
+                    <div
+                        onclick="clicaSecaoInternaSeguranca('trocarDeSenha')"
+                        class="item"
+                    >
+                        Trocar de Senha
+                    </div>
+                </div>
                 <hr class="linha" />
-                <div class="informacoes mostrar"></div>
+                <div id="trocarDeSenha" class="informacoes mostrar">
+                    <form class="formulario">
+                        <div class="entrada-dados">
+                            <label for="senhaAtualCliente">Senha atual</label>
+                            <input
+                                required
+                                type="password"
+                                name="senhaAtualCliente"
+                                id="senhaAtualCliente"
+                                placeholder="Informe a sua senha atual"
+                            />
+                        </div>
+                        <div class="entrada-dados">
+                            <label for="novaSenhaCliente">Nova senha</label>
+                            <input
+                                required
+                                type="password"
+                                name="novaSenhaCliente"
+                                id="novaSenhaCliente"
+                                placeholder="Informe a sua nova senha"
+                            />
+                        </div>
+
+                        <div class="entrada-dados">
+                            <label for="confirmaNovaSenhaCliente"
+                                >Confirme a nova senha</label
+                            >
+                            <input
+                                required
+                                type="password"
+                                name="confirmaNovaSenhaCliente"
+                                id="confirmaNovaSenhaCliente"
+                                placeholder="Confirme a sua nova senha"
+                            />
+                        </div>
+
+                        <button id="atualizarSenha">Salvar Alterações</button>
+                    </form>
+                </div>
             </div>
         </div>
 
