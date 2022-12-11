@@ -171,7 +171,7 @@
     border: 1px solid #000;
     height: 32px;
     width: 110px;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
 }
 
 .informacoes .grupo-esquerda .produtos .produto .quantidade-produto .adicionar,
@@ -429,7 +429,7 @@
 
 #dadosEntrega .grupo-total-compra {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -454,8 +454,13 @@
 
     background-color: var(--cor-principal-clara);
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 3px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+#dadosEntrega .grupo-total-compra .total-compra:hover {
+    cursor: pointer;
 }
 
 #dadosEntrega .grupo-total-compra .total-compra .valor-icone {
@@ -476,6 +481,136 @@
 #dadosEntrega .grupo-total-compra .total-compra .titulo-grupo,
 .valor-icone,
 .valor-compra {
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-total-compra .itens {
+    align-items: center;
+
+    margin-top: 10px;
+
+    padding-bottom: 20px;
+
+    width: 500px;
+
+    background-color: var(--cor-principal-clara);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+#dadosEntrega .grupo-total-compra .itens .item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-top: 20px;
+
+    width: 450px;
+    height: 150px;
+
+    border: 1px solid #000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-total-compra .itens .item .imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 10px;
+
+    width: 100px;
+    height: 100px;
+
+    background-color: var(--cor-clara);
+}
+
+#dadosEntrega .grupo-total-compra .itens .item .imagem img {
+    height: 100px;
+    object-fit: scale-down;
+
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-total-compra .itens .item .nomeValorQuantidade {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    margin-left: 20px;
+
+    height: 100%;
+
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+#dadosEntrega
+    .grupo-total-compra
+    .itens
+    .item
+    .nomeValorQuantidade
+    .nomeProduto {
+    font-size: 20px;
+
+    background-color: transparent;
+}
+
+#dadosEntrega
+    .grupo-total-compra
+    .itens
+    .item
+    .nomeValorQuantidade
+    .valorUnitario {
+    font-size: 18px;
+
+    background-color: transparent;
+}
+
+#dadosEntrega
+    .grupo-total-compra
+    .itens
+    .item
+    .nomeValorQuantidade
+    .quantidadeSubtotal {
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-total-compra .valores {
+    justify-content: space-between;
+
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 20px;
+
+    width: 500px;
+    height: 110px;
+
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+
+    background-color: var(--cor-principal-clara);
+}
+
+#dadosEntrega .grupo-total-compra .valores .valor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+#dadosEntrega .grupo-total-compra .valores .valor p,
+div {
     background-color: transparent;
 }
 
@@ -508,7 +643,7 @@
 
     background-color: var(--cor-principal-clara);
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     border-radius: 3px;
 }
 
@@ -565,7 +700,7 @@
 
     background-color: var(--cor-principal-clara);
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     border-radius: 3px;
 }
 

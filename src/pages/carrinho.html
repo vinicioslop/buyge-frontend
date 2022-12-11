@@ -139,25 +139,32 @@
                 </div>
 
                 <div class="grupo-total-compra">
-                    <div id="compraFechada" class="total-compra esconder">
+                    <div onclick="mostraProdutos()" class="total-compra mostrar-linha">
                         <div class="titulo-grupo">Total da Compra</div>
                         <div class="valor-icone">
                             <div class="valor-compra">Valor da Compra</div>
-                            <img
-                                src="/src/icons/seta-baixo-branco.svg"
-                                alt=""
-                            />
+                            <img id="iconeSeta" class="minimizado" src="/src/icons/seta-baixo-branco.svg" alt="" />
                         </div>
                     </div>
+                    <div class="itens mostrar" id="grupoProdutosFinal"></div>
 
-                    <div id="compraAberta" class="total-compra mostrar-linha">
-                        <div class="titulo-grupo">Total da Compra</div>
-                        <div class="valor-icone">
-                            <div class="valor-compra">Valor da Compra</div>
-                            <img
-                                src="/src/icons/seta-cima-branca.svg"
-                                alt=""
-                            />
+                    <div class="valores mostrar">
+                        <div class="valor">
+                            <p>Valor da Compra</p>
+                            <div id="valorBrutoFinal">teste</div>
+                        </div>
+
+                        <div class="valor">
+                            <p>Desconto</p>
+                            <div id="valorDescontoFinal">teste</div>
+                        </div>
+                        <div class="valor">
+                            <p>Entrega (normal)</p>
+                            <div id="valorEntregaFinal">teste</div>
+                        </div>
+                        <div class="valor">
+                            <p>Total</p>
+                            <div id="valorTotalFinal">teste</div>
                         </div>
                     </div>
                 </div>

@@ -415,6 +415,18 @@ async function montarValoresLogado() {
     });
 }
 
+function mostraProdutos() {
+    const iconeSeta = document.querySelector("#iconeSeta");
+
+    console.log(iconeSeta.src);
+
+    if (iconeSeta.classList.contains("minimizado")) {
+        iconeSeta.src = "/src/icons/seta-cima-branca.svg";
+    } else {
+        iconeSeta.src = "/src/icons/seta-baixo-branco.svg";
+    }
+}
+
 async function montarFinalizacao() {
     const token = sessionStorage.getItem("token");
 
@@ -432,15 +444,73 @@ async function montarFinalizacao() {
         window.location.reload();
     }
 
+    /*
+    <div class="item">
+        <div class="imagem">
+            <img src="/src/icons/image-preto.svg" alt="" />
+        </div>
+        <div class="valorQuantidade">
+            <div class="valorUnitario">
+                Valor do Produto
+            </div>
+            <div class="quantidadeSubtotal">
+                Quantidade unitária/ Valor
+            </div>
+        </div>
+    </div>
+    */
+
     const campoValorCompra = document.querySelector(".valor-compra");
+    const campoValorBrutoFinal = document.querySelector("#valorBrutoFinal");
+    const campoValorDescontoFinal = document.querySelector(
+        "#valorDescontoFinal"
+    );
+    const campoValorEntregaFinal = document.querySelector("#valorEntregaFinal");
+    const campoValorTotalFinal = document.querySelector("#valorTotalFinal");
 
     let contador = 0;
     let valorBruto = 0;
-
+    let valorEntrega = 0;
     let valorDesconto = 0;
 
+    const itemsDiv = document.querySelector("#grupoProdutosFinal");
+
     itemsCarrinhoResposta.dados.forEach(async (item) => {
+        const imagensResposta = await carregarImagems(item.fkCdProduto);
+
+        let imagemPrincipal = {};
+
+        imagensResposta.dados.forEach((imagem) => {
+            if (imagem.idPrincipal == 1) {
+                imagemPrincipal = imagem;
+            }
+        });
+
         const produto = await carregarProduto(item.fkCdProduto);
+
+        const itemCarrinho = document.createElement("div");
+        itemCarrinho.className = "item";
+
+        itemCarrinho.innerHTML = `
+        <div class="imagem">
+            <img src="${imagemPrincipal.imgProdutoLink}" alt="" />
+        </div>
+        <div class="nomeValorQuantidade">
+            <div class="nomeProduto">
+                ${produto.nmProduto}
+            </div>
+            <div class="valorUnitario">
+                ${mascaraPreco(produto.vlProduto)}
+            </div>
+            <div class="quantidadeSubtotal">
+                ${item.qtItemCarrinho} x ${mascaraPreco(
+            produto.vlProduto
+        )} = ${mascaraPreco(produto.vlProduto * item.qtItemCarrinho)}
+            </div>
+        </div>
+        `;
+
+        itemsDiv.appendChild(itemCarrinho);
 
         valorBruto += produto.vlProduto * item.qtItemCarrinho;
 
@@ -448,6 +518,20 @@ async function montarFinalizacao() {
 
         if (contador == itemsCarrinhoResposta.dados.length) {
             campoValorCompra.innerText = mascaraPreco(
+                valorBruto - valorDesconto
+            );
+
+            campoValorBrutoFinal.innerText = mascaraPreco(valorBruto);
+            campoValorDescontoFinal.innerText =
+                "- " + mascaraPreco(valorDesconto);
+
+            if (valorEntrega == 0) {
+                campoValorEntregaFinal.innerText = "Grátis";
+            } else {
+                campoValorEntregaFinal.innerText = mascaraPreco(valorEntrega);
+            }
+
+            campoValorTotalFinal.innerText = mascaraPreco(
                 valorBruto - valorDesconto
             );
         }
