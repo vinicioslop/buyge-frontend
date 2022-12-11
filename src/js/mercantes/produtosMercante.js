@@ -1,6 +1,15 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
-const carregarProdutos = async (idMercante) => {
+function mascaraPreco(preco) {
+    var valorFormatado = preco.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
+
+    return valorFormatado;
+}
+
+async function carregarProdutos(idMercante) {
     const response = await fetch(
         `${fetchUrl}/produtos/mercante/${idMercante}`,
         {
@@ -8,47 +17,266 @@ const carregarProdutos = async (idMercante) => {
             mode: "cors",
         }
     );
-    const produtos = await response.json();
-    carregarImagems(idMercante, produtos);
-};
 
-const carregarImagems = async (idMercante, produtos) => {
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function carregarImagems() {
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
         method: "GET",
         mode: "cors",
     });
-    const produtoImagens = await response.json();
-    carregarCategorias(idMercante, produtos, produtoImagens);
-};
 
-const carregarCategorias = async (idMercante, produtos, produtoImagens) => {
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",
         mode: "cors",
     });
-    const categorias = await response.json();
-    carregarMercante(idMercante, produtos, produtoImagens, categorias);
-};
 
-const carregarMercante = async (
-    idMercante,
-    produtos,
-    produtoImagens,
-    categorias
-) => {
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function carregarMercante(idMercante) {
     const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
         method: "GET",
         mode: "cors",
     });
-    const mercante = await response.json();
-    montarCartoes(produtos, produtoImagens, categorias, mercante);
-};
+
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function carregarFavoritos(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function adicionarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const status = response.status;
+
+    switch (status) {
+        case 201:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function apagarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
+async function favoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await adicionarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 201) {
+            window.location.reload();
+        }
+    }
+}
+
+async function desfavoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await apagarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 200) {
+            window.location.reload();
+        }
+    }
+}
 
 function exibirProduto(idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
 }
 
-function montarCartoes(produtos, produtoImagens, categorias, mercante) {
+async function montarCartoes(idMercante) {
+    const produtos = await carregarProdutos(idMercante);
+    const produtoImagens = await carregarImagems();
+    const categorias = await carregarCategorias();
+
+    const mercantes = await carregarMercante(idMercante);
+    const mercante = mercantes.dados;
+
     const container = document.querySelector(".container");
 
     const titulo = document.createElement("h1");
@@ -60,7 +288,26 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
     const containerProdutos = document.createElement("div");
     containerProdutos.classList.add("produtos");
 
-    produtos.forEach((produto) => {
+    var favoritos = [];
+
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await carregarFavoritos(idCliente, token);
+
+        if (resposta.status !== 200) {
+            console.log(
+                "Ocorreu um erro na coleta de produtos. STATUS: " +
+                    resposta.status
+            );
+        }
+
+        favoritos = resposta.dados;
+    }
+
+    produtos.dados.forEach((produto) => {
         if (produto.idDisponibilidade == 1) {
             const cartao = document.createElement("div");
             cartao.classList.add("cartao");
@@ -74,7 +321,7 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
                 `exibirProduto(${produto.cdProduto})`
             );
 
-            produtoImagens.forEach((produtoImagem) => {
+            produtoImagens.dados.forEach((produtoImagem) => {
                 if (produtoImagem.fkCdProduto === produto.cdProduto) {
                     imagem.src = produtoImagem.imgProdutoLink;
                 }
@@ -86,7 +333,28 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
 
             const iconeFavorito = document.createElement("img");
             iconeFavorito.classList.add("favorito");
-            iconeFavorito.src = "/src/icons/heart.svg";
+
+            if (favoritos.length > 0) {
+                favoritos.forEach((favorito) => {
+                    if (favorito.fkCdProduto == produto.cdProduto) {
+                        iconeFavorito.src = "/src/icons/heart2-cheio.png";
+
+                        iconeFavorito.setAttribute(
+                            "onclick",
+                            `desfavoritar(${produto.cdProduto})`
+                        );
+                    }
+                });
+            }
+
+            if (iconeFavorito.src == "") {
+                iconeFavorito.src = "/src/icons/heart2.png";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `favoritar(${produto.cdProduto})`
+                );
+            }
 
             imagemFavorito.appendChild(imagem);
             imagemFavorito.appendChild(iconeFavorito);
@@ -104,7 +372,7 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
 
             const categoria = document.createElement("p");
 
-            categorias.forEach((item) => {
+            categorias.dados.forEach((item) => {
                 if (item.cdCategoria === produto.fkCdCategoria) {
                     categoria.innerText = item.nmCategoria;
                 }
@@ -137,13 +405,9 @@ function montarCartoes(produtos, produtoImagens, categorias, mercante) {
             precoParcela.classList.add("preco-parcela");
             const preco = document.createElement("p");
             preco.classList.add("preco");
-            preco.innerText = "R$ " + produto.vlProduto;
-            const parcela = document.createElement("p");
-            parcela.classList.add("parcela");
-            parcela.innerText = "ou 2x R$ " + produto.vlProduto / 2;
+            preco.innerText = mascaraPreco(produto.vlProduto);
 
             precoParcela.appendChild(preco);
-            precoParcela.appendChild(parcela);
 
             const botao = document.createElement("button");
             botao.classList.add("comprar");
@@ -175,5 +439,5 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
     const idMercante = urlParams.get("idMercante");
 
-    carregarProdutos(idMercante);
+    montarCartoes(idMercante);
 });

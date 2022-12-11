@@ -377,10 +377,13 @@ td {
     margin-right: 20px;
     margin-bottom: 20px;
 
-    width: 500px;
+    width: 400px;
     height: 120px;
 
     color: var(--cor-clara);
+
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 
     background-color: var(--cor-principal-clara);
 }
@@ -393,9 +396,13 @@ td {
     width: 100px;
     height: 100px;
 
-    background-color: var(--cor-clara);
+    background-color: transparent;
 }
 
 #historico .compras .compra img {
     height: 30px;
+}
+
+#historico .compras .compra .valor-total {
+    font-size: 20px;
 }

@@ -9,6 +9,40 @@ function mascaraPreco(preco) {
     return valorFormatado;
 }
 
+async function carregarFavoritos(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
 async function carregarProduto(idProduto) {
     const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
         method: "GET",
@@ -215,6 +249,36 @@ async function montarProduto(idProduto) {
 
         miniaturas.append(img);
     });
+
+    const favoritoIcone = document.querySelector(".favoritar");
+    favoritoIcone.setAttribute("src", "/src/icons/heart.svg");
+
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const favoritosResposta = await carregarFavoritos(idCliente, token);
+        if (favoritosResposta.status != 200) {
+            console.log(
+                "Ocorreu um erro na requisição. STATUS: " +
+                    favoritosResposta.status
+            );
+            return;
+        }
+        const favoritos = favoritosResposta.dados;
+
+        if (favoritos.length > 0) {
+            favoritos.forEach((favorito) => {
+                if (favorito.fkCdProduto == produto.cdProduto) {
+                    favoritoIcone.setAttribute(
+                        "src",
+                        "/src/icons/heart-cheio.svg"
+                    );
+                }
+            });
+        }
+    }
 
     document.querySelector(".titulo-produto").innerText = produto.nmProduto;
     document.querySelector(".atual").innerText = mascaraPreco(

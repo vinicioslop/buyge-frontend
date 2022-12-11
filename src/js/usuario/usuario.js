@@ -551,42 +551,51 @@ async function montarCompras() {
         item.className = "compra";
 
         let status = "";
+        let icone = "";
 
         switch (compra.nmStatus) {
             case "approved":
                 status = "APROVADO";
+                icone = "/src/icons/shopping-bag-check-branca.svg";
                 break;
             case "pending":
                 status = "PENDENTE";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
             case "rejected":
                 status = "REJEITADO";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
             case "authorized":
                 status = "AUTORIZADO";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
             case "in_process":
                 status = "EM PROGRESSO";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
             case "in_mediation":
                 status = "EM MEDIAÇÃO";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
             case "cancelled":
                 status = "CANCELADO";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
             case "refunded":
                 status = "DEVOLVIDO";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
             case "charged_back":
                 status = "REEMBOLSADO";
+                icone = "/src/icons/shopping-bag-issue-branca.svg";
                 break;
         }
 
         item.innerHTML = `
         <div class="fundo-imagem">
-            <img src="/src/icons/image-preto.svg" alt="" />
+            <img src="${icone}" alt="" />
         </div>
-        <div class="nome-produto">Nome do Produto</div>
         <div class="status">${status}</div>
         <div class="valor-total">${mascaraPreco(compra.vlTotalCompra)}</div>
         `;

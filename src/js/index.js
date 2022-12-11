@@ -299,6 +299,10 @@ async function montaCartao(idCliente, token) {
             imagemFavorito.classList.add("imagem-favorito");
             const imagem = document.createElement("img");
             imagem.classList.add("imagem");
+            imagem.setAttribute(
+                "onclick",
+                `exibirProduto(${produto.cdProduto})`
+            );
 
             produtoImagens.forEach((produtoImagem) => {
                 if (

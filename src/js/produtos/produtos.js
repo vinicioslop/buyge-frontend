@@ -39,6 +39,139 @@ async function carregarMercantes() {
     return mercantes;
 }
 
+async function carregarFavoritos(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function adicionarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const status = response.status;
+
+    switch (status) {
+        case 201:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function apagarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
+async function favoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await adicionarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 201) {
+            window.location.reload();
+        }
+    }
+}
+
+async function desfavoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await apagarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 200) {
+            window.location.reload();
+        }
+    }
+}
+
 function exibirProduto(idProduto) {
     window.location = "/src/pages/produtos/produto.html?idProduto=" + idProduto;
 }
@@ -59,6 +192,25 @@ async function montaCartao() {
     const containerProdutos = document.createElement("div");
     containerProdutos.classList.add("produtos");
 
+    var favoritos = [];
+
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await carregarFavoritos(idCliente, token);
+
+        if (resposta.status !== 200) {
+            console.log(
+                "Ocorreu um erro na coleta de produtos. STATUS: " +
+                    resposta.status
+            );
+        }
+
+        favoritos = resposta.dados;
+    }
+
     produtos.forEach((produto) => {
         if (produto.idDisponibilidade == 1) {
             const cartao = document.createElement("div");
@@ -69,6 +221,10 @@ async function montaCartao() {
             imagemFavorito.classList.add("imagem-favorito");
             const imagem = document.createElement("img");
             imagem.classList.add("imagem");
+            imagem.setAttribute(
+                "onclick",
+                `exibirProduto(${produto.cdProduto})`
+            );
 
             produtoImagens.forEach((produtoImagem) => {
                 if (produtoImagem.fkCdProduto === produto.cdProduto) {
@@ -82,7 +238,28 @@ async function montaCartao() {
 
             const iconeFavorito = document.createElement("img");
             iconeFavorito.classList.add("favorito");
-            iconeFavorito.src = "/src/icons/heart.svg";
+
+            if (favoritos.length > 0) {
+                favoritos.forEach((favorito) => {
+                    if (favorito.fkCdProduto == produto.cdProduto) {
+                        iconeFavorito.src = "/src/icons/heart2-cheio.png";
+
+                        iconeFavorito.setAttribute(
+                            "onclick",
+                            `desfavoritar(${produto.cdProduto})`
+                        );
+                    }
+                });
+            }
+
+            if (iconeFavorito.src == "") {
+                iconeFavorito.src = "/src/icons/heart2.png";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `favoritar(${produto.cdProduto})`
+                );
+            }
 
             imagemFavorito.appendChild(imagem);
             imagemFavorito.appendChild(iconeFavorito);

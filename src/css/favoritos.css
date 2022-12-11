@@ -40,6 +40,7 @@
 
         /* DIMENSIONAMENTO */
         width: 95%;
+        min-height: 80vh;
     }
 
     .container .produtos-favoritados {
@@ -67,7 +68,7 @@
     display: none;
 }
 
-#meusFavoritos .titulo {
+#meusFavoritos .titulo-favorito {
     font-size: 36px;
     font-weight: normal;
 
