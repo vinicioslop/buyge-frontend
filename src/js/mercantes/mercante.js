@@ -1,27 +1,5 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
-String.prototype.reverse = function () {
-    return this.split("").reverse().join("");
-};
-
-function mascaraMoeda(campo, evento) {
-    var tecla = !evento ? window.event.keyCode : evento.which;
-    var valor = campo.value.replace(/[^\d]+/gi, "").reverse();
-    var resultado = "";
-    var mascara = "##.###.###,##".reverse();
-    for (var x = 0, y = 0; x < mascara.length && y < valor.length; ) {
-        if (mascara.charAt(x) != "#") {
-            resultado += mascara.charAt(x);
-            x++;
-        } else {
-            resultado += valor.charAt(y);
-            y++;
-            x++;
-        }
-    }
-    campo.value = resultado.reverse();
-}
-
 function recarregar() {
     window.location.reload();
 }
@@ -214,7 +192,7 @@ async function cadastrarProduto(produtoComImagem, token) {
         },
         body: JSON.stringify(produtoComImagem),
     });
-    const resposta = await requisicao.json();
+    const resposta = requisicao.status;
 
     return resposta;
 }
@@ -350,7 +328,7 @@ async function montarCategoriasEdicao(cdCategoria) {
     categorias.forEach((categoria) => {
         let categoriaItem = document.createElement("option");
         categoriaItem.value = categoria.cdCategoria;
-        categoriaItem.innerHTML = categoria.nmCategoria;
+        categoriaItem.innerText = categoria.nmCategoria;
 
         if (cdCategoria == categoria.cdCategoria) {
             categoriaItem.selected = true;
@@ -358,6 +336,36 @@ async function montarCategoriasEdicao(cdCategoria) {
 
         categoriaSelectEdicao.appendChild(categoriaItem);
     });
+}
+
+async function montarDisponibilidadeEdicao(idDisponibilidade) {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Usuário não está autenticado.");
+        return;
+    }
+
+    const disponibilidadeSelectEdicao = document.querySelector(
+        "#disponibilidadeProdutoEdicao"
+    );
+
+    const itemIndisponivel = document.createElement("option");
+    itemIndisponivel.value = 0;
+    itemIndisponivel.innerHTML = "Indisponível";
+
+    const itemDisponivel = document.createElement("option");
+    itemDisponivel.value = 1;
+    itemDisponivel.innerHTML = "Disponível";
+
+    if (idDisponibilidade == 0) {
+        itemIndisponivel.selected = true;
+    } else {
+        itemDisponivel.selected = true;
+    }
+
+    disponibilidadeSelectEdicao.appendChild(itemIndisponivel);
+    disponibilidadeSelectEdicao.appendChild(itemDisponivel);
 }
 
 async function montarProdutos() {
@@ -391,6 +399,14 @@ async function montarProdutos() {
     if (token === null) {
         console.log("Cliente não autenticado");
         return;
+    }
+
+    const produtosAnterior = document.querySelectorAll(".produto");
+
+    if (produtosAnterior.length > 0) {
+        produtosAnterior.forEach((produto) => {
+            produto.remove();
+        });
     }
 
     const idVendedor = sessionStorage.getItem("idCliente");
@@ -427,6 +443,15 @@ async function montarProdutos() {
 
     produtos.forEach((produto) => {
         let imagem = {};
+        let disponibilidade = "";
+
+        if (produto.idDisponibilidade == 1) {
+            disponibilidade =
+                "<div class='disponibilidade disponivel'>Disponível</div>";
+        } else {
+            disponibilidade =
+                "<div class='disponibilidade indisponivel'>Indisponível</div>";
+        }
 
         produtosImagens.forEach((produtoImagem) => {
             if (produtoImagem.fkCdProduto === produto.cdProduto) {
@@ -434,8 +459,24 @@ async function montarProdutos() {
             }
         });
 
+        const data = new Date(produto.dtCriacao)
+            .toLocaleDateString()
+            .toString();
+
+        let dataCriacao =
+            data[0] +
+            data[1] +
+            "/" +
+            data[3] +
+            data[4] +
+            "/" +
+            data[6] +
+            data[7] +
+            data[8] +
+            data[9];
+
         const item = document.createElement("div");
-        item.className = "item";
+        item.className = "produto";
 
         item.innerHTML = `
         <div class="fundo">
@@ -449,9 +490,9 @@ async function montarProdutos() {
             <h4 class="nome-produto">
                 ${produto.nmProduto}
             </h4>
-            <p class="criacao">Criado em ${produto.dtCriacao}</p>
+            <p class="criacao">Criado em ${dataCriacao}</p>
         </div>
-        <div class="disponibilidade">Desabilitado</div>
+        ${disponibilidade}
         <div class="acoes">
             <img
                 src="/src/icons/tres-pontinhos-branco.svg"
@@ -540,25 +581,27 @@ async function carregarInformacoesMercanteDadosLoja() {
 async function carregarInformacoesEditarProduto(idProduto) {
     const token = sessionStorage.getItem("token");
 
-    if (token === null) {
+    if (token == null) {
         console.log("Cliente não autenticado");
-        return;
+        window.location = "/";
     }
 
     const produto = await carregarProduto(idProduto);
 
-    console.log(produto);
-
     montarCategoriasEdicao(produto.fkCdCategoria);
+    montarDisponibilidadeEdicao(produto.idDisponibilidade);
 
-    let codigoProduto = document.querySelector("#codigoProdutoEdicao");
-    let nomeProduto = document.querySelector("#nomeProdutoEdicao");
-    let descProduto = document.querySelector("#descricaoProdutoEdicao");
-    let precoProduto = document.querySelector("#precoProdutoEdicao");
-    let quantidadeProduto = document.querySelector("#quantidadeProdutoEdicao");
-    let pesoProduto = document.querySelector("#pesoProdutoEdicao");
-    let tamanhoProduto = document.querySelector("#tamanhoProdutoEdicao");
-    let freteProduto = document.querySelector("#freteProdutoEdicao");
+    const codigoProduto = document.querySelector("#codigoProdutoEdicao");
+    const nomeProduto = document.querySelector("#nomeProdutoEdicao");
+    const descProduto = document.querySelector("#descricaoProdutoEdicao");
+    const precoProduto = document.querySelector("#precoProdutoEdicao");
+    const quantidadeProduto = document.querySelector(
+        "#quantidadeProdutoEdicao"
+    );
+    const pesoProduto = document.querySelector("#pesoProdutoEdicao");
+    const tamanhoProduto = document.querySelector("#tamanhoProdutoEdicao");
+    const freteProduto = document.querySelector("#freteProdutoEdicao");
+    const idMercante = document.querySelector("#idMercanteEdicao");
 
     codigoProduto.value = produto.cdProduto;
     nomeProduto.value = produto.nmProduto;
@@ -568,6 +611,7 @@ async function carregarInformacoesEditarProduto(idProduto) {
     pesoProduto.value = produto.vlPeso;
     tamanhoProduto.value = produto.vlTamanho;
     freteProduto.value = produto.vlFrete;
+    idMercante.value = produto.fkCdMercante;
 }
 
 function clicaSecaoInternaMinhaLoja(idComponente) {
@@ -736,13 +780,12 @@ document
             qtProduto: parseInt(
                 document.querySelector("#quantidadeProduto").value
             ),
-            vlPeso: parseFloat(document.querySelector("#pesoProduto").value),
+            /*vlPeso: parseFloat(document.querySelector("#pesoProduto").value),
             vlTamanho: parseFloat(
                 document.querySelector("#tamanhoProduto").value
             ),
-            vlFrete: parseFloat(document.querySelector("#freteProduto").value),
+            vlFrete: parseFloat(document.querySelector("#freteProduto").value),*/
             idDisponibilidade: 0,
-            dtCricao: Date.now(),
             fkCdMercante: parseInt(mercantes[0].cdMercante),
             fkCdCategoria: parseInt(
                 document.querySelector("#categoriaProduto").value
@@ -751,7 +794,10 @@ document
 
         const resposta = await cadastrarProduto(produto, token);
 
-        console.log(resposta);
+        if (resposta == 201) {
+            await montarProdutos();
+            clicaSecao("secaoProdutos");
+        }
     });
 
 document
@@ -765,9 +811,6 @@ document
             console.log("Cliente não autenticado");
             return;
         }
-
-        const idVendedor = sessionStorage.getItem("idCliente");
-        const mercantes = await carregarMercantes(idVendedor, token);
 
         const produto = {
             cdProduto: document.querySelector("#codigoProdutoEdicao").value,
@@ -788,15 +831,23 @@ document
             vlFrete: parseFloat(
                 document.querySelector("#freteProdutoEdicao").value
             ),
-            idDisponibilidade: 1,
-            dtCricao: Date.now(),
-            fkCdMercante: parseInt(mercantes[0].cdMercante),
+            idDisponibilidade: parseInt(
+                document.querySelector("#disponibilidadeProdutoEdicao").value
+            ),
+            fkCdMercante: parseInt(
+                document.querySelector("#idMercanteEdicao").value
+            ),
             fkCdCategoria: parseInt(
                 document.querySelector("#categoriaProdutoEdicao").value
             ),
         };
 
-        atualizarProduto(produto, token);
+        const resposta = await atualizarProduto(produto, token);
+
+        if (resposta == 200) {
+            await montarProdutos();
+            clicaSecao("secaoProdutos");
+        }
     });
 
 document.addEventListener("DOMContentLoaded", (e) => {

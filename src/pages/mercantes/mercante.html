@@ -223,7 +223,9 @@
                                     />
                                 </div>
                                 <div class="entrada-dados">
-                                    <label for="sgEstadoDadosLoja">Estado</label>
+                                    <label for="sgEstadoDadosLoja"
+                                        >Estado</label
+                                    >
                                     <select
                                         required
                                         name="sgEstadoDadosLoja"
@@ -451,20 +453,6 @@
                                         placeholder="Informe a descrição do Produto"
                                     ></textarea>
                                 </div>
-                                <div class="entrada-dados">
-                                    <label for="categoriaProduto"
-                                        >Categoria</label
-                                    >
-                                    <select
-                                        required
-                                        name="categoriaProduto"
-                                        id="categoriaProduto"
-                                    >
-                                        <option value="">
-                                            -- selecione --
-                                        </option>
-                                    </select>
-                                </div>
                             </div>
                             <div class="grupo-direita">
                                 <div class="entrada-dados">
@@ -493,6 +481,20 @@
                                     />
                                 </div>
                                 <div class="entrada-dados">
+                                    <label for="categoriaProduto"
+                                        >Categoria</label
+                                    >
+                                    <select
+                                        required
+                                        name="categoriaProduto"
+                                        id="categoriaProduto"
+                                    >
+                                        <option value="">
+                                            -- selecione --
+                                        </option>
+                                    </select>
+                                </div>
+                                <!--<div class="entrada-dados">
                                     <label for="pesoProduto"
                                         >Peso do Produto (kg)</label
                                     >
@@ -530,7 +532,7 @@
                                         onKeyUp="mascaraMoeda(this, event)"
                                         placeholder="0"
                                     />
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         <button id="cadastrarProduto">Salvar Alterações</button>
@@ -588,6 +590,16 @@
                                         id="categoriaProdutoEdicao"
                                     ></select>
                                 </div>
+                                <div class="entrada-dados">
+                                    <label for="disponibilidadeProdutoEdicao"
+                                        >Disponibilidade</label
+                                    >
+                                    <select
+                                        required
+                                        name="disponibilidadeProdutoEdicao"
+                                        id="disponibilidadeProdutoEdicao"
+                                    ></select>
+                                </div>
                             </div>
                             <div class="grupo-direita">
                                 <div class="entrada-dados">
@@ -599,8 +611,7 @@
                                         type="text"
                                         name="precoProdutoEdicao"
                                         id="precoProdutoEdicao"
-                                        onKeyUp="mascaraMoeda(this, event)"
-                                        placeholder="999,99"
+                                        placeholder="999.99"
                                     />
                                 </div>
                                 <div class="entrada-dados">
@@ -624,7 +635,6 @@
                                         type="text"
                                         name="pesoProdutoEdicao"
                                         id="pesoProdutoEdicao"
-                                        onKeyUp="mascaraMoeda(this, event)"
                                         placeholder="0"
                                     />
                                 </div>
@@ -637,7 +647,6 @@
                                         type="text"
                                         name="tamanhoProdutoEdicao"
                                         id="tamanhoProdutoEdicao"
-                                        onKeyUp="mascaraMoeda(this, event)"
                                         placeholder="0"
                                     />
                                 </div>
@@ -650,10 +659,17 @@
                                         type="text"
                                         name="freteProdutoEdicao"
                                         id="freteProdutoEdicao"
-                                        onKeyUp="mascaraMoeda(this, event)"
                                         placeholder="0"
                                     />
                                 </div>
+                                <input
+                                    required
+                                    disabled
+                                    hidden
+                                    type="number"
+                                    name="idMercanteEdicao"
+                                    id="idMercanteEdicao"
+                                />
                             </div>
                         </div>
                         <button id="atualizarProduto">Salvar Alterações</button>

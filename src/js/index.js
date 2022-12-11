@@ -1,6 +1,5 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
-
 function mascaraPreco(preco) {
     const valorFormatado = preco.toLocaleString("pt-BR", {
         style: "currency",
@@ -291,395 +290,416 @@ async function montaCartao(idCliente, token) {
     const queimaEstoque = new Flickity("#queima-estoque");
 
     produtos.forEach((produto) => {
-        const cartao = document.createElement("div");
-        cartao.classList.add("cartao");
-        cartao.classList.add("carrosel-cell");
+        if (produto.idDisponibilidade == 1) {
+            const cartao = document.createElement("div");
+            cartao.classList.add("cartao");
+            cartao.classList.add("carrosel-cell");
 
-        const imagemFavorito = document.createElement("div");
-        imagemFavorito.classList.add("imagem-favorito");
-        const imagem = document.createElement("img");
-        imagem.classList.add("imagem");
+            const imagemFavorito = document.createElement("div");
+            imagemFavorito.classList.add("imagem-favorito");
+            const imagem = document.createElement("img");
+            imagem.classList.add("imagem");
 
-        produtoImagens.forEach((produtoImagem) => {
-            if (
-                produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === 1
-            ) {
-                imagem.src = produtoImagem.imgProdutoLink;
+            produtoImagens.forEach((produtoImagem) => {
+                if (
+                    produtoImagem.fkCdProduto === produto.cdProduto &&
+                    produtoImagem.idPrincipal === 1
+                ) {
+                    imagem.src = produtoImagem.imgProdutoLink;
+                }
+            });
+
+            if (imagem.src == "") {
+                imagem.src = "/src/icons/image-preto.svg";
             }
-        });
 
-        if (imagem.src == "") {
-            imagem.src = "/src/icons/image-preto.svg";
-        }
+            const iconeFavorito = document.createElement("img");
+            iconeFavorito.classList.add("favorito");
 
-        const iconeFavorito = document.createElement("img");
-        iconeFavorito.classList.add("favorito");
+            if (favoritos.length > 0) {
+                favoritos.forEach((favorito) => {
+                    if (favorito.fkCdProduto == produto.cdProduto) {
+                        iconeFavorito.src = "/src/icons/heart2-cheio.png";
 
-        if (favoritos.length > 0) {
-            favoritos.forEach((favorito) => {
-                if (favorito.fkCdProduto == produto.cdProduto) {
-                    iconeFavorito.src = "/src/icons/heart2-cheio.png";
+                        iconeFavorito.setAttribute(
+                            "onclick",
+                            `desfavoritar(${produto.cdProduto})`
+                        );
+                    }
+                });
+            }
 
-                    iconeFavorito.setAttribute(
+            if (iconeFavorito.src == "") {
+                iconeFavorito.src = "/src/icons/heart2.png";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `favoritar(${produto.cdProduto})`
+                );
+            }
+
+            imagemFavorito.appendChild(imagem);
+            imagemFavorito.appendChild(iconeFavorito);
+
+            const informacoes = document.createElement("div");
+            informacoes.classList.add("informacoes");
+
+            const tituloCategoriaAvaliacao = document.createElement("div");
+            tituloCategoriaAvaliacao.classList.add(
+                "titulo-categoria-avaliacao"
+            );
+
+            const categoriaAvaliacao = document.createElement("div");
+            categoriaAvaliacao.classList.add("categoria-avaliacao");
+
+            const categoria = document.createElement("p");
+
+            categorias.forEach((item) => {
+                if (item.cdCategoria === produto.fkCdCategoria) {
+                    categoria.innerText = item.nmCategoria;
+                }
+            });
+
+            const avaliacao = document.createElement("div");
+            avaliacao.classList.add("avaliacao");
+            const iconeAvaliacao = document.createElement("img");
+            iconeAvaliacao.src = "/src/icons/star-amarela.svg";
+            const notaAvaliacao = document.createElement("p");
+            notaAvaliacao.innerText = "4.5";
+
+            avaliacao.appendChild(iconeAvaliacao);
+            avaliacao.appendChild(notaAvaliacao);
+
+            categoriaAvaliacao.appendChild(categoria);
+            categoriaAvaliacao.appendChild(avaliacao);
+
+            const tituloProduto = document.createElement("h1");
+            tituloProduto.classList.add("titulo-produto");
+            tituloProduto.innerText = produto.nmProduto;
+
+            tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
+            tituloCategoriaAvaliacao.appendChild(tituloProduto);
+
+            const nomeLoja = document.createElement("h2");
+            nomeLoja.classList.add("nome-loja");
+
+            mercantes.forEach((item) => {
+                if (item.cdMercante === produto.fkCdMercante) {
+                    nomeLoja.innerText = item.nmLoja;
+                    nomeLoja.setAttribute(
                         "onclick",
-                        `desfavoritar(${produto.cdProduto})`
+                        `produtosMercante(${item.cdMercante})`
                     );
                 }
             });
-        }
 
-        if (iconeFavorito.src == "") {
-            iconeFavorito.src = "/src/icons/heart2.png";
+            const precoParcelaBotao = document.createElement("div");
+            precoParcelaBotao.classList.add("preco-parcela-botao");
 
-            iconeFavorito.setAttribute(
+            const precoParcela = document.createElement("div");
+            precoParcela.classList.add("preco-parcela");
+            const preco = document.createElement("p");
+            preco.classList.add("preco");
+            preco.innerText = mascaraPreco(produto.vlProduto);
+
+            precoParcela.appendChild(preco);
+
+            const botao = document.createElement("button");
+            botao.classList.add("comprar");
+            botao.setAttribute(
                 "onclick",
-                `favoritar(${produto.cdProduto})`
+                `exibirProduto(${produto.cdProduto})`
             );
+            botao.innerText = "VISUALIZAR";
+
+            precoParcelaBotao.appendChild(precoParcela);
+            precoParcelaBotao.appendChild(botao);
+
+            informacoes.appendChild(tituloCategoriaAvaliacao);
+            informacoes.appendChild(nomeLoja);
+            informacoes.appendChild(precoParcelaBotao);
+
+            cartao.appendChild(imagemFavorito);
+            cartao.appendChild(informacoes);
+
+            maisVendidos.append(cartao);
         }
-
-        imagemFavorito.appendChild(imagem);
-        imagemFavorito.appendChild(iconeFavorito);
-
-        const informacoes = document.createElement("div");
-        informacoes.classList.add("informacoes");
-
-        const tituloCategoriaAvaliacao = document.createElement("div");
-        tituloCategoriaAvaliacao.classList.add("titulo-categoria-avaliacao");
-
-        const categoriaAvaliacao = document.createElement("div");
-        categoriaAvaliacao.classList.add("categoria-avaliacao");
-
-        const categoria = document.createElement("p");
-
-        categorias.forEach((item) => {
-            if (item.cdCategoria === produto.fkCdCategoria) {
-                categoria.innerText = item.nmCategoria;
-            }
-        });
-
-        const avaliacao = document.createElement("div");
-        avaliacao.classList.add("avaliacao");
-        const iconeAvaliacao = document.createElement("img");
-        iconeAvaliacao.src = "/src/icons/star-amarela.svg";
-        const notaAvaliacao = document.createElement("p");
-        notaAvaliacao.innerText = "4.5";
-
-        avaliacao.appendChild(iconeAvaliacao);
-        avaliacao.appendChild(notaAvaliacao);
-
-        categoriaAvaliacao.appendChild(categoria);
-        categoriaAvaliacao.appendChild(avaliacao);
-
-        const tituloProduto = document.createElement("h1");
-        tituloProduto.classList.add("titulo-produto");
-        tituloProduto.innerText = produto.nmProduto;
-
-        tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
-        tituloCategoriaAvaliacao.appendChild(tituloProduto);
-
-        const nomeLoja = document.createElement("h2");
-        nomeLoja.classList.add("nome-loja");
-
-        mercantes.forEach((item) => {
-            if (item.cdMercante === produto.fkCdMercante) {
-                nomeLoja.innerText = item.nmLoja;
-                nomeLoja.setAttribute(
-                    "onclick",
-                    `produtosMercante(${item.cdMercante})`
-                );
-            }
-        });
-
-        const precoParcelaBotao = document.createElement("div");
-        precoParcelaBotao.classList.add("preco-parcela-botao");
-
-        const precoParcela = document.createElement("div");
-        precoParcela.classList.add("preco-parcela");
-        const preco = document.createElement("p");
-        preco.classList.add("preco");
-        preco.innerText = mascaraPreco(produto.vlProduto);
-
-        precoParcela.appendChild(preco);
-
-        const botao = document.createElement("button");
-        botao.classList.add("comprar");
-        botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "VISUALIZAR";
-
-        precoParcelaBotao.appendChild(precoParcela);
-        precoParcelaBotao.appendChild(botao);
-
-        informacoes.appendChild(tituloCategoriaAvaliacao);
-        informacoes.appendChild(nomeLoja);
-        informacoes.appendChild(precoParcelaBotao);
-
-        cartao.appendChild(imagemFavorito);
-        cartao.appendChild(informacoes);
-
-        maisVendidos.append(cartao);
     });
 
     produtos.forEach((produto) => {
-        const cartao = document.createElement("div");
-        cartao.classList.add("cartao");
-        cartao.classList.add("carrosel-cell");
+        if (produto.idDisponibilidade == 1) {
+            const cartao = document.createElement("div");
+            cartao.classList.add("cartao");
+            cartao.classList.add("carrosel-cell");
 
-        const imagemFavorito = document.createElement("div");
-        imagemFavorito.classList.add("imagem-favorito");
-        const imagem = document.createElement("img");
-        imagem.classList.add("imagem");
+            const imagemFavorito = document.createElement("div");
+            imagemFavorito.classList.add("imagem-favorito");
+            const imagem = document.createElement("img");
+            imagem.classList.add("imagem");
 
-        produtoImagens.forEach((produtoImagem) => {
-            if (
-                produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === 1
-            ) {
-                imagem.src = produtoImagem.imgProdutoLink;
+            produtoImagens.forEach((produtoImagem) => {
+                if (
+                    produtoImagem.fkCdProduto === produto.cdProduto &&
+                    produtoImagem.idPrincipal === 1
+                ) {
+                    imagem.src = produtoImagem.imgProdutoLink;
+                }
+            });
+
+            if (imagem.src == "") {
+                imagem.src = "/src/icons/image-preto.svg";
             }
-        });
 
-        if (imagem.src == "") {
-            imagem.src = "/src/icons/image-preto.svg";
-        }
+            const iconeFavorito = document.createElement("img");
+            iconeFavorito.classList.add("favorito");
+            iconeFavorito.id = "produto" + produto.cdProduto;
 
-        const iconeFavorito = document.createElement("img");
-        iconeFavorito.classList.add("favorito");
-        iconeFavorito.id = "produto" + produto.cdProduto;
+            if (favoritos.length > 0) {
+                favoritos.forEach((favorito) => {
+                    if (favorito.fkCdProduto == produto.cdProduto) {
+                        iconeFavorito.src = "/src/icons/heart-cheio.svg";
 
-        if (favoritos.length > 0) {
-            favoritos.forEach((favorito) => {
-                if (favorito.fkCdProduto == produto.cdProduto) {
-                    iconeFavorito.src = "/src/icons/heart-cheio.svg";
+                        iconeFavorito.setAttribute(
+                            "onclick",
+                            `desfavoritar(${produto.cdProduto})`
+                        );
+                    }
+                });
+            }
 
-                    iconeFavorito.setAttribute(
+            if (iconeFavorito.src == "") {
+                iconeFavorito.src = "/src/icons/heart.svg";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `favoritar(${produto.cdProduto})`
+                );
+            }
+
+            imagemFavorito.appendChild(imagem);
+            imagemFavorito.appendChild(iconeFavorito);
+
+            const informacoes = document.createElement("div");
+            informacoes.classList.add("informacoes");
+
+            const tituloCategoriaAvaliacao = document.createElement("div");
+            tituloCategoriaAvaliacao.classList.add(
+                "titulo-categoria-avaliacao"
+            );
+
+            const categoriaAvaliacao = document.createElement("div");
+            categoriaAvaliacao.classList.add("categoria-avaliacao");
+
+            const categoria = document.createElement("p");
+
+            categorias.forEach((item) => {
+                if (item.cdCategoria === produto.fkCdCategoria) {
+                    categoria.innerText = item.nmCategoria;
+                }
+            });
+
+            const avaliacao = document.createElement("div");
+            avaliacao.classList.add("avaliacao");
+            const iconeAvaliacao = document.createElement("img");
+            iconeAvaliacao.src = "/src/icons/star-amarela.svg";
+            const notaAvaliacao = document.createElement("p");
+            notaAvaliacao.innerText = "4.5";
+
+            avaliacao.appendChild(iconeAvaliacao);
+            avaliacao.appendChild(notaAvaliacao);
+
+            categoriaAvaliacao.appendChild(categoria);
+            categoriaAvaliacao.appendChild(avaliacao);
+
+            const tituloProduto = document.createElement("h1");
+            tituloProduto.classList.add("titulo-produto");
+            tituloProduto.innerText = produto.nmProduto;
+
+            tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
+            tituloCategoriaAvaliacao.appendChild(tituloProduto);
+
+            const nomeLoja = document.createElement("h2");
+            nomeLoja.classList.add("nome-loja");
+
+            mercantes.forEach((item) => {
+                if (item.cdMercante === produto.fkCdMercante) {
+                    nomeLoja.innerText = item.nmLoja;
+                    nomeLoja.setAttribute(
                         "onclick",
-                        `desfavoritar(${produto.cdProduto})`
+                        `produtosMercante(${item.cdMercante})`
                     );
                 }
             });
-        }
 
-        if (iconeFavorito.src == "") {
-            iconeFavorito.src = "/src/icons/heart.svg";
+            const precoParcelaBotao = document.createElement("div");
+            precoParcelaBotao.classList.add("preco-parcela-botao");
 
-            iconeFavorito.setAttribute(
+            const precoParcela = document.createElement("div");
+            precoParcela.classList.add("preco-parcela");
+            const preco = document.createElement("p");
+            preco.classList.add("preco");
+            preco.innerText = mascaraPreco(produto.vlProduto);
+
+            precoParcela.appendChild(preco);
+
+            const botao = document.createElement("button");
+            botao.classList.add("comprar");
+            botao.setAttribute(
                 "onclick",
-                `favoritar(${produto.cdProduto})`
+                `exibirProduto(${produto.cdProduto})`
             );
+            botao.innerText = "VISUALIZAR";
+
+            precoParcelaBotao.appendChild(precoParcela);
+            precoParcelaBotao.appendChild(botao);
+
+            informacoes.appendChild(tituloCategoriaAvaliacao);
+            informacoes.appendChild(nomeLoja);
+            informacoes.appendChild(precoParcelaBotao);
+
+            cartao.appendChild(imagemFavorito);
+            cartao.appendChild(informacoes);
+
+            novidades.append(cartao);
         }
-
-        imagemFavorito.appendChild(imagem);
-        imagemFavorito.appendChild(iconeFavorito);
-
-        const informacoes = document.createElement("div");
-        informacoes.classList.add("informacoes");
-
-        const tituloCategoriaAvaliacao = document.createElement("div");
-        tituloCategoriaAvaliacao.classList.add("titulo-categoria-avaliacao");
-
-        const categoriaAvaliacao = document.createElement("div");
-        categoriaAvaliacao.classList.add("categoria-avaliacao");
-
-        const categoria = document.createElement("p");
-
-        categorias.forEach((item) => {
-            if (item.cdCategoria === produto.fkCdCategoria) {
-                categoria.innerText = item.nmCategoria;
-            }
-        });
-
-        const avaliacao = document.createElement("div");
-        avaliacao.classList.add("avaliacao");
-        const iconeAvaliacao = document.createElement("img");
-        iconeAvaliacao.src = "/src/icons/star-amarela.svg";
-        const notaAvaliacao = document.createElement("p");
-        notaAvaliacao.innerText = "4.5";
-
-        avaliacao.appendChild(iconeAvaliacao);
-        avaliacao.appendChild(notaAvaliacao);
-
-        categoriaAvaliacao.appendChild(categoria);
-        categoriaAvaliacao.appendChild(avaliacao);
-
-        const tituloProduto = document.createElement("h1");
-        tituloProduto.classList.add("titulo-produto");
-        tituloProduto.innerText = produto.nmProduto;
-
-        tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
-        tituloCategoriaAvaliacao.appendChild(tituloProduto);
-
-        const nomeLoja = document.createElement("h2");
-        nomeLoja.classList.add("nome-loja");
-
-        mercantes.forEach((item) => {
-            if (item.cdMercante === produto.fkCdMercante) {
-                nomeLoja.innerText = item.nmLoja;
-                nomeLoja.setAttribute(
-                    "onclick",
-                    `produtosMercante(${item.cdMercante})`
-                );
-            }
-        });
-
-        const precoParcelaBotao = document.createElement("div");
-        precoParcelaBotao.classList.add("preco-parcela-botao");
-
-        const precoParcela = document.createElement("div");
-        precoParcela.classList.add("preco-parcela");
-        const preco = document.createElement("p");
-        preco.classList.add("preco");
-        preco.innerText = mascaraPreco(produto.vlProduto);
-
-        precoParcela.appendChild(preco);
-
-        const botao = document.createElement("button");
-        botao.classList.add("comprar");
-        botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "VISUALIZAR";
-
-        precoParcelaBotao.appendChild(precoParcela);
-        precoParcelaBotao.appendChild(botao);
-
-        informacoes.appendChild(tituloCategoriaAvaliacao);
-        informacoes.appendChild(nomeLoja);
-        informacoes.appendChild(precoParcelaBotao);
-
-        cartao.appendChild(imagemFavorito);
-        cartao.appendChild(informacoes);
-
-        novidades.append(cartao);
     });
 
     produtos.forEach((produto) => {
-        const cartao = document.createElement("div");
-        cartao.classList.add("cartao");
-        cartao.classList.add("carrosel-cell");
+        if (produto.idDisponibilidade == 1) {
+            const cartao = document.createElement("div");
+            cartao.classList.add("cartao");
+            cartao.classList.add("carrosel-cell");
 
-        const imagemFavorito = document.createElement("div");
-        imagemFavorito.classList.add("imagem-favorito");
-        const imagem = document.createElement("img");
-        imagem.classList.add("imagem");
+            const imagemFavorito = document.createElement("div");
+            imagemFavorito.classList.add("imagem-favorito");
+            const imagem = document.createElement("img");
+            imagem.classList.add("imagem");
 
-        produtoImagens.forEach((produtoImagem) => {
-            if (
-                produtoImagem.fkCdProduto === produto.cdProduto &&
-                produtoImagem.idPrincipal === 1
-            ) {
-                imagem.src = produtoImagem.imgProdutoLink;
+            produtoImagens.forEach((produtoImagem) => {
+                if (
+                    produtoImagem.fkCdProduto === produto.cdProduto &&
+                    produtoImagem.idPrincipal === 1
+                ) {
+                    imagem.src = produtoImagem.imgProdutoLink;
+                }
+            });
+
+            if (imagem.src == "") {
+                imagem.src = "/src/icons/image-preto.svg";
             }
-        });
 
-        if (imagem.src == "") {
-            imagem.src = "/src/icons/image-preto.svg";
-        }
+            const iconeFavorito = document.createElement("img");
+            iconeFavorito.classList.add("favorito");
+            iconeFavorito.id = "produto" + produto.cdProduto;
 
-        const iconeFavorito = document.createElement("img");
-        iconeFavorito.classList.add("favorito");
-        iconeFavorito.id = "produto" + produto.cdProduto;
+            if (favoritos.length > 0) {
+                favoritos.forEach((favorito) => {
+                    if (favorito.fkCdProduto == produto.cdProduto) {
+                        iconeFavorito.src = "/src/icons/heart-cheio.svg";
 
-        if (favoritos.length > 0) {
-            favoritos.forEach((favorito) => {
-                if (favorito.fkCdProduto == produto.cdProduto) {
-                    iconeFavorito.src = "/src/icons/heart-cheio.svg";
+                        iconeFavorito.setAttribute(
+                            "onclick",
+                            `desfavoritar(${produto.cdProduto})`
+                        );
+                    }
+                });
+            }
 
-                    iconeFavorito.setAttribute(
+            if (iconeFavorito.src == "") {
+                iconeFavorito.src = "/src/icons/heart.svg";
+
+                iconeFavorito.setAttribute(
+                    "onclick",
+                    `favoritar(${produto.cdProduto})`
+                );
+            }
+
+            imagemFavorito.appendChild(imagem);
+            imagemFavorito.appendChild(iconeFavorito);
+
+            const informacoes = document.createElement("div");
+            informacoes.classList.add("informacoes");
+
+            const tituloCategoriaAvaliacao = document.createElement("div");
+            tituloCategoriaAvaliacao.classList.add(
+                "titulo-categoria-avaliacao"
+            );
+
+            const categoriaAvaliacao = document.createElement("div");
+            categoriaAvaliacao.classList.add("categoria-avaliacao");
+
+            const categoria = document.createElement("p");
+
+            categorias.forEach((item) => {
+                if (item.cdCategoria === produto.fkCdCategoria) {
+                    categoria.innerText = item.nmCategoria;
+                }
+            });
+
+            const avaliacao = document.createElement("div");
+            avaliacao.classList.add("avaliacao");
+            const iconeAvaliacao = document.createElement("img");
+            iconeAvaliacao.src = "/src/icons/star-amarela.svg";
+            const notaAvaliacao = document.createElement("p");
+            notaAvaliacao.innerText = "4.5";
+
+            avaliacao.appendChild(iconeAvaliacao);
+            avaliacao.appendChild(notaAvaliacao);
+
+            categoriaAvaliacao.appendChild(categoria);
+            categoriaAvaliacao.appendChild(avaliacao);
+
+            const tituloProduto = document.createElement("h1");
+            tituloProduto.classList.add("titulo-produto");
+            tituloProduto.innerText = produto.nmProduto;
+
+            tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
+            tituloCategoriaAvaliacao.appendChild(tituloProduto);
+
+            const nomeLoja = document.createElement("h2");
+            nomeLoja.classList.add("nome-loja");
+
+            mercantes.forEach((item) => {
+                if (item.cdMercante === produto.fkCdMercante) {
+                    nomeLoja.innerText = item.nmLoja;
+                    nomeLoja.setAttribute(
                         "onclick",
-                        `desfavoritar(${produto.cdProduto})`
+                        `produtosMercante(${item.cdMercante})`
                     );
                 }
             });
-        }
 
-        if (iconeFavorito.src == "") {
-            iconeFavorito.src = "/src/icons/heart.svg";
+            const precoParcelaBotao = document.createElement("div");
+            precoParcelaBotao.classList.add("preco-parcela-botao");
 
-            iconeFavorito.setAttribute(
+            const precoParcela = document.createElement("div");
+            precoParcela.classList.add("preco-parcela");
+            const preco = document.createElement("p");
+            preco.classList.add("preco");
+            preco.innerText = mascaraPreco(produto.vlProduto);
+
+            precoParcela.appendChild(preco);
+
+            const botao = document.createElement("button");
+            botao.classList.add("comprar");
+            botao.setAttribute(
                 "onclick",
-                `favoritar(${produto.cdProduto})`
+                `exibirProduto(${produto.cdProduto})`
             );
+            botao.innerText = "VISUALIZAR";
+
+            precoParcelaBotao.appendChild(precoParcela);
+            precoParcelaBotao.appendChild(botao);
+
+            informacoes.appendChild(tituloCategoriaAvaliacao);
+            informacoes.appendChild(nomeLoja);
+            informacoes.appendChild(precoParcelaBotao);
+
+            cartao.appendChild(imagemFavorito);
+            cartao.appendChild(informacoes);
+
+            queimaEstoque.append(cartao);
         }
-
-        imagemFavorito.appendChild(imagem);
-        imagemFavorito.appendChild(iconeFavorito);
-
-        const informacoes = document.createElement("div");
-        informacoes.classList.add("informacoes");
-
-        const tituloCategoriaAvaliacao = document.createElement("div");
-        tituloCategoriaAvaliacao.classList.add("titulo-categoria-avaliacao");
-
-        const categoriaAvaliacao = document.createElement("div");
-        categoriaAvaliacao.classList.add("categoria-avaliacao");
-
-        const categoria = document.createElement("p");
-
-        categorias.forEach((item) => {
-            if (item.cdCategoria === produto.fkCdCategoria) {
-                categoria.innerText = item.nmCategoria;
-            }
-        });
-
-        const avaliacao = document.createElement("div");
-        avaliacao.classList.add("avaliacao");
-        const iconeAvaliacao = document.createElement("img");
-        iconeAvaliacao.src = "/src/icons/star-amarela.svg";
-        const notaAvaliacao = document.createElement("p");
-        notaAvaliacao.innerText = "4.5";
-
-        avaliacao.appendChild(iconeAvaliacao);
-        avaliacao.appendChild(notaAvaliacao);
-
-        categoriaAvaliacao.appendChild(categoria);
-        categoriaAvaliacao.appendChild(avaliacao);
-
-        const tituloProduto = document.createElement("h1");
-        tituloProduto.classList.add("titulo-produto");
-        tituloProduto.innerText = produto.nmProduto;
-
-        tituloCategoriaAvaliacao.appendChild(categoriaAvaliacao);
-        tituloCategoriaAvaliacao.appendChild(tituloProduto);
-
-        const nomeLoja = document.createElement("h2");
-        nomeLoja.classList.add("nome-loja");
-
-        mercantes.forEach((item) => {
-            if (item.cdMercante === produto.fkCdMercante) {
-                nomeLoja.innerText = item.nmLoja;
-                nomeLoja.setAttribute(
-                    "onclick",
-                    `produtosMercante(${item.cdMercante})`
-                );
-            }
-        });
-
-        const precoParcelaBotao = document.createElement("div");
-        precoParcelaBotao.classList.add("preco-parcela-botao");
-
-        const precoParcela = document.createElement("div");
-        precoParcela.classList.add("preco-parcela");
-        const preco = document.createElement("p");
-        preco.classList.add("preco");
-        preco.innerText = mascaraPreco(produto.vlProduto);
-
-        precoParcela.appendChild(preco);
-
-        const botao = document.createElement("button");
-        botao.classList.add("comprar");
-        botao.setAttribute("onclick", `exibirProduto(${produto.cdProduto})`);
-        botao.innerText = "VISUALIZAR";
-
-        precoParcelaBotao.appendChild(precoParcela);
-        precoParcelaBotao.appendChild(botao);
-
-        informacoes.appendChild(tituloCategoriaAvaliacao);
-        informacoes.appendChild(nomeLoja);
-        informacoes.appendChild(precoParcelaBotao);
-
-        cartao.appendChild(imagemFavorito);
-        cartao.appendChild(informacoes);
-
-        queimaEstoque.append(cartao);
     });
 }
 

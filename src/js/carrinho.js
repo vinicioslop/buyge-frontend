@@ -417,13 +417,21 @@ async function montarValoresLogado() {
 
 function mostraProdutos() {
     const iconeSeta = document.querySelector("#iconeSeta");
+    const itensProdutosFinal = document.querySelector("#itensProdutosFinal");
+    const valoresProdutosFinal = document.querySelector(
+        "#valoresProdutosFinal"
+    );
 
-    console.log(iconeSeta.src);
+    if (itensProdutosFinal.classList.contains("esconder")) {
+        iconeSeta.setAttribute("src", "/src/icons/seta-cima-branca.svg");
 
-    if (iconeSeta.classList.contains("minimizado")) {
-        iconeSeta.src = "/src/icons/seta-cima-branca.svg";
+        itensProdutosFinal.className = "itens mostrar";
+        valoresProdutosFinal.className = "valores mostrar";
     } else {
-        iconeSeta.src = "/src/icons/seta-baixo-branco.svg";
+        iconeSeta.setAttribute("src", "/src/icons/seta-baixo-branco.svg");
+
+        itensProdutosFinal.className = "itens esconder";
+        valoresProdutosFinal.className = "valores esconder";
     }
 }
 
@@ -473,7 +481,7 @@ async function montarFinalizacao() {
     let valorEntrega = 0;
     let valorDesconto = 0;
 
-    const itemsDiv = document.querySelector("#grupoProdutosFinal");
+    const itemsDiv = document.querySelector("#itensProdutosFinal");
 
     itemsCarrinhoResposta.dados.forEach(async (item) => {
         const imagensResposta = await carregarImagems(item.fkCdProduto);

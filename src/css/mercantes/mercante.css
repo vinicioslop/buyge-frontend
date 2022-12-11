@@ -146,7 +146,7 @@
     flex-direction: column;
 }
 
-.conteudo .informacoes .todos-produtos .item {
+.conteudo .informacoes .todos-produtos .produto {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -165,7 +165,7 @@
     background-color: var(--cor-principal-clara);
 }
 
-.conteudo .informacoes .todos-produtos .item .fundo {
+.conteudo .informacoes .todos-produtos .produto .fundo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -179,14 +179,14 @@
     background-color: var(--cor-clara);
 }
 
-.conteudo .informacoes .todos-produtos .item .fundo .imagem {
+.conteudo .informacoes .todos-produtos .produto .fundo .imagem {
     height: 80px;
     object-fit: scale-down;
 
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .item .nome-data-criacao {
+.conteudo .informacoes .todos-produtos .produto .nome-data-criacao {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -199,20 +199,20 @@
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .item .nome-data-criacao .nome-produto {
+.conteudo .informacoes .todos-produtos .produto .nome-data-criacao .nome-produto {
     font-size: 20px;
     font-weight: normal;
 
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .item .nome-data-criacao .criacao {
+.conteudo .informacoes .todos-produtos .produto .nome-data-criacao .criacao {
     font-size: 14px;
 
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .item .disponibilidade {
+.conteudo .informacoes .todos-produtos .produto .disponibilidade {
     display: flex;
     flex-direction: column;
 
@@ -233,7 +233,19 @@
     background-color: var(--cor-clara);
 }
 
-.conteudo .informacoes .todos-produtos .item .acoes {
+.conteudo .informacoes .todos-produtos .produto .disponibilidade.disponivel {
+    color: var(--cor-clara);
+
+    background-color: limegreen;
+}
+
+.conteudo .informacoes .todos-produtos .produto .disponibilidade.indisponivel {
+    color: #000;
+
+    background-color: lightgray;
+}
+
+.conteudo .informacoes .todos-produtos .produto .acoes {
     display: flex;
     flex-direction: column;
 
@@ -242,18 +254,18 @@
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .item .acoes img {
+.conteudo .informacoes .todos-produtos .produto .acoes img {
     height: 40px;
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .item .grupo-botoes,
+.conteudo .informacoes .todos-produtos .produto .grupo-botoes,
 a,
 img {
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .item .grupo-botoes {
+.conteudo .informacoes .todos-produtos .produto .grupo-botoes {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -264,7 +276,7 @@ img {
     height: 90%;
 }
 
-.conteudo .informacoes .todos-produtos .item .grupo-botoes img:hover {
+.conteudo .informacoes .todos-produtos .produto .grupo-botoes img:hover {
     cursor: pointer;
 }
 
@@ -317,7 +329,7 @@ img {
 }
 
 .conteudo .informacoes .formulario .entrada-dados textarea {
-    height: 100px;
+    height: 135px;
 }
 
 .conteudo .informacoes .formulario label {
@@ -333,7 +345,7 @@ textarea {
     padding-left: 10px;
 
     height: 40px;
-    width: 100%;
+    width: 95%;
 
     outline: none;
 
@@ -358,7 +370,7 @@ input::placeholder {
 
 .conteudo .informacoes .formulario select {
     /* DIMENSIONAMENTO */
-    width: 90%;
+    width: 95%;
     padding: 12px;
 
     /* APARÊNCIA */

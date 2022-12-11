@@ -716,12 +716,12 @@ async function insereInformacoesUsuario() {
     const clienteResposta = await buscarClienteLogado(idCliente, token);
     const cliente = clienteResposta.dados;
 
-    const nome = document.getElementById("nomeCliente");
-    const sobrenome = document.getElementById("sobrenomeCliente");
-    const email = document.getElementById("emailCliente");
-    const cpf = document.getElementById("cpfCliente");
-    const telefone = document.getElementById("numeroTelefone");
-    const dataNasc = document.getElementById("dataNascimento");
+    const nome = document.querySelector("#nomeClienteEdicao");
+    const sobrenome = document.querySelector("#sobrenomeClienteEdicao");
+    const email = document.querySelector("#emailClienteEdicao");
+    const cpf = document.querySelector("#cpfClienteEdicao");
+    const telefone = document.querySelector("#numeroTelefoneEdicao");
+    const dataNasc = document.querySelector("#dataNascimentoEdicao");
 
     const data = new Date(cliente.dtNascimento).toLocaleDateString().toString();
 
@@ -849,12 +849,13 @@ document
 
         const cliente = {
             cdCliente: idCliente,
-            nmCliente: document.querySelector("#nomeCliente").value,
-            nmSobrenome: document.querySelector("#sobrenomeCliente").value,
-            nrCpf: document.querySelector("#cpfCliente").value,
-            dtNascimento: document.querySelector("#dataNascimento").value,
-            nrTelefone: document.querySelector("#numeroTelefone").value,
-            nmEmail: document.querySelector("#emailCliente").value,
+            nmCliente: document.querySelector("#nomeClienteEdicao").value,
+            nmSobrenome: document.querySelector("#sobrenomeClienteEdicao")
+                .value,
+            nrCpf: document.querySelector("#cpfClienteEdicao").value,
+            dtNascimento: document.querySelector("#dataNascimentoEdicao").value,
+            nrTelefone: document.querySelector("#numeroTelefoneEdicao").value,
+            nmEmail: document.querySelector("#emailClienteEdicao").value,
         };
 
         const status = await atualizarCliente(cliente, token);
