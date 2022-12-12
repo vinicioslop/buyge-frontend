@@ -459,9 +459,8 @@ async function excluirEndereco(idEndereco) {
     const resposta = await removerEndereco(idEndereco, token);
 
     if (resposta == 200) {
-        montarEnderecos;
+        montarEnderecos();
         clicaSecao("secaoEndereco");
-        clicaSecaoInternaEnderecos("meusEnderecos");
     }
 }
 
@@ -924,6 +923,51 @@ document
     });
 
 document
+    .querySelector("#adicionarEndereco")
+    .addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const token = sessionStorage.getItem("token");
+        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+
+        const valido = await testar();
+
+        if (!valido) {
+            console.log("Cliente não autenticado");
+            window.location = "/";
+        }
+
+        const enderecos = await carregarEnderecos(idCliente, token);
+
+        const endereco = {
+            nrCep: document.getElementById("cepClienteNovo").value,
+            nmBairro: document.getElementById("bairroClienteNovo").value,
+            sgEstado: document.getElementById("sgEstadoNovo").value,
+            nmLogradouro: document.getElementById("logradouroClienteNovo")
+                .value,
+            nmCidade: document.getElementById("cidadeClienteNovo").value,
+            nrEndereco: document.getElementById("numeroClienteNovo").value,
+            nmTituloEndereco:
+                document.getElementById("tituloEnderecoNovo").value,
+            nmTipoEndereco: document.getElementById("tipoEnderecoNovo").value,
+            idPrincipal: enderecos.dados.length == 0 ? 1 : 0,
+            fkCdCliente: idCliente,
+        };
+
+        const resposta = await adicionarEndereco(endereco, token);
+
+        if (resposta.status == 201) {
+            console.log("Endereco adicionado com sucesso");
+            montarEnderecos();
+            clicaSecao("secaoEndereco");
+        } else {
+            console.log(
+                "Ocorreu um erro na requisição. STATUS: " + resposta.status
+            );
+        }
+    });
+
+document
     .querySelector("#atualizarEndereco")
     .addEventListener("click", async (e) => {
         e.preventDefault();
@@ -956,50 +1000,6 @@ document
         const resposta = await atualizarEndereco(endereco, token);
 
         if (resposta.status === 200) {
-            montarEnderecos();
-            clicaSecao("secaoEndereco");
-        } else {
-            console.log(
-                "Ocorreu um erro na requisição. STATUS: " + resposta.status
-            );
-        }
-    });
-
-document
-    .querySelector("#adicionarEndereco")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
-
-        const token = sessionStorage.getItem("token");
-        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
-
-        const valido = await testar();
-
-        if (!valido) {
-            console.log("Cliente não autenticado");
-            window.location = "/";
-        }
-
-        const endereco = {
-            nrCep: document.getElementById("cepClienteNovo").value,
-            nmBairro: document.getElementById("bairroClienteNovo").value,
-            sgEstado: document.getElementById("sgEstadoNovo").value,
-            nmLogradouro: document.getElementById("logradouroClienteNovo")
-                .value,
-            nmCidade: document.getElementById("cidadeClienteNovo").value,
-            nrEndereco: document.getElementById("numeroClienteNovo").value,
-            nmTituloEndereco:
-                document.getElementById("tituloEnderecoNovo").value,
-            nmTipoEndereco: document.getElementById("tipoEnderecoNovo").value,
-            fkCdCliente: idCliente,
-        };
-
-        console.log(endereco);
-
-        const resposta = await adicionarEndereco(endereco, token);
-
-        if (resposta.status == 201) {
-            console.log("Endereco adicionado com sucesso");
             montarEnderecos();
             clicaSecao("secaoEndereco");
         } else {

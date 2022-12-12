@@ -493,12 +493,6 @@ async function montarProdutos() {
             <p class="criacao">Criado em ${dataCriacao}</p>
         </div>
         ${disponibilidade}
-        <div class="acoes">
-            <img
-                src="/src/icons/tres-pontinhos-branco.svg"
-                alt=""
-            />
-        </div>
         <div class="grupo-botoes">
             <a onclick="editarProduto(${produto.cdProduto})">
                 <img src="/src/icons/edit-branco2.svg"/>

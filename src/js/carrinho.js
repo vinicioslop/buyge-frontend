@@ -169,7 +169,7 @@ async function carregarEnderecos(idCliente, token) {
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
 
             var resposta = {
-                dados: null,
+                dados: [],
                 status: status,
             };
 
@@ -545,23 +545,77 @@ async function montarFinalizacao() {
         }
     });
 
+    /*
+    <div class="endereco">
+        <div class="nome-numero">
+            Nome da rua, número da casa
+        </div>
+        <div class="bairro-cidade-estado">
+            Bairro-Cidade-Estado
+        </div>
+        <div class="cep">CEP</div>
+        <div class="grupo-icones">
+            <img
+                src="/src/icons/loader2-branco.svg"
+                alt=""
+                id="trocarEndereco"
+                onclick="trocarEndereco()"
+            />
+        </div>
+    </div>
+    */
+
     const enderecosReposta = await carregarEnderecos(idCliente, token);
 
-    let endereco = {};
+    const grupoEndereco = document.querySelector(".grupo-endereco");
 
-    enderecosReposta.dados.forEach((item) => {
-        if (item.idPrincipal == 1) {
-            endereco = item;
-        }
-    });
+    const divEndereco = document.createElement("div");
+    divEndereco.className = "endereco";
 
-    const nomeNumero = document.querySelector(".nome-numero");
-    const bairroCidadeEstado = document.querySelector(".bairro-cidade-estado");
-    const cep = document.querySelector(".cep");
+    if (enderecosReposta.dados.length > 0) {
+        let endereco = {};
 
-    nomeNumero.innerText = `${endereco.nmLogradouro}, ${endereco.nrEndereco}`;
-    bairroCidadeEstado.innerText = `${endereco.nmBairro} - ${endereco.nmCidade} - ${endereco.sgEstado}`;
-    cep.innerText = `${endereco.nrCep}`;
+        enderecosReposta.dados.forEach((item) => {
+            if (item.idPrincipal == 1) {
+                endereco = item;
+            }
+        });
+
+        divEndereco.innerHTML = `
+        <div class="nome-numero">
+            ${endereco.nmLogradouro}, ${endereco.nrEndereco}
+        </div>
+        <div class="bairro-cidade-estado">
+            ${endereco.nmBairro} - ${endereco.nmCidade} - ${endereco.sgEstado}
+        </div>
+        <div class="cep">${endereco.nrCep}</div>
+        <div class="grupo-icones">
+            <img
+                src="/src/icons/loader2-branco.svg"
+                alt=""
+                id="trocarEndereco"
+                onclick="trocarEndereco()"
+            />
+        </div>
+        `;
+
+        grupoEndereco.appendChild(divEndereco);
+    } else {
+        divEndereco.innerHTML = `
+        <div>SEM ENDEREÇO CADASTRADO!</div>
+        <div>Adicione um endereço para finalizar a compra.</div>
+        <div class="grupo-icones">
+            <img
+                src="/src/icons/home-branco.svg"
+                alt=""
+                id="trocarEndereco"
+                onclick="trocarEndereco()"
+            />
+        </div>
+        `;
+
+        grupoEndereco.appendChild(divEndereco);
+    }
 
     const dadosEntrega = document.querySelector("#dadosEntrega");
     const informacoes = document.querySelector(".informacoes");
@@ -577,6 +631,13 @@ async function acionaMercadoPago() {
         console.log("Inválido");
     } else {
         const idCliente = sessionStorage.getItem("idCliente");
+
+        const enderecosReposta = await carregarEnderecos(idCliente, token);
+
+        if (enderecosReposta.dados.length == 0) {
+            console.log("Cliente não possue endereço cadastrado!");
+            return;
+        }
 
         const resposta = await gerarPreferencia(idCliente, token);
 

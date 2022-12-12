@@ -144,6 +144,8 @@
 .conteudo .informacoes .todos-produtos {
     display: flex;
     flex-direction: column;
+
+    margin-bottom: 100px;
 }
 
 .conteudo .informacoes .todos-produtos .produto {
@@ -199,7 +201,12 @@
     background-color: transparent;
 }
 
-.conteudo .informacoes .todos-produtos .produto .nome-data-criacao .nome-produto {
+.conteudo
+    .informacoes
+    .todos-produtos
+    .produto
+    .nome-data-criacao
+    .nome-produto {
     font-size: 20px;
     font-weight: normal;
 
@@ -217,7 +224,7 @@
     flex-direction: column;
 
     margin-left: 40px;
-    margin-right: 40px;
+    margin-right: 50px;
 
     padding-top: 10px;
     padding-bottom: 10px;
@@ -271,7 +278,7 @@ img {
     align-items: center;
     justify-content: space-evenly;
 
-    margin-right: 10px;
+    margin-right: 30px;
 
     height: 90%;
 }
