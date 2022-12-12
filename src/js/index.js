@@ -53,7 +53,7 @@ async function carregarImagems() {
 
 async function carregarCategorias() {
     const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -73,7 +73,7 @@ async function carregarCategorias() {
 
 async function carregarMercantes() {
     const response = await fetch(`${fetchUrl}/mercantes`, { mode: "cors" });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -92,7 +92,7 @@ async function carregarMercantes() {
 }
 
 async function carregarFavoritos(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+    const response = await fetch(`${fetchUrl}/favoritos/${idCliente}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -127,7 +127,7 @@ async function carregarFavoritos(idCliente, token) {
 
 async function adicionarFavorito(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        `${fetchUrl}/favorito/novo/${idCliente}/${idProduto}`,
         {
             method: "POST",
             mode: "cors",
@@ -164,7 +164,7 @@ async function adicionarFavorito(idCliente, idProduto, token) {
 
 async function apagarFavorito(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        `${fetchUrl}/favorito/remover/${idCliente}/${idProduto}`,
         {
             method: "DELETE",
             mode: "cors",

@@ -23,7 +23,7 @@ async function testarToken(token) {
             Authorization: "Bearer " + token,
         },
     });
-    const status = await requisicao.status;
+    const status = requisicao.status;
 
     switch (status) {
         case 200:
@@ -46,7 +46,7 @@ async function testar() {
 }
 
 async function buscarClienteLogado(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/clientes/${idCliente}`, {
+    const response = await fetch(`${fetchUrl}/cliente/${idCliente}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -80,25 +80,28 @@ async function buscarClienteLogado(idCliente, token) {
 }
 
 async function atualizarCliente(cliente, token) {
-    const result = await fetch(`${fetchUrl}/clientes/${cliente.cdCliente}`, {
-        method: "PATCH",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(cliente),
-    });
+    const result = await fetch(
+        `${fetchUrl}/cliente/atualizar/${cliente.cdCliente}`,
+        {
+            method: "PATCH",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify(cliente),
+        }
+    );
 
-    const response = await result.status;
+    const response = result.status;
 
     return response;
 }
 
 async function atualizarSenha(idCliente, novaSenha, token) {
     const response = await fetch(
-        `${fetchUrl}/clientes/senha/trocar/${idCliente}`,
+        `${fetchUrl}/cliente/senha/trocar/${idCliente}`,
         {
             method: "POST",
             mode: "cors",
@@ -110,7 +113,7 @@ async function atualizarSenha(idCliente, novaSenha, token) {
             body: JSON.stringify(novaSenha),
         }
     );
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -129,7 +132,7 @@ async function atualizarSenha(idCliente, novaSenha, token) {
 }
 
 async function carregarEndereco(idEndereco, token) {
-    const response = await fetch(`${fetchUrl}/enderecos/${idEndereco}`, {
+    const response = await fetch(`${fetchUrl}/endereco/${idEndereco}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -138,7 +141,7 @@ async function carregarEndereco(idEndereco, token) {
             Authorization: "Bearer " + token,
         },
     });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -166,7 +169,7 @@ async function carregarEnderecos(idCliente, token) {
             Authorization: "Bearer " + token,
         },
     });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -185,7 +188,7 @@ async function carregarEnderecos(idCliente, token) {
 }
 
 async function adicionarEndereco(endereco, token) {
-    const response = await fetch(`${fetchUrl}/enderecos/`, {
+    const response = await fetch(`${fetchUrl}/enderecos/novo`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -215,7 +218,7 @@ async function adicionarEndereco(endereco, token) {
 
 async function atualizarEndereco(endereco, token) {
     const response = await fetch(
-        `${fetchUrl}/enderecos/${endereco.cdEndereco}`,
+        `${fetchUrl}/endereco/atualizar/${endereco.cdEndereco}`,
         {
             method: "PATCH",
             mode: "cors",
@@ -227,7 +230,7 @@ async function atualizarEndereco(endereco, token) {
             body: JSON.stringify(endereco),
         }
     );
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -247,7 +250,7 @@ async function atualizarEndereco(endereco, token) {
 
 async function mudarPrincipal(idEndereco, token) {
     const response = await fetch(
-        `${fetchUrl}/enderecos/principal/${idEndereco}`,
+        `${fetchUrl}/endereco/principal/${idEndereco}`,
         {
             method: "PATCH",
             mode: "cors",
@@ -258,55 +261,6 @@ async function mudarPrincipal(idEndereco, token) {
             },
         }
     );
-    const status = await response.status;
-
-    switch (status) {
-        case 200:
-            const dados = await response.json();
-
-            const resposta = {
-                dados: dados,
-                status: status,
-            };
-
-            return resposta;
-        default:
-            console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
-    }
-}
-
-async function removerEndereco(idEndereco, token) {
-    const response = await fetch(`${fetchUrl}/enderecos/${idEndereco}`, {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
-    const status = await response.status;
-
-    switch (status) {
-        case 200:
-            return status;
-        default:
-            console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
-    }
-}
-
-async function carregarCompras(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/compras/todas/${idCliente}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
     const status = response.status;
 
     switch (status) {
@@ -325,8 +279,29 @@ async function carregarCompras(idCliente, token) {
     }
 }
 
-async function carregarItensCompra(idCompra, token) {
-    const response = await fetch(`${fetchUrl}/compras/items/${idCompra}`, {
+async function removerEndereco(idEndereco, token) {
+    const response = await fetch(`${fetchUrl}/endereco/remover/${idEndereco}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            return status;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+            return status;
+    }
+}
+
+async function carregarCompras(idCliente, token) {
+    const response = await fetch(`${fetchUrl}/compras/${idCliente}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -388,7 +363,7 @@ async function carregarItensCompra(idCompra, token) {
 }
 
 async function carregarProduto(idProduto) {
-    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+    const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
         mode: "cors",
     });

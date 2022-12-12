@@ -10,7 +10,7 @@ function mascaraPreco(preco) {
 }
 
 async function carregarFavoritos(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+    const response = await fetch(`${fetchUrl}/favoritos/${idCliente}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -44,7 +44,7 @@ async function carregarFavoritos(idCliente, token) {
 }
 
 async function carregarProduto(idProduto) {
-    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+    const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         mode: "cors",
     });
     const status = response.status;
@@ -112,7 +112,7 @@ async function carregarCategorias() {
 }
 
 async function carregarMercante(idMercante) {
-    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
+    const response = await fetch(`${fetchUrl}/mercante/${idMercante}`, {
         mode: "cors",
     });
     const status = response.status;
@@ -135,7 +135,7 @@ async function carregarMercante(idMercante) {
 
 async function apagarFavorito(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        `${fetchUrl}/favorito/remover/${idCliente}/${idProduto}`,
         {
             method: "DELETE",
             mode: "cors",
@@ -183,7 +183,7 @@ async function desfavoritar(idProduto) {
 
 async function adicionarItemCarrinho(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/carrinho/items/${idCliente}/${idProduto}`,
+        `${fetchUrl}/carrinho/item/novo/${idCliente}/${idProduto}`,
         {
             method: "POST",
             mode: "cors",
@@ -291,7 +291,10 @@ async function montaCartao(idCliente, token) {
             imagemFavorito.classList.add("imagem-favorito");
             const imagem = document.createElement("img");
             imagem.classList.add("imagem");
-            imagem.setAttribute("onclick", `exibirProduto(${favorito.fkCdProduto})`);
+            imagem.setAttribute(
+                "onclick",
+                `exibirProduto(${favorito.fkCdProduto})`
+            );
 
             produtoImagens.forEach((produtoImagem) => {
                 if (

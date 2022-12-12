@@ -10,7 +10,7 @@ function mascaraPreco(preco) {
 }
 
 async function carregarFavoritos(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+    const response = await fetch(`${fetchUrl}/favoritos/${idCliente}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -44,12 +44,12 @@ async function carregarFavoritos(idCliente, token) {
 }
 
 async function carregarProduto(idProduto) {
-    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+    const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
         mode: "cors",
     });
 
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -93,8 +93,8 @@ async function carregarImagens(idProduto) {
     }
 }
 
-async function carregarCategorias(idCategoria) {
-    const response = await fetch(`${fetchUrl}/categorias/${idCategoria}`, {
+async function carregarCategoria(idCategoria) {
+    const response = await fetch(`${fetchUrl}/categoria/${idCategoria}`, {
         method: "GET",
         mode: "cors",
     });
@@ -119,7 +119,7 @@ async function carregarCategorias(idCategoria) {
 
 async function adicionarItemCarrinho(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/carrinho/items/${idCliente}/${idProduto}`,
+        `${fetchUrl}/carrinho/item/novo/${idCliente}/${idProduto}`,
         {
             method: "POST",
             mode: "cors",
@@ -217,7 +217,7 @@ async function montarProduto(idProduto) {
     }
     const produto = produtoResposta.dados;
 
-    const categoriasResposta = await carregarCategorias(produto.fkCdCategoria);
+    const categoriasResposta = await carregarCategoria(produto.fkCdCategoria);
     if (categoriasResposta.status !== 200) {
         console.log(
             "Ocorreu um erro na requisição. STATUS: " +

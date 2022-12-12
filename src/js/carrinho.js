@@ -10,7 +10,7 @@ function mascaraPreco(preco) {
 }
 
 async function carregarProduto(idProduto) {
-    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+    const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -30,7 +30,7 @@ async function carregarImagems(idProduto) {
             mode: "cors",
         }
     );
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -58,7 +58,7 @@ async function carregarItensCarrinho(idCliente, token) {
             Authorization: "Bearer " + token,
         },
     });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -78,7 +78,7 @@ async function carregarItensCarrinho(idCliente, token) {
 
 async function adicionarItemCarrinho(idCliente, idProduto, token) {
     const requisicao = await fetch(
-        `${fetchUrl}/carrinho/items/${idCliente}/${idProduto}`,
+        `${fetchUrl}/carrinho/item/novo/${idCliente}/${idProduto}`,
         {
             method: "POST",
             mode: "cors",
@@ -96,7 +96,7 @@ async function adicionarItemCarrinho(idCliente, idProduto, token) {
 
 async function atualizarItemCarrinho(idItemCarrinho, itemCarrinho, token) {
     const response = await fetch(
-        `${fetchUrl}/carrinho/items/${idItemCarrinho}`,
+        `${fetchUrl}/carrinho/item/${idItemCarrinho}`,
         {
             method: "PATCH",
             mode: "cors",
@@ -128,7 +128,7 @@ async function atualizarItemCarrinho(idItemCarrinho, itemCarrinho, token) {
 
 async function apagarItemCarrinho(idItemCarrinho, token) {
     const requisicao = await fetch(
-        `${fetchUrl}/carrinho/items/${idItemCarrinho}`,
+        `${fetchUrl}/carrinho/item/remover/${idItemCarrinho}`,
         {
             method: "DELETE",
             mode: "cors",

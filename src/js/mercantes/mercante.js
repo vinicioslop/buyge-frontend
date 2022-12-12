@@ -24,7 +24,7 @@ async function carregarMercantes(idVendedor, token) {
 
 async function atualizarMercante(mercante, token) {
     const requisicao = await fetch(
-        `${fetchUrl}/mercantes/${mercante.cdMercante}`,
+        `${fetchUrl}/mercante/atualizar/${mercante.cdMercante}`,
         {
             method: "PATCH",
             mode: "cors",
@@ -44,7 +44,7 @@ async function atualizarMercante(mercante, token) {
 }
 
 async function removerMercante(idMercante, token) {
-    const requisicao = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
+    const requisicao = await fetch(`${fetchUrl}/mercante/remover/${idMercante}`, {
         method: "DELETE",
         mode: "cors",
         headers: {
@@ -95,7 +95,7 @@ async function carregarEnderecoLoja(idMercante, token) {
 }
 
 async function cadastrarEnderecoLoja(endereco, token) {
-    const response = await fetch(`${fetchUrl}/mercante/enderecos`, {
+    const response = await fetch(`${fetchUrl}/mercante/endereco`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -131,7 +131,7 @@ async function cadastrarEnderecoLoja(endereco, token) {
 
 async function atualizarEnderecoLoja(endereco, token) {
     const response = await fetch(
-        `${fetchUrl}/mercante/enderecos/${endereco.cdEndereco}`,
+        `${fetchUrl}/mercante/endereco/${endereco.cdEndereco}`,
         {
             method: "PATCH",
             mode: "cors",
@@ -182,7 +182,7 @@ async function carregarCategorias() {
 }
 
 async function cadastrarProduto(produtoComImagem, token) {
-    const requisicao = await fetch(`${fetchUrl}/produtos`, {
+    const requisicao = await fetch(`${fetchUrl}/produto/novo`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -211,7 +211,7 @@ async function carregarProdutos(idMercante) {
 }
 
 async function carregarProduto(idProduto) {
-    const response = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+    const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
         mode: "cors",
     });
@@ -222,7 +222,7 @@ async function carregarProduto(idProduto) {
 
 async function atualizarProduto(produto, token) {
     const requisicao = await fetch(
-        `${fetchUrl}/produtos/${produto.cdProduto}`,
+        `${fetchUrl}/produto/atualizar/${produto.cdProduto}`,
         {
             method: "PATCH",
             mode: "cors",
@@ -242,7 +242,7 @@ async function atualizarProduto(produto, token) {
 }
 
 async function apagarProduto(idProduto, token) {
-    const requisicao = await fetch(`${fetchUrl}/produtos/${idProduto}`, {
+    const requisicao = await fetch(`${fetchUrl}/produto/remover/${idProduto}`, {
         method: "DELETE",
         mode: "cors",
         headers: {

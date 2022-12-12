@@ -21,7 +21,7 @@ async function buscarCategorias() {
 }
 
 async function buscarDadosCliente(idCliente, token) {
-    const response = await fetch(`${url}/clientes/${idCliente}`, {
+    const response = await fetch(`${url}/cliente/${idCliente}`, {
         method: "GET",
         mode: "cors",
         headers: {

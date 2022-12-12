@@ -103,7 +103,7 @@ async function carregarCategorias() {
 }
 
 async function carregarMercante(idMercante) {
-    const response = await fetch(`${fetchUrl}/mercantes/${idMercante}`, {
+    const response = await fetch(`${fetchUrl}/mercante/${idMercante}`, {
         method: "GET",
         mode: "cors",
     });
@@ -133,7 +133,7 @@ async function carregarMercante(idMercante) {
 }
 
 async function carregarFavoritos(idCliente, token) {
-    const response = await fetch(`${fetchUrl}/favorito/${idCliente}`, {
+    const response = await fetch(`${fetchUrl}/favoritos/${idCliente}`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -168,7 +168,7 @@ async function carregarFavoritos(idCliente, token) {
 
 async function adicionarFavorito(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        `${fetchUrl}/favorito/novo/${idCliente}/${idProduto}`,
         {
             method: "POST",
             mode: "cors",
@@ -205,7 +205,7 @@ async function adicionarFavorito(idCliente, idProduto, token) {
 
 async function apagarFavorito(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/favorito/${idCliente}/${idProduto}`,
+        `${fetchUrl}/favorito/remover/${idCliente}/${idProduto}`,
         {
             method: "DELETE",
             mode: "cors",

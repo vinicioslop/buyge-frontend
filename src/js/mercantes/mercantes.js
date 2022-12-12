@@ -1,12 +1,11 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
-
 async function carregarMercantes() {
     const response = await fetch(`${fetchUrl}/mercantes`, {
         method: "GET",
         mode: "cors",
     });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -23,37 +22,6 @@ async function carregarMercantes() {
             return status;
     }
 }
-
-/*async function carregarMercantes(idVendedor, token) {
-    const response = await fetch(`${fetchUrl}/mercantes/${idVendedor}`, {
-        ethod: "GET",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
-        },
-    });
-    const status = await response.status;
-
-    switch (status) {
-        case 200:
-            const dados = await response.json();
-
-            const resposta = {
-                dados: dados,
-                status: status,
-            };
-
-            return resposta;
-        default:
-            console.log("Ocorreu um erro na requisição. STATUS: " + status);
-            return status;
-    }
-}*/
 
 function produtosMercante(idMercante) {
     window.location =
