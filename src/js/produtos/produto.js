@@ -43,6 +43,77 @@ async function carregarFavoritos(idCliente, token) {
     }
 }
 
+async function adicionarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/novo/${idCliente}/${idProduto}`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+    const status = response.status;
+
+    switch (status) {
+        case 201:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function apagarFavorito(idCliente, idProduto, token) {
+    const response = await fetch(
+        `${fetchUrl}/favorito/remover/${idCliente}/${idProduto}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                status: status,
+            };
+
+            return resposta;
+    }
+}
+
 async function carregarProduto(idProduto) {
     const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
@@ -114,6 +185,64 @@ async function carregarCategoria(idCategoria) {
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
             return status;
+    }
+}
+
+async function carregarMercante(idMercante) {
+    const response = await fetch(`${fetchUrl}/mercante/${idMercante}`, {
+        method: "GET",
+        mode: "cors",
+    });
+
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: "",
+                status: status,
+            };
+
+            return status;
+    }
+}
+
+async function favoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await adicionarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 201) {
+            window.location.reload();
+        }
+    }
+}
+
+async function desfavoritar(idProduto) {
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const resposta = await apagarFavorito(idCliente, idProduto, token);
+
+        if (resposta.status == 200) {
+            window.location.reload();
+        }
     }
 }
 
@@ -207,6 +336,11 @@ async function adicionarCarrinho(idProduto) {
     }
 }
 
+function produtosMercante(idMercante) {
+    window.location =
+        "/src/pages/mercantes/produtosMercante.html?idMercante=" + idMercante;
+}
+
 async function montarProduto(idProduto) {
     const produtoResposta = await carregarProduto(idProduto);
     if (produtoResposta.status !== 200) {
@@ -236,8 +370,17 @@ async function montarProduto(idProduto) {
     }
     const imagens = imagensResposta.dados;
 
-    document.querySelector(".caminho").innerText =
-        "Início > " + categoria.nmCategoria;
+    const mercanteResposta = await carregarMercante(produto.fkCdMercante);
+    if (mercanteResposta.status !== 200) {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " + imagensResposta.status
+        );
+        return;
+    }
+    const mercante = mercanteResposta.dados;
+
+    document.querySelector("#categoria").innerText =
+        categoria.nmCategoria.toUpperCase();
 
     document.querySelector(".imagem-full").src = imagens[0].imgProdutoLink;
 
@@ -251,7 +394,6 @@ async function montarProduto(idProduto) {
     });
 
     const favoritoIcone = document.querySelector(".favoritar");
-    favoritoIcone.setAttribute("src", "/src/icons/heart.svg");
 
     const token = sessionStorage.getItem("token");
 
@@ -275,18 +417,43 @@ async function montarProduto(idProduto) {
                         "src",
                         "/src/icons/heart-cheio.svg"
                     );
+                    favoritoIcone.setAttribute(
+                        "onclick",
+                        `desfavoritar(${produto.cdProduto})`
+                    );
                 }
             });
         }
+
+        if (favoritoIcone.src == "") {
+            favoritoIcone.setAttribute("src", "/src/icons/heart.svg");
+            favoritoIcone.setAttribute(
+                "onclick",
+                `favoritar(${produto.cdProduto})`
+            );
+        }
+    } else {
+        favoritoIcone.setAttribute("src", "/src/icons/heart.svg");
     }
 
     document.querySelector(".titulo-produto").innerText = produto.nmProduto;
+    document.querySelector(".nome-vendedor").innerText = mercante.nmLoja;
+    document
+        .querySelector(".nome-vendedor")
+        .setAttribute("onclick", `produtosMercante(${mercante.cdMercante})`);
+
     document.querySelector(".atual").innerText = mascaraPreco(
         produto.vlProduto
     );
-    document.querySelector(".parcelas").innerText =
-        "em 3x R$ " + mascaraPreco(produto.vlProduto / 3);
-    document.querySelector(".texto").innerText = produto.dsProduto;
+
+    if (produto.dsProduto.length > 150) {
+        let descricao = produto.dsProduto.substr(0, 150);
+
+        document.querySelector(".texto").innerHTML =
+            descricao + "   <a href='#' class='leia-mais'>leia mais...</a>";
+    } else {
+        document.querySelector(".texto").innerText = produto.dsProduto;
+    }
 
     const comprar = document.querySelector(".comprar");
     comprar.setAttribute("onclick", `comprarProduto(${produto.cdProduto})`);

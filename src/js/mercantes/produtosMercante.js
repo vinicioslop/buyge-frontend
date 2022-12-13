@@ -322,7 +322,10 @@ async function montarCartoes(idMercante) {
             );
 
             produtoImagens.dados.forEach((produtoImagem) => {
-                if (produtoImagem.fkCdProduto === produto.cdProduto) {
+                if (
+                    produtoImagem.fkCdProduto === produto.cdProduto &&
+                    produtoImagem.idPrincipal === 1
+                ) {
                     imagem.src = produtoImagem.imgProdutoLink;
                 }
             });

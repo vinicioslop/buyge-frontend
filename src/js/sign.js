@@ -1,7 +1,7 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
 async function cadastrar(cliente) {
-    const requisicao = await fetch(`${fetchUrl}/cliente/novo`, {
+    const requisicao = await fetch(`${fetchUrl}/cliente`, {
         method: "POST",
         mode: "cors",
         headers: {

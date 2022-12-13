@@ -30,7 +30,8 @@ async function buscarDadosCliente(idCliente, token) {
             Authorization: "Bearer " + token,
         },
     });
-    const status = await response.status;
+
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -45,6 +46,44 @@ async function buscarDadosCliente(idCliente, token) {
         default:
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
             return status;
+    }
+}
+
+async function buscarMercantes(idVendedor, token) {
+    const response = await fetch(
+        `${fetchUrl}/mercantes/vendedor/${idVendedor}`,
+        {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
+
+    const status = response.status;
+
+    switch (status) {
+        case 200:
+            const dados = await response.json();
+
+            var resposta = {
+                dados: dados,
+                status: status,
+            };
+
+            return resposta;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS: " + status);
+
+            var resposta = {
+                dados: [],
+                status: status,
+            };
+
+            return resposta;
     }
 }
 
@@ -251,22 +290,44 @@ async function montaBarraNavegacaoGrande(categorias) {
         usuarioConteudo.appendChild(logar);
         usuarioConteudo.appendChild(criarConta);
     } else {
+        const grupoIcones = document.querySelector(".grupo-icones");
+        const iconeFavoritos = document.querySelector("#linkFavoritos");
+
         const idCliente = sessionStorage.getItem("idCliente");
 
-        const resposta = await buscarDadosCliente(idCliente, token);
+        const respostaCliente = await buscarDadosCliente(idCliente, token);
+        const respostaMercantes = await buscarMercantes(idCliente, token);
 
-        const cliente = resposta.dados;
+        const cliente = respostaCliente.dados;
+        const mercantes = respostaMercantes.dados;
 
-        if (cliente.nmTipoConta == "Vendedor") {
-            const grupoIcones = document.querySelector(".grupo-icones");
-            const iconeFavoritos = document.querySelector("#linkFavoritos");
-
+        if (cliente.nmTipoConta == "Vendedor" && mercantes.length > 0) {
             const mercanteLink = document.createElement("a");
-            mercanteLink.setAttribute("href", "/src/pages/mercantes/mercante.html");
+            mercanteLink.setAttribute(
+                "href",
+                "/src/pages/mercantes/mercante.html"
+            );
             mercanteLink.className = "icone-link";
 
-            mercanteLink.innerHTML =
-            `
+            mercanteLink.innerHTML = `
+            <img
+                class="icone"
+                id="mercantes-icon"
+                src="/src/icons/lojas-branco.svg"
+                alt="Ícone de mercantes branco"
+            />
+            `;
+
+            grupoIcones.insertBefore(mercanteLink, iconeFavoritos);
+        } else {
+            const mercanteLink = document.createElement("a");
+            mercanteLink.setAttribute(
+                "href",
+                "/src/pages/mercantes/novoMercante.html"
+            );
+            mercanteLink.className = "icone-link";
+
+            mercanteLink.innerHTML = `
             <img
                 class="icone"
                 id="mercantes-icon"

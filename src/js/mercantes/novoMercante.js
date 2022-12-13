@@ -1,7 +1,7 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
 async function enviarMercante(mercante, token) {
-    const requisicao = await fetch(`${fetchUrl}/mercantes/novo`, {
+    const requisicao = await fetch(`${fetchUrl}/mercantes`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -11,7 +11,7 @@ async function enviarMercante(mercante, token) {
         },
         body: JSON.stringify(mercante),
     });
-    const resposta = await requisicao.status;
+    const resposta = requisicao.status;
 
     return resposta;
 }
@@ -25,10 +25,10 @@ document
         const idCliente = sessionStorage.getItem("idCliente");
 
         const mercante = {
-            nmLoja: document.querySelector("#nome").value,
-            dsLoja: document.querySelector("#descricao").value,
-            imgLogo: document.querySelector("#logoUrl").value,
-            nrCnpj: document.querySelector("#cnpj").value,
+            nmLoja: document.querySelector("#nomeMercanteNovo").value,
+            dsLoja: document.querySelector("#descricaoMercanteNovo").value,
+            imgLogoLink: document.querySelector("#logoUrlMercanteNovo").value,
+            nrCnpj: document.querySelector("#cnpjMercanteNovo").value,
             fkCdCliente: parseInt(idCliente),
         };
 
@@ -46,3 +46,13 @@ document
                 break;
         }
     });
+
+document.addEventListener("DOMContentLoaded", (e) => {
+    e.preventDefault();
+
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        window.location = "/";
+    }
+});
