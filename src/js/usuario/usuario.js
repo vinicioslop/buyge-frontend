@@ -188,7 +188,7 @@ async function carregarEnderecos(idCliente, token) {
 }
 
 async function adicionarEndereco(endereco, token) {
-    const response = await fetch(`${fetchUrl}/enderecos/novo`, {
+    const response = await fetch(`${fetchUrl}/enderecos/adicionar`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -434,6 +434,7 @@ async function excluirEndereco(idEndereco) {
     const resposta = await removerEndereco(idEndereco, token);
 
     if (resposta == 200) {
+        montarAlerta("Endereço removido com sucesso!");
         montarEnderecos();
         clicaSecao("secaoEndereco");
     }
@@ -498,7 +499,7 @@ async function montarEnderecos() {
                 <h3 class="titulo">${endereco.nmTituloEndereco}</h3>
                 <p class="tipo">${endereco.nmTipoEndereco}</tipo>
             </div>
-            <a onclick="enderecoPrincipal(${endereco.cdEndereco})" class="principal-link">
+            <a onclick="enviarConfirmacaoEnderecoPrincipal(event, ${endereco.cdEndereco})" class="principal-link">
                 <img src="${srcIcone}" alt="">
             </a>
         </div>
@@ -509,7 +510,7 @@ async function montarEnderecos() {
         <a onclick="editarEndereco(${endereco.cdEndereco})" class="editar-link">
             <img src="/src/icons/edit-branco3.svg" alt="">
         </a>
-        <a onclick="excluirEndereco(${endereco.cdEndereco})" class="remover-link">
+        <a onclick="enviarConfirmacaoRemoverEndereco(event, ${endereco.cdEndereco})" class="remover-link">
             <img src="/src/icons/bin-minus-branco.svg" alt="">
         </a>
         `;
@@ -699,7 +700,7 @@ function editarEndereco(idEndereco) {
     insereEnderecoUsuario(idEndereco);
 }
 
-async function enderecoPrincipal(idEndereco) {
+async function trocarEnderecoPrincipal(idEndereco) {
     const token = sessionStorage.getItem("token");
 
     if (token == null) {
@@ -710,6 +711,7 @@ async function enderecoPrincipal(idEndereco) {
     const resposta = await mudarPrincipal(idEndereco, token);
 
     if (resposta.status == 200) {
+        montarAlerta("Endereço principal trocado com sucesso!");
         montarEnderecos();
         clicaSecao("secaoEndereco");
     } else {
@@ -717,6 +719,56 @@ async function enderecoPrincipal(idEndereco) {
             "Ocorreu um erro na requisição. STATUS: " + resposta.status
         );
     }
+}
+
+function adicionarConfirmacao(conteudo, botoesMontados) {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+    const mensagem = document.querySelector(".mensagem");
+
+    mensagem.innerText = conteudo;
+
+    const botoes = document.querySelector("#botoes");
+
+    botoesMontados.forEach((botao) => {
+        botoes.appendChild(botao);
+    });
+
+    fundoMensagem.className = "mostrar-popup";
+}
+
+function removerConfirmacao() {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+
+    fundoMensagem.className = "esconder-popup";
+}
+
+function montarAlerta(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
 }
 
 async function insereInformacoesUsuario() {
@@ -861,166 +913,268 @@ function clicaSecao(secaoClicada) {
     }
 }
 
-document
-    .querySelector("#atualizarCliente")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+async function enviarConfirmacaoRemoverEndereco(event, idEndereco) {
+    event.preventDefault();
 
-        const token = sessionStorage.getItem("token");
-        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", `excluirEndereco(${idEndereco})`);
 
-        const valido = await testar();
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-        if (!valido) {
-            console.log("Cliente não autenticado");
-            window.location = "/";
-        }
+    const mensagem = "Deseja confirmar as alterações?";
 
-        const cliente = {
-            cdCliente: idCliente,
-            nmCliente: document.querySelector("#nomeClienteEdicao").value,
-            nmSobrenome: document.querySelector("#sobrenomeClienteEdicao")
-                .value,
-            nrCpf: document.querySelector("#cpfClienteEdicao").value,
-            dtNascimento: document.querySelector("#dataNascimentoEdicao").value,
-            nrTelefone: document.querySelector("#numeroTelefoneEdicao").value,
-            nmEmail: document.querySelector("#emailClienteEdicao").value,
-        };
+    const botoes = [botaoConfirmar, botaoCancelar];
 
-        const status = await atualizarCliente(cliente, token);
+    adicionarConfirmacao(mensagem, botoes);
+}
 
-        if (status === 200) {
-            console.log("Cliente atualizado com sucesso");
-            window.location.reload();
-        } else {
-            console.log("Ocorreu um erro na requisição. STATUS: " + status);
-        }
-    });
+async function enviarConfirmacaoEnderecoPrincipal(event, idEndereco) {
+    event.preventDefault();
 
-document
-    .querySelector("#adicionarEndereco")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute(
+        "onclick",
+        `trocarEnderecoPrincipal(${idEndereco})`
+    );
 
-        const token = sessionStorage.getItem("token");
-        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-        const valido = await testar();
+    const mensagem = "Deseja confirmar as alterações?";
 
-        if (!valido) {
-            console.log("Cliente não autenticado");
-            window.location = "/";
-        }
+    const botoes = [botaoConfirmar, botaoCancelar];
 
-        const enderecos = await carregarEnderecos(idCliente, token);
+    adicionarConfirmacao(mensagem, botoes);
+}
 
-        const endereco = {
-            nrCep: document.getElementById("cepClienteNovo").value,
-            nmBairro: document.getElementById("bairroClienteNovo").value,
-            sgEstado: document.getElementById("sgEstadoNovo").value,
-            nmLogradouro: document.getElementById("logradouroClienteNovo")
-                .value,
-            nmCidade: document.getElementById("cidadeClienteNovo").value,
-            nrEndereco: document.getElementById("numeroClienteNovo").value,
-            nmTituloEndereco:
-                document.getElementById("tituloEnderecoNovo").value,
-            nmTipoEndereco: document.getElementById("tipoEnderecoNovo").value,
-            idPrincipal: enderecos.dados.length == 0 ? 1 : 0,
-            fkCdCliente: idCliente,
-        };
+function enviarConfirmacaoAtualizarEndereco(event) {
+    event.preventDefault();
 
-        const resposta = await adicionarEndereco(endereco, token);
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", "enviarAtualizarEndereco()");
 
-        if (resposta.status == 201) {
-            console.log("Endereco adicionado com sucesso");
-            montarEnderecos();
-            clicaSecao("secaoEndereco");
-        } else {
-            console.log(
-                "Ocorreu um erro na requisição. STATUS: " + resposta.status
-            );
-        }
-    });
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-document
-    .querySelector("#atualizarEndereco")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+    const mensagem = "Deseja confirmar as alterações?";
 
-        const token = sessionStorage.getItem("token");
-        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+    const botoes = [botaoConfirmar, botaoCancelar];
 
-        const valido = await testar();
+    adicionarConfirmacao(mensagem, botoes);
+}
 
-        if (!valido) {
-            console.log("Cliente não autenticado");
-            window.location = "/";
-        }
+async function enviarAtualizarEndereco() {
+    const token = sessionStorage.getItem("token");
+    const idCliente = parseInt(sessionStorage.getItem("idCliente"));
 
-        const endereco = {
-            cdEndereco: document.getElementById("idEnderecoEditar").value,
-            nrCep: document.getElementById("cepClienteEditar").value,
-            nmBairro: document.getElementById("bairroClienteEditar").value,
-            sgEstado: document.getElementById("sgEstadoEditar").value,
-            nmLogradouro: document.getElementById("logradouroClienteEditar")
-                .value,
-            nmCidade: document.getElementById("cidadeClienteEditar").value,
-            nrEndereco: document.getElementById("numeroClienteEditar").value,
-            nmTituloEndereco: document.getElementById("tituloEnderecoEditar")
-                .value,
-            nmTipoEndereco: document.getElementById("tipoEnderecoEditar").value,
-            fkCdCliente: idCliente,
-        };
+    const valido = await testar();
 
-        const resposta = await atualizarEndereco(endereco, token);
+    if (!valido) {
+        console.log("Cliente não autenticado");
+        window.location = "/";
+    }
 
-        if (resposta.status === 200) {
-            montarEnderecos();
-            clicaSecao("secaoEndereco");
-        } else {
-            console.log(
-                "Ocorreu um erro na requisição. STATUS: " + resposta.status
-            );
-        }
-    });
+    const endereco = {
+        cdEndereco: document.getElementById("idEnderecoEditar").value,
+        nrCep: document.getElementById("cepClienteEditar").value,
+        nmBairro: document.getElementById("bairroClienteEditar").value,
+        sgEstado: document.getElementById("sgEstadoEditar").value,
+        nmLogradouro: document.getElementById("logradouroClienteEditar").value,
+        nmCidade: document.getElementById("cidadeClienteEditar").value,
+        nrEndereco: document.getElementById("numeroClienteEditar").value,
+        nmTituloEndereco: document.getElementById("tituloEnderecoEditar").value,
+        nmTipoEndereco: document.getElementById("tipoEnderecoEditar").value,
+        fkCdCliente: idCliente,
+    };
 
-document
-    .querySelector("#atualizarSenha")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+    const resposta = await atualizarEndereco(endereco, token);
 
-        const token = sessionStorage.getItem("token");
-        const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+    if (resposta.status === 200) {
+        montarAlerta("Endereço atualizado com sucesso!");
+        montarEnderecos();
+        clicaSecao("secaoEndereco");
+    } else {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " + resposta.status
+        );
+    }
+}
 
-        const valido = await testar();
+function enviarConfirmacaoNovoEndereco(event) {
+    event.preventDefault();
 
-        if (!valido) {
-            console.log("Cliente não autenticado");
-            window.location = "/";
-        }
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", "enviarNovoEndereco()");
 
-        if (
-            document.querySelector("#novaSenhaCliente").value !=
-            document.querySelector("#confirmaNovaSenhaCliente").value
-        ) {
-            console.log("Senhas precisam ser iguais!");
-            return;
-        }
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-        const novaSenha = {
-            senhaAtual: document.querySelector("#senhaAtualCliente").value,
-            novaSenha: document.querySelector("#novaSenhaCliente").value,
-        };
+    const mensagem = "Deseja confirmar as alterações?";
 
-        const status = await atualizarSenha(idCliente, novaSenha, token);
+    const botoes = [botaoConfirmar, botaoCancelar];
 
-        if (status == 201) {
-            console.log("Cliente atualizado com sucesso");
-            window.location.reload();
-        } else {
-            console.log("Ocorreu um erro na requisição. STATUS: " + status);
-        }
-    });
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+async function enviarNovoEndereco() {
+    const token = sessionStorage.getItem("token");
+    const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+
+    const valido = await testar();
+
+    if (!valido) {
+        console.log("Cliente não autenticado");
+        window.location = "/";
+    }
+
+    const enderecos = await carregarEnderecos(idCliente, token);
+
+    const endereco = {
+        nrCep: document.getElementById("cepClienteNovo").value,
+        nmBairro: document.getElementById("bairroClienteNovo").value,
+        sgEstado: document.getElementById("sgEstadoNovo").value,
+        nmLogradouro: document.getElementById("logradouroClienteNovo").value,
+        nmCidade: document.getElementById("cidadeClienteNovo").value,
+        nrEndereco: document.getElementById("numeroClienteNovo").value,
+        nmTituloEndereco: document.getElementById("tituloEnderecoNovo").value,
+        nmTipoEndereco: document.getElementById("tipoEnderecoNovo").value,
+        idPrincipal: enderecos.dados.length == 0 ? 1 : 0,
+        fkCdCliente: idCliente,
+    };
+
+    const resposta = await adicionarEndereco(endereco, token);
+
+    if (resposta.status == 201) {
+        montarAlerta("Endereco adicionado com sucesso!");
+        montarEnderecos();
+        clicaSecao("secaoEndereco");
+    } else {
+        console.log(
+            "Ocorreu um erro na requisição. STATUS: " + resposta.status
+        );
+    }
+}
+
+function enviarConfirmacaoSalvarCliente(event) {
+    event.preventDefault();
+
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", "enviarAtualizarCliente()");
+
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = "Deseja confirmar as alterações?";
+
+    const botoes = [botaoConfirmar, botaoCancelar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+async function enviarAtualizarCliente() {
+    const token = sessionStorage.getItem("token");
+    const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+
+    const valido = await testar();
+
+    if (!valido) {
+        console.log("Cliente não autenticado");
+        window.location = "/";
+    }
+
+    const cliente = {
+        cdCliente: idCliente,
+        nmCliente: document.querySelector("#nomeClienteEdicao").value,
+        nmSobrenome: document.querySelector("#sobrenomeClienteEdicao").value,
+        nrCpf: document.querySelector("#cpfClienteEdicao").value,
+        dtNascimento: document.querySelector("#dataNascimentoEdicao").value,
+        nrTelefone: document.querySelector("#numeroTelefoneEdicao").value,
+        nmEmail: document.querySelector("#emailClienteEdicao").value,
+    };
+
+    const status = await atualizarCliente(cliente, token);
+
+    if (status === 200) {
+        montarAlerta("Cliente atualizado com sucesso!");
+        insereInformacoesUsuario();
+    } else {
+        console.log("Ocorreu um erro na requisição. STATUS: " + status);
+    }
+}
+
+function enviarConfirmacaoAtualizarSenha(event) {
+    event.preventDefault();
+
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", "enviarAtualizarSenha()");
+
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = "Deseja confirmar as alterações?";
+
+    const botoes = [botaoConfirmar, botaoCancelar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+async function enviarAtualizarSenha() {
+    const token = sessionStorage.getItem("token");
+    const idCliente = parseInt(sessionStorage.getItem("idCliente"));
+
+    const valido = await testar();
+
+    if (!valido) {
+        console.log("Cliente não autenticado");
+        window.location = "/";
+    }
+
+    if (
+        document.querySelector("#novaSenhaCliente").value !=
+        document.querySelector("#confirmaNovaSenhaCliente").value
+    ) {
+        montarAlerta("Senhas precisam ser iguais!");
+        return;
+    }
+
+    const novaSenha = {
+        senhaAtual: document.querySelector("#senhaAtualCliente").value,
+        novaSenha: document.querySelector("#novaSenhaCliente").value,
+    };
+
+    const status = await atualizarSenha(idCliente, novaSenha, token);
+
+    if (status == 201) {
+        montarAlerta("Senha atualizada com sucesso!");
+    } else {
+        console.log("Ocorreu um erro na requisição. STATUS: " + status);
+    }
+}
 
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();

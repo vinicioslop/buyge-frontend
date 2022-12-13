@@ -177,7 +177,11 @@
                                 placeholder="Informe o descrição da loja"
                             ></textarea>
                         </div>
-                        <button id="enviarPerfilLoja">Salvar Alterações</button>
+                        <button
+                            onclick="enviarConfirmacaoSalvarDadosPerfilLoja(event)"
+                        >
+                            Salvar Alterações
+                        </button>
                     </form>
                 </div>
                 <div id="dadosLoja" class="informacoes esconder">
@@ -188,7 +192,7 @@
                             disabled
                             hidden
                             type="text"
-                            id="cdEnderecoLoja"
+                            id="cdEnderecoDadosLoja"
                         />
                         <div class="grupo-secao">
                             <h3 class="secao-formulario">Dados do Vendedor</h3>
@@ -374,7 +378,7 @@
                             disabled
                             hidden
                             type="text"
-                            id="fkCdMercanteLoja"
+                            id="fkCdMercanteDadosLoja"
                         />
                         <button id="atualizarDadosLoja">
                             Salvar Alterações
@@ -535,7 +539,7 @@
                                 </div>-->
                             </div>
                         </div>
-                        <button id="cadastrarProduto">Salvar Alterações</button>
+                        <button onclick="enviarConfirmacaoCadastrarProduto(event)">Salvar Alterações</button>
                     </form>
                 </div>
 
@@ -672,7 +676,11 @@
                                 />
                             </div>
                         </div>
-                        <button id="atualizarProduto">Salvar Alterações</button>
+                        <button
+                            onclick="enviarConfirmacaoAtualizarProduto(event)"
+                        >
+                            Salvar Alterações
+                        </button>
                     </form>
                 </div>
             </div>
@@ -722,6 +730,13 @@
                 <div class="informacoes">
                     <h1 class="titulo-secao">Saldo</h1>
                     <!--<div class="logo">LOGO</div>-->
+                </div>
+            </div>
+
+            <div id="fundoMensagem" class="esconder-popup">
+                <div id="mensagemPopup">
+                    <span class="mensagem"></span>
+                    <div id="botoes"></div>
                 </div>
             </div>
         </div>

@@ -158,7 +158,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="atualizarCliente">Salvar Alterações</button>
+                        <button onclick="enviarConfirmacaoSalvarCliente(event)">
+                            Salvar Alterações
+                        </button>
                     </form>
                 </div>
             </div>
@@ -354,7 +356,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="adicionarEndereco">
+                        <button onclick="enviarConfirmacaoNovoEndereco(event)">
                             Adicionar Endereço
                         </button>
                     </form>
@@ -542,7 +544,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="atualizarEndereco">
+                        <button
+                            onclick="enviarConfirmacaoAtualizarEndereco(event)"
+                        >
                             Salvar Alterações
                         </button>
                     </form>
@@ -650,8 +654,19 @@
                             />
                         </div>
 
-                        <button id="atualizarSenha">Salvar Alterações</button>
+                        <button
+                            onclick="enviarConfirmacaoAtualizarSenha(event)"
+                        >
+                            Salvar Alterações
+                        </button>
                     </form>
+                </div>
+            </div>
+
+            <div id="fundoMensagem" class="esconder-popup">
+                <div id="mensagemPopup">
+                    <span class="mensagem"></span>
+                    <div id="botoes"></div>
                 </div>
             </div>
         </div>

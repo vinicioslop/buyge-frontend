@@ -275,7 +275,7 @@ async function adicionarItemCarrinho(idCliente, idProduto, token) {
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
 
             var resposta = {
-                dados: null,
+                dados: [],
                 status: status,
             };
 

@@ -1,7 +1,7 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
 async function enviarMercante(mercante, token) {
-    const requisicao = await fetch(`${fetchUrl}/mercantes`, {
+    const requisicao = await fetch(`${fetchUrl}/mercantes/cadastrar`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -28,6 +28,7 @@ document
             nmLoja: document.querySelector("#nomeMercanteNovo").value,
             dsLoja: document.querySelector("#descricaoMercanteNovo").value,
             imgLogoLink: document.querySelector("#logoUrlMercanteNovo").value,
+            imgLogo: null,
             nrCnpj: document.querySelector("#cnpjMercanteNovo").value,
             fkCdCliente: parseInt(idCliente),
         };

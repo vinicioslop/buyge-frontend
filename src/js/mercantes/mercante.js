@@ -44,15 +44,18 @@ async function atualizarMercante(mercante, token) {
 }
 
 async function removerMercante(idMercante, token) {
-    const requisicao = await fetch(`${fetchUrl}/mercante/remover/${idMercante}`, {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        },
-    });
+    const requisicao = await fetch(
+        `${fetchUrl}/mercante/remover/${idMercante}`,
+        {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+    );
 
     return requisicao.status;
 }
@@ -159,7 +162,7 @@ async function atualizarEnderecoLoja(endereco, token) {
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
 
             var resposta = {
-                dados: null,
+                dados: [],
                 status: status,
             };
 
@@ -182,7 +185,7 @@ async function carregarCategorias() {
 }
 
 async function cadastrarProduto(produtoComImagem, token) {
-    const requisicao = await fetch(`${fetchUrl}/produto/novo`, {
+    const requisicao = await fetch(`${fetchUrl}/produto/adicionar`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -277,8 +280,9 @@ async function removerProduto(idProduto) {
 
     switch (status) {
         case 200:
-            console.log("Produto removido com sucesso!");
-            window.location.reload();
+            montarRespostaOK("Produto removido com sucesso!");
+            montarProdutos();
+            clicaSecao("secaoProdutos");
             break;
         default:
             console.log("Ocorreu uma falha na requisicao. STATUS: " + status);
@@ -286,10 +290,80 @@ async function removerProduto(idProduto) {
     }
 }
 
+async function enviarConfirmacaoRemoverProduto(event, idProduto) {
+    event.preventDefault();
+
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", `removerProduto(${idProduto})`);
+
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = "Deseja confirmar as alterações?";
+
+    const botoes = [botaoConfirmar, botaoCancelar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
 function editarProduto(idProduto) {
     clicaSecaoInternaProdutos("editarProduto");
 
     carregarInformacoesEditarProduto(idProduto);
+}
+
+function adicionarConfirmacao(conteudo, botoesMontados) {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+    const mensagem = document.querySelector(".mensagem");
+
+    mensagem.innerText = conteudo;
+
+    const botoes = document.querySelector("#botoes");
+
+    botoesMontados.forEach((botao) => {
+        botoes.appendChild(botao);
+    });
+
+    fundoMensagem.className = "mostrar-popup";
+}
+
+function removerConfirmacao() {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+
+    fundoMensagem.className = "esconder-popup";
+}
+
+function montarRespostaOK(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
 }
 
 async function montarCategorias() {
@@ -497,7 +571,7 @@ async function montarProdutos() {
             <a onclick="editarProduto(${produto.cdProduto})">
                 <img src="/src/icons/edit-branco2.svg"/>
             </a>
-            <a onclick="removerProduto(${produto.cdProduto})">
+            <a onclick="enviarConfirmacaoRemoverProduto(event, ${produto.cdProduto})">
                 <img src="/src/icons/bin-minus-branco.svg"/>
             </a>
         </div>
@@ -549,7 +623,7 @@ async function carregarInformacoesMercanteDadosLoja() {
     if (enderecoLojaResposta.dados.length != 0) {
         const endereco = enderecoLojaResposta.dados[0];
 
-        const cdEndereco = document.querySelector("#cdEnderecoLoja");
+        const cdEndereco = document.querySelector("#cdEnderecoDadosLoja");
         const cep = document.querySelector("#cepDadosLoja");
         const estado = document.querySelector("#sgEstadoDadosLoja");
         const municipio = document.querySelector("#cidadeDadosLoja");
@@ -568,7 +642,7 @@ async function carregarInformacoesMercanteDadosLoja() {
         bairro.value = endereco.nmBairro;
     }
 
-    const fkCdMercanteLoja = document.querySelector("#fkCdMercanteLoja");
+    const fkCdMercanteLoja = document.querySelector("#fkCdMercanteDadosLoja");
     fkCdMercanteLoja.value = mercantes[0].cdMercante;
 }
 
@@ -585,17 +659,15 @@ async function carregarInformacoesEditarProduto(idProduto) {
     montarCategoriasEdicao(produto.fkCdCategoria);
     montarDisponibilidadeEdicao(produto.idDisponibilidade);
 
-    const codigoProduto = document.querySelector("#codigoProdutoEdicao");
-    const nomeProduto = document.querySelector("#nomeProdutoEdicao");
-    const descProduto = document.querySelector("#descricaoProdutoEdicao");
-    const precoProduto = document.querySelector("#precoProdutoEdicao");
-    const quantidadeProduto = document.querySelector(
-        "#quantidadeProdutoEdicao"
-    );
-    const pesoProduto = document.querySelector("#pesoProdutoEdicao");
-    const tamanhoProduto = document.querySelector("#tamanhoProdutoEdicao");
-    const freteProduto = document.querySelector("#freteProdutoEdicao");
-    const idMercante = document.querySelector("#idMercanteEdicao");
+    var codigoProduto = document.querySelector("#codigoProdutoEdicao");
+    var nomeProduto = document.querySelector("#nomeProdutoEdicao");
+    var descProduto = document.querySelector("#descricaoProdutoEdicao");
+    var precoProduto = document.querySelector("#precoProdutoEdicao");
+    var quantidadeProduto = document.querySelector("#quantidadeProdutoEdicao");
+    var pesoProduto = document.querySelector("#pesoProdutoEdicao");
+    var tamanhoProduto = document.querySelector("#tamanhoProdutoEdicao");
+    var freteProduto = document.querySelector("#freteProdutoEdicao");
+    var idMercante = document.querySelector("#idMercanteEdicao");
 
     codigoProduto.value = produto.cdProduto;
     nomeProduto.value = produto.nmProduto;
@@ -665,40 +737,133 @@ function clicaSecao(secaoClicada) {
     }
 }
 
-document
-    .querySelector("#enviarPerfilLoja")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+function enviarConfirmacaoSalvarDadosPerfilLoja(event) {
+    event.preventDefault();
 
-        const token = sessionStorage.getItem("token");
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", "salvarDadosPerfilLoja()");
 
-        if (token === null) {
-            console.log("Cliente não autenticado");
-            return;
-        }
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-        const idCliente = sessionStorage.getItem("idCliente");
+    const mensagem = "Deseja confirmar as alterações?";
 
-        const mercante = {
-            cdMercante: document.querySelector("#idMercantePerfilLoja").value,
-            nmLoja: document.querySelector("#nomePerfilLoja").value,
-            nmEmail: document.querySelector("#emailPerfilLoja").value,
-            dsLoja: document.querySelector("#descricaoPerfilLoja").value,
-            fkCdCliente: idCliente,
-        };
+    const botoes = [botaoConfirmar, botaoCancelar];
 
-        const status = await atualizarMercante(mercante, token);
+    adicionarConfirmacao(mensagem, botoes);
+}
 
-        switch (status) {
-            case 200:
-                console.log("Lojista atualizado.");
-                window.location.reload();
-                break;
-            default:
-                console.log("Ocorreu um erro na requisição. STATUS" + status);
-                break;
-        }
-    });
+async function salvarDadosPerfilLoja() {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const idCliente = sessionStorage.getItem("idCliente");
+
+    const nmLoja = document.querySelector("#nomePerfilLoja");
+    const nmEmail = document.querySelector("#emailPerfilLoja");
+    const dsLoja = document.querySelector("#descricaoPerfilLoja");
+
+    if (
+        nmLoja.value.length < 1 &&
+        nmEmail.value.length < 1 &&
+        dsLoja.value.length < 1
+    ) {
+        removerConfirmacao();
+        return;
+    }
+
+    const mercante = {
+        cdMercante: document.querySelector("#idMercantePerfilLoja").value,
+        nmLoja: document.querySelector("#nomePerfilLoja").value,
+        nmEmail: document.querySelector("#emailPerfilLoja").value,
+        dsLoja: document.querySelector("#descricaoPerfilLoja").value,
+        fkCdCliente: idCliente,
+    };
+
+    const status = await atualizarMercante(mercante, token);
+
+    switch (status) {
+        case 200:
+            montarRespostaOK("Loja atualizada com sucesso!");
+            break;
+        default:
+            console.log("Ocorreu um erro na requisição. STATUS" + status);
+            break;
+    }
+}
+
+function enviarConfirmacaoAtualizarProduto(event) {
+    event.preventDefault();
+
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", "atualizarProduto()");
+
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = "Deseja confirmar as alterações?";
+
+    const botoes = [botaoConfirmar, botaoCancelar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+async function atualizarProduto() {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const cdProduto = document.querySelector("#codigoProdutoEdicao");
+    const nmProduto = document.querySelector("#nomeProdutoEdicao");
+    const dsProduto = document.querySelector("#descricaoProdutoEdicao");
+    const vlProduto = document.querySelector("#precoProdutoEdicao");
+    const qtProduto = document.querySelector("#quantidadeProdutoEdicao");
+    const vlPeso = document.querySelector("#pesoProdutoEdicao");
+    const vlTamanho = document.querySelector("#tamanhoProdutoEdicao");
+    const vlFrete = document.querySelector("#freteProdutoEdicao");
+    const idDisponibilidade = document.querySelector(
+        "#disponibilidadeProdutoEdicao"
+    );
+    const fkCdMercante = document.querySelector("#idMercanteEdicao");
+    const fkCdCategoria = document.querySelector("#categoriaProdutoEdicao");
+
+    const produto = {
+        cdProduto: cdProduto.value,
+        nmProduto: nmProduto.value,
+        dsProduto: dsProduto.value,
+        vlProduto: parseFloat(vlProduto.value),
+        qtProduto: parseInt(qtProduto.value),
+        vlPeso: parseFloat(vlPeso.value),
+        vlTamanho: parseFloat(vlTamanho.value),
+        vlFrete: parseFloat(vlFrete.value),
+        idDisponibilidade: parseInt(idDisponibilidade.value),
+        fkCdMercante: parseInt(fkCdMercante.value),
+        fkCdCategoria: parseInt(fkCdCategoria.value),
+    };
+
+    const resposta = await atualizarProduto(produto, token);
+
+    if (resposta == 200) {
+        montarRespostaOK("Produto atualizado com sucesso!");
+        await montarProdutos();
+        clicaSecao("secaoProdutos");
+    }
+}
 
 document
     .querySelector("#atualizarDadosLoja")
@@ -713,14 +878,14 @@ document
         }
 
         const endereco = {
-            cdEndereco: document.getElementById("cdEnderecoLoja").value,
+            cdEndereco: document.getElementById("cdEnderecoDadosLoja").value,
             nrCep: document.getElementById("cepDadosLoja").value,
             nmBairro: document.getElementById("bairroDadosLoja").value,
             sgEstado: document.getElementById("sgEstadoDadosLoja").value,
             nmLogradouro: document.getElementById("logradouroDadosLoja").value,
             nmCidade: document.getElementById("cidadeDadosLoja").value,
             nrEndereco: document.getElementById("numeroDadosLoja").value,
-            fkCdMercante: document.querySelector("#fkCdMercanteLoja"),
+            fkCdMercante: document.querySelector("#fkCdMercanteDadosLoja"),
         };
 
         if (endereco.cdEndereco == null) {
@@ -750,99 +915,62 @@ document
         }
     });
 
-document
-    .querySelector("#cadastrarProduto")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
+function enviarConfirmacaoCadastrarProduto(event) {
+    event.preventDefault();
 
-        const token = sessionStorage.getItem("token");
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", "enviarCadastrarProduto()");
 
-        if (token === null) {
-            console.log("Cliente não autenticado");
-            return;
-        }
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-        const idVendedor = sessionStorage.getItem("idCliente");
-        const mercantes = await carregarMercantes(idVendedor, token);
+    const mensagem = "Deseja confirmar as alterações?";
 
-        const produto = {
-            nmProduto: document.querySelector("#nomeProduto").value,
-            dsProduto: document.querySelector("#descricaoProduto").value,
-            vlProduto: parseFloat(
-                document.querySelector("#precoProduto").value
-            ),
-            qtProduto: parseInt(
-                document.querySelector("#quantidadeProduto").value
-            ),
-            /*vlPeso: parseFloat(document.querySelector("#pesoProduto").value),
+    const botoes = [botaoConfirmar, botaoCancelar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+async function enviarCadastrarProduto() {
+    const token = sessionStorage.getItem("token");
+
+    if (token === null) {
+        console.log("Cliente não autenticado");
+        return;
+    }
+
+    const idVendedor = sessionStorage.getItem("idCliente");
+    const mercantes = await carregarMercantes(idVendedor, token);
+
+    const produto = {
+        nmProduto: document.querySelector("#nomeProduto").value,
+        dsProduto: document.querySelector("#descricaoProduto").value,
+        vlProduto: parseFloat(document.querySelector("#precoProduto").value),
+        qtProduto: parseInt(document.querySelector("#quantidadeProduto").value),
+        /*vlPeso: parseFloat(document.querySelector("#pesoProduto").value),
             vlTamanho: parseFloat(
                 document.querySelector("#tamanhoProduto").value
             ),
             vlFrete: parseFloat(document.querySelector("#freteProduto").value),*/
-            idDisponibilidade: 0,
-            fkCdMercante: parseInt(mercantes[0].cdMercante),
-            fkCdCategoria: parseInt(
-                document.querySelector("#categoriaProduto").value
-            ),
-        };
+        idDisponibilidade: 0,
+        fkCdMercante: parseInt(mercantes[0].cdMercante),
+        fkCdCategoria: parseInt(
+            document.querySelector("#categoriaProduto").value
+        ),
+    };
 
-        const resposta = await cadastrarProduto(produto, token);
+    const resposta = await cadastrarProduto(produto, token);
 
-        if (resposta == 201) {
-            await montarProdutos();
-            clicaSecao("secaoProdutos");
-        }
-    });
-
-document
-    .querySelector("#atualizarProduto")
-    .addEventListener("click", async (e) => {
-        e.preventDefault();
-
-        const token = sessionStorage.getItem("token");
-
-        if (token === null) {
-            console.log("Cliente não autenticado");
-            return;
-        }
-
-        const produto = {
-            cdProduto: document.querySelector("#codigoProdutoEdicao").value,
-            nmProduto: document.querySelector("#nomeProdutoEdicao").value,
-            dsProduto: document.querySelector("#descricaoProdutoEdicao").value,
-            vlProduto: parseFloat(
-                document.querySelector("#precoProdutoEdicao").value
-            ),
-            qtProduto: parseInt(
-                document.querySelector("#quantidadeProdutoEdicao").value
-            ),
-            vlPeso: parseFloat(
-                document.querySelector("#pesoProdutoEdicao").value
-            ),
-            vlTamanho: parseFloat(
-                document.querySelector("#tamanhoProdutoEdicao").value
-            ),
-            vlFrete: parseFloat(
-                document.querySelector("#freteProdutoEdicao").value
-            ),
-            idDisponibilidade: parseInt(
-                document.querySelector("#disponibilidadeProdutoEdicao").value
-            ),
-            fkCdMercante: parseInt(
-                document.querySelector("#idMercanteEdicao").value
-            ),
-            fkCdCategoria: parseInt(
-                document.querySelector("#categoriaProdutoEdicao").value
-            ),
-        };
-
-        const resposta = await atualizarProduto(produto, token);
-
-        if (resposta == 200) {
-            await montarProdutos();
-            clicaSecao("secaoProdutos");
-        }
-    });
+    if (resposta == 201) {
+        montarRespostaOK("Produto cadastrado com sucesso!");
+        await montarProdutos();
+        clicaSecao("secaoProdutos");
+    }
+}
 
 document.addEventListener("DOMContentLoaded", (e) => {
     e.preventDefault();

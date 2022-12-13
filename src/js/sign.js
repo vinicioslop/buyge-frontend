@@ -1,7 +1,7 @@
 const fetchUrl = "https://129.148.45.5:30001/api";
 
 async function cadastrar(cliente) {
-    const requisicao = await fetch(`${fetchUrl}/cliente`, {
+    const requisicao = await fetch(`${fetchUrl}/cliente/cadastrar`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -143,13 +143,53 @@ function conectar() {
     window.location = "/src/pages/login.html";
 }
 
+function adicionarMensagemErro(conteudo) {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+    const mensagem = document.querySelector(".mensagem");
+
+    const botoes = document.querySelector("#botoes");
+
+    const confirmar = document.createElement("button");
+    confirmar.className = "popup-button";
+    confirmar.innerText = "Confirmar";
+    confirmar.setAttribute("onclick", "removerMensagemErro()");
+
+    botoes.appendChild(confirmar);
+
+    mensagem.innerText = conteudo;
+
+    fundoMensagem.className = "mostrar-popup";
+}
+
+function removerMensagemErro() {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+
+    fundoMensagem.className = "esconder-popup";
+}
+
 document.querySelector("#nome").addEventListener("keydown", function (e) {
     if (e.key > "0" && e.key < "9") {
         e.preventDefault();
     }
 });
 
-document.querySelector("#dataNasc").addEventListener("keyup", function (e) {
+document.querySelector("#dataNasc").addEventListener("change", function (e) {
     e.preventDefault();
 
     const dataNasc = document.querySelector("#dataNasc");
@@ -323,11 +363,10 @@ document.querySelector("#cadastrar").addEventListener("click", async (e) => {
         case 201:
             window.location = "/src/pages/login.html";
             break;
-        case 400:
-            console.log("Falha na criação da conta.");
-            break;
         default:
-            console.log("Falha na auntenticação");
+            const mensagem = "Ocorreu um erro na criação da conta!";
+
+            adicionarMensagemErro(mensagem);
             break;
     }
 });

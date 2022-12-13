@@ -14,7 +14,7 @@ async function carregarImagens(idProduto) {
 }
 
 async function inserirImagem(imagem) {
-    const requisicao = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
+    const requisicao = await fetch(`${fetchUrl}/produtos/produto-imagem/adicionar`, {
         method: "POST",
         mode: "cors",
         headers: {
