@@ -28,6 +28,16 @@
         background-color: var(--cor-fundo);
     }
 
+    .caminho {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+    }
+
     .dadosProduto {
         /* POSICIONAMENTO */
         display: flex;
@@ -143,7 +153,12 @@
     }
 
     .dadosProduto .informacoes .titulo-favorito-vendedor .vendedor {
-        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dadosProduto .informacoes .titulo-favorito-vendedor .vendedor .label {
+        margin-top: 5px;
     }
 
     .dadosProduto .informacoes .preco {
@@ -152,11 +167,16 @@
         flex-direction: column;
 
         margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .dadosProduto .informacoes .preco .atual {
         /* POSICIONAMENTO */
         margin-top: 1%;
+    }
+
+    .dadosProduto .informacoes .descricao .descricao-titulo {
+        margin-bottom: 10px;
     }
 
     .dadosProduto .informacoes .botoes {
