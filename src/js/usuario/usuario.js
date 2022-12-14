@@ -926,7 +926,7 @@ async function enviarConfirmacaoRemoverEndereco(event, idEndereco) {
     botaoCancelar.innerHTML = "Descartar";
     botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-    const mensagem = "Deseja confirmar as alterações?";
+    const mensagem = "Deseja remover o endereço selecionado?";
 
     const botoes = [botaoConfirmar, botaoCancelar];
 
@@ -949,7 +949,7 @@ async function enviarConfirmacaoEnderecoPrincipal(event, idEndereco) {
     botaoCancelar.innerHTML = "Descartar";
     botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-    const mensagem = "Deseja confirmar as alterações?";
+    const mensagem = "Deseja selecionar o endereço como principal?";
 
     const botoes = [botaoConfirmar, botaoCancelar];
 
@@ -1136,7 +1136,7 @@ function enviarConfirmacaoAtualizarSenha(event) {
     botaoCancelar.innerHTML = "Descartar";
     botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
 
-    const mensagem = "Deseja confirmar as alterações?";
+    const mensagem = "Deseja alterar a senha para a informada?";
 
     const botoes = [botaoConfirmar, botaoCancelar];
 

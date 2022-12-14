@@ -214,6 +214,7 @@ async function favoritar(idProduto) {
         const resposta = await adicionarFavorito(idCliente, idProduto, token);
 
         if (resposta.status == 201) {
+            console.log("Produto adiciona aos favoritos!");
             window.location.reload();
         }
     }
@@ -228,6 +229,7 @@ async function desfavoritar(idProduto) {
         const resposta = await apagarFavorito(idCliente, idProduto, token);
 
         if (resposta.status == 200) {
+            console.log("Produto removido dos favoritos!");
             window.location.reload();
         }
     }

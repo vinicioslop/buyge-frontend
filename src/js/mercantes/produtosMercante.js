@@ -9,6 +9,73 @@ function mascaraPreco(preco) {
     return valorFormatado;
 }
 
+function adicionarConfirmacao(conteudo, botoesMontados) {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+    const mensagem = document.querySelector(".mensagem");
+
+    mensagem.innerText = conteudo;
+
+    const botoes = document.querySelector("#botoes");
+
+    botoesMontados.forEach((botao) => {
+        botoes.appendChild(botao);
+    });
+
+    fundoMensagem.className = "mostrar-popup";
+}
+
+function recarregarPagina() {
+    window.location.reload();
+}
+
+function removerConfirmacao() {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+
+    fundoMensagem.className = "esconder-popup";
+}
+
+function montarAlerta(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+function montarAlertaRecarregar(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "recarregarPagina()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
 async function carregarProdutos(idMercante) {
     const response = await fetch(
         `${fetchUrl}/produtos/mercante/${idMercante}`,
@@ -246,7 +313,7 @@ async function favoritar(idProduto) {
         const resposta = await adicionarFavorito(idCliente, idProduto, token);
 
         if (resposta.status == 201) {
-            window.location.reload();
+            montarAlertaRecarregar("Produto adiciona aos favoritos!");
         }
     }
 }
@@ -260,7 +327,7 @@ async function desfavoritar(idProduto) {
         const resposta = await apagarFavorito(idCliente, idProduto, token);
 
         if (resposta.status == 200) {
-            window.location.reload();
+            montarAlertaRecarregar("Produto removido dos favoritos!");
         }
     }
 }

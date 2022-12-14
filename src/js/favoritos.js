@@ -9,6 +9,73 @@ function mascaraPreco(preco) {
     return valorFormatado;
 }
 
+function adicionarConfirmacao(conteudo, botoesMontados) {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+    const mensagem = document.querySelector(".mensagem");
+
+    mensagem.innerText = conteudo;
+
+    const botoes = document.querySelector("#botoes");
+
+    botoesMontados.forEach((botao) => {
+        botoes.appendChild(botao);
+    });
+
+    fundoMensagem.className = "mostrar-popup";
+}
+
+function recarregarPagina() {
+    window.location.reload();
+}
+
+function removerConfirmacao() {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+
+    fundoMensagem.className = "esconder-popup";
+}
+
+function montarAlerta(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+function montarAlertaRecarregar(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "recarregarPagina()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
 async function carregarFavoritos(idCliente, token) {
     const response = await fetch(`${fetchUrl}/favoritos/${idCliente}`, {
         method: "GET",
@@ -210,11 +277,11 @@ async function adicionarItemCarrinho(idCliente, idProduto, token) {
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
 
             var resposta = {
-                dados: null,
+                dados: [],
                 status: status,
             };
 
-            return status;
+            return resposta;
     }
 }
 
@@ -234,9 +301,14 @@ async function adicionarCarrinho(idProduto) {
         token
     );
 
-    if (itemCarrinhoResposta.status === 200) {
-        removerConfirmacao();
-        montarAlertaRecarregar("Produto adicionado ao carrinho com sucesso!");
+    switch (itemCarrinhoResposta.status) {
+        case 201:
+            removerConfirmacao();
+            montarAlerta("Produto adicionado ao carrinho!");
+            break;
+        case 400:
+            montarAlerta("Produto já adicionado ao carrinho!");
+            break;
     }
 }
 
@@ -385,7 +457,7 @@ async function montaCartao(idCliente, token) {
             botao.innerText = "Adicionar ao Carrinho";
             botao.setAttribute(
                 "onclick",
-                `enviarConfirmacaoAdicionarCarrinho(event, ${produto.cdProduto})`
+                `adicionarCarrinho(${produto.cdProduto})`
             );
 
             precoParcelaBotao.appendChild(precoParcela);
@@ -404,93 +476,6 @@ async function montaCartao(idCliente, token) {
         meusFavoritos.className = "mostrar";
         tituloFavoritos.className = "titulo-favorito mostrar";
     }
-}
-
-function adicionarConfirmacao(conteudo, botoesMontados) {
-    const popupButtons = document.querySelectorAll(".popup-button");
-
-    if (popupButtons.length > 0) {
-        popupButtons.forEach((botao) => {
-            botao.remove();
-        });
-    }
-
-    const fundoMensagem = document.querySelector("#fundoMensagem");
-    const mensagem = document.querySelector(".mensagem");
-
-    mensagem.innerText = conteudo;
-
-    const botoes = document.querySelector("#botoes");
-
-    botoesMontados.forEach((botao) => {
-        botoes.appendChild(botao);
-    });
-
-    fundoMensagem.className = "mostrar-popup";
-}
-
-function recarregarPagina() {
-    window.location.reload();
-}
-
-function removerConfirmacao() {
-    const popupButtons = document.querySelectorAll(".popup-button");
-
-    if (popupButtons.length > 0) {
-        popupButtons.forEach((botao) => {
-            botao.remove();
-        });
-    }
-
-    const fundoMensagem = document.querySelector("#fundoMensagem");
-
-    fundoMensagem.className = "esconder-popup";
-}
-
-function montarAlerta(conteudo) {
-    const botaoConfirmar = document.createElement("button");
-    botaoConfirmar.className = "popup-button";
-    botaoConfirmar.innerHTML = "OK";
-    botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
-
-    const mensagem = conteudo;
-
-    const botoes = [botaoConfirmar];
-
-    adicionarConfirmacao(mensagem, botoes);
-}
-
-function montarAlertaRecarregar(conteudo) {
-    const botaoConfirmar = document.createElement("button");
-    botaoConfirmar.className = "popup-button";
-    botaoConfirmar.innerHTML = "OK";
-    botaoConfirmar.setAttribute("onclick", "recarregarPagina()");
-
-    const mensagem = conteudo;
-
-    const botoes = [botaoConfirmar];
-
-    adicionarConfirmacao(mensagem, botoes);
-}
-
-function enviarConfirmacaoAdicionarCarrinho(event, idProduto) {
-    event.preventDefault();
-
-    const botaoConfirmar = document.createElement("button");
-    botaoConfirmar.className = "popup-button";
-    botaoConfirmar.innerHTML = "Confirmar";
-    botaoConfirmar.setAttribute("onclick", `adicionarCarrinho(${idProduto})`);
-
-    const botaoCancelar = document.createElement("button");
-    botaoCancelar.className = "popup-button";
-    botaoCancelar.innerHTML = "Descartar";
-    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
-
-    const mensagem = "Deseja confirmar as alterações?";
-
-    const botoes = [botaoConfirmar, botaoCancelar];
-
-    adicionarConfirmacao(mensagem, botoes);
 }
 
 document.addEventListener("DOMContentLoaded", async (e) => {

@@ -38,6 +38,8 @@
 .informacoes {
     width: 100%;
     height: 100%;
+
+    margin-bottom: 20%;
 }
 
 .informacoes .titulo {
@@ -121,8 +123,8 @@
     align-items: center;
     justify-content: center;
 
-    height: 100px;
-    width: 100px;
+    min-width: 30%;
+    min-height: 100px;
 
     background-color: var(--cor-clara);
 }
@@ -130,13 +132,13 @@
 .informacoes .grupo-esquerda .produtos .produto .nome-produto p {
     margin-left: 12px;
 
-    width: 95%;
+    width: 100%;
 
     text-align: justify;
 }
 
 .informacoes .grupo-esquerda .produtos .produto .nome-produto .imagem img {
-    height: 100px;
+    height: 60px;
     object-fit: scale-down;
 
     background-color: transparent;
@@ -168,10 +170,8 @@
     display: flex;
     flex-direction: row;
 
-    border: 1px solid #000;
-    height: 32px;
-    width: 110px;
-    border-radius: 0.5rem;
+    width: 30%;
+    height: 100%;
 }
 
 .informacoes .grupo-esquerda .produtos .produto .quantidade-produto .adicionar,
@@ -180,19 +180,51 @@
     align-items: center;
     justify-content: center;
 
+    height: 40px;
     width: 60px;
-    height: 100%;
 
     color: var(--cor-clara);
+
+    transition: 0.5s;
 
     background-color: var(--cor-principal-clara);
     border: solid 1px #000;
 }
 
+.informacoes
+    .grupo-esquerda
+    .produtos
+    .produto
+    .quantidade-produto
+    .adicionar:hover,
+.remover:hover {
+    cursor: pointer;
+
+    color: var(--cor-clara);
+
+    background-color: var(--cor-principal);
+}
+
+.informacoes .grupo-esquerda .produtos .produto .quantidade-produto .remover {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.informacoes .grupo-esquerda .produtos .produto .quantidade-produto .adicionar {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 .informacoes .grupo-esquerda .produtos .produto .quantidade-produto input {
-    height: 100%;
-    width: 20px;
-    border: none;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+    width: 100%;
+
+    text-align: center;
+
+    border: 1px solid #000;
 
     outline: none;
 }
@@ -287,7 +319,15 @@
 
     border-radius: 3px;
 
+    transition: 0.5s;
+
     background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-direita .frete-prazo .frete button:hover {
+    cursor: pointer;
+
+    background-color: var(--cor-principal);
 }
 
 .informacoes .grupo-direita .valores {
@@ -364,7 +404,15 @@
 
     border-radius: 3px;
 
+    transition: 0.5s;
+
     background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-direita .cupom-desconto .form-cupom button:hover {
+    cursor: pointer;
+
+    background-color: var(--cor-principal);
 }
 
 .informacoes .grupo-direita .comprar {
@@ -375,7 +423,15 @@
 
     border-radius: 3px;
 
+    transition: 0.5s;
+
     background-color: var(--cor-principal-clara);
+}
+
+.informacoes .grupo-direita .comprar:hover {
+    cursor: pointer;
+
+    background-color: var(--cor-principal);
 }
 
 #semItens {
@@ -521,14 +577,14 @@
 
     margin-left: 10px;
 
-    width: 100px;
-    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
 
     background-color: var(--cor-clara);
 }
 
 #dadosEntrega .grupo-total-compra .itens .item .imagem img {
-    height: 100px;
+    height: 70px;
     object-fit: scale-down;
 
     background-color: transparent;
@@ -749,4 +805,87 @@ img,
     cursor: pointer;
 
     background-color: var(--cor-principal-clara);
+}
+
+.mostrar-popup {
+    display: flex;
+    flex-direction: column;
+}
+
+.esconder-popup {
+    display: none;
+}
+
+#fundoMensagem {
+    position: absolute;
+    align-items: center;
+
+    top: 0;
+
+    padding-top: 20%;
+
+    width: 100%;
+    height: 150vh;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#fundoMensagem #mensagemPopup {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 120px;
+    width: 400px;
+
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7), 0px 20px 30px rgba(0, 0, 0, 0.3),
+        0px 10px 50px rgba(0, 0, 0, 0.2);
+
+    background-color: var(--cor-principal-clara);
+}
+
+#fundoMensagem #mensagemPopup .mensagem {
+    color: var(--cor-clara);
+
+    background-color: transparent;
+}
+
+#fundoMensagem #mensagemPopup #botoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 90%;
+
+    background-color: transparent;
+}
+
+#fundoMensagem #mensagemPopup #botoes button {
+    width: 100px;
+    height: 30px;
+
+    font-size: 14px;
+    color: var(--cor-clara);
+
+    border-radius: 5px;
+    outline: none;
+
+    transition: 0.5s;
+
+    background-color: var(--cor-principal);
+}
+
+#fundoMensagem #mensagemPopup #botoes button:hover {
+    cursor: pointer;
+
+    color: var(--cor-principal);
+
+    background-color: var(--cor-clara);
+}
+
+.escurecer {
+    background-color: rgba(0, 0, 0, 0.3);
 }

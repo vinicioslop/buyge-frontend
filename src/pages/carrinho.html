@@ -139,11 +139,19 @@
                 </div>
 
                 <div class="grupo-total-compra">
-                    <div onclick="mostraProdutos()" class="total-compra mostrar-linha">
+                    <div
+                        onclick="mostraProdutos()"
+                        class="total-compra mostrar-linha"
+                    >
                         <div class="titulo-grupo">Total da Compra</div>
                         <div class="valor-icone">
                             <div class="valor-compra">Valor da Compra</div>
-                            <img id="iconeSeta" class="minimizado" src="/src/icons/seta-baixo-branco.svg" alt="" />
+                            <img
+                                id="iconeSeta"
+                                class="minimizado"
+                                src="/src/icons/seta-baixo-branco.svg"
+                                alt=""
+                            />
                         </div>
                     </div>
                     <div class="itens esconder" id="itensProdutosFinal"></div>
@@ -169,9 +177,7 @@
                     </div>
                 </div>
 
-                <div class="grupo-endereco">
-                    
-                </div>
+                <div class="grupo-endereco"></div>
 
                 <div class="grupo-forma-entrega">
                     <div class="forma-entrega">
@@ -189,6 +195,13 @@
                 <button onclick="acionaMercadoPago()" id="finalizar">
                     Finalizar Compra
                 </button>
+            </div>
+        </div>
+
+        <div id="fundoMensagem" class="esconder-popup">
+            <div id="mensagemPopup">
+                <span class="mensagem"></span>
+                <div id="botoes"></div>
             </div>
         </div>
 

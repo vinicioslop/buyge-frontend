@@ -9,6 +9,73 @@ function mascaraPreco(preco) {
     return valorFormatado;
 }
 
+function adicionarConfirmacao(conteudo, botoesMontados) {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+    const mensagem = document.querySelector(".mensagem");
+
+    mensagem.innerText = conteudo;
+
+    const botoes = document.querySelector("#botoes");
+
+    botoesMontados.forEach((botao) => {
+        botoes.appendChild(botao);
+    });
+
+    fundoMensagem.className = "mostrar-popup";
+}
+
+function recarregarPagina() {
+    window.location.reload();
+}
+
+function removerConfirmacao() {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+
+    fundoMensagem.className = "esconder-popup";
+}
+
+function montarAlerta(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+function montarAlertaRecarregar(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "recarregarPagina()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
 async function carregarProduto(idProduto) {
     const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
@@ -177,25 +244,6 @@ async function carregarEnderecos(idCliente, token) {
     }
 }
 
-function trocarEndereco() {
-    window.location = "/src/pages/usuario/usuario.html?enderecos=true";
-}
-
-async function removerItemCarrinhoLogado(idItemCarrinho) {
-    const token = sessionStorage.getItem("token");
-
-    if (token == null) {
-        console.log("Usuário não autenticado!");
-        window.location = "/";
-    }
-
-    const resposta = await apagarItemCarrinho(idItemCarrinho, token);
-
-    if (resposta == 200) {
-        window.location.reload(true);
-    }
-}
-
 async function gerarPreferencia(idCliente, token) {
     const response = await fetch(`${fetchUrl}/comprar/${idCliente}`, {
         method: "POST",
@@ -223,6 +271,48 @@ async function gerarPreferencia(idCliente, token) {
             console.log("Ocorreu um erro na requisição. STATUS: " + status);
             return status;
     }
+}
+
+function trocarEndereco() {
+    window.location = "/src/pages/usuario/usuario.html?enderecos=true";
+}
+
+async function removerItemCarrinhoLogado(idItemCarrinho) {
+    const token = sessionStorage.getItem("token");
+
+    if (token == null) {
+        console.log("Usuário não autenticado!");
+        window.location = "/";
+    }
+
+    const resposta = await apagarItemCarrinho(idItemCarrinho, token);
+
+    if (resposta == 200) {
+        window.location.reload(true);
+    }
+}
+
+function enviarConfirmacaoRemoverItemCarrinho(event, idItemCarrinho) {
+    event.preventDefault();
+
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute(
+        "onclick",
+        `removerItemCarrinhoLogado(${idItemCarrinho})`
+    );
+
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = "Deseja remover o produto do carrinho?";
+
+    const botoes = [botaoConfirmar, botaoCancelar];
+
+    adicionarConfirmacao(mensagem, botoes);
 }
 
 async function atualizaSubTotal(idItemCarrinho) {
@@ -359,7 +449,9 @@ async function montarItemCarrinhoLogado() {
                 produto.vlProduto * item.qtItemCarrinho
             )}
         </div>
-        <div onclick="removerItemCarrinhoLogado(${item.cdItemCarrinho})"
+        <div onclick="enviarConfirmacaoRemoverItemCarrinho(event, ${
+            item.cdItemCarrinho
+        })"
             class="remover-produto">
             <img src="/src/icons/remover-preto.svg" alt="">
         </div>`;
@@ -413,26 +505,6 @@ async function montarValoresLogado() {
             );
         }
     });
-}
-
-function mostraProdutos() {
-    const iconeSeta = document.querySelector("#iconeSeta");
-    const itensProdutosFinal = document.querySelector("#itensProdutosFinal");
-    const valoresProdutosFinal = document.querySelector(
-        "#valoresProdutosFinal"
-    );
-
-    if (itensProdutosFinal.classList.contains("esconder")) {
-        iconeSeta.setAttribute("src", "/src/icons/seta-cima-branca.svg");
-
-        itensProdutosFinal.className = "itens mostrar";
-        valoresProdutosFinal.className = "valores mostrar";
-    } else {
-        iconeSeta.setAttribute("src", "/src/icons/seta-baixo-branco.svg");
-
-        itensProdutosFinal.className = "itens esconder";
-        valoresProdutosFinal.className = "valores esconder";
-    }
 }
 
 async function montarFinalizacao() {
@@ -725,6 +797,26 @@ function removerItemCarrinhoDeslogado(idProduto) {
     localStorage.setItem("itemsCarrinho", JSON.stringify(listaItemsCarrinho));
 
     window.location.reload();
+}
+
+function mostraProdutos() {
+    const iconeSeta = document.querySelector("#iconeSeta");
+    const itensProdutosFinal = document.querySelector("#itensProdutosFinal");
+    const valoresProdutosFinal = document.querySelector(
+        "#valoresProdutosFinal"
+    );
+
+    if (itensProdutosFinal.classList.contains("esconder")) {
+        iconeSeta.setAttribute("src", "/src/icons/seta-cima-branca.svg");
+
+        itensProdutosFinal.className = "itens mostrar";
+        valoresProdutosFinal.className = "valores mostrar";
+    } else {
+        iconeSeta.setAttribute("src", "/src/icons/seta-baixo-branco.svg");
+
+        itensProdutosFinal.className = "itens esconder";
+        valoresProdutosFinal.className = "valores esconder";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", async (e) => {
