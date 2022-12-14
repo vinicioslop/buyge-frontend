@@ -1,4 +1,4 @@
-const fetchUrl = "http://129.148.45.5:30000/api";
+const fetchUrl = "http://129.148.45.5:30001/api";
 
 async function logar(user) {
     const requisicao = await fetch(`${fetchUrl}/login`, {
