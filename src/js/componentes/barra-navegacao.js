@@ -1,4 +1,4 @@
-const url = "http://129.148.45.5:30001/api";
+const url = "https://129.148.45.5:30001/api";
 
 async function buscarCategorias() {
     const response = await fetch(`${url}/categorias`, { mode: "cors" });
