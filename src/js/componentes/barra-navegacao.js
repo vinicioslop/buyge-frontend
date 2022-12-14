@@ -126,14 +126,14 @@ function redirecionarPefilUsuario() {
     window.location = "/src/pages/usuario/usuario.html";
 }
 
-function montaBarraNavegacaoPequena(categorias) {
+async function montaBarraNavegacaoPequena(categorias) {
     // BARRA DE NAVEGAÇÃO
     const barraPequena = document.querySelector("#barraPequena");
     barraPequena.innerHTML = `
     <div class="grupo-esquerdo navbar">
         <div class="dropdown">
             <img src="/src/icons/menu-branco.svg" class="menu dropbtn">
-            <div class="dropdown-content"></div>
+            <div id="menuConteudo" class="dropdown-content"></div>
         </div>
     </div>
     <div class="grupo-meio">
@@ -141,24 +141,107 @@ function montaBarraNavegacaoPequena(categorias) {
             <img class="logo" src="/src/imgs/logo/buyge_logo_novo_branco_full.png" alt="Logo do projeto branco e preto">
         </a>
     </div>
-    <div class="grupo-direito">
-        <a class="pesquisa-link" href="/src/pages/produtos/produtos.html">
-            <img class="pesquisa-icone" src="/src/icons/search-branco.svg">
-        </a>
+    <div class="grupo-direito navbar">
+        <div class="dropdown">
+            <img class="dropbtn user-icone" src="/src/icons/user-branco.svg">
+            <div id="userConteudo" class="dropdown-content"></div>
+        </div>
     </div>
     `;
     barraPequena.setAttribute("class", "mostrar-row");
 
     // CONTEÚDO DO MENU
-    const menuConteudo = document.getElementsByClassName("dropdown-content")[0];
+    const menuConteudo = document.getElementById("menuConteudo");
 
     categorias.forEach((categoria) => {
-        let item = document.createElement("a");
+        var item = document.createElement("a");
         item.setAttribute("href", "#");
         item.innerText = categoria.nmCategoria;
 
         menuConteudo.appendChild(item);
     });
+
+    const todosProdutos = document.createElement("a");
+    todosProdutos.setAttribute("href", "/src/pages/produtos/produtos.html");
+    todosProdutos.id = "todasLojas";
+    todosProdutos.innerText = "Todos os Produtos";
+
+    menuConteudo.appendChild(todosProdutos);
+
+    // CONTEÚDO DO USUÁRIO
+    const userConteudo = document.getElementById("userConteudo");
+
+    const token = sessionStorage.getItem("token");
+
+    if (token != null) {
+        const idCliente = sessionStorage.getItem("idCliente");
+
+        const respostaCliente = await buscarDadosCliente(idCliente, token);
+        const respostaMercantes = await buscarMercantes(idCliente, token);
+
+        const cliente = respostaCliente.dados;
+        const mercantes = respostaMercantes.dados;
+
+        const nomeCliente = document.createElement("a");
+        nomeCliente.id = "nomeCliente";
+        nomeCliente.innerText = `Olá, ${cliente.nmCliente}`;
+
+        const perfilUsuario = document.createElement("a");
+        perfilUsuario.setAttribute("onclick", "redirecionarPefilUsuario()");
+        perfilUsuario.id = "perfilUsuario";
+        perfilUsuario.innerText = "Minha Conta";
+
+        const desconectar = document.createElement("a");
+        desconectar.setAttribute("onclick", "desconectar()");
+        desconectar.id = "desconectar";
+        desconectar.innerText = "Desconectar";
+
+        userConteudo.appendChild(nomeCliente);
+        userConteudo.appendChild(perfilUsuario);
+
+        if (cliente.nmTipoConta == "Vendedor" && mercantes.length > 0) {
+            const mercanteLink = document.createElement("a");
+            mercanteLink.setAttribute(
+                "href",
+                "/src/pages/mercantes/mercante.html"
+            );
+            mercanteLink.className = "icone-link";
+            mercanteLink.innerText = "Minha Loja";
+
+            userConteudo.appendChild(mercanteLink);
+        } else {
+            const mercanteLink = document.createElement("a");
+            mercanteLink.setAttribute(
+                "href",
+                "/src/pages/mercantes/novoMercante.html"
+            );
+            mercanteLink.className = "icone-link";
+
+            mercanteLink.innerHTML = `
+            <img
+                class="icone"
+                id="mercantes-icon"
+                src="/src/icons/lojas-branco.svg"
+                alt="Ícone de mercantes branco"
+            />
+            `;
+
+            grupoIcones.insertBefore(mercanteLink, iconeFavoritos);
+        }
+
+        userConteudo.appendChild(desconectar);
+    } else {
+        const logar = document.createElement("a");
+        logar.setAttribute("onclick", "logar()");
+        logar.innerText = "Conectar";
+
+        const cadastrar = document.createElement("a");
+        cadastrar.setAttribute("onclick", "criarConta()");
+        cadastrar.innerText = "Crie sua conta";
+
+        userConteudo.appendChild(logar);
+        userConteudo.appendChild(cadastrar);
+    }
 }
 
 async function montaBarraNavegacaoGrande(categorias) {
@@ -265,12 +348,12 @@ async function montaBarraNavegacaoGrande(categorias) {
         categoriasConteudo.appendChild(item);
     });
 
-    const todasLojas = document.createElement("a");
-    todasLojas.setAttribute("href", "/src/pages/mercantes/mercantes.html");
-    todasLojas.id = "todasLojas";
-    todasLojas.innerText = "Todas as Lojas";
+    const todosProdutos = document.createElement("a");
+    todosProdutos.setAttribute("href", "/src/pages/produtos/produtos.html");
+    todosProdutos.id = "todasLojas";
+    todosProdutos.innerText = "Todos os Produtos";
 
-    categoriasConteudo.appendChild(todasLojas);
+    categoriasConteudo.appendChild(todosProdutos);
 
     const usuarioConteudo = document.getElementById("usuarioConteudo");
 

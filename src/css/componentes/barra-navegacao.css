@@ -162,11 +162,7 @@
         background-color: transparent;
     }
 
-    .barra-navegacao .grupo-direito .pesquisa-link {
-        background-color: transparent;
-    }
-
-    .barra-navegacao .grupo-direito .pesquisa-link .pesquisa-icone {
+    .barra-navegacao .grupo-direito .user-icone {
         /* DIMENSIONAMENTO */
         height: 34px;
 
@@ -174,8 +170,12 @@
         background-color: transparent;
     }
 
-    .barra-navegacao .grupo-direito .pesquisa-link .pesquisa-icone:hover {
+    .barra-navegacao .grupo-direito .user-icone:hover {
         cursor: pointer;
+    }
+
+    #userConteudo {
+        right: 8%;
     }
     /* BARRA NAVEGAÇÃO MENOR */
 }

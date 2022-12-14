@@ -1202,7 +1202,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const enderecos = urlParams.get("enderecos");
 
     if (enderecos != null) {
-        montarCompras();
+        montarEnderecos();
         clicaSecao("secaoEndereco");
         clicaSecaoInternaEnderecos("meusEnderecos");
     }
