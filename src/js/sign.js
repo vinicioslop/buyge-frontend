@@ -1,4 +1,4 @@
-const fetchUrl = "http://129.148.45.5:30001/api";
+const fetchUrl = "http://129.148.45.5:30000/api";
 
 async function cadastrar(cliente) {
     const requisicao = await fetch(`${fetchUrl}/cliente/cadastrar`, {

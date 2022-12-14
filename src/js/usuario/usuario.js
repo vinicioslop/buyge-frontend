@@ -1,4 +1,4 @@
-const fetchUrl = "http://129.148.45.5:30001/api";
+const fetchUrl = "http://129.148.45.5:30000/api";
 
 function mascaraPreco(preco) {
     const valorFormatado = preco.toLocaleString("pt-BR", {
@@ -116,7 +116,7 @@ async function atualizarSenha(idCliente, novaSenha, token) {
     const status = response.status;
 
     switch (status) {
-        case 200:
+        case 201:
             const dados = await response.json();
 
             const resposta = {
