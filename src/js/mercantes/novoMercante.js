@@ -1,4 +1,4 @@
-const fetchUrl = "https://129.148.45.5:30001/api";
+const fetchUrl = "http://129.148.45.5:30001/api";
 
 async function enviarMercante(mercante, token) {
     const requisicao = await fetch(`${fetchUrl}/mercantes/cadastrar`, {
