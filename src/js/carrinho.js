@@ -714,7 +714,11 @@ async function acionaMercadoPago() {
         const resposta = await gerarPreferencia(idCliente, token);
 
         if (resposta.status === 200) {
-            window.location = resposta.dados.sandboxInitPoint;
+            // REDIRECIONAMENTO DE TESTE
+            //window.location = resposta.dados.sandboxInitPoint;
+
+            // REDIRECIONAMENTO DE PRODUÇÃO
+            window.location = resposta.dados.initPoint;
         } else {
             console.log(
                 "Ocorreu um erro na requisição. STATUS: " + resposta.status
