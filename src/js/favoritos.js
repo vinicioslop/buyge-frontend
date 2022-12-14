@@ -235,7 +235,8 @@ async function adicionarCarrinho(idProduto) {
     );
 
     if (itemCarrinhoResposta.status === 200) {
-        window.location.reload();
+        removerConfirmacao();
+        montarAlertaRecarregar("Produto adicionado ao carrinho com sucesso!");
     }
 }
 
@@ -384,7 +385,7 @@ async function montaCartao(idCliente, token) {
             botao.innerText = "Adicionar ao Carrinho";
             botao.setAttribute(
                 "onclick",
-                `adicionarCarrinho(${produto.cdProduto})`
+                `enviarConfirmacaoAdicionarCarrinho(event, ${produto.cdProduto})`
             );
 
             precoParcelaBotao.appendChild(precoParcela);
@@ -403,6 +404,93 @@ async function montaCartao(idCliente, token) {
         meusFavoritos.className = "mostrar";
         tituloFavoritos.className = "titulo-favorito mostrar";
     }
+}
+
+function adicionarConfirmacao(conteudo, botoesMontados) {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+    const mensagem = document.querySelector(".mensagem");
+
+    mensagem.innerText = conteudo;
+
+    const botoes = document.querySelector("#botoes");
+
+    botoesMontados.forEach((botao) => {
+        botoes.appendChild(botao);
+    });
+
+    fundoMensagem.className = "mostrar-popup";
+}
+
+function recarregarPagina() {
+    window.location.reload();
+}
+
+function removerConfirmacao() {
+    const popupButtons = document.querySelectorAll(".popup-button");
+
+    if (popupButtons.length > 0) {
+        popupButtons.forEach((botao) => {
+            botao.remove();
+        });
+    }
+
+    const fundoMensagem = document.querySelector("#fundoMensagem");
+
+    fundoMensagem.className = "esconder-popup";
+}
+
+function montarAlerta(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+function montarAlertaRecarregar(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "recarregarPagina()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+function enviarConfirmacaoAdicionarCarrinho(event, idProduto) {
+    event.preventDefault();
+
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "Confirmar";
+    botaoConfirmar.setAttribute("onclick", `adicionarCarrinho(${idProduto})`);
+
+    const botaoCancelar = document.createElement("button");
+    botaoCancelar.className = "popup-button";
+    botaoCancelar.innerHTML = "Descartar";
+    botaoCancelar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = "Deseja confirmar as alterações?";
+
+    const botoes = [botaoConfirmar, botaoCancelar];
+
+    adicionarConfirmacao(mensagem, botoes);
 }
 
 document.addEventListener("DOMContentLoaded", async (e) => {

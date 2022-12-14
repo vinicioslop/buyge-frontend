@@ -593,6 +593,8 @@ select {
 
 #fundoMensagem #mensagemPopup .mensagem {
     color: var(--cor-clara);
+
+    background-color: transparent;
 }
 
 #fundoMensagem #mensagemPopup #botoes {

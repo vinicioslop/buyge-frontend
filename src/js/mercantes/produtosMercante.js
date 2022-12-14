@@ -168,7 +168,7 @@ async function carregarFavoritos(idCliente, token) {
 
 async function adicionarFavorito(idCliente, idProduto, token) {
     const response = await fetch(
-        `${fetchUrl}/favorito/novo/${idCliente}/${idProduto}`,
+        `${fetchUrl}/favorito/adicionar/${idCliente}/${idProduto}`,
         {
             method: "POST",
             mode: "cors",
