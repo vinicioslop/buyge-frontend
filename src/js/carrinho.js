@@ -715,10 +715,10 @@ async function acionaMercadoPago() {
 
         if (resposta.status === 200) {
             // REDIRECIONAMENTO DE TESTE
-            //window.location = resposta.dados.sandboxInitPoint;
+            window.location = resposta.dados.sandboxInitPoint;
 
             // REDIRECIONAMENTO DE PRODUÇÃO
-            window.location = resposta.dados.initPoint;
+            //window.location = resposta.dados.initPoint;
         } else {
             console.log(
                 "Ocorreu um erro na requisição. STATUS: " + resposta.status
