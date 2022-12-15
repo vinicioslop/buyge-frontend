@@ -1,20 +1,11 @@
-async function configurarUrl() {
+function retornarUrl() {
     const location = window.location.hostname;
 
-    switch (location) {
-        case "www.buyge.com.br":
-            var url = "https://129.148.45.5:30001/api";
-            sessionStorage.setItem("fetchUrl", url);
-            break;
-        case "127.0.0.1":
-            var url = "https://localhost:30001/api";
-            sessionStorage.setItem("fetchUrl", url);
-            break;
+    if (location == "127.0.0.1") {
+        return "https://localhost:30001/api";
+    } else {
+        return "https://129.148.45.5:30001/api";
     }
-}
-
-function retornarUrl() {
-    return sessionStorage.getItem("fetchUrl");
 }
 
 async function logar(user) {
@@ -102,10 +93,4 @@ document.getElementById("entrar").addEventListener("click", async (e) => {
             mostraMensagem();
             break;
     }
-});
-
-document.addEventListener("DOMContentLoaded", async (e) => {
-    e.preventDefault();
-
-    await configurarUrl();
 });
