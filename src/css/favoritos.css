@@ -25,6 +25,393 @@
         /* DIMENSIONAMENTO */
         width: 95%;
     }
+
+    .container .produtos-favoritados {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-top: 20px;
+        margin-bottom: 100px;
+
+        width: 100%;
+    }
+
+    #meusFavoritos .titulo-favorito {
+        font-size: 36px;
+        font-weight: normal;
+        text-align: center;
+
+        margin-top: 10px;
+    }
+
+    #semFavoritos {
+        align-items: center;
+        justify-content: center;
+
+        min-height: 50vh;
+        width: 100%;
+    }
+
+    #semFavoritos img {
+        margin-bottom: 20px;
+
+        height: 80px;
+    }
+
+    #semFavoritos .texto {
+        font-size: 40px;
+    }
+
+    #deslogado {
+        align-items: center;
+        justify-content: center;
+
+        min-height: 80vh;
+        width: 100%;
+    }
+
+    #deslogado img {
+        margin-bottom: 20px;
+
+        height: 80px;
+    }
+
+    #deslogado .texto {
+        font-size: 40px;
+    }
+
+    .cartao-favorito {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 20px;
+
+        /* DIMENSIONAMENTO */
+        box-sizing: border-box;
+        min-height: fit-content;
+        max-height: 550px;
+        width: 240px;
+
+        /* APARÊNCIA */
+        border-radius: 5px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        background-color: white;
+    }
+
+    .cartao-favorito .imagem-favorito {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        min-height: 60%;
+        max-height: 60%;
+
+        /* APARÊNCIA */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        background-color: var(--cor-clara);
+    }
+
+    .cartao-favorito .imagem-favorito .imagem {
+        /* DIMENSIONAMENTO */
+        width: 80%;
+        object-fit: scale-down;
+
+        /* DIMENSIONAMENTO */
+        width: 80%;
+        object-fit: scale-down;
+
+        /* APARÊNCIA */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        background-color: transparent;
+    }
+
+    .cartao-favorito .imagem-favorito .favorito {
+        /* POSICIONAMENTO */
+        position: absolute;
+
+        margin-left: 200px;
+        margin-top: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 24px;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .imagem-favorito .favorito:hover {
+        cursor: pointer;
+    }
+
+    .cartao-favorito .informacoes {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        /* DIMENSIONAMENTO */
+        height: 50%;
+        width: 100%;
+
+        /* APARÊNCIA */
+        padding: 10px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: var(--cor-clara);
+    }
+
+    .cartao-favorito .informacoes .titulo-categoria-avaliacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao
+        .avaliacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao
+        p {
+        /* DIMENSIONAMENTO */
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 200%;
+        letter-spacing: 0.65px;
+
+        /* APARÊNCIA */
+        color: #777777;
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao
+        .avaliacao
+        img {
+        /* POSICIONAMENTO */
+        margin-right: 3px;
+
+        /* DIMENSIONAMENTO */
+        height: 22px;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .titulo-categoria-avaliacao .titulo-produto {
+        /* DIMENSIONAMENTO */
+        font-size: 16px;
+        font-weight: 700;
+        height: 30px;
+
+        /* APARÊNCIA */
+        color: #333333;
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .nome-loja {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        font-size: 14px;
+        text-align: right;
+
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .nome-loja:hover {
+        cursor: pointer;
+
+        color: var(--cor-principal);
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .preco-parcela {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+
+        width: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .preco-parcela .preco {
+        /* DIMENSIONAMENTO */
+        font-size: 20px;
+        font-weight: 700;
+        color: #333333;
+        text-align: left;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .comprar {
+        /* POSICIONAMENTO */
+        margin-top: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 30px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 200%;
+        letter-spacing: 0.65px;
+
+        /* APARÊNCIA */
+        color: var(--cor-clara);
+        background: var(--cor-principal-clara);
+        border: 1.5px solid var(--cor-principal);
+        box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .comprar:hover {
+        cursor: pointer;
+    }
+
+    .mostrar-popup {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .esconder-popup {
+        display: none;
+    }
+
+    #fundoMensagem {
+        position: absolute;
+        align-items: center;
+
+        top: 0;
+
+        padding-top: 20%;
+
+        width: 100%;
+        height: 150vh;
+
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    #fundoMensagem #mensagemPopup {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        height: 120px;
+        width: 400px;
+
+        border-radius: 5px;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7),
+            0px 20px 30px rgba(0, 0, 0, 0.3), 0px 10px 50px rgba(0, 0, 0, 0.2);
+
+        background-color: var(--cor-principal-clara);
+    }
+
+    #fundoMensagem #mensagemPopup .mensagem {
+        color: var(--cor-clara);
+    }
+
+    #fundoMensagem #mensagemPopup #botoes {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        width: 90%;
+
+        background-color: transparent;
+    }
+
+    #fundoMensagem #mensagemPopup #botoes button {
+        width: 100px;
+        height: 30px;
+
+        font-size: 14px;
+        color: var(--cor-clara);
+
+        border-radius: 5px;
+        outline: none;
+
+        transition: 0.5s;
+
+        background-color: var(--cor-principal);
+    }
+
+    #fundoMensagem #mensagemPopup #botoes button:hover {
+        cursor: pointer;
+
+        color: var(--cor-principal);
+
+        background-color: var(--cor-clara);
+    }
+
+    .escurecer {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -57,6 +444,381 @@
         margin-right: 20px;
         margin-bottom: 20px;
     }
+
+    #meusFavoritos .titulo-favorito {
+        font-size: 36px;
+        font-weight: normal;
+
+        margin-top: 1%;
+
+        margin-left: 2.5%;
+    }
+
+    #semFavoritos {
+        align-items: center;
+        justify-content: center;
+
+        min-height: 50vh;
+        width: 100%;
+    }
+
+    #semFavoritos img {
+        margin-bottom: 20px;
+
+        height: 80px;
+    }
+
+    #semFavoritos .texto {
+        font-size: 40px;
+    }
+
+    #deslogado {
+        align-items: center;
+        justify-content: center;
+
+        min-height: 80vh;
+        width: 100%;
+    }
+
+    #deslogado img {
+        margin-bottom: 20px;
+
+        height: 80px;
+    }
+
+    #deslogado .texto {
+        font-size: 40px;
+    }
+
+    .cartao-favorito {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        box-sizing: border-box;
+        min-height: fit-content;
+        max-height: 550px;
+        width: 240px;
+
+        /* APARÊNCIA */
+        border-radius: 5px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        background-color: white;
+    }
+
+    .cartao-favorito .imagem-favorito {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+        min-height: 60%;
+        max-height: 60%;
+
+        /* APARÊNCIA */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        background-color: var(--cor-clara);
+    }
+
+    .cartao-favorito .imagem-favorito .imagem {
+        /* DIMENSIONAMENTO */
+        width: 80%;
+        object-fit: scale-down;
+
+        /* DIMENSIONAMENTO */
+        width: 80%;
+        object-fit: scale-down;
+
+        /* APARÊNCIA */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        background-color: transparent;
+    }
+
+    .cartao-favorito .imagem-favorito .favorito {
+        /* POSICIONAMENTO */
+        position: absolute;
+
+        margin-left: 200px;
+        margin-top: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 24px;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .imagem-favorito .favorito:hover {
+        cursor: pointer;
+    }
+
+    .cartao-favorito .informacoes {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        /* DIMENSIONAMENTO */
+        height: 50%;
+        width: 100%;
+
+        /* APARÊNCIA */
+        padding: 10px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: var(--cor-clara);
+    }
+
+    .cartao-favorito .informacoes .titulo-categoria-avaliacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao
+        .avaliacao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao
+        p {
+        /* DIMENSIONAMENTO */
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 200%;
+        letter-spacing: 0.65px;
+
+        /* APARÊNCIA */
+        color: #777777;
+        background-color: transparent;
+    }
+
+    .cartao-favorito
+        .informacoes
+        .titulo-categoria-avaliacao
+        .categoria-avaliacao
+        .avaliacao
+        img {
+        /* POSICIONAMENTO */
+        margin-right: 3px;
+
+        /* DIMENSIONAMENTO */
+        height: 22px;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .titulo-categoria-avaliacao .titulo-produto {
+        /* DIMENSIONAMENTO */
+        font-size: 16px;
+        font-weight: 700;
+        height: 30px;
+
+        /* APARÊNCIA */
+        color: #333333;
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .nome-loja {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        font-size: 14px;
+        text-align: right;
+
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .nome-loja:hover {
+        cursor: pointer;
+
+        color: var(--cor-principal);
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+
+        /* DIMENSIONAMENTO */
+        width: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .preco-parcela {
+        /* POSICIONAMENTO */
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+
+        width: 100%;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .preco-parcela .preco {
+        /* DIMENSIONAMENTO */
+        font-size: 20px;
+        font-weight: 700;
+        color: #333333;
+        text-align: left;
+
+        /* APARÊNCIA */
+        background-color: transparent;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .comprar {
+        /* POSICIONAMENTO */
+        margin-top: 10px;
+
+        /* DIMENSIONAMENTO */
+        height: 30px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 200%;
+        letter-spacing: 0.65px;
+
+        /* APARÊNCIA */
+        color: var(--cor-clara);
+        background: var(--cor-principal-clara);
+        border: 1.5px solid var(--cor-principal);
+        box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+    }
+
+    .cartao-favorito .informacoes .preco-parcela-botao .comprar:hover {
+        cursor: pointer;
+    }
+
+    .mostrar-popup {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .esconder-popup {
+        display: none;
+    }
+
+    #fundoMensagem {
+        position: absolute;
+        align-items: center;
+
+        top: 0;
+
+        padding-top: 20%;
+
+        width: 100%;
+        height: 150vh;
+
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    #fundoMensagem #mensagemPopup {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        height: 120px;
+        width: 400px;
+
+        border-radius: 5px;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7),
+            0px 20px 30px rgba(0, 0, 0, 0.3), 0px 10px 50px rgba(0, 0, 0, 0.2);
+
+        background-color: var(--cor-principal-clara);
+    }
+
+    #fundoMensagem #mensagemPopup .mensagem {
+        color: var(--cor-clara);
+    }
+
+    #fundoMensagem #mensagemPopup #botoes {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        width: 90%;
+
+        background-color: transparent;
+    }
+
+    #fundoMensagem #mensagemPopup #botoes button {
+        width: 100px;
+        height: 30px;
+
+        font-size: 14px;
+        color: var(--cor-clara);
+
+        border-radius: 5px;
+        outline: none;
+
+        transition: 0.5s;
+
+        background-color: var(--cor-principal);
+    }
+
+    #fundoMensagem #mensagemPopup #botoes button:hover {
+        cursor: pointer;
+
+        color: var(--cor-principal);
+
+        background-color: var(--cor-clara);
+    }
+
+    .escurecer {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
 }
 
 .mostrar {
@@ -66,376 +828,4 @@
 
 .esconder {
     display: none;
-}
-
-#meusFavoritos .titulo-favorito {
-    font-size: 36px;
-    font-weight: normal;
-
-    margin-top: 1%;
-
-    margin-left: 2.5%;
-}
-
-#semFavoritos {
-    align-items: center;
-    justify-content: center;
-
-    min-height: 50vh;
-    width: 100%;
-}
-
-#semFavoritos img {
-    margin-bottom: 20px;
-
-    height: 80px;
-}
-
-#semFavoritos .texto {
-    font-size: 40px;
-}
-
-#deslogado {
-    align-items: center;
-    justify-content: center;
-
-    min-height: 80vh;
-    width: 100%;
-}
-
-#deslogado img {
-    margin-bottom: 20px;
-
-    height: 80px;
-}
-
-#deslogado .texto {
-    font-size: 40px;
-}
-
-.cartao-favorito {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    /* DIMENSIONAMENTO */
-    box-sizing: border-box;
-    min-height: fit-content;
-    max-height: 550px;
-    width: 240px;
-
-    /* APARÊNCIA */
-    border-radius: 5px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background-color: white;
-}
-
-.cartao-favorito .imagem-favorito {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    /* DIMENSIONAMENTO */
-    width: 100%;
-    min-height: 60%;
-    max-height: 60%;
-
-    /* APARÊNCIA */
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
-    background-color: var(--cor-clara);
-}
-
-.cartao-favorito .imagem-favorito .imagem {
-    /* DIMENSIONAMENTO */
-    width: 80%;
-    object-fit: scale-down;
-
-    /* DIMENSIONAMENTO */
-    width: 80%;
-    object-fit: scale-down;
-
-    /* APARÊNCIA */
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
-    background-color: transparent;
-}
-
-.cartao-favorito .imagem-favorito .favorito {
-    /* POSICIONAMENTO */
-    position: absolute;
-
-    margin-left: 200px;
-    margin-top: 10px;
-
-    /* DIMENSIONAMENTO */
-    height: 24px;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito .imagem-favorito .favorito:hover {
-    cursor: pointer;
-}
-
-.cartao-favorito .informacoes {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    /* DIMENSIONAMENTO */
-    height: 50%;
-    width: 100%;
-
-    /* APARÊNCIA */
-    padding: 10px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: var(--cor-clara);
-}
-
-.cartao-favorito .informacoes .titulo-categoria-avaliacao {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito .informacoes .titulo-categoria-avaliacao .categoria-avaliacao {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    /* DIMENSIONAMENTO */
-    width: 100%;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito
-    .informacoes
-    .titulo-categoria-avaliacao
-    .categoria-avaliacao
-    .avaliacao {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito
-    .informacoes
-    .titulo-categoria-avaliacao
-    .categoria-avaliacao
-    p {
-    /* DIMENSIONAMENTO */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 200%;
-    letter-spacing: 0.65px;
-
-    /* APARÊNCIA */
-    color: #777777;
-    background-color: transparent;
-}
-
-.cartao-favorito
-    .informacoes
-    .titulo-categoria-avaliacao
-    .categoria-avaliacao
-    .avaliacao
-    img {
-    /* POSICIONAMENTO */
-    margin-right: 3px;
-
-    /* DIMENSIONAMENTO */
-    height: 22px;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito .informacoes .titulo-categoria-avaliacao .titulo-produto {
-    /* DIMENSIONAMENTO */
-    font-size: 16px;
-    font-weight: 700;
-    height: 30px;
-
-    /* APARÊNCIA */
-    color: #333333;
-    background-color: transparent;
-}
-
-.cartao-favorito .informacoes .nome-loja {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    font-size: 14px;
-    text-align: right;
-
-    background-color: transparent;
-}
-
-.cartao-favorito .informacoes .nome-loja:hover {
-    cursor: pointer;
-
-    color: var(--cor-principal);
-}
-
-.cartao-favorito .informacoes .preco-parcela-botao {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: column;
-
-    /* DIMENSIONAMENTO */
-    width: 100%;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito .informacoes .preco-parcela-botao .preco-parcela {
-    /* POSICIONAMENTO */
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-
-    width: 100%;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito .informacoes .preco-parcela-botao .preco-parcela .preco {
-    /* DIMENSIONAMENTO */
-    font-size: 20px;
-    font-weight: 700;
-    color: #333333;
-    text-align: left;
-
-    /* APARÊNCIA */
-    background-color: transparent;
-}
-
-.cartao-favorito .informacoes .preco-parcela-botao .comprar {
-    /* POSICIONAMENTO */
-    margin-top: 10px;
-
-    /* DIMENSIONAMENTO */
-    height: 30px;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 200%;
-    letter-spacing: 0.65px;
-
-    /* APARÊNCIA */
-    color: var(--cor-clara);
-    background: var(--cor-principal-clara);
-    border: 1.5px solid var(--cor-principal);
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}
-
-.cartao-favorito .informacoes .preco-parcela-botao .comprar:hover {
-    cursor: pointer;
-}
-
-.mostrar-popup {
-    display: flex;
-    flex-direction: column;
-}
-
-.esconder-popup {
-    display: none;
-}
-
-#fundoMensagem {
-    position: absolute;
-    align-items: center;
-
-    top: 0;
-
-    padding-top: 20%;
-
-    width: 100%;
-    height: 150vh;
-
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-#fundoMensagem #mensagemPopup {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-
-    height: 120px;
-    width: 400px;
-
-    border-radius: 5px;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.7), 0px 20px 30px rgba(0, 0, 0, 0.3),
-        0px 10px 50px rgba(0, 0, 0, 0.2);
-
-    background-color: var(--cor-principal-clara);
-}
-
-#fundoMensagem #mensagemPopup .mensagem {
-    color: var(--cor-clara);
-}
-
-#fundoMensagem #mensagemPopup #botoes {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-
-    width: 90%;
-
-    background-color: transparent;
-}
-
-#fundoMensagem #mensagemPopup #botoes button {
-    width: 100px;
-    height: 30px;
-
-    font-size: 14px;
-    color: var(--cor-clara);
-
-    border-radius: 5px;
-    outline: none;
-
-    transition: 0.5s;
-
-    background-color: var(--cor-principal);
-}
-
-#fundoMensagem #mensagemPopup #botoes button:hover {
-    cursor: pointer;
-
-    color: var(--cor-principal);
-
-    background-color: var(--cor-clara);
-}
-
-.escurecer {
-    background-color: rgba(0, 0, 0, 0.3);
 }

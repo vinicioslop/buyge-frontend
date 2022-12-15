@@ -126,6 +126,14 @@ function redirecionarPefilUsuario() {
     window.location = "/src/pages/usuario/usuario.html";
 }
 
+function redirecionarFavoritos() {
+    window.location = "/src/pages/favoritos.html";
+}
+
+function redirecionarCarrinho() {
+    window.location = "/src/pages/carrinho.html";
+}
+
 async function montaBarraNavegacaoPequena(categorias) {
     // BARRA DE NAVEGAÇÃO
     const barraPequena = document.querySelector("#barraPequena");
@@ -196,8 +204,20 @@ async function montaBarraNavegacaoPequena(categorias) {
         desconectar.id = "desconectar";
         desconectar.innerText = "Desconectar";
 
+        const favoritos = document.createElement("a");
+        favoritos.setAttribute("onclick", "redirecionarFavoritos()");
+        favoritos.id = "favoritos";
+        favoritos.innerText = "Favoritos";
+
+        const carrinho = document.createElement("a");
+        carrinho.setAttribute("onclick", "redirecionarCarrinho()");
+        carrinho.id = "carrinho";
+        carrinho.innerText = "Carrinho";
+
         userConteudo.appendChild(nomeCliente);
         userConteudo.appendChild(perfilUsuario);
+        userConteudo.appendChild(favoritos);
+        userConteudo.appendChild(carrinho);
 
         if (cliente.nmTipoConta == "Vendedor" && mercantes.length > 0) {
             const mercanteLink = document.createElement("a");

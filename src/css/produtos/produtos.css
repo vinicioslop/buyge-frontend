@@ -11,7 +11,7 @@
     --cor-principal-clara: #ad7cb5;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
     html,
     body {
         /* POSICIONAMENTO */
@@ -27,10 +27,14 @@
         /* POSICIONAMENTO */
         display: flex;
         flex-direction: column;
+        justify-content: center;
+
+        margin-bottom: 100px;
     }
 
     .titulo {
         /* POSICIONAMENTO */
+        text-align: center;
         margin-top: 20px;
         margin-bottom: 20px;
     }
@@ -38,9 +42,10 @@
     .produtos {
         /* POSICIONAMENTO */
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
         align-items: center;
+        justify-content: center;
     }
 
     .produtos .cartao {
@@ -51,7 +56,7 @@
     }
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 768px) {
     html,
     body {
         /* POSICIONAMENTO */
