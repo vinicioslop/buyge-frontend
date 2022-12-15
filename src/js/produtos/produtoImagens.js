@@ -1,4 +1,5 @@
-const fetchUrl = "https://129.148.45.5:30001/api";
+//const fetchUrl = "https://129.148.45.5:30001/api";
+const fetchUrl = "https://localhost:30001/api";
 
 async function carregarImagens(idProduto) {
     const response = await fetch(

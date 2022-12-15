@@ -1,4 +1,9 @@
-const url = "https://129.148.45.5:30001/api";
+//const url = "https://129.148.45.5:30001/api";
+const url = "https://localhost:30001/api";
+
+async function configuraUrl() {
+    console.log(window.location);
+}
 
 async function buscarCategorias() {
     const response = await fetch(`${url}/categorias`, { mode: "cors" });
@@ -97,8 +102,7 @@ async function veriricarToken(token) {
             Authorization: "Bearer " + token,
         },
     });
-    const status = await requisicao.status;
-    console.log(status);
+    const status = requisicao.status;
 
     switch (status) {
         case 200:
@@ -494,4 +498,5 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const categorias = categoriasResposta.dados;
 
     montaBarra(categorias);
+    configuraUrl();
 });

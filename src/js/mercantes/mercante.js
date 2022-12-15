@@ -1,4 +1,5 @@
-const fetchUrl = "https://129.148.45.5:30001/api";
+//const fetchUrl = "https://129.148.45.5:30001/api";
+const fetchUrl = "https://localhost:30001/api";
 
 function recarregar() {
     window.location.reload();
@@ -195,7 +196,9 @@ async function cadastrarProduto(produtoComImagem, token) {
         },
         body: JSON.stringify(produtoComImagem),
     });
-    const resposta = requisicao.status;
+    const resposta = await requisicao.json();
+
+    console.log(resposta);
 
     return resposta;
 }
@@ -358,6 +361,23 @@ function montarRespostaOK(conteudo) {
     botaoConfirmar.className = "popup-button";
     botaoConfirmar.innerHTML = "OK";
     botaoConfirmar.setAttribute("onclick", "removerConfirmacao()");
+
+    const mensagem = conteudo;
+
+    const botoes = [botaoConfirmar];
+
+    adicionarConfirmacao(mensagem, botoes);
+}
+
+function recarregarPagina() {
+    window.location.reload(true);
+}
+
+function montarRespostaAtualizar(conteudo) {
+    const botaoConfirmar = document.createElement("button");
+    botaoConfirmar.className = "popup-button";
+    botaoConfirmar.innerHTML = "OK";
+    botaoConfirmar.setAttribute("onclick", "recarregarPagina()");
 
     const mensagem = conteudo;
 
@@ -885,7 +905,8 @@ document
             nmLogradouro: document.getElementById("logradouroDadosLoja").value,
             nmCidade: document.getElementById("cidadeDadosLoja").value,
             nrEndereco: document.getElementById("numeroDadosLoja").value,
-            fkCdMercante: document.querySelector("#fkCdMercanteDadosLoja").value,
+            fkCdMercante: document.querySelector("#fkCdMercanteDadosLoja")
+                .value,
         };
 
         if (endereco.cdEndereco == null) {
@@ -914,6 +935,15 @@ document
             }
         }
     });
+
+document.querySelector("#imgProdutoLink").addEventListener("change", (e) => {
+    e.preventDefault();
+
+    const imgProdutoLink = document.querySelector("#imgProdutoLink");
+
+    const imagemPreview = document.querySelector("#imagemPreview");
+    imagemPreview.src = imgProdutoLink.value;
+});
 
 function enviarConfirmacaoCadastrarProduto(event) {
     event.preventDefault();
@@ -951,11 +981,6 @@ async function enviarCadastrarProduto() {
         dsProduto: document.querySelector("#descricaoProduto").value,
         vlProduto: parseFloat(document.querySelector("#precoProduto").value),
         qtProduto: parseInt(document.querySelector("#quantidadeProduto").value),
-        /*vlPeso: parseFloat(document.querySelector("#pesoProduto").value),
-            vlTamanho: parseFloat(
-                document.querySelector("#tamanhoProduto").value
-            ),
-            vlFrete: parseFloat(document.querySelector("#freteProduto").value),*/
         idDisponibilidade: 0,
         fkCdMercante: parseInt(mercantes[0].cdMercante),
         fkCdCategoria: parseInt(
@@ -963,7 +988,19 @@ async function enviarCadastrarProduto() {
         ),
     };
 
-    const resposta = await cadastrarProduto(produto, token);
+    const imagem = {
+        imgProdutoLink: document.querySelector("#imgProdutoLink").value,
+        altImagemProduto: "ALTERAR DEPOIS",
+        idPrincipal: 1,
+        fkCdProduto: 0,
+    };
+
+    const produtoComImagem = {
+        produto: produto,
+        imagem: imagem,
+    };
+
+    const resposta = await cadastrarProduto(produtoComImagem, token);
 
     if (resposta == 201) {
         montarRespostaOK("Produto cadastrado com sucesso!");

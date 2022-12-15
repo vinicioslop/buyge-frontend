@@ -458,7 +458,7 @@
                                     ></textarea>
                                 </div>
                             </div>
-                            <div class="grupo-direita">
+                            <div class="grupo-meio">
                                 <div class="entrada-dados">
                                     <label for="precoProduto"
                                         >Preco do Produto</label
@@ -468,7 +468,6 @@
                                         type="text"
                                         name="precoProduto"
                                         id="precoProduto"
-                                        onKeyUp="mascaraMoeda(this, event)"
                                         placeholder="999,99"
                                     />
                                 </div>
@@ -498,45 +497,23 @@
                                         </option>
                                     </select>
                                 </div>
-                                <!--<div class="entrada-dados">
-                                    <label for="pesoProduto"
-                                        >Peso do Produto (kg)</label
+                            </div>
+                            <div class="grupo-direita">
+                                <div class="entrada-dados">
+                                    <label for="imgProdutoLink"
+                                        >URL da Imagem</label
                                     >
                                     <input
                                         required
                                         type="text"
-                                        name="pesoProduto"
-                                        id="pesoProduto"
-                                        onKeyUp="mascaraMoeda(this, event)"
-                                        placeholder="0"
+                                        name="imgProdutoLink"
+                                        id="imgProdutoLink"
+                                        placeholder="Informe o link da imagem do produto"
                                     />
                                 </div>
-                                <div class="entrada-dados">
-                                    <label for="tamanhoProduto"
-                                        >Tamanho do Produto (m)</label
-                                    >
-                                    <input
-                                        required
-                                        type="text"
-                                        name="tamanhoProduto"
-                                        id="tamanhoProduto"
-                                        onKeyUp="mascaraMoeda(this, event)"
-                                        placeholder="0"
-                                    />
+                                <div class="imagem-preview">
+                                    <img src="" id="imagemPreview" />
                                 </div>
-                                <div class="entrada-dados">
-                                    <label for="freteProduto"
-                                        >Frete do Produto</label
-                                    >
-                                    <input
-                                        required
-                                        type="text"
-                                        name="freteProduto"
-                                        id="freteProduto"
-                                        onKeyUp="mascaraMoeda(this, event)"
-                                        placeholder="0"
-                                    />
-                                </div>-->
                             </div>
                         </div>
                         <button
