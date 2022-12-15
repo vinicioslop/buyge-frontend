@@ -459,7 +459,8 @@ async function montarEnderecos() {
     </div>
     */
 
-    const enderecosPrevios = document.querySelectorAll(".endereco");
+    const enderecosPrevios = document.getElementsByClassName("endereco");
+    console.log(enderecosPrevios);
 
     if (enderecosPrevios.length > 0) {
         enderecosPrevios.forEach((endereco) => {
@@ -1202,7 +1203,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const enderecos = urlParams.get("enderecos");
 
     if (enderecos != null) {
-        montarEnderecos();
         clicaSecao("secaoEndereco");
         clicaSecaoInternaEnderecos("meusEnderecos");
     }
@@ -1210,7 +1210,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const pedidos = urlParams.get("pedidos");
 
     if (pedidos != null) {
-        montarCompras();
         clicaSecao("secaoCompras");
         clicaSecaoInternaCompras("pedidos");
     }

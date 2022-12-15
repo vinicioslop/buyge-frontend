@@ -89,8 +89,6 @@
     }
 
     .conteudo .titulo-adicionar .adicionar {
-        
-
         width: 140px;
         height: 50px;
 
@@ -531,7 +529,7 @@
     }
 }
 
-@media screen and (min-width: 500px) and (max-width: 820px) {
+@media screen and (min-width: 500px) and (max-width: 768px) {
     .container {
         display: flex;
         flex-direction: row;
@@ -765,7 +763,7 @@
     }
 
     .conteudo .informacoes .formulario button {
-        align-self:center;
+        align-self: center;
 
         min-height: fit-content;
         width: 100%;
@@ -1047,7 +1045,7 @@
     }
 }
 
-@media screen and (min-width: 820px) {
+@media screen and (min-width: 768px) {
     .container {
         display: flex;
         flex-direction: row;
