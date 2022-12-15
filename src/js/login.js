@@ -1,7 +1,26 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+    
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 async function logar(user) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(`${fetchUrl}/login`, {
         method: "POST",
         mode: "cors",
@@ -85,3 +104,8 @@ document.getElementById("entrar").addEventListener("click", async (e) => {
             break;
     }
 });
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => await configurarUrl()
+);

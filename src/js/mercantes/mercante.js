@@ -1009,8 +1009,10 @@ async function enviarCadastrarProduto() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
+
+    await configurarUrl();
 
     const token = sessionStorage.getItem("token");
 

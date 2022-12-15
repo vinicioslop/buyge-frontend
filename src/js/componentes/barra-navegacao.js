@@ -1,13 +1,27 @@
-//const url = "https://129.148.45.5:30001/api";
-const url = "https://localhost:30001/api";
-
 async function configuraUrl() {
-    console.log(window.location);
+    const location = window.location.hostname;
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornaUrl() {
+    return sessionStorage.getItem("fetchUrl");
 }
 
 async function buscarCategorias() {
+    const url = retornaUrl();
+
     const response = await fetch(`${url}/categorias`, { mode: "cors" });
-    const status = await response.status;
+    const status = response.status;
 
     switch (status) {
         case 200:
@@ -26,6 +40,8 @@ async function buscarCategorias() {
 }
 
 async function buscarDadosCliente(idCliente, token) {
+    const url = retornaUrl();
+
     const response = await fetch(`${url}/cliente/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -55,18 +71,17 @@ async function buscarDadosCliente(idCliente, token) {
 }
 
 async function buscarMercantes(idVendedor, token) {
-    const response = await fetch(
-        `${fetchUrl}/mercantes/vendedor/${idVendedor}`,
-        {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
-        }
-    );
+    const url = retornaUrl();
+
+    const response = await fetch(`${url}/mercantes/vendedor/${idVendedor}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    });
 
     const status = response.status;
 
@@ -93,6 +108,8 @@ async function buscarMercantes(idVendedor, token) {
 }
 
 async function veriricarToken(token) {
+    const url = retornaUrl();
+
     const requisicao = await fetch(`${url}/token`, {
         method: "GET",
         mode: "cors",
@@ -494,9 +511,10 @@ function montaBarra(categorias) {
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
+    await configuraUrl();
+
     const categoriasResposta = await buscarCategorias();
     const categorias = categoriasResposta.dados;
 
     montaBarra(categorias);
-    configuraUrl();
 });

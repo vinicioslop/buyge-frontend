@@ -1,5 +1,22 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+    
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 function mascaraPreco(preco) {
     const valorFormatado = preco.toLocaleString("pt-BR", {
@@ -78,6 +95,8 @@ function montarAlertaRecarregar(conteudo) {
 }
 
 async function carregarProduto(idProduto) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
         mode: "cors",
@@ -92,6 +111,8 @@ async function carregarProduto(idProduto) {
 }
 
 async function carregarImagems(idProduto) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
         {
@@ -117,6 +138,8 @@ async function carregarImagems(idProduto) {
 }
 
 async function carregarItensCarrinho(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/carrinho/items/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -145,6 +168,8 @@ async function carregarItensCarrinho(idCliente, token) {
 }
 
 async function adicionarItemCarrinho(idCliente, idProduto, token) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(
         `${fetchUrl}/carrinho/item/novo/${idCliente}/${idProduto}`,
         {
@@ -163,6 +188,8 @@ async function adicionarItemCarrinho(idCliente, idProduto, token) {
 }
 
 async function atualizarItemCarrinho(idItemCarrinho, itemCarrinho, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/carrinho/item/${idItemCarrinho}`,
         {
@@ -195,6 +222,8 @@ async function atualizarItemCarrinho(idItemCarrinho, itemCarrinho, token) {
 }
 
 async function apagarItemCarrinho(idItemCarrinho, token) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(
         `${fetchUrl}/carrinho/item/remover/${idItemCarrinho}`,
         {
@@ -212,6 +241,8 @@ async function apagarItemCarrinho(idItemCarrinho, token) {
 }
 
 async function carregarEnderecos(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/enderecos/cliente/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -246,6 +277,8 @@ async function carregarEnderecos(idCliente, token) {
 }
 
 async function gerarPreferencia(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/comprar/${idCliente}`, {
         method: "POST",
         mode: "cors",
@@ -826,6 +859,8 @@ function mostraProdutos() {
 
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
+
+    await configurarUrl();
 
     const token = sessionStorage.getItem("token");
 

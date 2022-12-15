@@ -1,5 +1,22 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+    
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 function mascaraPreco(preco) {
     var valorFormatado = preco.toLocaleString("pt-BR", {
@@ -11,6 +28,8 @@ function mascaraPreco(preco) {
 }
 
 async function carregarProdutos() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/produtos`, { mode: "cors" });
     const produtos = await response.json();
 
@@ -18,6 +37,8 @@ async function carregarProdutos() {
 }
 
 async function carregarImagems() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
         mode: "cors",
     });
@@ -27,6 +48,8 @@ async function carregarImagems() {
 }
 
 async function carregarCategorias() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/categorias`, { mode: "cors" });
     const categorias = await response.json();
 
@@ -34,6 +57,8 @@ async function carregarCategorias() {
 }
 
 async function carregarMercantes() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/mercantes`, { mode: "cors" });
     const mercantes = await response.json();
 
@@ -41,6 +66,8 @@ async function carregarMercantes() {
 }
 
 async function carregarFavoritos(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/favoritos/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -75,6 +102,8 @@ async function carregarFavoritos(idCliente, token) {
 }
 
 async function adicionarFavorito(idCliente, idProduto, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/favorito/adicionar/${idCliente}/${idProduto}`,
         {
@@ -112,6 +141,8 @@ async function adicionarFavorito(idCliente, idProduto, token) {
 }
 
 async function apagarFavorito(idCliente, idProduto, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/favorito/remover/${idCliente}/${idProduto}`,
         {
@@ -228,7 +259,10 @@ async function montaCartao() {
             );
 
             produtoImagens.forEach((produtoImagem) => {
-                if (produtoImagem.fkCdProduto === produto.cdProduto && produtoImagem.idPrincipal === 1) {
+                if (
+                    produtoImagem.fkCdProduto === produto.cdProduto &&
+                    produtoImagem.idPrincipal === 1
+                ) {
                     imagem.src = produtoImagem.imgProdutoLink;
                 }
             });
@@ -353,4 +387,9 @@ async function montaCartao() {
     container.append(containerProdutos);
 }
 
-document.addEventListener("DOMContentLoaded", montaCartao());
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault();
+
+    await configurarUrl();
+    await montaCartao();
+});

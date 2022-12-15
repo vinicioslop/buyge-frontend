@@ -1,5 +1,22 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+    
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 function mascaraPreco(preco) {
     var valorFormatado = preco.toLocaleString("pt-BR", {
@@ -78,6 +95,8 @@ function montarAlertaRecarregar(conteudo) {
 }
 
 async function carregarProdutos(idMercante) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/produtos/mercante/${idMercante}`,
         {
@@ -111,6 +130,8 @@ async function carregarProdutos(idMercante) {
 }
 
 async function carregarImagems() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem`, {
         method: "GET",
         mode: "cors",
@@ -141,6 +162,8 @@ async function carregarImagems() {
 }
 
 async function carregarCategorias() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",
         mode: "cors",
@@ -171,6 +194,8 @@ async function carregarCategorias() {
 }
 
 async function carregarMercante(idMercante) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/mercante/${idMercante}`, {
         method: "GET",
         mode: "cors",
@@ -201,6 +226,8 @@ async function carregarMercante(idMercante) {
 }
 
 async function carregarFavoritos(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/favoritos/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -235,6 +262,8 @@ async function carregarFavoritos(idCliente, token) {
 }
 
 async function adicionarFavorito(idCliente, idProduto, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/favorito/adicionar/${idCliente}/${idProduto}`,
         {
@@ -272,6 +301,8 @@ async function adicionarFavorito(idCliente, idProduto, token) {
 }
 
 async function apagarFavorito(idCliente, idProduto, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/favorito/remover/${idCliente}/${idProduto}`,
         {
@@ -503,8 +534,10 @@ async function montarCartoes(idMercante) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
+
+    await configurarUrl();
 
     const urlParams = new URLSearchParams(window.location.search);
 

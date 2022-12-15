@@ -1,7 +1,26 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+    
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 async function carregarImagens(idProduto) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
         {
@@ -15,19 +34,26 @@ async function carregarImagens(idProduto) {
 }
 
 async function inserirImagem(imagem) {
-    const requisicao = await fetch(`${fetchUrl}/produtos/produto-imagem/adicionar`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(imagem),
-    });
+    const fetchUrl = retornarUrl();
+
+    const requisicao = await fetch(
+        `${fetchUrl}/produtos/produto-imagem/adicionar`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(imagem),
+        }
+    );
 
     return requisicao.status;
 }
 
 async function atualizarImagem(imagem) {
+    const fetchUrl = retornarUrl();
+
     const result = await fetch(
         `${fetchUrl}/produtos/produto-imagem/${imagem.cdProdutoImagem}`,
         {
@@ -54,6 +80,8 @@ async function enviarEditarImagem(imagem) {
 }
 
 async function removerImagem(idImagem) {
+    const fetchUrl = retornarUrl();
+
     const result = await fetch(
         `${fetchUrl}/produtos/produto-imagem/${idImagem}`,
         {
@@ -276,7 +304,11 @@ document.querySelector("#atualizarImagem").addEventListener("click", (e) => {
     montarConfirmacaoEdição(imagem);
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault();
+
+    await configurarUrl();
+
     const urlParams = new URLSearchParams(window.location.search);
 
     const idProduto = urlParams.get("idProduto");

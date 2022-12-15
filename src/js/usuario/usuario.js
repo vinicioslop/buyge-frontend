@@ -1,5 +1,21 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 function mascaraPreco(preco) {
     const valorFormatado = preco.toLocaleString("pt-BR", {
@@ -15,7 +31,9 @@ function removeSessao() {
 }
 
 async function testarToken(token) {
-    const requisicao = await fetch(`${url}/token`, {
+    const fetchUrl = retornarUrl();
+
+    const requisicao = await fetch(`${fetchUrl}/token`, {
         method: "GET",
         mode: "cors",
         headers: {
@@ -47,6 +65,8 @@ async function testar() {
 }
 
 async function buscarClienteLogado(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/cliente/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -81,6 +101,8 @@ async function buscarClienteLogado(idCliente, token) {
 }
 
 async function atualizarCliente(cliente, token) {
+    const fetchUrl = retornarUrl();
+
     const result = await fetch(
         `${fetchUrl}/cliente/atualizar/${cliente.cdCliente}`,
         {
@@ -101,6 +123,8 @@ async function atualizarCliente(cliente, token) {
 }
 
 async function atualizarSenha(idCliente, novaSenha, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/cliente/senha/trocar/${idCliente}`,
         {
@@ -133,6 +157,8 @@ async function atualizarSenha(idCliente, novaSenha, token) {
 }
 
 async function carregarEndereco(idEndereco, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/endereco/${idEndereco}`, {
         method: "GET",
         mode: "cors",
@@ -161,6 +187,8 @@ async function carregarEndereco(idEndereco, token) {
 }
 
 async function carregarEnderecos(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/enderecos/cliente/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -189,6 +217,8 @@ async function carregarEnderecos(idCliente, token) {
 }
 
 async function adicionarEndereco(endereco, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/enderecos/adicionar`, {
         method: "POST",
         mode: "cors",
@@ -218,6 +248,8 @@ async function adicionarEndereco(endereco, token) {
 }
 
 async function atualizarEndereco(endereco, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/endereco/atualizar/${endereco.cdEndereco}`,
         {
@@ -250,6 +282,8 @@ async function atualizarEndereco(endereco, token) {
 }
 
 async function mudarPrincipal(idEndereco, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/endereco/principal/${idEndereco}`,
         {
@@ -281,6 +315,8 @@ async function mudarPrincipal(idEndereco, token) {
 }
 
 async function removerEndereco(idEndereco, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/endereco/remover/${idEndereco}`, {
         method: "DELETE",
         mode: "cors",
@@ -302,6 +338,8 @@ async function removerEndereco(idEndereco, token) {
 }
 
 async function carregarCompras(idCliente, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/compras/${idCliente}`, {
         method: "GET",
         mode: "cors",
@@ -330,6 +368,8 @@ async function carregarCompras(idCliente, token) {
 }
 
 async function carregarItensCompra(idCompra, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/compras/items/${idCompra}`, {
         method: "GET",
         mode: "cors",
@@ -364,6 +404,8 @@ async function carregarItensCompra(idCompra, token) {
 }
 
 async function carregarProduto(idProduto) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
         mode: "cors",
@@ -393,6 +435,8 @@ async function carregarProduto(idProduto) {
 }
 
 async function carregarImagens(idProduto) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/produtos/produto-imagem/${idProduto}/todas`,
         {
@@ -1180,6 +1224,8 @@ async function enviarAtualizarSenha() {
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
 
+    await configurarUrl();
+
     const valido = await testar();
 
     if (!valido) {
@@ -1200,14 +1246,14 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
     const enderecos = urlParams.get("enderecos");
 
-    if (valido) {
+    if (valido && enderecos != null) {
         clicaSecao("secaoEndereco");
         clicaSecaoInternaEnderecos("meusEnderecos");
     }
 
     const pedidos = urlParams.get("pedidos");
 
-    if (pedidos != null) {
+    if (valido && pedidos != null) {
         clicaSecao("secaoCompras");
         clicaSecaoInternaCompras("pedidos");
     }

@@ -1,7 +1,26 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+    
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 async function salvarDadosCompra(idCliente, token, novaCompra) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/comprar/salvar/${idCliente}`, {
         method: "POST",
         mode: "cors",
@@ -93,6 +112,8 @@ function voltaInicio() {
 
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault();
+
+    await configurarUrl();
 
     const urlParams = new URLSearchParams(window.location.search);
     const statusCompra = urlParams.get("status");
