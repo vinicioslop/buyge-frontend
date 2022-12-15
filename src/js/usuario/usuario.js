@@ -460,7 +460,6 @@ async function montarEnderecos() {
     */
 
     const enderecosPrevios = document.getElementsByClassName("endereco");
-    console.log(enderecosPrevios);
 
     if (enderecosPrevios.length > 0) {
         enderecosPrevios.forEach((endereco) => {
@@ -1187,9 +1186,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         window.location = "/src/pages/login.html";
     }
 
-    const token = sessionStorage.getItem("token");
-
-    if (token != null) {
+    if (valido) {
         insereInformacoesUsuario();
         montarEnderecos();
         montarCompras();
@@ -1202,7 +1199,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
     const enderecos = urlParams.get("enderecos");
 
-    if (enderecos != null) {
+    if (valido) {
         clicaSecao("secaoEndereco");
         clicaSecaoInternaEnderecos("meusEnderecos");
     }

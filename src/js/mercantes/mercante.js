@@ -806,7 +806,7 @@ function enviarConfirmacaoAtualizarProduto(event) {
     const botaoConfirmar = document.createElement("button");
     botaoConfirmar.className = "popup-button";
     botaoConfirmar.innerHTML = "Confirmar";
-    botaoConfirmar.setAttribute("onclick", "atualizarProduto()");
+    botaoConfirmar.setAttribute("onclick", "enviarAtualizarProduto()");
 
     const botaoCancelar = document.createElement("button");
     botaoCancelar.className = "popup-button";
@@ -820,7 +820,7 @@ function enviarConfirmacaoAtualizarProduto(event) {
     adicionarConfirmacao(mensagem, botoes);
 }
 
-async function atualizarProduto() {
+async function enviarAtualizarProduto() {
     const token = sessionStorage.getItem("token");
 
     if (token === null) {
@@ -885,7 +885,7 @@ document
             nmLogradouro: document.getElementById("logradouroDadosLoja").value,
             nmCidade: document.getElementById("cidadeDadosLoja").value,
             nrEndereco: document.getElementById("numeroDadosLoja").value,
-            fkCdMercante: document.querySelector("#fkCdMercanteDadosLoja"),
+            fkCdMercante: document.querySelector("#fkCdMercanteDadosLoja").value,
         };
 
         if (endereco.cdEndereco == null) {
