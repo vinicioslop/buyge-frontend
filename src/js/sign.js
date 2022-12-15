@@ -3,11 +3,11 @@ async function configurarUrl() {
 
     switch (location) {
         case "www.buyge.com.br":
-            var url = "https://129.148.45.5:30001/api";
+            var url = "https://129.148.45.5:30001/api/cliente/cadastrar";
             sessionStorage.setItem("fetchUrl", url);
             break;
         case "127.0.0.1":
-            var url = "https://localhost:30001/api";
+            var url = "https://localhost:30001/api/cliente/cadastrar";
             sessionStorage.setItem("fetchUrl", url);
             break;
     }
@@ -20,7 +20,7 @@ function retornarUrl() {
 async function cadastrar(cliente) {
     const fetchUrl = retornarUrl();
 
-    const requisicao = await fetch(`${fetchUrl}/cliente/cadastrar`, {
+    const requisicao = await fetch(fetchUrl, {
         method: "POST",
         mode: "cors",
         headers: {
