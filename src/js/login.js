@@ -3,7 +3,7 @@ async function configurarUrl() {
 
     switch (location) {
         case "www.buyge.com.br":
-            var url = "https://129.148.45.5:30001/api";
+            var url = "129.148.45.5:30001/api";
             sessionStorage.setItem("fetchUrl", url);
             break;
         case "127.0.0.1":
@@ -104,7 +104,8 @@ document.getElementById("entrar").addEventListener("click", async (e) => {
     }
 });
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async () => await configurarUrl()
-);
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault();
+
+    await configurarUrl();
+});
