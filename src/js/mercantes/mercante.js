@@ -1,11 +1,29 @@
-//const fetchUrl = "https://129.148.45.5:30001/api";
-const fetchUrl = "https://localhost:30001/api";
+async function configurarUrl() {
+    const location = window.location.hostname;
+
+    switch (location) {
+        case "www.buyge.com.br":
+            var url = "https://129.148.45.5:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+        case "127.0.0.1":
+            var url = "https://localhost:30001/api";
+            sessionStorage.setItem("fetchUrl", url);
+            break;
+    }
+}
+
+function retornarUrl() {
+    return sessionStorage.getItem("fetchUrl");
+}
 
 function recarregar() {
     window.location.reload();
 }
 
 async function carregarMercantes(idVendedor, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/mercantes/vendedor/${idVendedor}`,
         {
@@ -24,6 +42,8 @@ async function carregarMercantes(idVendedor, token) {
 }
 
 async function atualizarMercante(mercante, token) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(
         `${fetchUrl}/mercante/atualizar/${mercante.cdMercante}`,
         {
@@ -45,6 +65,8 @@ async function atualizarMercante(mercante, token) {
 }
 
 async function removerMercante(idMercante, token) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(
         `${fetchUrl}/mercante/remover/${idMercante}`,
         {
@@ -62,6 +84,8 @@ async function removerMercante(idMercante, token) {
 }
 
 async function carregarEnderecoLoja(idMercante, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/mercante/enderecos/${idMercante}`,
         {
@@ -99,6 +123,8 @@ async function carregarEnderecoLoja(idMercante, token) {
 }
 
 async function cadastrarEnderecoLoja(endereco, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/mercante/endereco`, {
         method: "POST",
         mode: "cors",
@@ -134,6 +160,8 @@ async function cadastrarEnderecoLoja(endereco, token) {
 }
 
 async function atualizarEnderecoLoja(endereco, token) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/mercante/endereco/${endereco.cdEndereco}`,
         {
@@ -172,6 +200,8 @@ async function atualizarEnderecoLoja(endereco, token) {
 }
 
 async function carregarCategorias() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/categorias`, {
         method: "GET",
         mode: "cors",
@@ -186,6 +216,8 @@ async function carregarCategorias() {
 }
 
 async function cadastrarProduto(produtoComImagem, token) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(`${fetchUrl}/produto/adicionar`, {
         method: "POST",
         mode: "cors",
@@ -204,6 +236,8 @@ async function cadastrarProduto(produtoComImagem, token) {
 }
 
 async function carregarProdutos(idMercante) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(
         `${fetchUrl}/produtos/mercante/${idMercante}`,
         {
@@ -217,6 +251,8 @@ async function carregarProdutos(idMercante) {
 }
 
 async function carregarProduto(idProduto) {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/produto/${idProduto}`, {
         method: "GET",
         mode: "cors",
@@ -227,6 +263,8 @@ async function carregarProduto(idProduto) {
 }
 
 async function atualizarProduto(produto, token) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(
         `${fetchUrl}/produto/atualizar/${produto.cdProduto}`,
         {
@@ -248,6 +286,8 @@ async function atualizarProduto(produto, token) {
 }
 
 async function apagarProduto(idProduto, token) {
+    const fetchUrl = retornarUrl();
+
     const requisicao = await fetch(`${fetchUrl}/produto/remover/${idProduto}`, {
         method: "DELETE",
         mode: "cors",
@@ -262,6 +302,8 @@ async function apagarProduto(idProduto, token) {
 }
 
 async function carregarImagens() {
+    const fetchUrl = retornarUrl();
+
     const response = await fetch(`${fetchUrl}/produtos/produto-imagem/`, {
         method: "GET",
         mode: "cors",
