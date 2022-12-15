@@ -3,7 +3,7 @@ async function configuraUrl() {
 
     switch (location) {
         case "www.buyge.com.br":
-            var url = "https://https://129.148.45.5:30001/api";
+            var url = "https://129.148.45.5:30001/api";
             sessionStorage.setItem("fetchUrl", url);
             break;
         case "127.0.0.1":
