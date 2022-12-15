@@ -215,7 +215,7 @@ async function carregarCategorias() {
     return categorias;
 }
 
-async function cadastrarProduto(produtoComImagem, token) {
+async function cadastrarProduto(produto, token) {
     const fetchUrl = retornarUrl();
 
     const requisicao = await fetch(`${fetchUrl}/produto/adicionar`, {
@@ -226,13 +226,13 @@ async function cadastrarProduto(produtoComImagem, token) {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
         },
-        body: JSON.stringify(produtoComImagem),
+        body: JSON.stringify(produto),
     });
-    const resposta = await requisicao.json();
+    const status = requisicao.status;
 
-    console.log(resposta);
+    console.log(status);
 
-    return resposta;
+    return status;
 }
 
 async function carregarProdutos(idMercante) {
@@ -578,7 +578,7 @@ async function montarProdutos() {
     const todosProdutos = document.querySelector("#todosProdutos");
 
     produtos.forEach((produto) => {
-        let imagem = {};
+        let imagem = [];
         let disponibilidade = "";
 
         if (produto.idDisponibilidade == 1) {
@@ -614,30 +614,57 @@ async function montarProdutos() {
         const item = document.createElement("div");
         item.className = "produto";
 
-        item.innerHTML = `
-        <div class="fundo">
-            <img
-                src="${imagem.imgProdutoLink}"
-                alt=""
-                class="imagem"
-            />
-        </div>
-        <div class="nome-data-criacao">
-            <h4 class="nome-produto">
-                ${produto.nmProduto}
-            </h4>
-            <p class="criacao">Criado em ${dataCriacao}</p>
-        </div>
-        ${disponibilidade}
-        <div class="grupo-botoes">
-            <a onclick="editarProduto(${produto.cdProduto})">
-                <img src="/src/icons/edit-branco2.svg"/>
-            </a>
-            <a onclick="enviarConfirmacaoRemoverProduto(event, ${produto.cdProduto})">
-                <img src="/src/icons/bin-minus-branco.svg"/>
-            </a>
-        </div>
-        `;
+        if (imagem.length == 0) {
+            item.innerHTML = `
+            <div class="fundo">
+                <img
+                    src="/src/icons/image-preto.svg"
+                    alt=""
+                    class="imagem"
+                />
+            </div>
+            <div class="nome-data-criacao">
+                <h4 class="nome-produto">
+                    ${produto.nmProduto}
+                </h4>
+                <p class="criacao">Criado em ${dataCriacao}</p>
+            </div>
+            ${disponibilidade}
+            <div class="grupo-botoes">
+                <a onclick="editarProduto(${produto.cdProduto})">
+                    <img src="/src/icons/edit-branco2.svg"/>
+                </a>
+                <a onclick="enviarConfirmacaoRemoverProduto(event, ${produto.cdProduto})">
+                    <img src="/src/icons/bin-minus-branco.svg"/>
+                </a>
+            </div>
+            `;
+        } else {
+            item.innerHTML = `
+            <div class="fundo">
+                <img
+                    src="${imagem.imgProdutoLink}"
+                    alt=""
+                    class="imagem"
+                />
+            </div>
+            <div class="nome-data-criacao">
+                <h4 class="nome-produto">
+                    ${produto.nmProduto}
+                </h4>
+                <p class="criacao">Criado em ${dataCriacao}</p>
+            </div>
+            ${disponibilidade}
+            <div class="grupo-botoes">
+                <a onclick="editarProduto(${produto.cdProduto})">
+                    <img src="/src/icons/edit-branco2.svg"/>
+                </a>
+                <a onclick="enviarConfirmacaoRemoverProduto(event, ${produto.cdProduto})">
+                    <img src="/src/icons/bin-minus-branco.svg"/>
+                </a>
+            </div>
+            `;
+        }
 
         todosProdutos.appendChild(item);
     });
@@ -1030,6 +1057,7 @@ async function enviarCadastrarProduto() {
         ),
     };
 
+    /*
     const imagem = {
         imgProdutoLink: document.querySelector("#imgProdutoLink").value,
         altImagemProduto: "ALTERAR DEPOIS",
@@ -1041,10 +1069,12 @@ async function enviarCadastrarProduto() {
         produto: produto,
         imagem: imagem,
     };
+    */
 
-    const resposta = await cadastrarProduto(produtoComImagem, token);
+    const resposta = await cadastrarProduto(produto, token);
 
     if (resposta == 201) {
+        removerConfirmacao();
         montarRespostaOK("Produto cadastrado com sucesso!");
         await montarProdutos();
         clicaSecao("secaoProdutos");
