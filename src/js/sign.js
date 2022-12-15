@@ -1,6 +1,5 @@
 async function configurarUrl() {
     const location = window.location.hostname;
-    
 
     switch (location) {
         case "www.buyge.com.br":
